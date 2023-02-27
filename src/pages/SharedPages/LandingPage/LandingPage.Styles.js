@@ -57,12 +57,16 @@ export const LandingWhatWeDoCardContainer = styled.div`
 export const HowToGetStartedContainer = styled.section`
     padding:5.5rem 7.6rem;
     height: 60vh;
+    position:relative;
 
 `
 export const HowToGetStartedBackground = styled.div`
     position:absolute;
-    z-index:0;
+    top:0;
+    left:0;
+    width:100%;
     height:60vh;
+    z-index:-1;
     div{
         position:relative ;
         width:100%;
@@ -81,7 +85,7 @@ export const HowToGetStartedBackground = styled.div`
 `
 export const HowToGetStartedContent = styled.div`
     position: relative;
-    z-index:80;
+    z-index:1;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -143,5 +147,45 @@ export const HowToGetStartedCardDetails = styled.p`
     display:${props => props.open==="open" ? "block" : "none"};
     height:${props => props.open === "open" ? "fit-content" : "0"} ;
     transition: all 1s ;
-    
+`
+
+export const CommunityContainer = styled.section`
+    padding:2.8rem 7.6rem;
+`
+export const CommunityCollaborate = styled.section`
+    position:relative;
+`
+export const CommunityCollaborateDetails = styled.div`
+
+`
+export const AvatarContainer = styled.aside`
+    padding:2rem;
+    background-color:red;
+    border-radius:1.2rem;
+    width:fit-content;
+    &>div{
+        display:flex;
+        gap:2.3rem;
+    }
+    &>div:last-child{
+        margin-top:1.9rem;
+    }
+    h4{
+        font-weight:600;
+        margin-bottom:1.5rem;
+    }
+`
+export const AvatarElement = styled.div`
+     p{
+        text-align:center;
+    }
+`
+export const AvatarBoxOne = styled.div`
+   
+`
+export const CallContainer = styled.div`
+
+`
+export const AudioContainer = styled.div`
+
 `

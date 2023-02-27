@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import {
   HowToGetStartedBackground,
   HowToGetStartedCard,
@@ -16,17 +16,30 @@ import {
   LandingWhatWeDoCardContainer,
   LandingWhatWeDoContainer,
   HowToGetStartedTitle,
-  HowToGetStartedCardDetails
+  HowToGetStartedCardDetails,
+  CommunityContainer,
+  CommunityCollaborate,
+  CommunityCollaborateDetails,
+  AvatarContainer,
+  CallContainer,
+  AudioContainer,
+  AvatarElement
 } from './LandingPage.Styles';
-import { Button } from '../../../ui_elements/index';
+import { Button, LandingCard } from '../../../ui_elements/index';
 import {
+  Alex,
+  Ayo,
+  Call,
   LeaderboardIcon,
   PortfolioIcon,
-  RoadmapIcon
+  RoadmapIcon,
+  Sophia,
+  Tina,
+  Tunji
 } from '../../../assets/svgs';
 import GreenLogo from "../../../assets/images/greenLargeLogo.png"
 const LandingPage = () => {
-  
+
   const [cardState, setCardState] = useState(0)
   const handleCardExpansion = (index) => {
     setCardState(index)
@@ -87,10 +100,10 @@ const LandingPage = () => {
         </LandingWhatWeDoCardContainer>
       </LandingWhatWeDo>
       <HowToGetStartedContainer>
-        {/* <HowToGetStartedBackground>
+        <HowToGetStartedBackground>
           <img src={GreenLogo} alt={"Greeen"} />
           <img src={GreenLogo} alt={"Green"} />
-        </HowToGetStartedBackground> */}
+        </HowToGetStartedBackground>
         <HowToGetStartedContent>
           <HowToGetStartedDetails>
             <p>HOW TO GET STARTED</p>
@@ -108,23 +121,78 @@ const LandingPage = () => {
           <HowToGetStartedCardContainer>
             {
               cardDetails.map((card, index) =>
-                <HowToGetStartedCard>
-                  <HowToGetStartedTitle>
-                    <h5>{card.title }</h5>
-                    <LandingExpand onClick={()=>handleCardExpansion(index)}>
-                      <p>+</p>
-                    </LandingExpand>
-                  </HowToGetStartedTitle>
-                  <HowToGetStartedCardDetails open={cardState ? "open" : null}>
-                    {card.description}
-                  </HowToGetStartedCardDetails>
-
-                </HowToGetStartedCard>
+                <LandingCard
+                  key={index}
+                  handleCardExpansion={() => handleCardExpansion(index)}
+                  title={card.title}
+                  description={card.description}
+                  cardState={cardState}
+                  index={index}
+                />
               )
             }
           </HowToGetStartedCardContainer>
         </HowToGetStartedContent>
       </HowToGetStartedContainer>
+      <CommunityContainer>
+        <CommunityCollaborate>
+          <AvatarContainer>
+            <h4>More than 300+ Memebers</h4>
+            <div>
+              <AvatarElement>
+                <Tina />
+                <p>Tina</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Ayo />
+                <p>Ayo</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Alex />
+                <p>Alex</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Tunji />
+                <p>Tunji</p>
+              </AvatarElement>
+            </div>
+            <div>
+              <AvatarElement>
+                <Sophia />
+                <p>Sophia</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Ayo />
+                <p>Ayo</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Alex />
+                <p>Alex</p>
+              </AvatarElement>
+              <AvatarElement>
+                <Tunji />
+                <p>Tunji</p>
+              </AvatarElement>
+            </div>
+          </AvatarContainer>
+          <CallContainer>
+            <Call />
+          </CallContainer>
+          <AudioContainer>
+
+          </AudioContainer>
+        </CommunityCollaborate>
+        <CommunityCollaborateDetails>
+          <p>OUR COMMUNITY</p>
+          <h3>We have over 3000+ community members that uses Codevite</h3>
+          <p>Lorem ipsum dolor sit amet consectetur. Sem magna mattis malesuada hendrerit aliquet.
+            Posuere aenean enim porttitor varius. Etiam libero congue faucibus ultrices.
+            Imperdiet et pharetra adipiscing a vitae dui in eget.
+            Posuere sit enim et porttitor proin leo felis euismod.
+          </p>
+          <Button primary>Join our Community</Button>
+        </CommunityCollaborateDetails>
+      </CommunityContainer>
     </LandingMainContainer>
   )
 }
