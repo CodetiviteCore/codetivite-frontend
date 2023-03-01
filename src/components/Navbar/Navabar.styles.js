@@ -1,79 +1,64 @@
-
-import {
-    Link,
-    NavLink
-} from "react-router-dom";
 import styled from "styled-components";
 
-
-
-export const Nav = styled.nav`
-  background-color: transparent;
+export const NavWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 122px;
+  position: sticky;
+  top: 0;
+  background-color: ${(props) =>
+    props.scrolled ? "green" : "transparent"};
+  padding: 20px;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out;
 `;
 
-export const Logo = styled(Link)`
-color:var(--heading-black);
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-decoration: none;
+export const Logo = styled.img`
+  width: 50px;
 `;
 
-export const NavItems = styled.ul`
+export const NavList = styled.ul`
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 1rem ;
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
-    position: fixed;
-    top: 4rem;
-    left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    display: ${(props) => (props.isOpen ? "flex" : "none")};
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    background-color: #333;
-    width: 100%;
-    height: ${({ isOpen }) => (isOpen ? '100vh' : '0')};
-    transition: all 0.3s ease-in-out;
+    background-color: white;
   }
 `;
 
 export const NavItem = styled.li`
-  margin: 0 1rem;
-
+  margin: 0 10px;
   @media (max-width: 768px) {
-    margin: 1rem 0;
+    margin: 10px 0;
   }
 `;
 
-export const NavLinks = styled(NavLink)`
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-`;
-
-export const Burger = styled.div`
-  display: none;
+export const NavButton = styled.button`
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 30px;
   cursor: pointer;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
-
-export const BurgerLine = styled.div`
-  width: 30px;
-  height: 3px;
-  background-color: var(--text-black);
-  margin: 5px;
   transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 
-  ${({ isOpen }) =>
-        isOpen &&
-        `
-    transform: rotate(-45deg) translate(-5px, 6px);
-  `}
+  @media (min-width: 769px) {
+    display: none;
+  }
 `;

@@ -3,10 +3,10 @@ import { devices } from "../../utils/MediaQueiyBreakPoints"
 
 
 export const FooterContainer = styled.footer`
-    padding: 51px 122px 30px 122px;
+    padding:4% 8%;
     position:relative ;
     color: var(--white);
-    p{
+    p,h2{
         color: var(--white);
     }
 `
@@ -107,6 +107,9 @@ export const FooterDetails = styled.div`
     align-items:center;
     justify-content:center;
     gap:86px;
+    @media ${devices.tablet}{
+        margin:0 auto;
+    }
 `
 export const FooterGetStarted = styled.div`
     max-width:36.5rem;
@@ -122,7 +125,7 @@ export const FooterGetStarted = styled.div`
         margin-top:0.5rem;
         max-width:36.5rem;
         @media ${devices.tablet} {
-            font-size:0.66rem;
+            font-size:0.8rem;
         }
     }
 `
@@ -135,12 +138,10 @@ export const FooterButtonContainer = styled.div`
 export const FooterLinksContainers = styled.section`
     display:flex;
     justify-content:space-between ;
-    /* align-items: center; */
     margin-top:63px;
     @media ${devices.tablet}{
-        width:320px;
+        width:100%;
         flex-direction:column;
-        margin-left: -100px;
     }
     &>section{
         display:flex;
@@ -170,7 +171,7 @@ export const FootLinksLogoDetails = styled.div`
     }
     width: 28.8rem;
     @media ${devices.tablet}{
-        width:inherit;
+        width:100%;
     }
 `  
 export const FooterLinkList = styled.ul`
@@ -188,6 +189,6 @@ export const CopyRight = styled.p`
     margin-top:3.125rem ;
     @media ${devices.tablet}{
         font-size:12px;
-        width:205px;
+        margin:5% auto;
     }
 `

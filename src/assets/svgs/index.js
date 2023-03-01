@@ -8,14 +8,11 @@ import { ReactComponent as RoadmapIcon } from "./roadmap.svg"
 import { ReactComponent as PortfolioIcon } from "./portfolio.svg"
 import { ReactComponent as LeaderboardIcon } from "./leaderboard.svg"
 import { ReactComponent as GreenLargeLogo } from "./greenLargeLogo.svg"
-import { ReactComponent as Alex } from "./alex.svg"
-import { ReactComponent as Tobi } from "./tobi.svg"
-import { ReactComponent as Tunji } from "./tunji.svg"
-import { ReactComponent as Toks } from "./toks.svg"
-import { ReactComponent as Tina } from "./tina.svg"
-import { ReactComponent as Ayo } from "./ayo.svg"
-import { ReactComponent as Sophia } from "./sophia.svg"
-import { ReactComponent as Call } from "./call.svg"
+import { ReactComponent as Audio } from "./audio.svg"
+import { ReactComponent as RightArrow } from "./rightArrow.svg"
+import { ReactComponent as LeftArrow } from "./leftArrow.svg"
+
+
 
 
 
@@ -32,12 +29,8 @@ export {
     PortfolioIcon,
     LeaderboardIcon,
     GreenLargeLogo,
-    Alex,
-    Tobi,
-    Tunji,
-    Toks,
-    Tina,
-    Ayo,
-    Sophia,
-    Call
+    Audio,
+    RightArrow,
+    LeftArrow
+
 }

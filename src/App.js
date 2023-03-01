@@ -1,7 +1,17 @@
 import { SharedRoutes } from "./routes";
-import { Routes } from 'react-router-dom';
+import { useEffect } from "react";
+import Aos from 'aos';
+
 
 function App() {
+
+  useEffect(() => {
+    Aos.init(
+      {
+        offset: 20,
+      }
+    )
+  },[])
 
   return (
     <SharedRoutes/>
