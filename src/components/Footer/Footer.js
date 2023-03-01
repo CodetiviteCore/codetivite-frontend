@@ -32,20 +32,43 @@ export const Footer = () => {
             </FooterBackground>
             <FooterDetails>
                 <FooterImageContainer>
-                    <FooterImage src={FImage} alt={"footer pic"} />
-                    <FooterClips portfolio>
+                    <FooterImage src={FImage} alt={"footer pic"}
+                        data-aos="fade-up"
+                        data-aos-duration="600"
+                        data-aos-easing="ease-in-out"
+                    />
+                    <FooterClips
+                        portfolio
+                        data-aos="zoom-in"
+                        data-aos-duration="400"
+                        data-aos-easing="ease-in-out"
+                        data-aos-delay="200"
+
+                    >
                         <FooterIconBody>
                             <img src={FooterBriefcase} alt={"Briefcase"} />
                         </FooterIconBody>
                         <FooterClipTitle>Portfolio</FooterClipTitle>
                     </FooterClips>
-                    <FooterClips roadmap>
+                    <FooterClips
+                        roadmap
+                        data-aos="zoom-in"
+                        data-aos-duration="400"
+                        data-aos-easing="ease-in-out"
+                        data-aos-delay="600"
+                    >
                         <FooterIconBody>
                             <img src={FooterBook} alt="book" />
                         </FooterIconBody>
                         <FooterClipTitle>Roadmap</FooterClipTitle>
                     </FooterClips>
-                    <FooterClips leaderboard>
+                    <FooterClips
+                        leaderboard
+                        data-aos="zoom-in"
+                        data-aos-duration="400"
+                        data-aos-easing="ease-in-out"
+                        data-aos-delay="900"
+                    >
                         <FooterIconBody>
                             <img src={FooterAward} alt="Award" />
                         </FooterIconBody>

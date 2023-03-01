@@ -42,6 +42,7 @@ code {
   --gray: #F0F0EF;
   --gray-black:#5C5C5C;
   --landing-card-black:#1B1D16;
+  --carouselText: #555750;
 }
 
 h1,h2,h3,h4,h5,h6,p,em,i,ul,li,a,span,button{
@@ -65,4 +66,26 @@ p,em,i,ul,li,a,span{
 button{
   font-size: 1rem;
   font-weight: 600;
+}
+.mySwiper{
+  height:40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+}
+@media screen and (max-width:768px) {
+  p{
+    font-size: 0.8rem;
+  }
+  .mySwiper{
+    height:14rem;
+  }
+}
+
+@media screen and (min-width:2000px) {
+  body{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
