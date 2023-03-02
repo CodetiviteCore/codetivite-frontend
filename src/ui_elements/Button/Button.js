@@ -3,8 +3,8 @@ import { devices } from './../../utils/MediaQueiyBreakPoints';
 
 const ButtonStyle = styled.button`
     padding: 1rem 2rem;
-    background-color: ${props=>props.primary ? "var(--primary)" : "var(--primary-light)"};
-    color: ${props => props.primary ? "var(--white)" : "var(--primary)"};
+    background-color: ${({primary,scrolled})=> primary ? "var(--primary)" : scrolled ? "var(--primary)" : "var(--primary-light)"};
+    color: ${({primary,scrolled})=>primary ? "var(--white)" : scrolled ? "var(--white)" : "var(--primary)"};
     outline: none;
     border: none;
     border-radius:6.25rem ;
@@ -22,7 +22,8 @@ const ButtonStyle = styled.button`
     }
 `
 
-export const Button = ({children,...props}) => {
+export const Button = ({ children, ...props }) => {
+   
     return (
         <ButtonStyle
             {...props}

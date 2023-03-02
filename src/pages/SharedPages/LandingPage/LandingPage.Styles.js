@@ -439,7 +439,7 @@ export const LandingBlogContainer = styled.section`
     padding:8%;
 `
 export const LandingBlogCard = styled.div`
-    width:28.6rem;
+    width:24.6rem;
     
     img{
         object-fit:cover;
