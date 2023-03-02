@@ -1,16 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 import { BlackLogo } from '../../assets/svgs';
 import { Button } from '../../ui_elements';
 import { devices } from './../../utils/MediaQueiyBreakPoints';
+import { ModalContext } from '../../context/ModalContext';
 
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setIsModalOpen } = useContext(ModalContext)
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +36,13 @@ export const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+
+
+
 
   return (
     <NavigationBar scrolled={scrolled}>
@@ -50,7 +60,12 @@ export const Navbar = () => {
           <NavItem>Contact us</NavItem>
           <NavItem>Our blog</NavItem>
         </NavList>
-        <Button scrolled={scrolled}>Login or Sign up</Button>
+        <Button
+          scrolled={scrolled}
+          onClick={openModal}
+        >
+          Login or Sign up
+        </Button>
       </NavListContainer>
 
     </NavigationBar>
@@ -169,17 +184,5 @@ const Bar = styled.div`
 
   &:last-child {
     transform: ${({ isMenuOpen }) => (isMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : '')};
-  }
-`;
-
-const bounceAnimation = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-  100% {
-    transform: translateY(0);
   }
 `;
