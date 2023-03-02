@@ -57,6 +57,7 @@ import AuthorAvatar from "../../../assets/images/blogAvatar.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
+import { Modal } from '../../../components';
 
 
 
@@ -66,10 +67,16 @@ import 'aos/dist/aos.css';
 const LandingPage = () => {
 
   const [cardState, setCardState] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleCardExpansion = (index) => {
     setCardState(index)
@@ -120,6 +127,10 @@ const LandingPage = () => {
   ]
   return (
     <LandingMainContainer>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <h2>Modal Title</h2>
+        <p>Modal content goes here.</p>
+      </Modal>
       <LandingFirstContainer>
         <div>
           <p
@@ -146,6 +157,7 @@ const LandingPage = () => {
             data-aos-easing="ease-in-out"
             data-aos-duration="800"
             data-aos-delay="120"
+            onClick={openModal}
           >Get started now</Button>
         </div>
       </LandingFirstContainer>
