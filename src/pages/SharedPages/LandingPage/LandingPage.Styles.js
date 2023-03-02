@@ -5,6 +5,42 @@ import { devices } from "../../../utils/MediaQueiyBreakPoints"
 export const LandingMainContainer = styled.main`
 
 `
+export const LandingModal = styled.div`
+    height:fit-content;
+    div:first-child{
+        width:100%;
+        background-color:var(--blue) ;
+        display:flex;
+        justify-content:space-between ;
+    }
+    div:last-child{
+        padding:50px 70px;
+        text-align:center;
+        h4{
+            font-size:1.3rem;
+            margin-bottom:1rem;
+
+        }
+     
+        button{
+            background-color:var(--google-blue);
+            margin:2rem auto 0 auto;
+            padding:22px 52px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:20px;
+            border-radius: 10px;
+            p{
+                color:var(--white);
+            }
+            &:hover{
+                cursor:pointer;
+            }
+           
+        }
+    }
+`
 export const LandingFirstContainer = styled.div`
     display:flex;
     align-items:center;

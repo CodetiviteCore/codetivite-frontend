@@ -11,6 +11,11 @@ import { ReactComponent as GreenLargeLogo } from "./greenLargeLogo.svg"
 import { ReactComponent as Audio } from "./audio.svg"
 import { ReactComponent as RightArrow } from "./rightArrow.svg"
 import { ReactComponent as LeftArrow } from "./leftArrow.svg"
+import { ReactComponent as Google } from "./google.svg"
+import { ReactComponent as LandingModalLogoRight } from "./LandingModalLogoCutRight.svg"
+import { ReactComponent as LandingModalLogoLeft } from "./LandingModalLogoCutLeft.svg"
+
+
 
 
 
@@ -31,6 +36,9 @@ export {
     GreenLargeLogo,
     Audio,
     RightArrow,
-    LeftArrow
+    LeftArrow,
+    Google,
+    LandingModalLogoLeft,
+    LandingModalLogoRight
 
 }

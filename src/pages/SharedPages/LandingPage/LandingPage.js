@@ -32,11 +32,15 @@ import {
   LandingBlogContainer,
   LandingBlogCard,
   BlogContainer,
-  LandingBlogCardContainer
+  LandingBlogCardContainer,
+  LandingModal
 } from './LandingPage.Styles';
 import { Button, LandingCard } from '../../../ui_elements/index';
 import {
   Audio,
+  Google,
+  LandingModalLogoLeft,
+  LandingModalLogoRight,
   LeaderboardIcon,
   LeftArrow,
   PortfolioIcon,
@@ -128,8 +132,22 @@ const LandingPage = () => {
   return (
     <LandingMainContainer>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2>Modal Title</h2>
-        <p>Modal content goes here.</p>
+        <LandingModal>
+          <div>
+            <LandingModalLogoLeft className='left' />
+            <LandingModalLogoRight className='right'/>
+          </div>
+          <div>
+            <h4>Continue with your Google account.</h4>
+            <p>Getting started and getting back into your account has been simplified.
+              Continue using your google account.
+            </p>
+            <button>
+              <Google />
+              <p>Continue with your Google account</p>
+            </button>
+          </div>
+        </LandingModal>
       </Modal>
       <LandingFirstContainer>
         <div>

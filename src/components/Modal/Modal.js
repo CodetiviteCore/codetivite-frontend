@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ModalWrapper = styled.div`
@@ -16,43 +15,24 @@ const ModalWrapper = styled.div`
 
 const ModalContent = styled.div`
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 2rem;
-  max-width: 600px;
-  max-height: 80vh;
+  max-width: 35rem;
+  /* max-height: 8rem; */
+  height:fit-content;
   overflow: auto;
+  
 `;
 
 export const Modal = ({ isOpen, onClose, children }) => {
-  return (
-    <ModalWrapper isOpen={isOpen}>
-      <ModalContent>
-        <button onClick={onClose}>Close</button>
-        {children}
-      </ModalContent>
-    </ModalWrapper>
-  );
-};
-
-const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  return (
-    <>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2>Modal Title</h2>
-        <p>Modal content goes here.</p>
-      </Modal>
-    </>
-  );
+    return (
+        <ModalWrapper
+            isOpen={isOpen}
+            onClick={onClose}
+        >
+            <ModalContent>
+                {children}
+            </ModalContent>
+        </ModalWrapper>
+    );
 };
