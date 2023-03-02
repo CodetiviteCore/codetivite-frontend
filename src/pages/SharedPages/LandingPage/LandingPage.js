@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import "swiper/css"
 import "swiper/css/pagination"
 import 'swiper/css/navigation';
@@ -62,6 +62,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
 import { Modal } from '../../../components';
+import { ModalContext } from '../../../context/ModalContext';
 
 
 
@@ -69,14 +70,9 @@ import { Modal } from '../../../components';
 
 
 const LandingPage = () => {
-
+  const { isModalOpen, setIsModalOpen} = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -175,7 +171,6 @@ const LandingPage = () => {
             data-aos-easing="ease-in-out"
             data-aos-duration="800"
             data-aos-delay="120"
-            onClick={openModal}
           >Get started now</Button>
         </div>
       </LandingFirstContainer>
