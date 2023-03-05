@@ -138,7 +138,7 @@ const LandingPage = () => {
             <p>Getting started and getting back into your account has been simplified.
               Continue using your google account.
             </p>
-            <button>
+            <button onClick={()=>alert("clicked!")}>
               <Google />
               <p>Continue with your Google account</p>
             </button>

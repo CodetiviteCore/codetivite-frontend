@@ -118,7 +118,7 @@ export const Footer = () => {
                     <div>
                         <h3>SOCIALS</h3>
                         <FooterLinkList>
-                            <FooterLinkItem>LinkedIN</FooterLinkItem>
+                            <FooterLinkItem>LinkedIn</FooterLinkItem>
                             <FooterLinkItem>Twitter</FooterLinkItem>
                             <FooterLinkItem>Instagram</FooterLinkItem>
                         </FooterLinkList>
