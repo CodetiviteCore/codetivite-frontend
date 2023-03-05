@@ -17,7 +17,7 @@ const ButtonStyle = styled.button`
      
     }
     @media ${devices.tablet} {
-        font-size: 0.66rem;
+        font-size: 1rem;
         padding:0.5rem 1rem ;
     }
 `

@@ -1,6 +1,8 @@
+    import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const ModalWrapper = styled.div`
+
+const ModalWrapper = styled(motion.div)`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
@@ -10,13 +12,14 @@ const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter:blur(3px);
   z-index: 10000;
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled(motion.div)`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   max-width: 35rem;
   /* max-height: 8rem; */
   height:fit-content;
@@ -30,7 +33,15 @@ export const Modal = ({ isOpen, onClose, children }) => {
             isOpen={isOpen}
             onClick={onClose}
         >
-            <ModalContent>
+            <ModalContent
+                initial={{
+                    opacity:0,
+                }}
+                animate={{
+                    opacity: 1,
+                    x:-10,  
+                }}
+            >
                 {children}
             </ModalContent>
         </ModalWrapper>

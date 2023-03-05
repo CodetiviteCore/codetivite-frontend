@@ -154,6 +154,7 @@ const NavItem = styled(NavLink)`
   @media ${devices.tablet}{
     color:var(--white);
     text-align:center;
+    font-size:1rem;
   }
 `
 const HamburgerContainer = styled.div`

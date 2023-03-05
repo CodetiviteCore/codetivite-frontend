@@ -31,6 +31,8 @@ export const LandingModal = styled.div`
             justify-content:center;
             gap:20px;
             border-radius: 10px;
+            outline:none;
+            border:none;
             p{
                 color:var(--white);
             }
@@ -50,11 +52,11 @@ export const LandingFirstContainer = styled.div`
         flex-wrap:wrap;
         h2{
             width:100%;
-            font-size:1.2rem;
+            font-size:1.6rem;
             line-height:1;
         }
         p{
-            font-size:0.8rem;
+            font-size:1rem;
            
         }
         div:last-child{
@@ -96,10 +98,10 @@ export const LandingWhatWeDoContainer = styled.div`
     }
     @media ${devices.tablet}{
         p{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         h3{
-            font-size:1.2rem;
+            font-size:1.6rem;
         }
     }
 `
@@ -111,10 +113,10 @@ export const LandingWhatWeDoCard = styled.div`
     }
     @media ${devices.tablet}{
         h4{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         P{
-            font-size:0.8rem;
+            font-size:1rem;
         }
     }
 `
@@ -197,7 +199,7 @@ export const HowToGetStartedDetails = styled.div`
             font-size:1.1rem;
         }
         p{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         button{
             display:none;
@@ -238,7 +240,7 @@ export const LandingExpand = styled.button`
     border:none;
     p{
         margin:auto;
-        font-size:1.2rem;
+        font-size:1rem;
         color:${props => props.open ? "var(--gray-black)" : "var(--primary)"};
         font-weight: 600;
     }
@@ -277,7 +279,7 @@ export const CommunityCollaborateDetails = styled.div`
     height:fit-content;
     padding-bottom:10%;
     h3{
-        font-size:1.75rem;
+        font-size:1.6rem;
         font-weight:700;
     }
     h5{
@@ -291,7 +293,7 @@ export const CommunityCollaborateDetails = styled.div`
         margin-top:10%;
     
         p,h5{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         h3{
             font-size:1.2rem;
@@ -395,7 +397,7 @@ export const AudioContainer = styled.div`
         bottom:-1rem;
         left:4rem;
         h5{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         div{
             p{
@@ -434,7 +436,7 @@ export const LandingCarouselElement = styled.div`
     @media ${devices.tablet}{
         width:100% ;
         h5{
-            font-size:0.8rem;
+            font-size:1rem;
         }
     }
 
@@ -501,15 +503,21 @@ export const LandingBlogCard = styled.div`
             margin-top:1rem;
         }
         h5{
-            font-size:0.8rem;
+            font-size:1rem;
         }
         p{
-            font-size:0.6rem;
+            font-size:0.8rem;
         }
 
     }
     @media ${devices.tablet}{
         width:20rem;
+        h4{
+            font-size:1rem;
+        }
+        p{
+            font-size:1rem;
+        }
     }
 
 `
@@ -542,7 +550,10 @@ export const BlogContainer = styled.div`
             display:none;
         }
         h4{
-            font-size:1rem !important;
+            font-size:1.6rem !important;
+        }
+        p{
+            font-size:1rem;
         }
     }
    

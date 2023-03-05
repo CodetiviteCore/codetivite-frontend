@@ -117,15 +117,16 @@ export const FooterGetStarted = styled.div`
         font-size:1.75rem;
         width:36.5rem;
         @media ${devices.tablet} {
-            font-size:1.1rem ;
+            font-size:1.6rem ;
             width:350px;
+            line-height:1.5  ;
         }
     }
     p{
         margin-top:0.5rem;
         max-width:36.5rem;
         @media ${devices.tablet} {
-            font-size:0.8rem;
+            font-size:1rem;
         }
     }
 `
@@ -166,7 +167,7 @@ export const FootLinksLogoDetails = styled.div`
     }
     p{
         @media ${devices.tablet}{
-            font-size:0.83rem;
+            font-size:1rem;
         }
     }
     width: 28.8rem;
@@ -181,7 +182,7 @@ export const FooterLinkItem = styled.li`
     color:var(--white);
     margin-top:1rem;
     @media ${devices.tablet}{
-        font-size: 0.86rem ;
+        font-size: 1rem ;
     }
 `
 export const CopyRight = styled.p`
