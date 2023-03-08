@@ -60,16 +60,24 @@ export const LandingFirstContainer = styled.div`
            
         }
         div:last-child{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
             p{
                 margin-bottom:0.4rem;
                 line-height:1.7;
             }
+            button{
+                margin:0 auto ;
+            }
         }
     }
     div:last-child{
+
         p{
             margin-bottom:1.5rem;
         }
+        
     }
 
 `
@@ -112,6 +120,7 @@ export const LandingWhatWeDoCard = styled.div`
         font-weight: 600;
     }
     @media ${devices.tablet}{
+        text-align:center;
         h4{
             font-size:1rem;
         }
@@ -291,6 +300,8 @@ export const CommunityCollaborateDetails = styled.div`
     }
     @media ${devices.tablet}{
         margin-top:10%;
+        display:flex;
+        flex-direction:column ;
     
         p,h5{
             font-size:1rem;
@@ -299,9 +310,9 @@ export const CommunityCollaborateDetails = styled.div`
             font-size:1.2rem;
         }
         
-        /* button{
-            margin:auto;
-        } */
+        button{
+            align-self:center;
+        }
     }
 `
 export const AvatarContainer = styled.aside`

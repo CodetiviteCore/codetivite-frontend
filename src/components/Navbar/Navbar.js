@@ -117,6 +117,7 @@ const NavListContainer = styled.div`
   align-items:center;
   justify-content:space-between ;
   width:72%;
+  transition: all 2s ease-in-out;
   @media ${devices.tablet}{
     position:fixed;
     top:10vh;
@@ -126,7 +127,7 @@ const NavListContainer = styled.div`
     justify-content:space-around ;
     align-items:center ;
     background-color:var(--primary);
-    transition: all 2as ease-in-out;
+    transition: all 2s ease-in-out;
     height:${({ isMenuOpen }) => isMenuOpen ? "100vh" : "0"};
     width:${({isMenuOpen})=> isMenuOpen ? "100%" : "0"};
   }

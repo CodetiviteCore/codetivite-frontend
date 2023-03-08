@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import "swiper/css"
 import "swiper/css/pagination"
 import 'swiper/css/navigation';
@@ -63,6 +63,15 @@ import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
 import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
+import { useDispatch } from 'react-redux';
+import { Puff } from 'react-loader-spinner';
+import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useApiGet } from './../../../custom-hooks/useApiGet';
+import DOMPurify from 'dompurify';
+import axios from 'axios';
+
 
 
 
@@ -70,13 +79,55 @@ import { ModalContext } from '../../../context/ModalContext';
 
 
 const LandingPage = () => {
-  const { isModalOpen, setIsModalOpen} = useContext(ModalContext)
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
+  const [googleLoginPageHTML, setGoogleLoginPageHTML] = useState("")
+  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(true);
 
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+
+
+  //Auth api call
+  // const onAuthSuccess = () => toast.success(`You're signed up`, {
+  //   position: "top-right",
+  //   autoClose: 3000,
+  //   hideProgressBar: true,
+  //   closeOnClick: true,
+  //   pauseOnHover: false,
+  //   draggable: false,
+  //   theme: "light",
+  // })
+  // const onAuthFailure = (error) => toast.error(`Something went wrong ${error}`, {
+  //   position: "top-right",
+  //   autoClose: 3000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "light",
+  // })
+
+  // const {
+  //   data: googleLoginPage,
+  //   isLoading: isLoadingUser,
+  //   refetch
+  // } = useApiGet(onAuthSuccess, onAuthFailure)
+
+
+  const fetchLoginPage = async () => {
+    try {
+      const response = await axios.get('https://codetivite-api.onrender.com/login');
+      const sanitizedHTML = DOMPurify.sanitize(response.data);
+      setGoogleLoginPageHTML(sanitizedHTML);
+    } catch (error) {
+      alert(error)
+    } finally {
+      setIsLoading(false);
+    }
   };
+
 
   const handleCardExpansion = (index) => {
     setCardState(index)
@@ -127,22 +178,47 @@ const LandingPage = () => {
   ]
   return (
     <LandingMainContainer>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen}>
         <LandingModal>
-          <div>
-            <LandingModalLogoLeft className='left' />
-            <LandingModalLogoRight className='right'/>
-          </div>
-          <div>
-            <h4>Continue with your Google account.</h4>
-            <p>Getting started and getting back into your account has been simplified.
-              Continue using your google account.
-            </p>
-            <button onClick={()=>alert("clicked!")}>
-              <Google />
-              <p>Continue with your Google account</p>
-            </button>
-          </div>
+          {
+            googleLoginPageHTML ?
+              <div dangerouslySetInnerHTML={{ __html: googleLoginPageHTML }} />
+              :
+              <>
+                <div>
+                  <LandingModalLogoLeft className='left' />
+                  <LandingModalLogoRight className='right' />
+                </div>
+                <div>
+                  <h4>Continue with your Google account.</h4>
+                  <p>Getting started and getting back into your account has been simplified.
+                    Continue using your google account.
+                  </p>
+                  <button onClick={fetchLoginPage}>
+                    {/* {
+                      isLoadingUser ? <Puff
+                        height="40"
+                        width="40"
+                        radius={1}
+                        color="var(--white)"
+                        ariaLabel="puff-loading"
+                        wrapperStyle={{ backgroundColor: "transparent" }}
+                        wrapperClass=""
+                        visible={true}
+                      />
+                        : */}
+                        <>
+                          <Google />
+                          <p>Continue with your Google account</p>
+                        </>
+                    {/* } */}
+
+                  </button>
+                </div>
+              </>
+
+          }
+
         </LandingModal>
       </Modal>
       <LandingFirstContainer>
@@ -355,7 +431,7 @@ const LandingPage = () => {
               margin-top:40px;"> 
               </span>`
           }}
-          modules={[Pagination,Navigation]}
+          modules={[Pagination, Navigation]}
           className={"mySwiper"}
         >
           <Slide>
@@ -443,6 +519,7 @@ const LandingPage = () => {
           }
         </LandingBlogCardContainer>
       </LandingBlogContainer>
+      <ToastContainer />
     </LandingMainContainer>
   )
 }
