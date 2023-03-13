@@ -1,7 +1,7 @@
     import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { ModalContext } from '../../context/ModalContext';
+// import { useContext } from 'react';
+// import { ModalContext } from '../../context/ModalContext';
 
 
 const ModalWrapper = styled(motion.div)`
@@ -30,10 +30,10 @@ const ModalContent = styled(motion.div)`
 `;
 
 export const Modal = ({ isOpen, children }) => {
-    const { setIsModalOpen } = useContext(ModalContext)
-    const closeModal = () => {
-        setIsModalOpen(false);
-      };
+    // const { setIsModalOpen } = useContext(ModalContext)
+    // const closeModal = () => {
+    //     setIsModalOpen(false);
+    //   };
     return (
         <ModalWrapper
             isOpen={isOpen}

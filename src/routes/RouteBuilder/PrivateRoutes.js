@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { MainLayout } from '../../components/Layouts'
 
 
 const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Preferences/Prefrence"))
@@ -9,31 +10,31 @@ const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Prefere
 
 
 export const PrivateRoutes = () => {
-    // const privateLayouts = [
-    //     {
-    //         path: "/",
-    //         component: <LazyLanding />
-    //     },
-    //     {
-    //         path: "/community",
-    //         component: <LazyCommunity />
-    //     }, {
-    //         path: "/about-us",
-    //         component: <LazyAboutUs />
-    //     },
-    //     {
-    //         path: "/contact-us",
-    //         component: <LazyContactUs />
-    //     },
-    //     {
-    //         path: "/our-blog",
-    //         component: <LazyBLog />
-    //     },
-    //     {
-    //         path: "/preferences",
-    //         component: <LazyPreference />
-    //     },
-    // ]
+    const privateLayouts = [
+        // {
+        //     path: "/",
+        //     component: <LazyLanding />
+        // },
+        // {
+        //     path: "/community",
+        //     component: <LazyCommunity />
+        // }, {
+        //     path: "/about-us",
+        //     component: <LazyAboutUs />
+        // },
+        // {
+        //     path: "/contact-us",
+        //     component: <LazyContactUs />
+        // },
+        // {
+        //     path: "/our-blog",
+        //     component: <LazyBLog />
+        // },
+        {
+            path: "/preferences",
+            component: <LazyPreference />
+        },
+    ]
 
 
     return (
@@ -42,13 +43,13 @@ export const PrivateRoutes = () => {
                 <React.Suspense fallback={null}>
                     <LazyPreference/>
                 </React.Suspense>} />
-            {/* {
+            {
                 privateLayouts.map((routes, index) => <Route key={index} path={routes.path} element={
                     <React.Suspense fallback={null}>
                         <MainLayout>{routes.component}</MainLayout>
                     </React.Suspense>
                 } />)
-            } */}
+            }
         </Routes>
     )
 }

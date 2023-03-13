@@ -1,4 +1,3 @@
-import { useEffect} from 'react';
 import styled from 'styled-components';
 import { devices } from '../../utils/MediaQueiyBreakPoints';
 
@@ -28,30 +27,19 @@ const ButtonStyle = styled.button`
 export const PreferenceButton = ({
     children,
     preferences,
-    setPreferences,
     index,
     preferenceState,
-    setPreferenceState,
     onClick,
     selected,
     ...props
 }) => {
-
-
-    useEffect(() => {
-        console.log(preferences, "preference")
-    }, [preferences])
-    
-
-
-
     return (
         <ButtonStyle
             {...props}
             onClick={onClick}
             style={{
-                backgroundColor: selected && "var(--primary)",
-                color: selected && "var(--white)",
+                backgroundColor: selected ? "var(--primary)":"var(--white)" ,
+                color: selected ? "var(--white)": "var(--primary)"
             }}
 
         >
