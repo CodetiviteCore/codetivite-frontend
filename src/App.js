@@ -1,7 +1,7 @@
-import { PrivateRoutes, SharedRoutes } from "./routes";
+import { PrivateRoutes} from "./routes";
 import {
   useEffect,
-  useLayoutEffect
+  
 } from "react";
 import Aos from 'aos';
 import { QueryClient, QueryClientProvider } from "react-query";

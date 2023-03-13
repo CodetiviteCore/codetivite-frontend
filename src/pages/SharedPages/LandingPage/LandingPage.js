@@ -1,4 +1,4 @@
-import { useCallback, useContext, useLayoutEffect, useState } from 'react'
+import {  useContext, useState } from 'react'
 import "swiper/css"
 import "swiper/css/pagination"
 import 'swiper/css/navigation';
@@ -63,9 +63,9 @@ import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
 import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
-import { Puff } from 'react-loader-spinner';
-import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
-import { ToastContainer, toast } from 'react-toastify';
+// import { Puff } from 'react-loader-spinner';
+// import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -74,7 +74,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const LandingPage = () => {
-  const { isModalOpen, setIsModalOpen } = useContext(ModalContext)
+  const { isModalOpen } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
   
   
