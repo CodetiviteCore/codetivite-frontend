@@ -10,6 +10,9 @@ const LazyCommunity = React.lazy(() => import("../../pages/SharedPages/Community
 const LazyAboutUs = React.lazy(() => import("../../pages/SharedPages/AboutUsPage/AboutUs"))
 const LazyContactUs = React.lazy(() => import("../../pages/SharedPages/ContactUsPage/ContactUs"))
 const LazyBLog = React.lazy(() => import("../../pages/SharedPages/BlogPage/Blog"))
+const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Preferences/Prefrence"))
+
+
 
 
 
@@ -34,7 +37,13 @@ export const SharedRoutes = () => {
             path: "/our-blog",
             component: <LazyBLog />
         },
+        {
+            path: "/preferences",
+            component: <LazyPreference />
+        },
     ]
+
+
     return (
         <Routes>
             {

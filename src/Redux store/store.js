@@ -3,8 +3,8 @@ import { createStore,compose } from "redux"
 import logger from "redux-logger"
 import persistReducer from "redux-persist/es/persistReducer"
 import persistStore from "redux-persist/es/persistStore"
+import localStorage from "redux-persist/es/storage";
 import thunk from "redux-thunk"
-import storage from "redux-persist/lib/storage";
 import { rootReducer } from './root-reducer';
 
 
@@ -12,9 +12,8 @@ import { rootReducer } from './root-reducer';
 
 const persistConfig = {
     key: 'root',
-    storage: storage,
-    whitelist: ["auth"],
-    blacklist: []
+    storage: localStorage,
+    whitelist: ['auth'],
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 const middleWares = [process.env.NODE_ENV === "development" && logger, thunk].filter(Boolean)

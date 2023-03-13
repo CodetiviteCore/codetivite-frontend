@@ -7,14 +7,15 @@ const ButtonStyle = styled.button`
     color: ${({primary,scrolled})=>primary ? "var(--white)" : scrolled ? "var(--white)" : "var(--primary)"};
     outline: none;
     border: none;
-    border-radius:6.25rem ;
-    /*ripple effect*/
+    border-radius:${({preference})=>preference ? "0px" : "6.25rem"};
+    font-weight:${({preference})=>preference ? "400" : null} ;
     background-position:center;
-    transition: background 0.8s ease-in-out ;
+    transition: all 0.3s ease-in-out ;
     &:hover{
         cursor:pointer;
-        opacity:0.8;
-     
+        opacity:${({preference})=>preference ? 1 : 0.8};
+        background-color:${({ preference }) => preference ? "var(--primary)" : null} ;
+        color:${({preference})=>preference ? "var(--white)" : null}
     }
     @media ${devices.tablet} {
         font-size: 1rem;

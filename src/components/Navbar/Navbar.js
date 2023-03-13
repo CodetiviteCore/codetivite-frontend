@@ -1,23 +1,55 @@
-import React from 'react'
-import { useState, useEffect, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import {
+  useState,
+  useEffect,
+  useContext,
+  useLayoutEffect
+} from 'react';
+import {
+
+  NavLink
+} from 'react-router-dom';
+
 import styled from "styled-components";
 
 import { BlackLogo } from '../../assets/svgs';
 import { Button } from '../../ui_elements';
 import { devices } from './../../utils/MediaQueiyBreakPoints';
 import { ModalContext } from '../../context/ModalContext';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../Redux store/auth/auth.selector';
+import Avatar from 'react-avatar';
 
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setIsModalOpen } = useContext(ModalContext)
+  const user = useSelector(selectUser)
+  const [usernames, setUsernames] = useState({
+    firstname: "",
+    lastname: ""
+  })
+
+  console.log(user)
+
+  useLayoutEffect(() => {
+
+    if (user) {
+      console.log(user, "user")
+      const { firstName, lastName } = user
+      setUsernames({
+        firstname: firstName,
+        lastname: lastName
+      })
+    }
+
+  }, [user])
 
 
   useEffect(() => {
+
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
+      const isScrolled = window.scrollY > 400;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -61,12 +93,23 @@ export const Navbar = () => {
           <NavItem>Contact us</NavItem>
           <NavItem>Our blog</NavItem>
         </NavList>
-        <Button
-          scrolled={scrolled}
-          onClick={openModal}
-        >
-          Login or Sign up
-        </Button>
+        {
+          user ?
+            <NavAvatar
+              name={`${usernames.firstname} ${usernames.lastname}`}
+              round={true}
+              size="40"
+              fgColor='	#FFF'
+            />
+            :
+            <Button
+              scrolled={scrolled}
+              onClick={openModal}
+            >
+              Login or Sign up
+            </Button>
+        }
+
       </NavListContainer>
 
     </NavigationBar>
@@ -85,7 +128,7 @@ const NavigationBar = styled.nav`
   width:${({ scrolled }) => (scrolled ? "-webkit-fill-available" : "initial")};
   height:10vh;
   padding:0 8%;
-  transition: background-color 0.5s ease;
+  transition: all 0.5s ease;
   z-index: 10;
   @media ${devices.tablet}{
     flex-wrap:wrap;
@@ -129,7 +172,7 @@ const NavListContainer = styled.div`
     background-color:var(--primary);
     transition: all 2s ease-in-out;
     height:${({ isMenuOpen }) => isMenuOpen ? "100vh" : "0"};
-    width:${({isMenuOpen})=> isMenuOpen ? "100%" : "0"};
+    width:${({ isMenuOpen }) => isMenuOpen ? "100%" : "0"};
   }
 `
 const NavItem = styled(NavLink)`
@@ -169,7 +212,13 @@ const HamburgerContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
   }
-`;
+`
+
+const NavAvatar = styled(Avatar)`
+  span{
+    color:var(--white) !important;
+  }
+`
 
 const Bar = styled.div`
   width: 100%;
