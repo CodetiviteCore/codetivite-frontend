@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import {  useContext, useState } from 'react'
 import "swiper/css"
 import "swiper/css/pagination"
 import 'swiper/css/navigation';
@@ -63,6 +63,10 @@ import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
 import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
+// import { Puff } from 'react-loader-spinner';
+// import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -70,13 +74,18 @@ import { ModalContext } from '../../../context/ModalContext';
 
 
 const LandingPage = () => {
-  const { isModalOpen, setIsModalOpen} = useContext(ModalContext)
+  const { isModalOpen } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
+  
+  
 
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const redirect = () => {
+    window.location.href = 'https://codetivite-api.onrender.com/login'
+  }
+
+
+
 
   const handleCardExpansion = (index) => {
     setCardState(index)
@@ -127,22 +136,40 @@ const LandingPage = () => {
   ]
   return (
     <LandingMainContainer>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen}>
         <LandingModal>
+
           <div>
             <LandingModalLogoLeft className='left' />
-            <LandingModalLogoRight className='right'/>
+            <LandingModalLogoRight className='right' />
           </div>
           <div>
             <h4>Continue with your Google account.</h4>
             <p>Getting started and getting back into your account has been simplified.
               Continue using your google account.
             </p>
-            <button onClick={()=>alert("clicked!")}>
-              <Google />
-              <p>Continue with your Google account</p>
+            <button onClick={redirect}>
+              {/* {
+                      isLoadingUser ? <Puff
+                        height="40"
+                        width="40"
+                        radius={1}
+                        color="var(--white)"
+                        ariaLabel="puff-loading"
+                        wrapperStyle={{ backgroundColor: "transparent" }}
+                        wrapperClass=""
+                        visible={true}
+                      />
+                        : */}
+              <>
+                <Google />
+                <p>Continue with your Google account</p>
+              </>
+              {/* } */}
+
             </button>
           </div>
+
         </LandingModal>
       </Modal>
       <LandingFirstContainer>
@@ -355,7 +382,7 @@ const LandingPage = () => {
               margin-top:40px;"> 
               </span>`
           }}
-          modules={[Pagination,Navigation]}
+          modules={[Pagination, Navigation]}
           className={"mySwiper"}
         >
           <Slide>
@@ -443,6 +470,7 @@ const LandingPage = () => {
           }
         </LandingBlogCardContainer>
       </LandingBlogContainer>
+      <ToastContainer />
     </LandingMainContainer>
   )
 }

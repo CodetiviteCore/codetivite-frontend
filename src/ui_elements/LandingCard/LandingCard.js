@@ -26,7 +26,7 @@ const Title = styled.div`
     align-items:center;
     @media ${devices.tablet}{
         h5{
-            font-size:0.8rem;
+            font-size:1rem;
         }
     }
 `
@@ -58,7 +58,7 @@ const CardDetails = styled.p`
     opacity:${props => props.open === "open" ? "1" : "0"} ;
     transition: all 0.5s ease-in-out;
     @media ${devices.tablet}{
-        font-size:0.8rem;
+        font-size:1rem;
     }
 `
 export const LandingCard = ({ title, description, cardState, index, handleCardExpansion }) => {
