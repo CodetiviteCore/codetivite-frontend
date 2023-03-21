@@ -7,7 +7,7 @@ import {
 import {
   NavLink,
   useSearchParams,
-  useNavigate
+  // useNavigate
 } from 'react-router-dom';
 
 import styled from "styled-components";
@@ -16,24 +16,24 @@ import { BlackLogo } from '../../assets/svgs';
 import { Button } from '../../ui_elements';
 import { devices } from './../../utils/MediaQueiyBreakPoints';
 import { ModalContext } from '../../context/ModalContext';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
-import { useApiGet } from '../../custom-hooks/useApiGet';
-import {getUserDetailsFromAuth} from "../../api/apiCalls"
+// import { useApiGet } from '../../custom-hooks/useApiGet';
+// import {getUserDetailsFromAuth} from "../../api/apiCalls"
 import Avatar from 'react-avatar';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { BASE_URL } from '../../utils/urls';
+// import { BASE_URL } from '../../utils/urls';
 
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setIsModalOpen } = useContext(ModalContext)
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const [authToken, setAuthToken] = useState("")
+  // const navigate = useNavigate();
+  // const [authToken, setAuthToken] = useState("")
   const user = useSelector(selectUser)
   const [usernames, setUsernames] = useState({
     firstname: "",
@@ -79,7 +79,7 @@ export const Navbar = () => {
     // refetch()
     // navigate("/")
   
- },[])
+ },[searchParams])
  
 
 
