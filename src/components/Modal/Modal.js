@@ -1,4 +1,4 @@
-    import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useContext } from 'react';
 import { ModalContext } from '../../context/ModalContext';
@@ -33,21 +33,22 @@ export const Modal = ({ isOpen, children }) => {
     const { setIsModalOpen } = useContext(ModalContext)
     const closeModal = () => {
         setIsModalOpen(false);
-      };
+    };
     return (
         <ModalWrapper
             isOpen={isOpen}
-            // onClick={closeModal}
+            onClick={closeModal}
         >
             <ModalContent
                 initial={{
-                    opacity:0,
+                    opacity: 0,
                 }}
                 animate={{
                     opacity: 1,
-                    x:-10,  
+                    x: -10,
                 }}
             >
+                <em>X</em>
                 {children}
             </ModalContent>
         </ModalWrapper>

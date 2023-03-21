@@ -1,14 +1,15 @@
 import { useQuery } from "react-query";
-import { signUserWithGoogleAuth } from '../api/authApi';
 
-export const useApiGet= (onSuccess, onError) => {
+
+export const useApiGet = (onSuccess, onError, queryKey, apiCall) => {
     return useQuery(
-        "Google-sign-in/up",
-        signUserWithGoogleAuth,
+        `${queryKey}`,
+        ()=>apiCall,
         {
             onSuccess,
             onError,
-            enabled: false
+            enabled: false,
+            
         }
     )
 }

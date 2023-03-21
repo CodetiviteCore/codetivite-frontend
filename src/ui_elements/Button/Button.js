@@ -18,7 +18,7 @@ const ButtonStyle = styled.button`
         color:${({preference})=>preference ? "var(--white)" : null}
     }
     @media ${devices.tablet} {
-        font-size: 1rem;
+        font-size: 0.8rem;
         padding:0.5rem 1rem ;
     }
 `

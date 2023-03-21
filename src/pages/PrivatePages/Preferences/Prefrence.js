@@ -1,6 +1,6 @@
-import {useState} from 'react'
-import {PreferenceButton } from '../../../ui_elements'
-import DashboardImage from "../../../assets/images/dashboardImage.png"
+import { useState,useEffect } from "react";
+import { PreferenceButton } from "../../../ui_elements";
+import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {
     PreferenceDetails,
     PrefrenceContainer,
@@ -8,14 +8,12 @@ import {
     PreferenceDetailsHeader,
     PreferenceCardContainer,
     PreferencDashboardeDetails,
-    Save
-} from './Preference.styles'
+    Save,
+} from "./Preference.styles";
 
 const Prefrence = () => {
-    const [preferenceState, setPreferenceState] = useState(null)
-    const [preferences, setPreferences] = useState([])
-
-    const preference =  [
+    const [preferences, setPreferences] = useState([]);
+    const preference = [
         "Frontend developer",
         "Backend developer",
         "Solidity developer",
@@ -29,20 +27,25 @@ const Prefrence = () => {
         "Rust developer",
         "Devops Engineer",
         "Graphic Designer",
-        "Smart contract debveloper"
-    ]
+        "Smart contract debveloper",
+    ];
 
-    const selectPreferences = (skill, index) => {
+    const selectPreferences = (skill) => {
         if (preferences.includes(skill.toString())) {
-            setPreferenceState(null)
-            setPreferences((preferences)=>preferences.filter((item)=>item!==skill.toString()))
+            setPreferences((preferences) =>
+                preferences.filter((item) => item !== skill.toString())
+            );
+        } else {
+            setPreferences((preferences) => [...preferences, skill.toString()]);
         }
-        else {
-            setPreferenceState(index)
-            setPreferences((preferences)=>[...preferences, skill.toString()])
-        }
-    }
-    
+    };
+
+    useEffect(() => {
+        console.log(preferences)
+    },[preferences])
+
+
+
     return (
         <PrefrenceContainer>
             <PreferenceDetails>
@@ -51,34 +54,32 @@ const Prefrence = () => {
                     <p>Choose a career path to enable us serve you better.</p>
                 </PreferenceDetailsHeader>
                 <PreferenceCardContainer>
-                    {
-                        preference.map((item, index) => <PreferenceButton
-                            preference
-                            preferences={preferences}
-                            setPreferences={setPreferences}
-                            preferenceState={preferenceState}
-                            setPreferenceState={()=>setPreferenceState(item)}
-                            onClick={selectPreferences}
-                            selected={preference.includes(item)}
+                    {preference.map((item, index) => (
+                        <PreferenceButton
+                            onClick={() => selectPreferences(item)}
+                            selected={preferences.includes(item)}
                             index={index}
-                            key={index}>
+                            key={index}
+                        >
                             {item}
-                        </PreferenceButton>)
-                    }
+                        </PreferenceButton>
+                    ))}
                 </PreferenceCardContainer>
                 <Save primary>Save and continue to dashboard</Save>
             </PreferenceDetails>
             <PreferenceDashboard>
                 <PreferencDashboardeDetails>
                     <h2>Codetivite got you covered!</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur. Lobortis neque odio proin diam magna sed feugiat maecenas.
-                        Quam quis diam vel non feugiat fames facilisi.
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur. Lobortis neque odio proin
+                        diam magna sed feugiat maecenas. Quam quis diam vel non feugiat
+                        fames facilisi.
                     </p>
                 </PreferencDashboardeDetails>
                 <img src={DashboardImage} alt={"dashboard_image"} />
             </PreferenceDashboard>
         </PrefrenceContainer>
-    )
-}
+    );
+};
 
-export default Prefrence
+export default Prefrence;
