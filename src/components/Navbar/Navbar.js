@@ -5,8 +5,9 @@ import {
   useLayoutEffect
 } from 'react';
 import {
-
-  NavLink
+  NavLink,
+  useSearchParams,
+  useNavigate
 } from 'react-router-dom';
 
 import styled from "styled-components";
@@ -15,22 +16,72 @@ import { BlackLogo } from '../../assets/svgs';
 import { Button } from '../../ui_elements';
 import { devices } from './../../utils/MediaQueiyBreakPoints';
 import { ModalContext } from '../../context/ModalContext';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
+import { useApiGet } from '../../custom-hooks/useApiGet';
+import {getUserDetailsFromAuth} from "../../api/apiCalls"
 import Avatar from 'react-avatar';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/urls';
 
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setIsModalOpen } = useContext(ModalContext)
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [authToken, setAuthToken] = useState("")
   const user = useSelector(selectUser)
   const [usernames, setUsernames] = useState({
     firstname: "",
     lastname: ""
   })
 
-  console.log(user)
+  
+  // const onSuccess = (data) => {
+  //   console.log("Perform side effect after data fetching",data)
+  // }
+
+  // const onError = (error) => {
+  //   console.log("Perform side effect after data fetching Error",error)
+  // }
+
+  // const { data,refetch } = useApiGet(onSuccess,onError,"googleAuth",getUserDetailsFromAuth(authToken))
+  // console.log(user)
+
+  
+  
+  useEffect(() => {
+    const refresh = searchParams.toString() === "";
+    if (!refresh) {
+      //    setAuthToken(searchParams.get("token"))
+      //    refetch()
+      //    navigate("/")
+      const queryString = searchParams.get("code")
+      console.log("my query string", queryString)
+        // const urlParam = new URLSearchParams(queryString)
+        // console.log("my query string param", urlParam)
+      // setAuthToken(queryString)
+      const makeAPICall = () => {
+        console.log("function")
+        axios.get(`https://codetivite-api2.onrender.com/auth?code=${queryString}`)
+        .then(response => console.log("response", response))
+        .catch(e => console.log("errro", e))
+        .finally(() => console.log("nothing happened"))
+      }
+      makeAPICall()
+      
+    }
+
+    // refetch()
+    // navigate("/")
+  
+ },[])
+ 
+
 
   useLayoutEffect(() => {
 
@@ -44,6 +95,7 @@ export const Navbar = () => {
     }
 
   }, [user])
+
 
 
   useEffect(() => {
@@ -218,6 +270,7 @@ const NavAvatar = styled(Avatar)`
   span{
     color:var(--white) !important;
   }
+
 `
 
 const Bar = styled.div`

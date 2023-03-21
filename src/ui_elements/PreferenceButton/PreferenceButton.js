@@ -3,12 +3,9 @@ import { devices } from '../../utils/MediaQueiyBreakPoints';
 
 const ButtonStyle = styled.button`
     padding: 1rem 2rem;
-    background-color: ${({ primary, scrolled }) => primary ? "var(--primary)" : scrolled ? "var(--primary)" : "var(--primary-light)"};
-    color: ${({ primary, scrolled }) => primary ? "var(--white)" : scrolled ? "var(--white)" : "var(--primary)"};
     outline: none;
     border: none;
-    border-radius:${({ preference }) => preference ? "0px" : "6.25rem"};
-    font-weight:${({ preference }) => preference ? "400" : null} ;
+    font-weight:400;
     background-position:center;
     transition: all 0.3s ease-in-out ;
     font-size: 0.87rem;
@@ -19,16 +16,14 @@ const ButtonStyle = styled.button`
         color:${({ preference }) => preference ? "var(--white)" : null}
     }
     @media ${devices.tablet} {
-        font-size: 1rem;
-        padding:0.5rem 1rem ;
+        font-size: 0.8rem;
+        padding:0.5rem 0.5rem ;
     }
 `
 
 export const PreferenceButton = ({
     children,
-    preferences,
     index,
-    preferenceState,
     onClick,
     selected,
     ...props
@@ -38,7 +33,7 @@ export const PreferenceButton = ({
             {...props}
             onClick={onClick}
             style={{
-                backgroundColor: selected ? "var(--primary)":"var(--white)" ,
+                backgroundColor: selected ? "var(--primary)":"var(--primary-light)" ,
                 color: selected ? "var(--white)": "var(--primary)"
             }}
 

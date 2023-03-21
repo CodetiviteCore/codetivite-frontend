@@ -65,8 +65,7 @@ import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
 // import { Puff } from 'react-loader-spinner';
 // import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from './../../../utils/urls';
 
 
 
@@ -81,7 +80,7 @@ const LandingPage = () => {
 
 
   const redirect = () => {
-    window.location.href = 'https://codetivite-api.onrender.com/login'
+    window.location.href = `https://codetivite-api2.onrender.com/login`
   }
 
 
@@ -470,7 +469,6 @@ const LandingPage = () => {
           }
         </LandingBlogCardContainer>
       </LandingBlogContainer>
-      <ToastContainer />
     </LandingMainContainer>
   )
 }
