@@ -18,73 +18,42 @@ import { devices } from './../../utils/MediaQueiyBreakPoints';
 import { ModalContext } from '../../context/ModalContext';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
-// import { useApiGet } from '../../custom-hooks/useApiGet';
-// import {getUserDetailsFromAuth} from "../../api/apiCalls"
+import { useApiGet } from '../../custom-hooks/useApiGet';
 import Avatar from 'react-avatar';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-// import { BASE_URL } from '../../utils/urls';
-
+import AuthServices from '../../services/authServices';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setIsModalOpen } = useContext(ModalContext)
-  // const dispatch = useDispatch();
+  const { setIsModalOpen, setEmailModal } = useContext(ModalContext)
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
   // const navigate = useNavigate();
-  // const [authToken, setAuthToken] = useState("")
+  const [authToken, setAuthToken] = useState("")
   const user = useSelector(selectUser)
   const [usernames, setUsernames] = useState({
     firstname: "",
     lastname: ""
   })
+  const { data:authResponse } = useApiGet("iii", () => AuthServices.getUserDetails(searchParams.get("code")))
 
-  
-  // const onSuccess = (data) => {
-  //   console.log("Perform side effect after data fetching",data)
-  // }
+  console.log(authResponse)
 
-  // const onError = (error) => {
-  //   console.log("Perform side effect after data fetching Error",error)
-  // }
-
-  // const { data,refetch } = useApiGet(onSuccess,onError,"googleAuth",getUserDetailsFromAuth(authToken))
-  // console.log(user)
-
-  
-  
   useEffect(() => {
-    const refresh = searchParams.toString() === "";
-    if (!refresh) {
-      //    setAuthToken(searchParams.get("token"))
-      //    refetch()
-      //    navigate("/")
-      const queryString = searchParams.get("code")
-      console.log("my query string", queryString)
-        // const urlParam = new URLSearchParams(queryString)
-        // console.log("my query string param", urlParam)
-      // setAuthToken(queryString)
-      const makeAPICall = () => {
-        console.log("function")
-        axios.get(`https://codetivite-api2.onrender.com/auth?code=${queryString}`)
-        .then(response => console.log("response", response))
-        .catch(e => console.log("errro", e))
-        .finally(() => console.log("nothing happened"))
-      }
-      makeAPICall()
-      
+    if (authResponse?.sentEmail === "false") {
+      // navigate("/",{replace:true})
+      setEmailModal(true)
     }
+      navigate("/",{replace:true})
 
-    // refetch()
-    // navigate("/")
-  
- },[searchParams])
- 
 
+  },[authResponse, setEmailModal])
 
   useLayoutEffect(() => {
-
     if (user) {
       console.log(user, "user")
       const { firstName, lastName } = user
@@ -93,13 +62,11 @@ export const Navbar = () => {
         lastname: lastName
       })
     }
-
   }, [user])
 
 
 
   useEffect(() => {
-
     const handleScroll = () => {
       const isScrolled = window.scrollY > 400;
       if (isScrolled !== scrolled) {
@@ -123,9 +90,6 @@ export const Navbar = () => {
   const openModal = () => {
     setIsModalOpen(true);
   };
-
-  //git
-
 
 
 
@@ -270,8 +234,7 @@ const NavAvatar = styled(Avatar)`
   span{
     color:var(--white) !important;
   }
-
-`
+  `
 
 const Bar = styled.div`
   width: 100%;
