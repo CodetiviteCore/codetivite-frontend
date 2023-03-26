@@ -124,6 +124,7 @@ const ProjectsDue = styled(RoadMapProjectsToComplete)`
 
 const RoadmapDetails = () => {
     const { level } = useParams()
+    //
     const navigate = useNavigate()
     const avatars = [
         Tina,
