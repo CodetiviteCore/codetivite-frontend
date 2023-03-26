@@ -4,6 +4,7 @@ import Aos from "aos";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ConfigProvider } from "react-avatar";
+import 'react-circular-progressbar/dist/styles.css';
 
 
 

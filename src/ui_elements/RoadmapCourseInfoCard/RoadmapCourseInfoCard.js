@@ -3,6 +3,7 @@ import { YellowAward } from "../../assets/svgs";
 import { Button } from "../Button/Button";
 import Left from "../../assets/images/courseCardAccent.png"
 import Right from "../../assets/images/courseCardAccent2.png"
+import { useNavigate } from 'react-router-dom';
 
 const CardContainer = styled.div`
     width: auto;
@@ -53,7 +54,8 @@ const CardDetails = styled.section`
         line-height: 1.3;
     }
 `
-export const RoadMapCourseInfoCard = ({level, courseNo}) => {
+export const RoadMapCourseInfoCard = ({ level, courseNo }) => {
+    const roadMapNavigate = useNavigate()
     return (
         <CardContainer>
             <img src={ Left} alt="Accent"/>
@@ -68,7 +70,7 @@ export const RoadMapCourseInfoCard = ({level, courseNo}) => {
                     </div>
                 </CardHeaderInfo>
 
-                <Button>View Roadmap</Button>
+                <Button onClick={()=>roadMapNavigate(`/roadmap/${level}`)}>View Roadmap</Button>
             </CardHeader>
             <CardDetails>
                 <p>Lorem ipsum dolor sit amet consectetur.

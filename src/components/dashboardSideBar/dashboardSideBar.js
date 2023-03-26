@@ -16,9 +16,9 @@ import { useState } from 'react';
 
 const SideBarContainer = styled.aside`
     height: 100vh;
+    position: relative;
     background-color: var(--white);
     width: ${({ show }) => (show ? '12.6rem' : '4rem')};
-    position: relative;
     transition: all .5s ease;
     border-right: 1px solid var(--navborders);
 `

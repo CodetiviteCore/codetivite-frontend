@@ -49,6 +49,9 @@ code {
   --sidemenu-text:#545454;
   --navborders:#E4E4E4;
   --danger:#F04C4C;
+  --progres-bar-blue:#1470F5;
+  --progress-bar-trailing-blue:#F6F9FE;
+  --trail:#F6F9FE;
 }
 
 h1,h2,h3,h4,h5,h6,p,em,i,ul,li,a,span,button{
@@ -68,6 +71,9 @@ p,em,i,ul,li,a,span{
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--text-black);
+}
+a{
+  text-decoration: none;
 }
 button{
   font-size: 1rem;

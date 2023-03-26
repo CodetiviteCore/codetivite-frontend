@@ -9,6 +9,7 @@ const DashboardNav = styled.nav`
     justify-content: space-between;
     border-bottom: 1px solid var(--navborders);
     padding: 0 1.4rem;
+
     
 `
 const DashboardTitle = styled.div`

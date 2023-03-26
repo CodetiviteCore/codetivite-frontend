@@ -5,3 +5,5 @@ export * from "./dashboardMenuitem/dashboardMenuItem.js"
 export * from "./RoadmapCards/RoadmapCards.js"
 export * from "./RoadmapCourseInfoCard/RoadmapCourseInfoCard.js"
 export * from "./completeProjectCard/CompleteProjectCard.js"
+export * from "./RoadmapLectureCards/RoadmapLectureCards.js"
+

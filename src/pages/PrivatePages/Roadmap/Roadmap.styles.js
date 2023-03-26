@@ -4,6 +4,7 @@ export const RoadMapContainer = styled.main`
     height:100%;
     width: auto;
     padding: 2rem 1.4rem;
+    overflow-y: scroll !important;
 
 `
 
@@ -35,5 +36,5 @@ export const RoadMapProjectsToComplete = styled(RoadMapPath)`
         font-size: 0.75rem;
         line-height: 1.3;
     }
-
 `
+export const RoadMapProjectDetails = styled(PathRoadMapContainer)``

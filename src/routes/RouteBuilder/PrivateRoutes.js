@@ -8,6 +8,8 @@ import { DashboardLayout } from '../../components/Layouts/dashboardLayout';
 const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Preferences/Prefrence"))
 const LazyDashboard = React.lazy(() => import("../../pages/PrivatePages/dashboard/dasboard"))
 const LazyRoadMap = React.lazy(() => import("../../pages/PrivatePages/Roadmap/Roadmap"))
+const LazyRoadMapDetails = React.lazy(() => import("../../pages/PrivatePages/Roadmap/RoadmapDetails"))
+
 
 
 
@@ -16,11 +18,19 @@ export const PrivateRoutes = () => {
     const privateLayouts = [
         {
             path: "/dashboard",
-            component: <LazyDashboard/>
+            component: <LazyDashboard />
         },
         {
-            path: "/roadmap",
-            component: <LazyRoadMap/>
+            path: "/roadmap/*",
+            component: (
+                <React.Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<LazyRoadMap />} />
+                        <Route path="/:level" element={<LazyRoadMapDetails />} />
+                    </Routes>
+                </React.Suspense>
+            )
+
         },
     ]
 

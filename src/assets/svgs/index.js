@@ -32,7 +32,9 @@ import { ReactComponent as InfoCircle } from "./info-circle.svg"
 import { ReactComponent as YellowAward } from "./award-yellow.svg"
 import { ReactComponent as Teacher } from "./teacher.svg"
 import { ReactComponent as Lock } from "./lock.svg"
-import { ReactComponent as Unlock} from "./unlock.svg"
+import { ReactComponent as Unlock } from "./unlock.svg"
+import { ReactComponent as RoadmapBookIcon} from "./roadmap-book.svg"
+
 
 
 
@@ -81,6 +83,7 @@ export {
     YellowAward,
     Teacher,
     Lock,
-    Unlock
+    Unlock,
+    RoadmapBookIcon
 
 }
