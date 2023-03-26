@@ -25,7 +25,8 @@ export const LandingModal = styled.div`
         button{
             background-color:var(--google-blue);
             margin:2rem auto 0 auto;
-            padding:22px 52px;
+            padding:22px 20px;
+            width:412px;
             display:flex;
             align-items:center;
             justify-content:center;
@@ -42,6 +43,27 @@ export const LandingModal = styled.div`
            
         }
     }
+`
+export const LandingModalVerify = styled(LandingModal)`
+    padding: 50px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div:first-child{
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-light);
+        border-radius: 50%;
+    }
+    button{
+        background-color: var(--primary)!important;
+        color:var(--white);
+    }
+    
+
 `
 export const LandingFirstContainer = styled.div`
     display:flex;

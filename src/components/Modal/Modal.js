@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useContext } from 'react';
 import { ModalContext } from '../../context/ModalContext';
+import { useEffect } from 'react';
 
 
 const ModalWrapper = styled(motion.div)`
@@ -30,14 +31,17 @@ const ModalContent = styled(motion.div)`
 `;
 
 export const Modal = ({ isOpen, children }) => {
-    const { setIsModalOpen } = useContext(ModalContext)
+    const { setIsModalOpen, emailModal } = useContext(ModalContext)
+    useEffect(() => {
+        emailModal && setIsModalOpen(true)
+    },[emailModal, setIsModalOpen])
     const closeModal = () => {
         setIsModalOpen(false);
     };
     return (
         <ModalWrapper
             isOpen={isOpen}
-            onClick={closeModal}
+            // onClick={closeModal}
         >
             <ModalContent
                 initial={{
@@ -48,7 +52,6 @@ export const Modal = ({ isOpen, children }) => {
                     x: -10,
                 }}
             >
-                <em>X</em>
                 {children}
             </ModalContent>
         </ModalWrapper>

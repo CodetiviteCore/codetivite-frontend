@@ -22,6 +22,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 code {
@@ -40,10 +41,17 @@ code {
   --footer-blue:#2475DF;
   --google-blue:#0924FC;
   --white: #FAFFFF;
+  --deep-white:#F5F5F5;
   --gray: #F0F0EF;
   --gray-black:#5C5C5C;
   --landing-card-black:#1B1D16;
   --carouselText: #555750;
+  --sidemenu-text:#545454;
+  --navborders:#E4E4E4;
+  --danger:#F04C4C;
+  --progres-bar-blue:#1470F5;
+  --progress-bar-trailing-blue:#F6F9FE;
+  --trail:#F6F9FE;
 }
 
 h1,h2,h3,h4,h5,h6,p,em,i,ul,li,a,span,button{
@@ -64,6 +72,9 @@ p,em,i,ul,li,a,span{
   line-height: 1.5rem;
   color: var(--text-black);
 }
+a{
+  text-decoration: none;
+}
 button{
   font-size: 1rem;
   font-weight: 600;
@@ -75,6 +86,7 @@ button{
   justify-content: center;
   padding: 5rem 0;
 }
+
 @media screen and (max-width:768px) {
   p{
     font-size: 0.8rem;

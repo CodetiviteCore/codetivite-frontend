@@ -1,15 +1,13 @@
 import { useQuery } from "react-query";
 
-
-export const useApiGet = (onSuccess, onError, queryKey, apiCall) => {
+//react-query custom hook
+export const useApiGet = (key, queryFunction) => {
     return useQuery(
-        `${queryKey}`,
-        ()=>apiCall,
+        key,
+        queryFunction,
         {
-            onSuccess,
-            onError,
-            enabled: false,
-            
+            enabled: true,
+            retry:false
         }
     )
 }

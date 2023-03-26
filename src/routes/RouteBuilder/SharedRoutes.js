@@ -38,7 +38,6 @@ export const SharedRoutes = () => {
         },
     ]
 
-
     return (
         <Routes>
             {

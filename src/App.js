@@ -1,16 +1,14 @@
-import { PrivateRoutes, SharedRoutes } from "./routes";
+import { PrivateRoutes} from "./routes";
 import { useEffect} from "react";
 import Aos from "aos";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ConfigProvider } from "react-avatar";
+import 'react-circular-progressbar/dist/styles.css';
 
 
 
 function App() {
-
-
-
   useEffect(() => {
     Aos.init({
       offset: 20,
@@ -18,7 +16,15 @@ function App() {
   }, []);
 
   //React query initialization
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient(
+    // {
+    //   defaultOptions: {
+    //     queries: {
+    //       refetchOnWindowFocus:false
+    //     }
+    //   }
+    // }
+  );
 
   //avatar component random colors
   const primaryColor = "#2AB255";
@@ -38,8 +44,8 @@ function App() {
       ]}
     >
       <QueryClientProvider client={queryClient}>
-        <SharedRoutes />
-        {/* <PrivateRoutes /> */}
+        {/* <SharedRoutes /> */}
+        <PrivateRoutes />
         <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
       </QueryClientProvider>
     

@@ -1,3 +1,5 @@
 export * from "./Navbar/Navbar.js"
 export * from "./Footer/Footer.js"
 export * from "./Modal/Modal.js"
+export * from "./dashboardSideBar/dashboardSideBar.js"
+export * from "./dashboardNavbar/dashboardNavbar.js"

@@ -1,38 +1,36 @@
 
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { MainLayout } from '../../components/Layouts'
+import { DashboardLayout } from '../../components/Layouts/dashboardLayout';
+
 
 
 const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Preferences/Prefrence"))
+const LazyDashboard = React.lazy(() => import("../../pages/PrivatePages/dashboard/dasboard"))
+const LazyRoadMap = React.lazy(() => import("../../pages/PrivatePages/Roadmap/Roadmap"))
+const LazyRoadMapDetails = React.lazy(() => import("../../pages/PrivatePages/Roadmap/RoadmapDetails"))
+
 
 
 
 
 export const PrivateRoutes = () => {
     const privateLayouts = [
-        // {
-        //     path: "/",
-        //     component: <LazyLanding />
-        // },
-        // {
-        //     path: "/community",
-        //     component: <LazyCommunity />
-        // }, {
-        //     path: "/about-us",
-        //     component: <LazyAboutUs />
-        // },
-        // {
-        //     path: "/contact-us",
-        //     component: <LazyContactUs />
-        // },
-        // {
-        //     path: "/our-blog",
-        //     component: <LazyBLog />
-        // },
         {
-            path: "/preferences",
-            component: <LazyPreference />
+            path: "/dashboard",
+            component: <LazyDashboard />
+        },
+        {
+            path: "/roadmap/*",
+            component: (
+                <React.Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<LazyRoadMap />} />
+                        <Route path="/:level" element={<LazyRoadMapDetails />} />
+                    </Routes>
+                </React.Suspense>
+            )
+
         },
     ]
 
@@ -41,12 +39,12 @@ export const PrivateRoutes = () => {
         <Routes>
             <Route path='/preferences' element={
                 <React.Suspense fallback={null}>
-                    <LazyPreference/>
+                    <LazyPreference />
                 </React.Suspense>} />
             {
-                privateLayouts.map((routes, index) => <Route key={index} path={routes.path} element={
+                privateLayouts.map((route, index) => <Route key={index} path={route.path} element={
                     <React.Suspense fallback={null}>
-                        <MainLayout>{routes.component}</MainLayout>
+                        <DashboardLayout>{route.component}</DashboardLayout>
                     </React.Suspense>
                 } />)
             }
