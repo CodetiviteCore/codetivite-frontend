@@ -9,6 +9,8 @@ const LazyPreference = React.lazy(() => import("../../pages/PrivatePages/Prefere
 const LazyDashboard = React.lazy(() => import("../../pages/PrivatePages/dashboard/dasboard"))
 const LazyRoadMap = React.lazy(() => import("../../pages/PrivatePages/Roadmap/Roadmap"))
 const LazyRoadMapDetails = React.lazy(() => import("../../pages/PrivatePages/Roadmap/RoadmapDetails"))
+const LazyCommunity = React.lazy(() => import("../../pages/PrivatePages/Community/Community"))
+
 
 
 
@@ -32,6 +34,11 @@ export const PrivateRoutes = () => {
             )
 
         },
+        {
+            path: "/community",
+            component: <LazyCommunity />
+        },
+    
     ]
 
 

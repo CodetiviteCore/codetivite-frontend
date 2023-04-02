@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 import { devices } from "../../utils/MediaQueiyBreakPoints"
 
 
-export const FooterContainer = styled.footer`
+export const FooterContainer = styled.div`
     padding:4% 8%;
     position:relative ;
     color: var(--white);
@@ -174,7 +174,7 @@ export const FootLinksLogoDetails = styled.div`
     @media ${devices.tablet}{
         width:100%;
     }
-`  
+`
 export const FooterLinkList = styled.ul`
     list-style: none;
 `
@@ -192,4 +192,50 @@ export const CopyRight = styled.p`
         font-size:12px;
         margin:5% auto;
     }
+`
+export const NewsletterOuterContainer = styled.section`
+    background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url("https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2342&q=80");
+    background-size: cover;
+    height: 50vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 8%;
+
+`
+export const NewsletterContainer = styled.div`
+
+    h4{
+        font-size: 3rem;
+        color: var(--white);
+    }
+    p{
+        color: var(--white);
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 3rem;
+    }
+    >div{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    @media ${devices.tablet}{
+        h4{
+            font-size: 2rem;
+        }
+        p{
+            font-size: 0.8rem;
+        }
+        >div{
+            flex-wrap: wrap;
+        }
+    }
+
+`
+export const FooterOuterContainer = styled.footer`
 `

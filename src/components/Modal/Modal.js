@@ -21,7 +21,7 @@ const ModalWrapper = styled(motion.div)`
 
 const ModalContent = styled(motion.div)`
   background-color: #fff;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   max-width: 35rem;
   /* max-height: 8rem; */

@@ -564,6 +564,9 @@ export const LandingBlogCardContainer = styled.div`
         align-items:center;
         padding:8% ;
     }
+    /* @media only screen and () and (min-width: 400px){
+
+    } */
 `
 export const BlogContainer = styled.div`
     display:flex;

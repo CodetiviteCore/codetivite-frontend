@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Route,Routes } from 'react-router-dom'
-import { MainLayout } from '../../components/Layouts'
+import { Route, Routes } from 'react-router-dom'
+import { BlogLayout, MainLayout } from '../../components/Layouts'
 
 
 
@@ -40,13 +40,28 @@ export const SharedRoutes = () => {
 
     return (
         <Routes>
-            {
-                sharedLayouts.map((routes, index) => <Route key={index} path={routes.path} element={
-                    <React.Suspense fallback={null}>
-                        <MainLayout>{routes.component}</MainLayout>
-                    </React.Suspense>
-                } />)
-            }
+            {sharedLayouts.map((routes, index) => (
+                <Route
+                    key={index}
+                    path={routes.path}
+                    element={
+                        routes.path === "/our-blog" ? (
+                            <React.Suspense fallback={null}>
+                                <MainLayout>
+                                    <BlogLayout>
+                                        {routes.component}
+                                    </BlogLayout>
+                                </MainLayout>
+                            </React.Suspense>
+                            
+                        ) : (
+                            <React.Suspense fallback={null}>
+                                <MainLayout>{routes.component}</MainLayout>
+                            </React.Suspense>
+                        )
+                    }
+                />
+            ))}
         </Routes>
     )
 }

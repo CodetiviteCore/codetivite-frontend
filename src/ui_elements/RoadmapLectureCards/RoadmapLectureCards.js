@@ -14,16 +14,21 @@ const CardConatiner = styled.div`
         gap: 10px;
     }
 `
-const Title = styled(Link)`
-    
+const Title = styled.p`
+    :hover{
+        cursor:pointer;
+    }
 `
 
-export const RoadmapLectureCards = ({title}) => {
+export const RoadmapLectureCards = ({title,setIsModalOpen,setCurrentTopic}) => {
     return (
         <CardConatiner>
             <div>
                 <RoadmapBookIcon />
-                <Title>{title}</Title>
+                <Title onClick={() => {
+                    setCurrentTopic(title)
+                    setIsModalOpen(true)
+                }}>{title}</Title>
             </div>
             <Lock/>
         </CardConatiner>

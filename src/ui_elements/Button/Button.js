@@ -3,11 +3,11 @@ import { devices } from './../../utils/MediaQueiyBreakPoints';
 
 const ButtonStyle = styled.button`
     padding: 1rem 2rem;
-    background-color: ${({primary,scrolled})=> primary ? "var(--primary)" : scrolled ? "var(--primary)" : "var(--primary-light)"};
-    color: ${({primary,scrolled})=>primary ? "var(--white)" : scrolled ? "var(--white)" : "var(--primary)"};
+    background-color: ${({primary,scrolled, newsLetter})=> primary ? "var(--primary)" : scrolled ? "var(--primary)" : newsLetter ? "var(--primary)" :  "var(--primary-light)"};
+    color: ${({primary,scrolled,newsLetter})=>primary ? "var(--white)" : scrolled ? "var(--white)" : newsLetter ? "var(--white)" : "var(--primary)"};
     outline: none;
     border: none;
-    border-radius:${({preference})=>preference ? "0px" : "6.25rem"};
+    border-radius:${({preference,newsLetter})=>preference ? "0px" : newsLetter ? "8px" : "6.25rem"};
     font-weight:${({preference})=>preference ? "400" : null} ;
     background-position:center;
     transition: all 0.3s ease-in-out ;

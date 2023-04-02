@@ -7,7 +7,8 @@ export const useApiGet = (key, queryFunction) => {
         queryFunction,
         {
             enabled: true,
-            retry:false
+            retry: false,
+            refetchOnWindowFocus:false
         }
     )
 }

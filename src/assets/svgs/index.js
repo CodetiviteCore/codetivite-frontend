@@ -34,6 +34,17 @@ import { ReactComponent as Teacher } from "./teacher.svg"
 import { ReactComponent as Lock } from "./lock.svg"
 import { ReactComponent as Unlock } from "./unlock.svg"
 import { ReactComponent as RoadmapBookIcon} from "./roadmap-book.svg"
+import { ReactComponent as Discord } from "./discord.svg"
+import { ReactComponent as Slack } from "./slack.svg"
+import { ReactComponent as Telegram } from "./telegram.svg"
+import { ReactComponent as SlackOutline } from "./slackOutline.svg"
+import { ReactComponent as DiscordOutline } from "./discordOutline.svg"
+import { ReactComponent as TelegramOutline} from "./telegramOutline.svg"
+
+
+
+
+
 
 
 
@@ -84,6 +95,12 @@ export {
     Teacher,
     Lock,
     Unlock,
-    RoadmapBookIcon
+    RoadmapBookIcon,
+    Discord,
+    Slack,
+    Telegram,
+    TelegramOutline,
+    DiscordOutline,
+    SlackOutline
 
 }

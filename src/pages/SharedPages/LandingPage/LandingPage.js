@@ -30,7 +30,6 @@ import {
   NextArrow,
   Slide,
   LandingBlogContainer,
-  LandingBlogCard,
   BlogContainer,
   LandingBlogCardContainer,
   LandingModal,
@@ -66,9 +65,7 @@ import 'aos/dist/aos.css';
 import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
 import { Puff } from 'react-loader-spinner';
-// import { signUpWithGoogle } from '../../../Redux store/auth/auth.action';
-import { BASE_URL } from './../../../utils/urls';
-import { useNavigate } from 'react-router-dom';
+import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
 
 
 
@@ -79,15 +76,14 @@ const LandingPage = () => {
   const { isModalOpen, emailModal } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
   const [isredirect, setIsRedirect] = useState(false)
-  const navigate = useNavigate()
 
 
   const redirect = () => {
     setIsRedirect(true)
-    window.location.href = `https://codetivite-api2.onrender.com/login`
+    window.location.href = `https://codetivite-api2.onrender.com/api/v1.0/auth/login`
   }
   const redirectToMail = () => {
-    navigate("gmail.com",{replace:true})
+    window.location.href ="https://gmail.com"
   }
 
 
@@ -476,25 +472,21 @@ const LandingPage = () => {
         <LandingBlogCardContainer>
           {
             blogCardDetails.map((card, index) =>
-              <LandingBlogCard
+              <BlogCards
                 key={index}
                 data-aos="fade-up"
                 data-aos-duration="1000"
                 data-aos-easing="ease-in-out"
-              >
-                <img src={card.image} alt={"Blog media"} />
-                <h6>{card.category.toLocaleUpperCase()}</h6>
-                <h4>{card.title}</h4>
-                <p>{card.description}</p>
-                <hr />
-                <div>
-                  <img src={card.avater} alt={"auther media"} />
-                  <div>
-                    <h5>{card.author}</h5>
-                    <p>{card.time}</p>
-                  </div>
-                </div>
-              </LandingBlogCard>)
+                image={card.image}
+                category={card.category}
+                title={card.title}
+                description={card.description}
+                avater={card.avater}
+                author={card.author}
+                time={card.time}
+                
+              />
+            )
           }
         </LandingBlogCardContainer>
       </LandingBlogContainer>

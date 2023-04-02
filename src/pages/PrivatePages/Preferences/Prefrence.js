@@ -10,9 +10,17 @@ import {
     PreferencDashboardeDetails,
     Save,
 } from "./Preference.styles";
+import { useApiGet } from "../../../custom-hooks/useApiGet";
+import PreferenceServices from "../../../services/preferenceServices";
+
 
 const Prefrence = () => {
     const [preferences, setPreferences] = useState([]);
+
+    const { data: preferencesResponse } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    // console.log(Cookies.get("authToken"))
+    
+    
     const preference = [
         "Frontend developer",
         "Backend developer",
@@ -42,6 +50,8 @@ const Prefrence = () => {
 
     useEffect(() => {
         console.log(preferences)
+        console.log(preferencesResponse, "resopons")
+
     },[preferences])
 
 
