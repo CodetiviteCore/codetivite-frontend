@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PreferenceButton } from "../../../ui_elements";
 import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {
@@ -12,47 +12,22 @@ import {
 } from "./Preference.styles";
 import { useApiGet } from "../../../custom-hooks/useApiGet";
 import PreferenceServices from "../../../services/preferenceServices";
+import { useDispatch } from "react-redux";
+import { setCareerPath } from "../../../Redux store/auth/auth.action";
+import { useNavigate } from "react-router-dom";
 
 
 const Prefrence = () => {
-    const [preferences, setPreferences] = useState([]);
-
-    const { data: preferencesResponse } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { data: preferencesRespsonse, isLoading: isLoadingPreferences } = useApiGet("Preferences", PreferenceServices.getPreferences);
     // console.log(Cookies.get("authToken"))
-    
-    
-    const preference = [
-        "Frontend developer",
-        "Backend developer",
-        "Solidity developer",
-        "Blockchain developer",
-        "De-fi developer",
-        "UIUX Designer",
-        "Technical writing",
-        "Full stack developer",
-        "Product manager",
-        "Community manager",
-        "Rust developer",
-        "Devops Engineer",
-        "Graphic Designer",
-        "Smart contract debveloper",
-    ];
 
-    const selectPreferences = (skill) => {
-        if (preferences.includes(skill.toString())) {
-            setPreferences((preferences) =>
-                preferences.filter((item) => item !== skill.toString())
-            );
-        } else {
-            setPreferences((preferences) => [...preferences, skill.toString()]);
-        }
+
+    const selectPreference = (skill) => {
+        dispatch(setCareerPath(skill))
+        navigate("/dashboard")
     };
-
-    useEffect(() => {
-        console.log(preferences)
-        console.log(preferencesResponse, "resopons")
-
-    },[preferences])
 
 
 
@@ -64,14 +39,13 @@ const Prefrence = () => {
                     <p>Choose a career path to enable us serve you better.</p>
                 </PreferenceDetailsHeader>
                 <PreferenceCardContainer>
-                    {preference.map((item, index) => (
+                    {preferencesRespsonse?.map((item, index) => (
                         <PreferenceButton
-                            onClick={() => selectPreferences(item)}
-                            selected={preferences.includes(item)}
+                            onClick={() => selectPreference(item)}
                             index={index}
                             key={index}
                         >
-                            {item}
+                            {item.charAt(0).toUpperCase() + item.slice(1)}
                         </PreferenceButton>
                     ))}
                 </PreferenceCardContainer>
@@ -88,6 +62,7 @@ const Prefrence = () => {
                 </PreferencDashboardeDetails>
                 <img src={DashboardImage} alt={"dashboard_image"} />
             </PreferenceDashboard>
+
         </PrefrenceContainer>
     );
 };

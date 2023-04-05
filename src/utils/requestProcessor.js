@@ -1,22 +1,22 @@
 import axios from "axios"
 import { BASE_URL } from "./urls"
-import  Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 
 //axios client
-const client = (() => {
-    return axios.create({
-        baseURL: BASE_URL
-    })
-})()
+const client = axios.create({
+    baseURL: BASE_URL,
+})
 
-//getToken 
-var token = Cookies.get("authToken")
+
+// client.defaults.withCredentials = true;
+
 
 //request Processor
 export const request = async (options) => {
+    //getToken 
+    var token = Cookies.get("authToken")
     client.defaults.headers.common.Authorization = `Bearer ${token}`;
-
     //handle success
     const onSuccess = (response) => {
         return response.data

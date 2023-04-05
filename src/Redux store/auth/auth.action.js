@@ -13,7 +13,13 @@ export const logoutUser = () => {
         payload:null
     }
 }
-export const careerPathSelect = (state) => {
+export const careerPathSelectState = (state) => {
+    return {
+        type: AUTH_ACTION_TYPES.SET_CAREERPATH_SELECTED,
+        payload:state
+    }
+}
+export const setCareerPath = (state) => {
     return {
         type: AUTH_ACTION_TYPES.SET_CAREERPATH,
         payload:state

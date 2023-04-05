@@ -7,7 +7,12 @@ export const selectUser = createSelector(
     (authSlice)=>authSlice.currentUser
 )
 
-export const selectCarrer = createSelector(
+export const selectCareerState = createSelector(
     [selectAuthReducer],
     (authSlice)=>authSlice.isCareerPathSelected
+)
+
+export const selectCareer = createSelector(
+    [selectAuthReducer],
+    (authSlice)=>authSlice.careerPath
 )

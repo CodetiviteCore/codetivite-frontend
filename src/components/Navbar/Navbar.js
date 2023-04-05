@@ -26,7 +26,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import AuthServices from '../../services/authServices';
 import { useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
-import { careerPathSelect, logoutUser, signUpWithGoogle } from '../../Redux store/auth/auth.action';
+import {
+  careerPathSelectState,
+  logoutUser,
+  signUpWithGoogle
+} from '../../Redux store/auth/auth.action';
 import Cookies from 'js-cookie';
 
 
@@ -58,12 +62,12 @@ export const Navbar = () => {
     Cookies.remove("authToken")
     Cookies.set("authToken", authToken,
       {
-        secure:true
+        secure: true
       })
     const userDetails = jwtDecode(authToken);
     dispatch(signUpWithGoogle(userDetails?.profile));
     if (!userDetails?.profile?.careerPath) {
-      dispatch(careerPathSelect(true));
+      dispatch(careerPathSelectState(true));
       navigate("/preferences", { replace: true });
     }
   }, [dispatch, navigate, searchParams]);
@@ -74,12 +78,18 @@ export const Navbar = () => {
       setEmailModal(true);
       setIsModalOpen(true);
       navigate("/", { replace: true });
-    } else if (authResponse?.authToken) {
+    }
+
+    else if (authResponse?.authToken) {
+      
       const userDetails = jwtDecode(authResponse?.authToken);
       dispatch(signUpWithGoogle(userDetails?.profile));
+
       if (!userDetails?.profile?.careerPath) {
-        dispatch(careerPathSelect(true));
+
+        dispatch(careerPathSelectState(true));
         navigate("/preferences", { replace: true });
+
       }
       navigate("/", { replace: true });
     }

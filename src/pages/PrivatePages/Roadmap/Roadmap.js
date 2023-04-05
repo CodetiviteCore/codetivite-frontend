@@ -1,8 +1,24 @@
+import { useSelector } from "react-redux"
 import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../assets/svgs"
+import { useApiGet } from "../../../custom-hooks/useApiGet"
+import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
 import { PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
+import { selectCareer } from "../../../Redux store/auth/auth.selector"
+import { useEffect } from "react"
+import { useState } from "react"
 
 const Roadmap = () => {
+
+    const careerPathFromReducer = useSelector(selectCareer)
+
+
+    const {
+        data: careerDetails,
+        isLoading: isLoadingCereerDetails
+    } = useApiGet("Roadmap", () => PreferenceServices.getSelectedPreferences(careerPathFromReducer))
+
+        
     const statsCardDetails = [
         {
             icon: <SkillIcon />,

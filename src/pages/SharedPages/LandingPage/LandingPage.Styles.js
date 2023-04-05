@@ -544,7 +544,7 @@ export const LandingBlogCard = styled.div`
 
     }
     @media ${devices.tablet}{
-        width:20rem;
+        width:20rem;e
         h4{
             font-size:1rem;
         }

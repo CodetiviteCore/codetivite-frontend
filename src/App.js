@@ -7,12 +7,12 @@ import { ConfigProvider } from "react-avatar";
 import 'react-circular-progressbar/dist/styles.css';
 import { SharedRoutes } from './routes/RouteBuilder/SharedRoutes';
 import { useSelector } from 'react-redux';
-import { selectCarrer } from "./Redux store/auth/auth.selector";
+import { selectCareerState } from "./Redux store/auth/auth.selector";
 
 
 
 function App() {
-  const careerPathSelected = useSelector(selectCarrer)
+  const careerPathSelected = useSelector(selectCareerState)
   console.log("this is career path", careerPathSelected)
   useEffect(() => {
     Aos.init({
