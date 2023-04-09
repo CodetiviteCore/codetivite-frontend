@@ -166,7 +166,7 @@ export const Navbar = () => {
         <NavList>
           <NavItem>Our community</NavItem>
           <NavItem>Clarity test</NavItem>
-          <NavItem>About</NavItem>
+          <NavItem to={"/about-us"}>About</NavItem>
           <NavItem>Contact us</NavItem>
           <NavItem to={"/our-blog"}>Our blog</NavItem>
         </NavList>

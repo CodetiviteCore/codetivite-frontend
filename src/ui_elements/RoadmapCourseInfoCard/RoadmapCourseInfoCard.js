@@ -54,32 +54,37 @@ const CardDetails = styled.section`
         line-height: 1.3;
     }
 `
-export const RoadMapCourseInfoCard = ({ level, courseNo }) => {
-    const roadMapNavigate = useNavigate()
+export const RoadMapCourseInfoCard = ({ level, courseNo, cardTitle, item }) => {
+    const roadMapNavigate = useNavigate();
     return (
         <CardContainer>
-            <img src={ Left} alt="Accent"/>
+            <img src={Left} alt="Accent" />
             <CardHeader>
                 <CardHeaderInfo>
                     <AwardBackground>
                         <YellowAward />
                     </AwardBackground>
                     <div>
-                        <h6>{level}</h6>
+                        <h6>{cardTitle}</h6>
                         <p>{courseNo} syllabus</p>
                     </div>
                 </CardHeaderInfo>
 
-                <Button onClick={()=>roadMapNavigate(`/roadmap/${level}`)}>View Roadmap</Button>
+                <Button onClick={() => {
+                    roadMapNavigate(`/roadmap/${level}`, { state: item })
+                }}>
+                    View Roadmap
+                </Button>
             </CardHeader>
             <CardDetails>
-                <p>Lorem ipsum dolor sit amet consectetur.
-                    Amet viverra purus enim urna hac semper. Integer at imperdiet tortor imperdiet vulputate pharetra nullam lorem elit.
-                    Vitae consequat et id porta. Ut diam diam commodo suspendisse sed lorem.
-                    Scelerisque proin.
+                <p>
+                    Lorem ipsum dolor sit amet consectetur. Amet viverra purus enim urna
+                    hac semper. Integer at imperdiet tortor imperdiet vulputate pharetra
+                    nullam lorem elit. Vitae consequat et id porta. Ut diam diam commodo
+                    suspendisse sed lorem. Scelerisque proin.
                 </p>
             </CardDetails>
-            <img src={Right} alt="Accent"/>
+            <img src={Right} alt="Accent" />
         </CardContainer>
-    )
-}
+    );
+};

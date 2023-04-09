@@ -53,6 +53,8 @@ code {
   --progress-bar-trailing-blue:#F6F9FE;
   --trail:#F6F9FE;
   --categoryGray:#F4F4F4;
+  --pure-white:#FFFF;
+  --primary-yellow:#FCE459;
 }
 
 h1,h2,h3,h4,h5,h6,p,em,i,ul,li,a,span,button,input{

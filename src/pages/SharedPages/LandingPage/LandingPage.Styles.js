@@ -288,7 +288,6 @@ export const CommunityContainer = styled.section`
     display:flex;
     justify-content:center;
     gap:35rem;
-    height:80vh;
     @media ${devices.tablet}{
         height:fit-content;
         display:block;
@@ -409,7 +408,7 @@ export const CallContainer = styled.div`
 export const AudioContainer = styled.div`
     position:absolute;
     width: 18.75rem;
-    bottom:13rem;
+    bottom:3%;
     left:11rem;
     padding:0.62rem;
     display:flex;
@@ -440,7 +439,7 @@ export const AudioContainer = styled.div`
     }
 `
 export const LandingCarouselContainer = styled.section`
-    height:50vh;
+    padding:8%;
     align-items:center;
     padding:8%;
     @media ${devices.tablet}{

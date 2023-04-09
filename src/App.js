@@ -20,6 +20,8 @@ function App() {
     });
   }, []);
 
+
+
   //React query initialization
   const queryClient = new QueryClient(
     // {

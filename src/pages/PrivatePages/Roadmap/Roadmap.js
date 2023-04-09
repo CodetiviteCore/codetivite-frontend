@@ -3,14 +3,17 @@ import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../as
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
-import { PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
+import { LoaderContainer, PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
 import { selectCareer } from "../../../Redux store/auth/auth.selector"
+import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect } from "react"
 import { useState } from "react"
+import { Puff } from "react-loader-spinner"
 
 const Roadmap = () => {
 
     const careerPathFromReducer = useSelector(selectCareer)
+    const [levels, setLevels] = useState([])
 
 
     const {
@@ -18,12 +21,59 @@ const Roadmap = () => {
         isLoading: isLoadingCereerDetails
     } = useApiGet("Roadmap", () => PreferenceServices.getSelectedPreferences(careerPathFromReducer))
 
-        
+    useEffect(() => {
+        if (!!careerDetails) {
+
+            let levelsArray = []
+
+            careerDetails?.resource?.levels?.map((level) => {
+
+                const fresher = level?.junior ? level?.junior?.map(({ title, resource }) => ({
+                    cardTitle: "Fresher",
+                    title: title,
+                    resource: resource
+                })) : []
+
+                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resource }) => ({
+                    cardTitle: "Entry-level",
+                    title: title,
+                    resource: resource
+                })) : []
+
+                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resource }) => ({
+                    cardTitle: "Intermediate",
+                    title: title,
+                    resource: resource
+                })) : []
+
+                const advanced = level?.advanced ? level?.advanced?.map(({ title, resource }) => ({
+                    cardTitle: "Advanced",
+                    title: title,
+                    resource: resource
+                })) : []
+
+                levelsArray.push(
+                    fresher,
+                    entryLevel,
+                    intermediate,
+                    advanced
+                )
+                return setLevels(levelsArray)
+
+            })
+        }
+    }, [careerDetails])
+
+    useEffect(() => {
+        console.log(levels)
+
+    })
+
     const statsCardDetails = [
         {
             icon: <SkillIcon />,
             title: "Current skill level",
-            info: "Beginner",
+            info: careerDetails?.userInfo?.currentSkillLevel?.title,
             valueicon: <Increase />,
             value: "+12.5%",
             valueDetail: "increased vs lastmonth",
@@ -32,7 +82,7 @@ const Roadmap = () => {
         {
             icon: <AverageSalary />,
             title: "Average salary",
-            info: "$120,000",
+            info: careerDetails?.userInfo?.avarageSalary,
             valueicon: <Increase />,
             value: "+12.5%",
             valueDetail: "increased vs lastmonth",
@@ -42,7 +92,7 @@ const Roadmap = () => {
         {
             icon: <Badge />,
             title: "Badges earned",
-            info: "Fresher",
+            info: careerDetails?.userInfo?.badgeEarned?.mostRecentBadgeGotten,
             valueicon: <Increase />,
             value: "+12.5%",
             valueDetail: "increased vs lastmonth",
@@ -51,36 +101,52 @@ const Roadmap = () => {
         {
             icon: <SkillIcon />,
             title: "Projects completed",
-            info: "02",
+            info: careerDetails?.userInfo?.completedProjects?.numberOfProjectCompleted,
             valueicon: <Decrease />,
-            value: "-12.5%",
+            value: careerDetails?.userInfo?.completedProjects?.percentageIncreaseSinceLastProjectCompletion
+            ,
             valueDetail: "decreased vs last month",
             improved: false
 
         },
     ]
-    const courseInfo =[
-        {
-            level: "Fresher",
-            courseNo:"12"
-        },
-        {
-            level: "Entry Level",
-            courseNo:"12"
-        },
-        {
-            level: "Mid-Level",
-            courseNo:"12"
-        },
-        {
-            level: "Intermediate",
-            courseNo:"12"
-        },
-        
-        
-        
-        
-    ]
+
+    // const courseInfo = [
+    //     {
+    //         level: "Fresher",
+    //         courseNo: "12"
+    //     },
+    //     {
+    //         level: "Entry Level",
+    //         courseNo: "12"
+    //     },
+    //     {
+    //         level: "Intermediate",
+    //         courseNo: "12"
+    //     },
+    //     {
+    //         level: "Advanced",
+    //         courseNo: "12"
+    //     },
+
+    // ]
+
+    if (isLoadingCereerDetails) {
+        return (
+            <LoaderContainer>
+                <Puff
+                    height="60"
+                    width="60"
+                    radius={1}
+                    color="var(--primary)"
+                    ariaLabel="puff-loading"
+                />
+            </LoaderContainer>
+        )
+    }
+
+
+
     return (
         <RoadMapContainer>
             <Stats>
@@ -94,7 +160,8 @@ const Roadmap = () => {
                         valueDetail,
                         improved
                     },
-                        index) => <RoadMapCards
+                        index
+                    ) => <RoadMapCards
                             key={index}
                             icon={icon}
                             title={title}
@@ -109,16 +176,17 @@ const Roadmap = () => {
             </Stats>
             <PathRoadMapContainer>
                 <RoadMapPath>
-                    <h2>Product Design Roadmap</h2>
+                    <h2>{careerDetails?.resource?.careerpath} Roadmap</h2>
                     {
-                        courseInfo.map(({level,courseNo}, index) =>
-                            
+                        levels.map((item, index) =>
                             <RoadMapCourseInfoCard
-                                level={level}
-                                courseNo={courseNo}
-                            />
-                        )
-                        
+                                cardTitle={item[0]?.cardTitle}
+                                level={item[0].cardTitle}
+                                courseNo={item?.length}
+                                key={index}
+                                item={item}
+                            />)
+
                     }
                 </RoadMapPath>
                 <RoadMapProjectsToComplete>
@@ -127,24 +195,24 @@ const Roadmap = () => {
                         Before the end of this roadmap you will be able to complete the projects below.
                     </p>
                     <CompleteProjectCard />
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
-                    <CompleteProjectCard/>
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
+                    <CompleteProjectCard />
 
                 </RoadMapProjectsToComplete>
             </PathRoadMapContainer>

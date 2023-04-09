@@ -15,12 +15,15 @@ const CardConatiner = styled.div`
     }
 `
 const Title = styled.p`
+    font-weight: 600;
     :hover{
         cursor:pointer;
     }
 `
 
-export const RoadmapLectureCards = ({title,setIsModalOpen,setCurrentTopic}) => {
+export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink }) => {
+    // const response = getDocument("17Sghj2HHVuSfZTZ9B5Amxa2vyKxw020BcuZPcmc-KUs")
+    // console.log(response, "getFromDocs")
     return (
         <CardConatiner>
             <div>
@@ -28,6 +31,7 @@ export const RoadmapLectureCards = ({title,setIsModalOpen,setCurrentTopic}) => {
                 <Title onClick={() => {
                     setCurrentTopic(title)
                     setIsModalOpen(true)
+                    setLink(title.resource)
                 }}>{title}</Title>
             </div>
             <Lock/>

@@ -128,7 +128,6 @@ const Blog = () => {
               />
             )
           }
-
         </BlogPageContainer>
         <Button primary>Load More Posts</Button>
       </BlogPageOuterContainer>

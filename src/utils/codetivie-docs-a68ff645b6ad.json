@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "codetivie-docs",
+  "private_key_id": "a68ff645b6ad67e080cdbcb660ec106fb408d287",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAuVe/hBMO2N9Q\nCa1tPCwad+apIrD1dFcvnTZc0b5Z28XA0YSY8Xrx4GqLzxZh4m5gXgrXGufaEW0a\npBV4WSMdbcc3iAXewXsWiANt6EXn2Xo0bbAyCcALYVfkhbdZDbsI9OzR3Mvqzu1t\nP8Ii/ow28bhe1CCUyviXztyjDWipvy9TA2ysqAfgqh+zBP5Ic+bUlcbcQkGBsOEX\nyuZFL0KMFRx90yWZrLt8O+Ntx8WMZguL07Wf3n0NLBN/yu/5B6GeifpkriY4Zsg3\ne4otgwN7lu3frrinwcETEMWSmb5vjBufaasPaLJgc/G+X4uuiHoyUx2EObS8PRLy\npN+BhCQDAgMBAAECggEAWNCRSacaCUuUjhQHokGKqZ/74pIkLtmwnDa9KMVYDZ0k\nYxmrG7idSf5723ZSAEYTS8HLCRpTIsHJH+/iHRYnApbmqga7fc54ZQfFXM8f+BrX\nIHY0Lrsjj5sKoDunJRkYyqXkxUoVh15ZOHGbi/j2sRNwPfNQGIH5Uix4rYOuahru\nT2/TsQKwV7foFcnsNRrCzpPqUtvRDjpzyRrKmoXESqe6B7B/BJguJbmsBMzS/uGk\n09pZio3A9EBwJLy1HIUrQAyZJ7PIPKFmSLnCroRPgJq/h7vvAkr3s+sAlPG9zxk1\nN/F8fsRR8Q9ZUpeP72erNaL88+IY3vN37s4zgktaAQKBgQDn64BXkvTIYKjqPuhP\nNLVZxnphKkdHCoWsm0LzraTKl8BEyKvmz+OFG6SG7qRCmBOwyQk+pO5C4GEOQMil\nlwuDW2zxp/fR0KGmVYTO+e3mJsM9xlow2l8H9W00qvUKyiSA4JllKaTTMoEdSxQs\nFBRILGPZLrT8Tu1Xw1XCj/bYgQKBgQDUvACShmWCX89NYEtjW8Rzg2U3w6kh4TYA\n8AYPVREh6rPFWl47tehQYh5W5fcus+48RIBngwoIfLIHdPqCuPdBOZIHvAJcvhQS\njnjl0VnmNgFOVGW2yvHWGNozJBOMQh9D8E8XU6lRcdly30ZEKnxg1cD/njxgq/+9\n4L/68xZagwKBgBalAPgMCkiSX4vXrpklPVvRrFtWZHVESr8KvePLHZ8GaCiPK3Gy\n9LUneM4P+Qvji3CkgHmUYws2m2Nn4e+BKwedYqrJysG6zD3QddI7xwXE3SVn+6Bv\ngf3l8c7Frn1qNVw8Ed41zbktYjv4+7Q+FajiZLFtBRDpp/T8xp/jrKeBAoGAafg0\nuMil7CnZ1Atxwk7GL1x2oS6gI7ZR9mmaOyz+2cxWPKrlYg0dal1WC6eGWAddVzww\nUl/eMZgb/sbwuwl0cVNCQQQQkS5GRXAfHSwKAjlIsUItYL77dNDwcKU575ZIiMk+\nPLp6D44M6cH6+J3JU1tnRm4GWYmUXXuFZnaM3g0CgYEAkoluQivqO8iSj3njXV1B\ndn2+T5g36pPbw3NJ7YuGRZF1ubAjG/nZJ0yky3EozAnOOq+GGPLXvn1tgov7dLdq\nrMc/FLRaGTUyjfCTTgX2WXljIeIrxku+k1E5RktK4sRqSh8Sp1F3Lg/FChS3BaOC\nTQpOaceFLvOGQMqp24I/y4U=\n-----END PRIVATE KEY-----\n",
+  "client_email": "codetivite@codetivie-docs.iam.gserviceaccount.com",
+  "client_id": "108304427366525618304",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/codetivite%40codetivie-docs.iam.gserviceaccount.com"
+}

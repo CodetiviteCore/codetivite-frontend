@@ -10,5 +10,7 @@ export * from "./CommunityCards/CommunityCards.js"
 export * from "./LatestPostCards/latestPostsCards.js"
 export * from "./AuthorDetails/authorDetails.js"
 export * from "./FooterInput/footerInput.js"
+export * from "./TeamImage/TeamImage.js"
+
 
 

@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useParams, useNavigate, Routes, Route, Link } from "react-router-dom";
+import { useParams, useNavigate, Routes, Route, Link, useLocation } from "react-router-dom";
 import styled from "styled-components"
 import { Button, RoadmapLectureCards } from "../../../ui_elements";
 import {
@@ -178,7 +178,7 @@ const Resources = styled(Overview)`
     div{
         margin-top:16px;
     }
-    a{
+    p{
       display: block;
       font-size:0.9rem;
       color: var(--primary);
@@ -195,7 +195,9 @@ const Projects = styled(Overview)`
 const RoadmapDetails = () => {
     const { level } = useParams()
     const navigate = useNavigate()
-    const [currentTopic, setCurrentTopic] = useState("")
+    const { state } = useLocation()
+    const [currentTopic, setCurrentTopic] = useState([])
+    const [link,setLink] = useState(null)
     const { setIsModalOpen, isModalOpen } = useContext(ModalContext)
     const avatars = [
         Tina,
@@ -203,6 +205,9 @@ const RoadmapDetails = () => {
         Tunji,
         Sophia
     ]
+    const redirectToResource = (resourceLink) => {
+        window.location.href=resourceLink
+    }
     return (
         <RoadMapDetails>
             <Modal isOpen={isModalOpen}>
@@ -212,7 +217,7 @@ const RoadmapDetails = () => {
                             <RoadmapBookIcon />
                             <p>{currentTopic}</p>
                         </div>
-                        <p onClick={()=>setIsModalOpen(false)}>&#10006;</p>
+                        <p onClick={() => setIsModalOpen(false)}>&#10006;</p>
                     </DetailsModalHeader>
                     <hr />
                     <Overview>
@@ -245,9 +250,7 @@ const RoadmapDetails = () => {
                             Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
                         </p>
                         <div>
-                            <Link> https://codetivite.com/</Link>
-                            <Link> https://codetivite.com/</Link>
-                            <Link> https://codetivite.com/</Link>
+                            <p onClick={()=>redirectToResource(link)}> https://codetivite.com/</p>
                         </div>
 
 
@@ -273,50 +276,17 @@ const RoadmapDetails = () => {
             </Navigation>
             <DetailsContainer>
                 <Details>
-                    <RoadmapLectureCards
-                        title={"Introduction to design"}
-                        setIsModalOpen={setIsModalOpen}
-                        setCurrentTopic={setCurrentTopic}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                        setIsModalOpen={setIsModalOpen}
-                        setCurrentTopic={setCurrentTopic}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                        setIsModalOpen={setIsModalOpen}
-                        setCurrentTopic={setCurrentTopic}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                        setIsModalOpen={setIsModalOpen}
-                        setCurrentTopic={setCurrentTopic}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
-                    <RoadmapLectureCards
-                        title={"Lorem ipsum dolor sit amet consectetur. Consequat proin quis eget."}
-                    />
+
+                    {
+                        state.map((item, index) =>
+                            <RoadmapLectureCards
+                                key={index}
+                                title={item.title}
+                                setIsModalOpen={setIsModalOpen}
+                                setCurrentTopic={setCurrentTopic}
+                                setLink={setLink}
+                            />)
+                    }
 
                 </Details>
                 <Progress>
