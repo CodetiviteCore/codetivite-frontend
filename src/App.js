@@ -33,6 +33,7 @@ function App() {
     //   }
     // }
   );
+  //
 
   //avatar component random colors
   const primaryColor = "#2AB255";
