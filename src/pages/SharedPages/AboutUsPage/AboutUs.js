@@ -68,7 +68,7 @@ const AboutUs = () => {
             data-aos-easing="ease-in-out"
             data-aos-duration="800"
             data-aos-delay="100"
-          >Tough times don’t last, We got you<span>covered.</span></h2>
+          >Tough times don’t last, We got you<span> covered.</span></h2>
 
         </div>
         <div>

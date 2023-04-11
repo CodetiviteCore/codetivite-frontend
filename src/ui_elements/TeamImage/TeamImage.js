@@ -28,7 +28,7 @@ const Overlay = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    transition: all 1s ease;
+    transition: all .5s ease;
     transform-origin: bottom;
     position: absolute;
     bottom: 0;

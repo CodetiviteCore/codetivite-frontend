@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { Lock, RoadmapBookIcon } from "../../assets/svgs"
-import { Link } from 'react-router-dom';
 
 const CardConatiner = styled.div`
     width: auto;

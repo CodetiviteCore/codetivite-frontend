@@ -12,6 +12,7 @@ import {
 } from "../../assets/svgs"
 import { DashboardMenuItem } from "../../ui_elements"
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const SideBarContainer = styled.aside`
@@ -22,7 +23,7 @@ const SideBarContainer = styled.aside`
     transition: all .5s ease;
     border-right: 1px solid var(--navborders);
 `
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
     padding: 1.3rem;
 `
 const SectionTitle = styled.p`
@@ -113,7 +114,7 @@ export const DashboardSideBar = () => {
     ]
     return (
         <SideBarContainer show={show}>
-            <LogoContainer>
+            <LogoContainer to={"/"}>
                 {
                     show ?
                         <Logo show={show}>C<span><BlackLogo /></span>detivite</Logo>

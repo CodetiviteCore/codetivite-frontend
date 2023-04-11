@@ -57,7 +57,24 @@ code {
   --primary-yellow:#FCE459;
 }
 
-h1,h2,h3,h4,h5,h6,p,em,i,ul,li,a,span,button,input{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+em,
+i,
+ul,
+li,
+a,
+span,
+button,
+input,
+label,
+textarea
+{
   font-family: 'Red Hat Display', sans-serif;
   font-size: 1rem;
 }
@@ -69,7 +86,13 @@ h1,h2{
   color: var(--heading-black);
 }
 
-p,em,i,ul,li,a,span{
+p,
+em,
+i,
+ul,
+li,
+a,
+span{
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -78,6 +101,7 @@ p,em,i,ul,li,a,span{
 a{
   text-decoration: none;
 }
+
 button{
   font-size: 1rem;
   font-weight: 600;

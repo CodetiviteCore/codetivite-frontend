@@ -22,7 +22,7 @@ const Prefrence = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [selectCareerPath, setSelectCareerPath] = useState(null)
-    const { data: preferencesRespsonse, isLoading: isLoadingPreferences } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    const { data: preferencesRespsonse } = useApiGet("Preferences", PreferenceServices.getPreferences);
     const { mutate: updateCareer } = useApiPost(PreferenceServices.updateCareerPath)
     // console.log(Cookies.get("authToken"))
 

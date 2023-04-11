@@ -55,15 +55,11 @@ export const Navbar = () => {
   const { data: authResponse, refetch: fetchToken } = useApiGet("Auth", () => AuthServices.getUserDetails(searchParams.get("code")));
 
   //sign up process
-
-  //Login Process
   const getUserfromEmail = useCallback(() => {
     const authToken = searchParams.get("token")
     Cookies.remove("authToken")
-    Cookies.set("authToken", authToken,
-      {
-        secure: true
-      })
+    Cookies.set("authToken", authToken, { secure: true })
+
     const userDetails = jwtDecode(authToken);
     dispatch(signUpWithGoogle(userDetails?.profile));
     if (!userDetails?.profile?.careerPath) {
@@ -72,7 +68,7 @@ export const Navbar = () => {
     }
   }, [dispatch, navigate, searchParams]);
 
-  //Get user details
+  //Get user details login proccess... normal flow
   const getUser = useCallback(() => {
     if (authResponse?.sentEmail) {
       setEmailModal(true);
@@ -81,17 +77,21 @@ export const Navbar = () => {
     }
 
     else if (authResponse?.authToken) {
-      
+      Cookies.remove("authToken")
+      Cookies.set("authToken", authResponse?.authToken, { secure: true })
       const userDetails = jwtDecode(authResponse?.authToken);
       dispatch(signUpWithGoogle(userDetails?.profile));
 
       if (!userDetails?.profile?.careerPath) {
-
         dispatch(careerPathSelectState(true));
         navigate("/preferences", { replace: true });
-
       }
+      else if (userDetails?.profile?.careerPath) {
+        dispatch(careerPathSelectState(true))
+      }
+
       navigate("/", { replace: true });
+
     }
   }, [
     authResponse?.authToken,
@@ -125,7 +125,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 400;
+      const isScrolled = window.scrollY > 200;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -164,10 +164,10 @@ export const Navbar = () => {
       </HamburgerContainer>
       <NavListContainer isMenuOpen={isMenuOpen}>
         <NavList>
-          <NavItem>Our community</NavItem>
-          <NavItem>Clarity test</NavItem>
+          <NavItem to={"/#community"}>Our community</NavItem>
+          <NavItem to={"/clarity-test"}>Clarity test</NavItem>
           <NavItem to={"/about-us"}>About</NavItem>
-          <NavItem>Contact us</NavItem>
+          <NavItem to={"/contact-us"}>Contact us</NavItem>
           <NavItem to={"/our-blog"}>Our blog</NavItem>
         </NavList>
         {
@@ -185,7 +185,7 @@ export const Navbar = () => {
               >
                 <p onClick={() => dispatch(logoutUser)}>Logout</p>
                 <hr />
-                <p>Dashboard</p>
+                <DashboardLink to={"/dashboard"}>Dashboard</DashboardLink>
               </LogoOutDropDown>
             </AvatarContainer>
             :
@@ -220,8 +220,6 @@ const NavigationBar = styled.nav`
   @media ${devices.tablet}{
     flex-wrap:wrap;
   }
-  
-
 `;
 const Logo = styled(Link)`
   font-size:1.5rem ;
@@ -268,6 +266,9 @@ const NavItem = styled(NavLink)`
   text-decoration:none;
   position:relative;
   font-size:1rem ;
+  &.active {
+    color: var(--primary);
+  }
   &::before{
     position: absolute;
     content: "";
@@ -349,10 +350,18 @@ const LogoOutDropDown = styled.div`
     font-weight: 600;
     cursor: pointer;
   }
+  
   hr{
     opacity: 0.3;
   }
 `
 const AvatarContainer = styled.div`
   position: relative;
+`
+const DashboardLink = styled(Link)`
+     font-size: 1rem;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration:none;
 `

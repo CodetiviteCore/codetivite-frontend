@@ -22,36 +22,46 @@ export const AboutUsFirstContainer = styled.div`
     }
     @media ${devices.tablet}{
         flex-wrap:wrap;
+        div:first-child{
+            h2{
+                width: 100%;
+            }
+            span{
+                font-size: 1.6rem;
+            }
+        }
         h2{
             width:100%;
             font-size:1.6rem;
             line-height:1;
+            font-size: 1.6rem;
+            margin-top: 1rem;
         }
         p{
             font-size:1rem;
            
         }
         div:last-child{
+            margin-top: 2rem;
             display:flex;
             flex-direction:column;
-            align-items:center;
+            width: 100%;
             p{
                 margin-bottom:0.4rem;
                 line-height:1.7;
-            }
-            button{
-                margin:0 auto ;
+                width: 100% !important;
+                font-size: 1rem;
             }
         }
     }
     div:last-child{
-
         p{
             margin-bottom:1.5rem;
             max-width:400px;
         }
         
     }
+    
 `
 export const AboutUsSecondContainer = styled.section`
     padding:8%;
@@ -63,8 +73,8 @@ export const AboutUsSecondContainer = styled.section`
         ::before{
             content: "";
             background-color: var(--primary);
-            width: 16.5rem;
-            height: 16.9rem;
+            width: 20%;
+            height: 40%;
             position: absolute;
             z-index: -4;
             top: -5%;
@@ -73,8 +83,8 @@ export const AboutUsSecondContainer = styled.section`
         ::after{
             content: "";
             background-color: var(--primary);
-            width: 16.5rem;
-            height: 16.9rem;
+            width: 20%;
+            height: 40%;
             position: absolute;
             z-index: -4;
             bottom: -5%;
@@ -83,6 +93,8 @@ export const AboutUsSecondContainer = styled.section`
     }
     img{
         position: relative;
+        width: 100%;
+        height: 100%;
 
     }
 
@@ -166,6 +178,22 @@ export const TeamHeading = styled.div`
     button{
         margin-top: 1.5rem;
     }
+
+    @media ${devices.tablet} {
+        flex-direction: column;
+        gap:0.8rem;
+        align-items: flex-start;
+        h6{
+            margin-bottom: 0;
+        }
+        button{
+            margin-top: 0.8rem;
+        }
+        p{
+            width: 100%;
+            font-size: 1rem;
+        }
+    }
 `
 export const TeamGalleryContainer = styled.section`
     display: flex;
@@ -182,13 +210,19 @@ export const TeamGallery = styled.div`
 
 export const OurValuesContainer = styled.section`
     position: relative;
-    padding: 4% 0;
+    padding: 4% 8%;
     >img{
         position: absolute;
         object-fit: contain;
         bottom: 0;
         left: 0;
         transform: scale(-1);
+        z-index: 0;
+    }
+    @media ${devices.tablet} {
+        img{
+            z-index: -1;
+        }
     }
 
 `
@@ -196,6 +230,9 @@ export const OurValuesContainer = styled.section`
 export const ValuesContainer = styled.div`
     display: flex;
     justify-content: center;
+    @media ${devices.tablet} {
+        flex-wrap: wrap;
+    }
 `
 
 export const ValuesCard = styled.div`
@@ -211,17 +248,31 @@ export const ValuesCard = styled.div`
         max-width: 80%;
         text-align: center;
     }
+    @media ${devices.tablet} {
+        h6,p{
+            font-size: 1rem;
+        }
+    }
+
 `
 export const OurValueHeader = styled.div`
     p{
         font-weight: 600;
         font-size: 1rem;
         text-align: center;
+      
     }
     h4{
         font-size: 2.5rem;
         text-align: center;
         margin-bottom: 1rem;
     }
-
+    @media ${devices.tablet} {
+        p{
+            font-size: 1rem;
+        }
+        h4{
+            font-size: 1.6rem;
+        }
+    }
 `

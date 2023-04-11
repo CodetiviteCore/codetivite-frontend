@@ -11,6 +11,6 @@ export * from "./LatestPostCards/latestPostsCards.js"
 export * from "./AuthorDetails/authorDetails.js"
 export * from "./FooterInput/footerInput.js"
 export * from "./TeamImage/TeamImage.js"
-
+export * from "./Input/Input.js"
 
 

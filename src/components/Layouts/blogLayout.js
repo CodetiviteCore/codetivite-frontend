@@ -12,7 +12,6 @@ export const BlogLayout = ({ children }) => {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
             </BlogTitleContainer>
             <BlogMenu />
-
             {children}
 
         </BlogLayoutContainer>

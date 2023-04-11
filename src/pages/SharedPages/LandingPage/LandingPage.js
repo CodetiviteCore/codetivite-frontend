@@ -66,6 +66,10 @@ import { Modal } from '../../../components';
 import { ModalContext } from '../../../context/ModalContext';
 import { Puff } from 'react-loader-spinner';
 import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -76,6 +80,9 @@ const LandingPage = () => {
   const { isModalOpen, emailModal } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
   const [isredirect, setIsRedirect] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation();
+  const communityRef = useRef(null)
 
 
   const redirect = () => {
@@ -83,8 +90,19 @@ const LandingPage = () => {
     window.location.href = `https://codetivite-api2.onrender.com/api/v1.0/auth/login`
   }
   const redirectToMail = () => {
-    window.location.href ="https://gmail.com"
+    window.location.href = "https://gmail.com"
   }
+
+
+
+  useEffect(() => {
+    if (location.hash === '#community') {
+      console.log('Community section found!');
+      // Scroll to the community section
+      const communityRef = document.getElementById('community');
+      communityRef.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
 
 
   const handleCardExpansion = (index) => {
@@ -315,7 +333,10 @@ const LandingPage = () => {
           </HowToGetStartedCardContainer>
         </HowToGetStartedContent>
       </HowToGetStartedContainer>
-      <CommunityContainer>
+      <CommunityContainer
+        id='community'
+        ref={communityRef}
+      >
         <CommunityCollaborate>
           <AvatarContainer
             data-aos="zoom-in-left"
@@ -467,7 +488,11 @@ const LandingPage = () => {
             <p>OUR BLOG</p>
             <h4>Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.</h4>
           </div>
-          <Button primary>Visit our blog</Button>
+          <Button primary
+            onClick={() => navigate("/our-blog")}
+          >
+            Visit our blog
+          </Button>
         </BlogContainer>
         <LandingBlogCardContainer>
           {
@@ -484,7 +509,7 @@ const LandingPage = () => {
                 avater={card.avater}
                 author={card.author}
                 time={card.time}
-                
+
               />
             )
           }

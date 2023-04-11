@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useParams, useNavigate, Routes, Route, Link, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components"
 import { Button, RoadmapLectureCards } from "../../../ui_elements";
 import {
@@ -19,11 +19,6 @@ import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
-
-
-
-const LazyCourseContent = React.lazy(() => import("../../PrivatePages/Roadmap/RoadmapDetails.js"))
-
 
 
 

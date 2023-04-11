@@ -10,6 +10,7 @@ const LazyCommunity = React.lazy(() => import("../../pages/SharedPages/Community
 const LazyAboutUs = React.lazy(() => import("../../pages/SharedPages/AboutUsPage/AboutUs"))
 const LazyContactUs = React.lazy(() => import("../../pages/SharedPages/ContactUsPage/ContactUs"))
 const LazyBLog = React.lazy(() => import("../../pages/SharedPages/BlogPage/Blog"))
+const LazyClarityTest = React.lazy(() => import("../../pages/SharedPages/ClarityTestPage/ClarityTest"))
 
 
 
@@ -24,10 +25,16 @@ export const SharedRoutes = () => {
         {
             path: "/community",
             component: <LazyCommunity />
-        }, {
+        },
+        {
             path: "/about-us",
             component: <LazyAboutUs />
         },
+        {
+            path: "/clarity-test",
+            component: <LazyClarityTest />
+        },
+
         {
             path: "/contact-us",
             component: <LazyContactUs />

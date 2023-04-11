@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Community from './Community';
 
 export const CommunityContainer = styled.main`
     height:100%;

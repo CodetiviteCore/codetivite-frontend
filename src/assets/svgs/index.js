@@ -45,7 +45,12 @@ import { ReactComponent as LinkedIn } from "./linkedin.svg"
 import { ReactComponent as Accessibility } from "./accessibilty.svg"
 import { ReactComponent as Empowerment } from "./empowerment.svg"
 import { ReactComponent as Support } from "./support.svg"
-import { ReactComponent as Inclusive} from "./inclusiveness.svg"
+import { ReactComponent as Inclusive } from "./inclusiveness.svg"
+import { ReactComponent as CallBlack } from "./callblack.svg"
+import { ReactComponent as Sms } from "./sms.svg"
+
+
+
 
 
 
@@ -101,6 +106,7 @@ export {
     Accessibility,
     Empowerment,
     Support,
-    Inclusive
-
+    Inclusive,
+    CallBlack,
+    Sms
 }

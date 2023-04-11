@@ -14,6 +14,8 @@ import { selectCareerState } from "./Redux store/auth/auth.selector";
 function App() {
   const careerPathSelected = useSelector(selectCareerState)
   console.log("this is career path", careerPathSelected)
+
+
   useEffect(() => {
     Aos.init({
       offset: 20,
@@ -21,47 +23,47 @@ function App() {
   }, []);
 
 
-
-  //React query initialization
-  const queryClient = new QueryClient(
-    // {
-    //   defaultOptions: {
-    //     queries: {
-    //       refetchOnWindowFocus: false,
-    //       enabled: false,
-    //     }
-    //   }
-    // }
-  );
-  //
-
-  //avatar component random colors
-  const primaryColor = "#2AB255";
-  const secondaryYellow = "#FCE459";
-  const secondaryBlue = "#2475DF";
-  return (
-    <ConfigProvider
-      colors={[
-        primaryColor,
-        secondaryYellow,
-        secondaryBlue,
-        "purple",
-        "red",
-        "gray",
-      ]}
-    >
-      <QueryClientProvider client={queryClient}>
-        {
-          careerPathSelected ? <PrivateRoutes />
-            :
-            <SharedRoutes />
+    //React query initialization
+    const queryClient = new QueryClient(
+      {
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            enabled: false,
+          }
         }
+      }
+    );
 
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryClientProvider>
 
-    </ConfigProvider>
-  );
-}
+    //avatar component random colors
+    const primaryColor = "#2AB255";
+    const secondaryYellow = "#FCE459";
+    const secondaryBlue = "#2475DF";
+    return (
+      <ConfigProvider
+        colors={[
+          primaryColor,
+          secondaryYellow,
+          secondaryBlue,
+          "purple",
+          "red",
+          "gray",
+        ]}
+      >
+        <QueryClientProvider client={queryClient}>
 
-export default App;
+          <SharedRoutes />
+          {
+            careerPathSelected && <PrivateRoutes />
+          }
+
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
+
+      </ConfigProvider>
+    );
+  }
+
+
+  export default App;

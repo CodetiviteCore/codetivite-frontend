@@ -35,9 +35,9 @@ export const Modal = ({ isOpen, children }) => {
     useEffect(() => {
         emailModal && setIsModalOpen(true)
     },[emailModal, setIsModalOpen])
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+    // const closeModal = () => {
+    //     setIsModalOpen(false);
+    // };
     return (
         <ModalWrapper
             isOpen={isOpen}

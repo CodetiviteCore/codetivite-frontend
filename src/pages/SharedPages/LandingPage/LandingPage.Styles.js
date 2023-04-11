@@ -298,7 +298,7 @@ export const CommunityCollaborate = styled.section`
     position:relative;
     width:fit-content;
     @media ${devices.tablet}{
-        margin:0 auto;
+        margin:-2rem auto;
         height:fit-content;
         padding-bottom:20%;
         display:block;
@@ -329,6 +329,7 @@ export const CommunityCollaborateDetails = styled.div`
         }
         h3{
             font-size:1.2rem;
+            margin-bottom: 1rem;
         }
         
         button{
