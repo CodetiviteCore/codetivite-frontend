@@ -2,12 +2,14 @@ import {
   useState,
   useEffect,
   useContext,
-  useLayoutEffect
+  useLayoutEffect,
+  useCallback
 } from 'react';
 import {
   NavLink,
   useSearchParams,
-  // useNavigate
+  useNavigate,
+  Link
 } from 'react-router-dom';
 
 import styled from "styled-components";
@@ -23,52 +25,107 @@ import Avatar from 'react-avatar';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthServices from '../../services/authServices';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import {
+  careerPathSelectState,
+  logoutUser,
+  signUpWithGoogle
+} from '../../Redux store/auth/auth.action';
+import Cookies from 'js-cookie';
+
+
+
+
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setIsModalOpen, setEmailModal } = useContext(ModalContext)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { setIsModalOpen, setEmailModal } = useContext(ModalContext);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate()
-  // const navigate = useNavigate();
-  const [authToken, setAuthToken] = useState("")
-  const user = useSelector(selectUser)
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
   const [usernames, setUsernames] = useState({
     firstname: "",
     lastname: ""
-  })
-  const { data:authResponse } = useApiGet("iii", () => AuthServices.getUserDetails(searchParams.get("code")))
+  });
 
-  console.log(authResponse)
+  //api call
+  const { data: authResponse, refetch: fetchToken } = useApiGet("Auth", () => AuthServices.getUserDetails(searchParams.get("code")));
+
+  //sign up process
+  const getUserfromEmail = useCallback(() => {
+    const authToken = searchParams.get("token")
+    Cookies.remove("authToken")
+    Cookies.set("authToken", authToken, { secure: true })
+
+    const userDetails = jwtDecode(authToken);
+    dispatch(signUpWithGoogle(userDetails?.profile));
+    if (!userDetails?.profile?.careerPath) {
+      dispatch(careerPathSelectState(true));
+      navigate("/preferences", { replace: true });
+    }
+  }, [dispatch, navigate, searchParams]);
+
+  //Get user details login proccess... normal flow
+  const getUser = useCallback(() => {
+    if (authResponse?.sentEmail) {
+      setEmailModal(true);
+      setIsModalOpen(true);
+      navigate("/", { replace: true });
+    }
+
+    else if (authResponse?.authToken) {
+      Cookies.remove("authToken")
+      Cookies.set("authToken", authResponse?.authToken, { secure: true })
+      const userDetails = jwtDecode(authResponse?.authToken);
+      dispatch(signUpWithGoogle(userDetails?.profile));
+
+      if (!userDetails?.profile?.careerPath) {
+        dispatch(careerPathSelectState(true));
+        navigate("/preferences", { replace: true });
+      }
+      else if (userDetails?.profile?.careerPath) {
+        dispatch(careerPathSelectState(true))
+      }
+
+      navigate("/", { replace: true });
+
+    }
+  }, [
+    authResponse?.authToken,
+    authResponse?.sentEmail,
+    dispatch,
+    navigate,
+    setEmailModal,
+    setIsModalOpen
+  ]);
 
   useEffect(() => {
-    if (authResponse?.sentEmail === "false") {
-      // navigate("/",{replace:true})
-      setEmailModal(true)
+    //get user details useEffect
+    if (searchParams.get("token")) {
+      getUserfromEmail();
+    } else if (searchParams.get("code")) {
+      fetchToken();
+      getUser();
     }
-      navigate("/",{replace:true})
-
-
-  },[authResponse, setEmailModal])
+  }, [getUser, getUserfromEmail, searchParams, fetchToken]);
 
   useLayoutEffect(() => {
     if (user) {
-      console.log(user, "user")
-      const { firstName, lastName } = user
+      const { firstName, lastName } = user;
       setUsernames({
         firstname: firstName,
         lastname: lastName
-      })
+      });
     }
-  }, [user])
-
+  }, [user]);
 
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 400;
+      const isScrolled = window.scrollY > 200;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -91,11 +148,15 @@ export const Navbar = () => {
     setIsModalOpen(true);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
 
 
   return (
     <NavigationBar scrolled={scrolled}>
-      <Logo>c<span><BlackLogo /></span>detivite</Logo>
+      <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
       <HamburgerContainer onClick={handleHamburgerClick}>
         <Bar isMenuOpen={isMenuOpen} />
         <Bar isMenuOpen={isMenuOpen} />
@@ -103,20 +164,30 @@ export const Navbar = () => {
       </HamburgerContainer>
       <NavListContainer isMenuOpen={isMenuOpen}>
         <NavList>
-          <NavItem>Our community</NavItem>
-          <NavItem>Clarity test</NavItem>
-          <NavItem>About</NavItem>
-          <NavItem>Contact us</NavItem>
-          <NavItem>Our blog</NavItem>
+          <NavItem to={"/#community"}>Our community</NavItem>
+          <NavItem to={"/clarity-test"}>Clarity test</NavItem>
+          <NavItem to={"/about-us"}>About</NavItem>
+          <NavItem to={"/contact-us"}>Contact us</NavItem>
+          <NavItem to={"/our-blog"}>Our blog</NavItem>
         </NavList>
         {
           user ?
-            <NavAvatar
-              name={`${usernames.firstname} ${usernames.lastname}`}
-              round={true}
-              size="40"
-              fgColor='	#FFF'
-            />
+            <AvatarContainer>
+              <NavAvatar
+                onClick={toggleDropdown}
+                name={`${usernames.firstname} ${usernames.lastname}`}
+                round={true}
+                size="40"
+                fgColor='	#FFF'
+              />
+              <LogoOutDropDown
+                isDropdownOpen={isDropdownOpen}
+              >
+                <p onClick={() => dispatch(logoutUser)}>Logout</p>
+                <hr />
+                <DashboardLink to={"/dashboard"}>Dashboard</DashboardLink>
+              </LogoOutDropDown>
+            </AvatarContainer>
             :
             <Button
               scrolled={scrolled}
@@ -149,11 +220,11 @@ const NavigationBar = styled.nav`
   @media ${devices.tablet}{
     flex-wrap:wrap;
   }
-  
-
 `;
-const Logo = styled.h1`
+const Logo = styled(Link)`
   font-size:1.5rem ;
+  font-weight: 800;
+  color:black;
   display:flex;
   align-items:center ;
   span{
@@ -195,6 +266,9 @@ const NavItem = styled(NavLink)`
   text-decoration:none;
   position:relative;
   font-size:1rem ;
+  &.active {
+    color: var(--primary);
+  }
   &::before{
     position: absolute;
     content: "";
@@ -231,6 +305,9 @@ const HamburgerContainer = styled.div`
 `
 
 const NavAvatar = styled(Avatar)`
+  :hover{
+    cursor: pointer;
+  }
   span{
     color:var(--white) !important;
   }
@@ -254,3 +331,37 @@ const Bar = styled.div`
     transform: ${({ isMenuOpen }) => (isMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : '')};
   }
 `;
+
+const LogoOutDropDown = styled.div`
+  background-color: var(--white);
+  border-radius: 1px solid var(--navborders); 
+  height:auto;
+  padding: 1rem;
+  display: ${({ isDropdownOpen }) => isDropdownOpen ? "block" : "none"};
+  position: absolute;
+  bottom: -130px;
+  right: 0;
+  box-shadow: -1px 4px 5px -3px rgba(0,0,0,0.31);
+  -webkit-box-shadow: -1px 4px 5px -3px rgba(0,0,0,0.31);
+  -moz-box-shadow: -1px 4px 5px -3px rgba(0,0,0,0.31);
+  p{
+    font-size: 1rem;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  hr{
+    opacity: 0.3;
+  }
+`
+const AvatarContainer = styled.div`
+  position: relative;
+`
+const DashboardLink = styled(Link)`
+     font-size: 1rem;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration:none;
+`

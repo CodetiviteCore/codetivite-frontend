@@ -1,5 +1,78 @@
 import styled from "styled-components"
 import User from "../../assets/images/toib.png"
+import { useLayoutEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../Redux store/auth/auth.selector';
+import Avatar from 'react-avatar';
+
+
+
+export const DashboardNavabar = () => {
+    const [usernames, setUsernames] = useState({
+        firstname: "",
+        lastname: ""
+    });
+    const user = useSelector(selectUser);
+
+    useLayoutEffect(() => {
+        if (user) {
+            const { firstName, lastName } = user;
+            setUsernames({
+                firstname: firstName,
+                lastname: lastName
+            });
+        }
+    }, [user]);
+
+    return (
+        <DashboardNav>
+            <DashboardTitle>
+                <h3>Dashboard</h3>
+                <p>Welcome to codetivite, another day to build amazing products.</p>
+            </DashboardTitle>
+            <DashboardUserDetails>
+                <div />
+                <div />
+                {
+                    user ?
+                        <AvatarContainer>
+                            <NavAvatar
+                                name={`${usernames.firstname} ${usernames.lastname}`}
+                                round={true}
+                                size="40"
+                                fgColor='	#FFF'
+                            />
+                        </AvatarContainer>
+                        :
+                         <img src={User} alt="avatar Icon" />
+                }
+
+               
+                <section>
+                    <div>
+                        <h5>{usernames.firstname} { usernames.lastname}</h5>
+                        <p>Product Designer</p>
+                    </div>
+                    <span>&gt;</span>
+                </section>
+            </DashboardUserDetails>
+        </DashboardNav>
+    )
+}
+
+const AvatarContainer = styled.div`
+  position: relative;
+`
+
+const NavAvatar = styled(Avatar)`
+  :hover{
+    cursor: pointer;
+  }
+  span{
+    color:var(--white) !important;
+  }
+  `
+
 
 const DashboardNav = styled.nav`
     height: 4.75rem;
@@ -20,6 +93,7 @@ const DashboardTitle = styled.div`
 `
 const DashboardUserDetails = styled.div`
     display: flex;
+    align-items: center !important;
     gap: 0.5rem;
     img{
         width: 38px;
@@ -51,26 +125,3 @@ const DashboardUserDetails = styled.div`
         }
     }
 `
-
-export const DashboardNavabar = () => {
-    return (
-        <DashboardNav>
-            <DashboardTitle>
-                <h3>Dashboard</h3>
-                <p>Welcome to codetivite, another day to build amazing products.</p>
-            </DashboardTitle>
-            <DashboardUserDetails>
-                <div />
-                <div/>
-                <img src={User} alt="avatar Icon"/>
-                <section>
-                    <div>
-                    <h5>Prince Chijioke</h5>
-                    <p>Product Designer</p>
-                    </div>
-                    <span>&gt;</span>
-                </section>
-            </DashboardUserDetails>
-        </DashboardNav>
-    )
-}

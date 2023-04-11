@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PreferenceButton } from "../../../ui_elements";
 import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {
@@ -10,40 +10,37 @@ import {
     PreferencDashboardeDetails,
     Save,
 } from "./Preference.styles";
+import { useApiGet } from "../../../custom-hooks/useApiGet";
+import PreferenceServices from "../../../services/preferenceServices";
+import { useDispatch } from "react-redux";
+import { setCareerPath } from "../../../Redux store/auth/auth.action";
+import { useNavigate } from "react-router-dom";
+import { useApiPost } from "../../../custom-hooks/useApiPost";
+
 
 const Prefrence = () => {
-    const [preferences, setPreferences] = useState([]);
-    const preference = [
-        "Frontend developer",
-        "Backend developer",
-        "Solidity developer",
-        "Blockchain developer",
-        "De-fi developer",
-        "UIUX Designer",
-        "Technical writing",
-        "Full stack developer",
-        "Product manager",
-        "Community manager",
-        "Rust developer",
-        "Devops Engineer",
-        "Graphic Designer",
-        "Smart contract debveloper",
-    ];
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [selectCareerPath, setSelectCareerPath] = useState(null)
+    const { data: preferencesRespsonse } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    const { mutate: updateCareer } = useApiPost(PreferenceServices.updateCareerPath)
+    // console.log(Cookies.get("authToken"))
 
-    const selectPreferences = (skill) => {
-        if (preferences.includes(skill.toString())) {
-            setPreferences((preferences) =>
-                preferences.filter((item) => item !== skill.toString())
-            );
-        } else {
-            setPreferences((preferences) => [...preferences, skill.toString()]);
-        }
+
+    const selectPreference = (skill) => {
+        setSelectCareerPath(skill)
+     
     };
 
-    useEffect(() => {
-        console.log(preferences)
-    },[preferences])
+    const submitCareerPath = () => {
+        dispatch(setCareerPath(selectCareerPath))
+        updateCareer(selectCareerPath)
+        navigate("/dashboard")
+    }
 
+    useEffect(() => {
+        console.log(selectCareerPath)
+    },[selectCareerPath])
 
 
     return (
@@ -54,18 +51,21 @@ const Prefrence = () => {
                     <p>Choose a career path to enable us serve you better.</p>
                 </PreferenceDetailsHeader>
                 <PreferenceCardContainer>
-                    {preference.map((item, index) => (
+                    {preferencesRespsonse?.map((item, index) => (
                         <PreferenceButton
-                            onClick={() => selectPreferences(item)}
-                            selected={preferences.includes(item)}
+                            onClick={() => selectPreference(item)}
                             index={index}
                             key={index}
                         >
-                            {item}
+                            {item.charAt(0).toUpperCase() + item.slice(1)}
                         </PreferenceButton>
                     ))}
                 </PreferenceCardContainer>
-                <Save primary>Save and continue to dashboard</Save>
+                <Save primary
+                    onClick={submitCareerPath}
+                >
+                    Save and continue to dashboard
+                </Save>
             </PreferenceDetails>
             <PreferenceDashboard>
                 <PreferencDashboardeDetails>
@@ -78,6 +78,7 @@ const Prefrence = () => {
                 </PreferencDashboardeDetails>
                 <img src={DashboardImage} alt={"dashboard_image"} />
             </PreferenceDashboard>
+
         </PrefrenceContainer>
     );
 };

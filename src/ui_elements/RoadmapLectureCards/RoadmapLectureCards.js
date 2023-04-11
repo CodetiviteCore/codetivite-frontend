@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { Lock, RoadmapBookIcon } from "../../assets/svgs"
-import { Link } from 'react-router-dom';
 
 const CardConatiner = styled.div`
     width: auto;
@@ -14,16 +13,25 @@ const CardConatiner = styled.div`
         gap: 10px;
     }
 `
-const Title = styled(Link)`
-    
+const Title = styled.p`
+    font-weight: 600;
+    :hover{
+        cursor:pointer;
+    }
 `
 
-export const RoadmapLectureCards = ({title}) => {
+export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink }) => {
+    // const response = getDocument("17Sghj2HHVuSfZTZ9B5Amxa2vyKxw020BcuZPcmc-KUs")
+    // console.log(response, "getFromDocs")
     return (
         <CardConatiner>
             <div>
                 <RoadmapBookIcon />
-                <Title>{title}</Title>
+                <Title onClick={() => {
+                    setCurrentTopic(title)
+                    setIsModalOpen(true)
+                    setLink(title.resource)
+                }}>{title}</Title>
             </div>
             <Lock/>
         </CardConatiner>

@@ -34,10 +34,20 @@ import { ReactComponent as Teacher } from "./teacher.svg"
 import { ReactComponent as Lock } from "./lock.svg"
 import { ReactComponent as Unlock } from "./unlock.svg"
 import { ReactComponent as RoadmapBookIcon} from "./roadmap-book.svg"
-
-
-
-
+import { ReactComponent as Discord } from "./discord.svg"
+import { ReactComponent as Slack } from "./slack.svg"
+import { ReactComponent as Telegram } from "./telegram.svg"
+import { ReactComponent as SlackOutline } from "./slackOutline.svg"
+import { ReactComponent as DiscordOutline } from "./discordOutline.svg"
+import { ReactComponent as TelegramOutline } from "./telegramOutline.svg"
+import { ReactComponent as Twitter } from "./twitter.svg"
+import { ReactComponent as LinkedIn } from "./linkedin.svg"
+import { ReactComponent as Accessibility } from "./accessibilty.svg"
+import { ReactComponent as Empowerment } from "./empowerment.svg"
+import { ReactComponent as Support } from "./support.svg"
+import { ReactComponent as Inclusive } from "./inclusiveness.svg"
+import { ReactComponent as CallBlack } from "./callblack.svg"
+import { ReactComponent as Sms } from "./sms.svg"
 
 
 
@@ -84,6 +94,19 @@ export {
     Teacher,
     Lock,
     Unlock,
-    RoadmapBookIcon
-
+    RoadmapBookIcon,
+    Discord,
+    Slack,
+    Telegram,
+    TelegramOutline,
+    DiscordOutline,
+    SlackOutline,
+    Twitter,
+    LinkedIn,
+    Accessibility,
+    Empowerment,
+    Support,
+    Inclusive,
+    CallBlack,
+    Sms
 }

@@ -288,7 +288,6 @@ export const CommunityContainer = styled.section`
     display:flex;
     justify-content:center;
     gap:35rem;
-    height:80vh;
     @media ${devices.tablet}{
         height:fit-content;
         display:block;
@@ -299,7 +298,7 @@ export const CommunityCollaborate = styled.section`
     position:relative;
     width:fit-content;
     @media ${devices.tablet}{
-        margin:0 auto;
+        margin:-2rem auto;
         height:fit-content;
         padding-bottom:20%;
         display:block;
@@ -330,6 +329,7 @@ export const CommunityCollaborateDetails = styled.div`
         }
         h3{
             font-size:1.2rem;
+            margin-bottom: 1rem;
         }
         
         button{
@@ -409,7 +409,7 @@ export const CallContainer = styled.div`
 export const AudioContainer = styled.div`
     position:absolute;
     width: 18.75rem;
-    bottom:13rem;
+    bottom:3%;
     left:11rem;
     padding:0.62rem;
     display:flex;
@@ -440,7 +440,7 @@ export const AudioContainer = styled.div`
     }
 `
 export const LandingCarouselContainer = styled.section`
-    height:50vh;
+    padding:8%;
     align-items:center;
     padding:8%;
     @media ${devices.tablet}{
@@ -544,7 +544,7 @@ export const LandingBlogCard = styled.div`
 
     }
     @media ${devices.tablet}{
-        width:20rem;
+        width:20rem;e
         h4{
             font-size:1rem;
         }
@@ -564,6 +564,9 @@ export const LandingBlogCardContainer = styled.div`
         align-items:center;
         padding:8% ;
     }
+    /* @media only screen and () and (min-width: 400px){
+
+    } */
 `
 export const BlogContainer = styled.div`
     display:flex;

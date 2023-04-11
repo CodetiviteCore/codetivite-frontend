@@ -38,3 +38,11 @@ export const RoadMapProjectsToComplete = styled(RoadMapPath)`
     }
 `
 export const RoadMapProjectDetails = styled(PathRoadMapContainer)``
+
+export const LoaderContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+`

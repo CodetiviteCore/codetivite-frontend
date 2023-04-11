@@ -6,9 +6,22 @@ export const signUpWithGoogle = (user) => {
         payload: user
     }
 }
-export const loggoutUser = () => {
+export const logoutUser = () => {
+    console.log("logout!!")
     return {
         type: AUTH_ACTION_TYPES.REMOVE_CURRENT_USER,
         payload:null
+    }
+}
+export const careerPathSelectState = (state) => {
+    return {
+        type: AUTH_ACTION_TYPES.SET_CAREERPATH_SELECTED,
+        payload:state
+    }
+}
+export const setCareerPath = (state) => {
+    return {
+        type: AUTH_ACTION_TYPES.SET_CAREERPATH,
+        payload:state
     }
 }

@@ -1,7 +1,9 @@
 
 import { AUTH_ACTION_TYPES } from './auth.type';
 export const AUTH_INITIAL_STATE = {
-    currentUser:null
+    currentUser: null,
+    careerPath: null,
+    isCareerPathSelected: false
 }
 
 export const authReducer = (state = AUTH_INITIAL_STATE, action) => {
@@ -10,12 +12,22 @@ export const authReducer = (state = AUTH_INITIAL_STATE, action) => {
         case AUTH_ACTION_TYPES.SET_CURRENT_USER:
             return {
                 ...state,
-                currentUser: {...payload }
+                currentUser: { ...payload }
             }
         case AUTH_ACTION_TYPES.REMOVE_CURRENT_USER:
             return {
                 ...state,
-                currentUser:null
+                currentUser: payload
+            }
+        case AUTH_ACTION_TYPES.SET_CAREERPATH_SELECTED:
+            return {
+                ...state,
+                isCareerPathSelected: payload
+            }
+        case AUTH_ACTION_TYPES.SET_CAREERPATH:
+            return {
+                ...state,
+                careerPath: payload
             }
         default:
             return state
