@@ -12,19 +12,19 @@ import { Puff } from "react-loader-spinner"
 
 const Roadmap = () => {
 
-    const careerPathFromReducer = useSelector(selectCareer)
     const [levels, setLevels] = useState([])
 
 
     const {
         data: careerDetails,
         isLoading: isLoadingCereerDetails
-    } = useApiGet("Roadmap", () => PreferenceServices.getSelectedPreferences(careerPathFromReducer))
+    } = useApiGet("Roadmap", PreferenceServices.getSelectedPreferences)
 
     useEffect(() => {
         if (!!careerDetails) {
 
             let levelsArray = []
+            console.log(careerDetails?.resource?.levels, "yayyy")
 
             careerDetails?.resource?.levels?.map((level) => {
 
@@ -59,15 +59,11 @@ const Roadmap = () => {
                     advanced
                 )
                 return setLevels(levelsArray)
-
             })
         }
     }, [careerDetails])
 
-    useEffect(() => {
-        console.log(levels)
-
-    })
+    
 
     const statsCardDetails = [
         {

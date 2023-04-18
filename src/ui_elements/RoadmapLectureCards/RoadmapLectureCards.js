@@ -20,9 +20,10 @@ const Title = styled.p`
     }
 `
 
-export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink }) => {
-    // const response = getDocument("17Sghj2HHVuSfZTZ9B5Amxa2vyKxw020BcuZPcmc-KUs")
-    // console.log(response, "getFromDocs")
+export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink, setResourceDoc, resource }) => {
+    
+    const 
+
     return (
         <CardConatiner>
             <div>
@@ -30,7 +31,8 @@ export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, se
                 <Title onClick={() => {
                     setCurrentTopic(title)
                     setIsModalOpen(true)
-                    setLink(title.resource)
+                    setLink(title?.resourceUrl)
+                    setResourceDoc(resource)
                 }}>{title}</Title>
             </div>
             <Lock/>

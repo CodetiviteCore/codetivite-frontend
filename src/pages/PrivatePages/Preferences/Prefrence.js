@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setCareerPath } from "../../../Redux store/auth/auth.action";
 import { useNavigate } from "react-router-dom";
 import { useApiPost } from "../../../custom-hooks/useApiPost";
+import Skeleton from "react-loading-skeleton";
 
 
 const Prefrence = () => {
@@ -29,7 +30,6 @@ const Prefrence = () => {
 
     const selectPreference = (skill) => {
         setSelectCareerPath(skill)
-     
     };
 
     const submitCareerPath = () => {
@@ -40,26 +40,33 @@ const Prefrence = () => {
 
     useEffect(() => {
         console.log(selectCareerPath)
-    },[selectCareerPath])
+    }, [selectCareerPath])
 
 
     return (
         <PrefrenceContainer>
             <PreferenceDetails>
                 <PreferenceDetailsHeader>
-                    <h1>Selecte your Prefrence</h1>
+                    <h1>Selecte your Carrer Path</h1>
                     <p>Choose a career path to enable us serve you better.</p>
                 </PreferenceDetailsHeader>
                 <PreferenceCardContainer>
-                    {preferencesRespsonse?.map((item, index) => (
-                        <PreferenceButton
-                            onClick={() => selectPreference(item)}
-                            index={index}
-                            key={index}
-                        >
-                            {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </PreferenceButton>
-                    ))}
+                    {
+                        preferencesRespsonse ?
+
+                            preferencesRespsonse?.map((item, index) => (
+                                <PreferenceButton
+                                    onClick={() => selectPreference(item)}
+                                    index={index}
+                                    key={index}
+                                >
+                                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                                </PreferenceButton>
+                            ))
+                            :
+                            <p>hdfjsnoeifb</p>
+
+                    }
                 </PreferenceCardContainer>
                 <Save primary
                     onClick={submitCareerPath}

@@ -192,7 +192,8 @@ const RoadmapDetails = () => {
     const navigate = useNavigate()
     const { state } = useLocation()
     const [currentTopic, setCurrentTopic] = useState([])
-    const [link,setLink] = useState(null)
+    const [link, setLink] = useState("")
+    const [resoureDoc, setResourceDoc] = useState(null)
     const { setIsModalOpen, isModalOpen } = useContext(ModalContext)
     const avatars = [
         Tina,
@@ -276,10 +277,12 @@ const RoadmapDetails = () => {
                         state.map((item, index) =>
                             <RoadmapLectureCards
                                 key={index}
-                                title={item.title}
+                                title={item?.title}
+                                resource={item?.resourceUrl}
                                 setIsModalOpen={setIsModalOpen}
                                 setCurrentTopic={setCurrentTopic}
                                 setLink={setLink}
+                                setResourceDoc={setResourceDoc}
                             />)
                     }
 
