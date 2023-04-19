@@ -28,28 +28,28 @@ const Roadmap = () => {
 
             careerDetails?.resource?.levels?.map((level) => {
 
-                const fresher = level?.junior ? level?.junior?.map(({ title, resource }) => ({
+                const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl }) => ({
                     cardTitle: "Fresher",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl
                 })) : []
 
-                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resource }) => ({
+                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resourceUrl }) => ({
                     cardTitle: "Entry-level",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl
                 })) : []
 
-                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resource }) => ({
+                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl }) => ({
                     cardTitle: "Intermediate",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl
                 })) : []
 
-                const advanced = level?.advanced ? level?.advanced?.map(({ title, resource }) => ({
+                const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl }) => ({
                     cardTitle: "Advanced",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl
                 })) : []
 
                 levelsArray.push(
@@ -173,11 +173,12 @@ const Roadmap = () => {
             <PathRoadMapContainer>
                 <RoadMapPath>
                     <h2>{careerDetails?.resource?.careerpath} Roadmap</h2>
+                    
                     {
                         levels.map((item, index) =>
                             <RoadMapCourseInfoCard
                                 cardTitle={item[0]?.cardTitle}
-                                level={item[0].cardTitle}
+                                level={item[0]?.cardTitle}
                                 courseNo={item?.length}
                                 key={index}
                                 item={item}

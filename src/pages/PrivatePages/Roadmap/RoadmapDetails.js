@@ -1,9 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+    useParams,
+    useNavigate,
+    useLocation
+} from "react-router-dom";
 import styled from "styled-components"
-import { Button, RoadmapLectureCards } from "../../../ui_elements";
+import {
+    Button,
+    RoadmapLectureCards
+} from "../../../ui_elements";
 import {
     RoadMapContainer,
     Stats,
@@ -19,6 +26,9 @@ import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 
 
 
@@ -102,7 +112,8 @@ const OtherUsers = styled.div`
         div{
             min-width:2rem !important;
             min-height: 2rem !important;
-            display: flex;
+            display: flex;import { ReactHtmlParser } from 'react-html-parser';
+
             align-items: center;
             justify-content: center;
             border-radius: 50%;
@@ -127,7 +138,7 @@ const ProjectsDue = styled(RoadMapProjectsToComplete)`
 
 const DetailsModal = styled.div`
     height: 90vh;
-    max-width:681px;
+    max-width:inherit;
     background-color: var(--white);
     overflow-y:scroll;
     overflow-x: hidden;
@@ -192,7 +203,6 @@ const RoadmapDetails = () => {
     const navigate = useNavigate()
     const { state } = useLocation()
     const [currentTopic, setCurrentTopic] = useState([])
-    const [link, setLink] = useState("")
     const [resoureDoc, setResourceDoc] = useState(null)
     const { setIsModalOpen, isModalOpen } = useContext(ModalContext)
     const avatars = [
@@ -201,12 +211,15 @@ const RoadmapDetails = () => {
         Tunji,
         Sophia
     ]
-    const redirectToResource = (resourceLink) => {
-        window.location.href=resourceLink
-    }
+
+    console.log(state, "This is the state!")
+    console.log(resoureDoc, "This is resource doc!!")
+
+
+
     return (
         <RoadMapDetails>
-            <Modal isOpen={isModalOpen}>
+            {/* <Modal isOpen={isModalOpen}>
                 <DetailsModal>
                     <DetailsModalHeader>
                         <div>
@@ -216,52 +229,15 @@ const RoadmapDetails = () => {
                         <p onClick={() => setIsModalOpen(false)}>&#10006;</p>
                     </DetailsModalHeader>
                     <hr />
-                    <Overview>
-                        <h3>Overview</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-
-                        <p> Et at vel consequat egestas fermentum est.
-                            Enim pretium in nulla sit sed tellus eget tristique in. Eget in urna varius enim neque neque a.
-                            Dolor quam ut dui orci purus est consectetur placerat erat. At nunc ut eu elit dui et et nunc semper.
-                            Semper morbi quis et accumsan varius platea tincidunt bibendum mauris.
-                        </p>
-
-                        <p>Cras feugiat ut nisi erat leo. At in pellentesque ac felis convallis pellentesque ante.
-                            Vulputate tempus scelerisque sed senectus nisi. Quam at arcu odio vel.
-                            Risus at bibendum dui varius id nibh pellentesque. Amet enim orci a lacus lacus congue leo vulputate.
-                            In aliquam dictum pulvinar ut aliquam integer. Porttitor a massa ante eget volutpat.
-                            Etiam rhoncus velit velit in vitae fames.
-                        </p>
-                    </Overview>
-                    <Resources>
-                        <h3>Resources</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-                        <div>
-                            <p onClick={()=>redirectToResource(link)}> https://codetivite.com/</p>
-                        </div>
-
-
-                    </Resources>
-                    <Projects>
-                        <h3>Projects</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-                    </Projects>
+                    <div>
+                        <ReactQuill
+                            value={resoureDoc}
+                            readOnly={true}
+                            modules={{toolbar:false}}
+                        />
+                    </div>
                 </DetailsModal>
-            </Modal>
+            </Modal> */}
 
             <Navigation>
                 <div>
@@ -274,16 +250,35 @@ const RoadmapDetails = () => {
                 <Details>
 
                     {
-                        state.map((item, index) =>
-                            <RoadmapLectureCards
-                                key={index}
-                                title={item?.title}
-                                resource={item?.resourceUrl}
-                                setIsModalOpen={setIsModalOpen}
-                                setCurrentTopic={setCurrentTopic}
-                                setLink={setLink}
-                                setResourceDoc={setResourceDoc}
-                            />)
+                        resoureDoc ?
+                            <DetailsModal>
+                                <DetailsModalHeader>
+                                    <div>
+                                        <RoadmapBookIcon />
+                                        <p>{currentTopic}</p>
+                                    </div>
+                                    <p onClick={() => setResourceDoc("")}>&#10006;</p>
+                                </DetailsModalHeader>
+                                <hr />
+                                <div>
+                                    <ReactQuill
+                                        value={resoureDoc}
+                                        readOnly={true}
+                                        modules={{ toolbar: false }}
+                                    />
+                                </div>
+                            </DetailsModal>
+                            :
+                            state.map((item, index) =>
+                                <RoadmapLectureCards
+                                    key={index}
+                                    title={item?.title}
+                                    resource={item?.resource}
+                                    // setIsModalOpen={setIsModalOpen}
+                                    setCurrentTopic={setCurrentTopic}
+                                    setResourceDoc={setResourceDoc}
+                                    resourceDoc={resoureDoc}
+                                />)
                     }
 
                 </Details>

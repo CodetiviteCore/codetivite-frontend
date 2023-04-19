@@ -1,5 +1,9 @@
+
 import styled from "styled-components"
 import { Lock, RoadmapBookIcon } from "../../assets/svgs"
+import { useApiGet } from '../../custom-hooks/useApiGet';
+import RoadmapServices from "../../services/roadmapServices";
+import { useNavigate } from 'react-router-dom';
 
 const CardConatiner = styled.div`
     width: auto;
@@ -20,22 +24,34 @@ const Title = styled.p`
     }
 `
 
-export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink, setResourceDoc, resource }) => {
-    
-    const 
+export const RoadmapLectureCards = ({
+    title,
+    setIsModalOpen,
+    setCurrentTopic,
+    setResourceDoc,
+    resource,
+    resourceDoc
+}) => {
 
+    const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
+    console.log(resource, "backend resource")
+
+    const getDoc = () => {
+        fetchDoc()
+        document && setResourceDoc(document.data)
+    }
     return (
         <CardConatiner>
             <div>
                 <RoadmapBookIcon />
                 <Title onClick={() => {
                     setCurrentTopic(title)
-                    setIsModalOpen(true)
-                    setLink(title?.resourceUrl)
-                    setResourceDoc(resource)
+                    // setIsModalOpen(true)
+                    setResourceDoc()
+                    getDoc()
                 }}>{title}</Title>
             </div>
-            <Lock/>
+            <Lock />
         </CardConatiner>
     )
 }
