@@ -79,7 +79,7 @@ export const LandingFirstContainer = styled.div`
         }
         p{
             font-size:1rem;
-           
+           font-weight:600;
         }
         div:last-child{
             display:flex;
@@ -99,8 +99,8 @@ export const LandingFirstContainer = styled.div`
         p{
             margin-bottom:1.5rem;
         }
-        
     }
+    
 
 `
 export const LandingVideoIllustratorContainer = styled.section`

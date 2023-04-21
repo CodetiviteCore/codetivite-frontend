@@ -21,11 +21,11 @@ const ButtonStyle = styled.button`
     }
 `
 
+
 export const PreferenceButton = ({
     children,
-    index,
     onClick,
-    selected,
+    active,
     ...props
 }) => {
     return (
@@ -33,12 +33,11 @@ export const PreferenceButton = ({
             {...props}
             onClick={onClick}
             style={{
-                backgroundColor: selected ? "var(--primary)":"var(--primary-light)" ,
-                color: selected ? "var(--white)": "var(--primary)"
+                backgroundColor: active ? "var(--primary)" : "var(--primary-light)",
+                color: active ? "var(--white)" : "var(--primary)",
             }}
-
         >
             {children}
         </ButtonStyle>
     )
-}
+};

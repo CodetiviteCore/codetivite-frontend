@@ -1,4 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, {
+    useContext,
+    useState
+} from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { CircularProgressbar } from "react-circular-progressbar";
 import {
@@ -19,15 +22,17 @@ import {
     RoadMapProjectsToComplete
 } from './Roadmap.styles';
 import { CompleteProjectCard } from "../../../ui_elements";
-import { Modal } from "../../../components";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+
 //avtar imports
 import Tina from "../../../assets/images/tima.png"
 import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
 
 
 

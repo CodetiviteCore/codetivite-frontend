@@ -69,7 +69,7 @@ function App() {
       ]}
     >
       {/* <ReactLenis root> */}
-        <SkeletonTheme baseColor="red" highlightColor="yellow">
+        <SkeletonTheme baseColor="#F5F5F5" highlightColor="#fff">
           <QueryClientProvider client={queryClient}>
 
             <SharedRoutes />

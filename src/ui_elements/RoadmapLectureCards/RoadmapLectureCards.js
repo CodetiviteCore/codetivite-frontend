@@ -26,11 +26,9 @@ const Title = styled.p`
 
 export const RoadmapLectureCards = ({
     title,
-    setIsModalOpen,
     setCurrentTopic,
     setResourceDoc,
     resource,
-    resourceDoc
 }) => {
 
     const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))

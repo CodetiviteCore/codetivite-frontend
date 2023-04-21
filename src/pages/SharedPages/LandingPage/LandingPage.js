@@ -233,7 +233,10 @@ const LandingPage = () => {
             data-aos="fade-up"
             data-aos-easing="ease-in-out"
             data-aos-duration="600"
-          >Lorem ipsum dolor sit amet consectetur. Senectus orci scelerisque lectus tortor tellus magnis. Molestie porta purus nunc vestibulum ante lacus. </p>
+          >Are you ready to turn your tech dreams into a reality? We're here to help.
+            With our comprehensive and accessible roadmaps, you can learn the latest
+            technologies and achieve your goals in no time
+          </p>
           <Button
             primary
             data-aos="fade-up"
@@ -509,7 +512,6 @@ const LandingPage = () => {
                 avater={card.avater}
                 author={card.author}
                 time={card.time}
-
               />
             )
           }
