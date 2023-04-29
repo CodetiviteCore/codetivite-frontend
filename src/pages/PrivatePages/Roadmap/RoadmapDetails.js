@@ -1,8 +1,6 @@
 import React, {
-    useContext,
     useState
 } from "react";
-import { ModalContext } from "../../../context/ModalContext";
 import { CircularProgressbar } from "react-circular-progressbar";
 import {
     useParams,
@@ -33,9 +31,9 @@ import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
 import { useSelector } from "react-redux";
-import { selectCareer, selectUser } from "../../../Redux store/auth/auth.selector";
 import { useApiGet } from "../../../custom-hooks/useApiGet";
 import RoadmapServices from "../../../services/roadmapServices";
+import { selectUser } from "../../../Redux store/auth/auth.selector";
 
 
 
@@ -207,29 +205,7 @@ const DetailsModalHeader = styled.div`
         }
     }
 `
-const Overview = styled.div`
-    margin-top: 1.5rem;
-    h3{
-        margin-bottom: 6px;
-    }
-    p{
-        line-height: 1.2;
-        font-size: 0.9rem;
-        margin-top: 1rem;
-    }
-    
 
-`
-const Resources = styled(Overview)`
-    div{
-        margin-top:16px;
-    }
-    p{
-      display: block;
-      font-size:0.9rem;
-      color: var(--primary);
-    }
-`
 const DocumentsDisplay = styled.div`
     overflow: auto;
     height:90%;
@@ -261,8 +237,8 @@ const RoadmapDetails = () => {
 
     const {
         data: projectsResponse,
-        isFetching: fetchingProjectsDue,
-        isLoading: loadingProjectsDue
+        // isFetching: fetchingProjectsDue,
+        // isLoading: loadingProjectsDue
     } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(careerPath, state?.level))
 
     console.log(projectsResponse, "!!!!!!")

@@ -5,71 +5,63 @@ import { useState } from "react";
 
 
 const LayoutBody = styled.div`
-    display: flex;
-    max-height: 100vh !important;
-    background-color: var(--deep-white);
-    position:relative;
-   
-`
+  display: flex;
+  max-height: 100vh !important;
+  background-color: var(--deep-white);
+`;
+
 const MainContainer = styled.div`
-    z-index:5;
-    width:${({ show }) => show ? "120%" : "80%"};
-    position: absolute;
+  position: absolute;
   top: 0;
-  left: ${({ show }) => (show ? "100px" : "12.7rem")};
+  left: ${({ show }) => (show ? "3.5rem" : "12.7rem")};
   width: stretch;
   height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-`
+  background-color:var(--deep-white) ;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.6s ease;
+`;
 
 const Toggler = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--white);
-    border: 1px solid var(--gray-black);
-    position: absolute;
-    top: 20%;
-    left: -10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .6s ease;
-    &:hover{
-        cursor: pointer;
-        transform:${({ show }) => show ? "translateX(5px)" : "translateX(-7px)"}; 
-    }
-    p{
-        font-weight: 700;
-    }
-    
-`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 1px solid var(--gray-black);
+  position: absolute;
+  top: 20%;
+  left: ${({ show }) => (show ? "-0.5rem" : "-1rem")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s ease;
+  &:hover {
+    cursor: pointer;
+    transform: ${({ show }) =>
+      show ? "translateX(5px)" : "translateX(-7px)"};
+  }
+  p {
+    font-weight: 700;
+  }
+`;
+
 export const DashboardLayout = ({ children }) => {
-    const [show, setShow] = useState(true)
-    const toggleShowSideBar = () => {
-        setShow(!show)
-        console.log(show)
+  const [show, setShow] = useState(true);
 
-    }
-    return (
-        <LayoutBody>
-            <DashboardSideBar />
-            <MainContainer>
-                <Toggler onClick={toggleShowSideBar}>
-                    {
-                        show
-                            ?
-                            <p>&lt;</p>
-                            :
-                            <p>&gt;</p>
-                    }
-                </Toggler>
-                <DashboardNavabar />
-                {children}
-            </MainContainer>
+  const toggleShowSideBar = () => {
+    setShow(!show);
+  };
 
-        </LayoutBody>
-    )
-}
+  return (
+    <LayoutBody>
+          <DashboardSideBar show={show} />
+      <MainContainer show={show}>
+        <Toggler show={show} onClick={toggleShowSideBar}>
+          {show ? <p>&gt;</p> :  <p>&lt;</p>}
+        </Toggler>
+        <DashboardNavabar />
+        {children}
+      </MainContainer>
+    </LayoutBody>
+  );
+};
