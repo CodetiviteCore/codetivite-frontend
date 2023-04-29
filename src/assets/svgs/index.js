@@ -48,6 +48,8 @@ import { ReactComponent as Support } from "./support.svg"
 import { ReactComponent as Inclusive } from "./inclusiveness.svg"
 import { ReactComponent as CallBlack } from "./callblack.svg"
 import { ReactComponent as Sms } from "./sms.svg"
+import { ReactComponent as Notification } from "./notification-bing.svg"
+
 
 
 
@@ -108,5 +110,6 @@ export {
     Support,
     Inclusive,
     CallBlack,
-    Sms
+    Sms,
+    Notification
 }

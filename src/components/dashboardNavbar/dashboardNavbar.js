@@ -4,6 +4,8 @@ import { useLayoutEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
 import Avatar from 'react-avatar';
+import { textFormat } from "../../utils/constants";
+import { Notification } from "../../assets/svgs";
 
 
 
@@ -31,8 +33,9 @@ export const DashboardNavabar = () => {
                 <p>Welcome to codetivite, another day to build amazing products.</p>
             </DashboardTitle>
             <DashboardUserDetails>
-                <div />
-                <div />
+                <div>
+                    <Notification/>
+                </div>
                 {
                     user ?
                         <AvatarContainer>
@@ -51,7 +54,7 @@ export const DashboardNavabar = () => {
                 <section>
                     <div>
                         <h5>{usernames.firstname} { usernames.lastname}</h5>
-                        <p>Product Designer</p>
+                        <p>{textFormat(user?.careerPath)}</p>
                     </div>
                     <span>&gt;</span>
                 </section>
@@ -105,16 +108,20 @@ const DashboardUserDetails = styled.div`
         width: 38px;
         background-color: var(--deep-white);
         border-radius: 50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
     }
     section{
         display: flex;
-        gap: 8px;
+        gap: 10px;
         h5{
-            font-size: 12px;
+            font-size: 1rem;
             font-weight: 600;
+            margin-bottom:-5px;
         }
         p{
-            font-size: 10px;
+            font-size: 0.9rem;
         }
         span{
             transform: rotate(90deg);

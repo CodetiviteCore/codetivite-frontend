@@ -77,10 +77,11 @@ const AboutUs = () => {
             data-aos-easing="ease-in-out"
             data-aos-duration="600"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse varius enim in eros elementum tristique.
-            Duis cursus, mi quis viverra ornare, eros dolor interdum nulla,
-            ut commodo diam libero vitae erat.
+            We understand that times can be tough, but we're here to support you on your tech journey.
+            Our platform is designed to provide accessible and affordable learning opportunities for anyone,
+            regardless of their background or current situation.
+            With our comprehensive resources and supportive community, you can be confident that we've got
+            your back every step of the way. Join us today and let's tackle tough times together.
           </p>
         </div>
       </AboutUsFirstContainer>
@@ -115,7 +116,11 @@ const AboutUs = () => {
           >
             <RoadmapIcon />
             <h4>Course Roadmap</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Our roadmaps cater to both beginners and advanced learners,
+              covering a wide range of topics in the latest technologies.
+              From web development to artificial intelligence,
+              our modular approach ensures easy-to-follow learning.
+            </p>
           </WhatWeDoCard>
           <WhatWeDoCard
             data-aos="fade-up"
@@ -125,7 +130,11 @@ const AboutUs = () => {
           >
             <PortfolioIcon />
             <h4>Portfolio Manager</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Generate a portfolio that showcases all the skills you've learned and
+              the projects you've worked on. Our portfolio manager is more than just
+              a resume - it's a proof of learning document that demonstrates your proficiency
+              in the latest technologies.
+            </p>
           </WhatWeDoCard>
           <WhatWeDoCard
             data-aos="fade-up"
@@ -135,7 +144,10 @@ const AboutUs = () => {
           >
             <LeaderboardIcon />
             <h4>Leaderboard</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Compete with other techies and see how you rank on Codetivite's real-time leaderboard.
+              Our leaderboard tracks your progress in courses and builder's program,
+              motivating you to climb to the top
+            </p>
           </WhatWeDoCard>
         </WhatWeDoCardContainer>
       </WhatWeDo>
@@ -152,7 +164,13 @@ const AboutUs = () => {
               </Button>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Sem magna mattis malesuada hendrerit aliquet. Posuere aenean enim porttitor varius. Etiam libero congue faucibus ultrices. Imperdiet et pharetra adipiscing a vitae dui in eget. Posuere sit enim et porttitor proin leo felis euismod.
+              Looking for an exciting opportunity to work in the tech industry?
+              Join our team at Codetivite! We are always on the lookout for
+              talented individuals who are passionate about technology and education.
+              With our dynamic and collaborative work environment, you'll have the
+              chance to work on cutting-edge projects and contribute to our mission of
+              empowering techies to achieve their dreams. Check out our current job
+              openings and apply today!
             </p>
           </TeamHeading>
           <TeamGalleryContainer>
@@ -283,34 +301,32 @@ const AboutUs = () => {
                   <Accessibility />
                   <h6>Accessibility</h6>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur.
-                    Commodo pharetra ultricies senectus est dolor id.
+                    Making training and education accessible to a wide range of individuals,
+                    regardless of background or experience.
                   </p>
                 </ValuesCard>
                 <ValuesCard>
                   <Support />
                   <h6>Support</h6>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur.
-                    Commodo pharetra ultricies senectus est dolor id.
+                    Providing ongoing support and resources to help techies succeed.
                   </p>
                 </ValuesCard>
               </div>
               <div>
                 <ValuesCard>
                   <Empowerment />
-                  <h6>Accessibility</h6>
+                  <h6>Empowerment</h6>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur.
-                    Commodo pharetra ultricies senectus est dolor id.
+                    Providing the tools and resources needed to empower techies to succeed.
                   </p>
                 </ValuesCard>
                 <ValuesCard>
                   <Inclusive />
-                  <h6>Support</h6>
+                  <h6>Inclusivity</h6>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur.
-                    Commodo pharetra ultricies senectus est dolor id.
+                    Promoting a diverse and inclusive community where everyone is
+                    welcome and encouraged to learn and grow.
                   </p>
                 </ValuesCard>
               </div>
@@ -382,10 +398,10 @@ const AboutUs = () => {
         <CommunityCollaborateDetails>
           <h5>OUR COMMUNITY</h5>
           <h3>We have over 3000+ community members that uses Codevite</h3>
-          <p>Lorem ipsum dolor sit amet consectetur. Sem magna mattis malesuada hendrerit aliquet.
-            Posuere aenean enim porttitor varius. Etiam libero congue faucibus ultrices.
-            Imperdiet et pharetra adipiscing a vitae dui in eget.
-            Posuere sit enim et porttitor proin leo felis euismod.
+          <p>Join our growing community of techies at Codetivite! We're passionate
+            about learning and collaboration and offer comprehensive course roadmaps,
+            builder's program, and leaderboard to help you succeed in the tech industry.
+            Whether you're a beginner or an experienced techie, we welcome you to join us today!
           </p>
           <Button primary>Join our Community</Button>
         </CommunityCollaborateDetails>

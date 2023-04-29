@@ -172,7 +172,7 @@ const Roadmap = () => {
             </Stats>
             <PathRoadMapContainer>
                 <RoadMapPath>
-                    <h2>{careerDetails?.resource?.careerpath} Roadmap</h2>
+                    <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
                     
                     {
                         levels.map((item, index) =>

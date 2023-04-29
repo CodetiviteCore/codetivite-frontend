@@ -14,7 +14,7 @@ export const FooterImageContainer = styled.div`
     width: 21.18rem;
     height:21.93;
     position: relative;
-    @media ${devices.tablet} {
+    @media ${devices.tabletL} {
         display:none ;
     }
 `
@@ -77,7 +77,7 @@ export const FooterBackground = styled.div`
         object-fit:contain;
         object-position:left;
 
-        @media ${devices.tablet}{
+        @media ${devices.tabletL}{
             width:200px;
             height:200px;
         }
@@ -92,7 +92,7 @@ export const FooterBackground = styled.div`
         object-fit:contain;
         object-position:left;
         
-        @media ${devices.tablet}{
+        @media ${devices.tabletL}{
             width:200px;
             height:200px;
         }
@@ -107,7 +107,7 @@ export const FooterDetails = styled.div`
     align-items:center;
     justify-content:center;
     gap:86px;
-    @media ${devices.tablet}{
+    @media ${devices.tabletL}{
         margin:0 auto;
     }
 `
@@ -116,7 +116,9 @@ export const FooterGetStarted = styled.div`
     h2{
         font-size:1.75rem;
         width:36.5rem;
-        @media ${devices.tablet} {
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        @media ${devices.tabletL} {
             font-size:1.6rem ;
             width:350px;
             line-height:1.5  ;
@@ -140,14 +142,17 @@ export const FooterLinksContainers = styled.section`
     display:flex;
     justify-content:space-between ;
     margin-top:63px;
-    @media ${devices.tablet}{
+    @media ${devices.tabletL}{
         width:100%;
-        flex-direction:column;
+        flex-wrap:wrap;
+        /* flex-direction:column; */
+        /* align-items:center;
+        justify-content:space-between; */
     }
     &>section{
         display:flex;
         gap:92px;
-        @media ${devices.tablet}{
+        @media ${devices.tabletL}{
             gap:110px;
             margin-top:23px ;
         }
@@ -171,7 +176,7 @@ export const FootLinksLogoDetails = styled.div`
         }
     }
     width: 28.8rem;
-    @media ${devices.tablet}{
+    @media ${devices.tabletL}{
         width:100%;
     }
 `
@@ -188,7 +193,7 @@ export const FooterLinkItem = styled.li`
 export const CopyRight = styled.p`
     text-align:center;
     margin-top:3.125rem ;
-    @media ${devices.tablet}{
+    @media ${devices.tabletL}{
         font-size:12px;
         margin:5% auto;
     }
@@ -219,13 +224,16 @@ export const NewsletterContainer = styled.div`
         font-size: 1rem;
         font-weight: 400;
         margin-bottom: 3rem;
+        width:60%;
+        text-align:center;
+        margin: 1.5% auto;
     }
     >div{
         display: flex;
         justify-content: center;
         gap: 20px;
     }
-    @media ${devices.tablet}{
+    @media ${devices.tabletL}{
         h4{
             font-size: 2rem;
         }

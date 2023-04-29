@@ -32,6 +32,10 @@ import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
+import { useSelector } from "react-redux";
+import { selectCareer, selectUser } from "../../../Redux store/auth/auth.selector";
+import { useApiGet } from "../../../custom-hooks/useApiGet";
+import RoadmapServices from "../../../services/roadmapServices";
 
 
 
@@ -44,6 +48,7 @@ const RoadMapDetails = styled(RoadMapContainer)`
 `
 const Navigation = styled(Stats)`
     justify-content: space-between;
+    
     div{
         display: flex;
         gap:10px;
@@ -60,8 +65,12 @@ const Navigation = styled(Stats)`
         }
     }
 `
-const DetailsContainer = styled(PathRoadMapContainer)``
-const Details = styled(RoadMapPath)``
+const DetailsContainer = styled(PathRoadMapContainer)`
+`
+const Details = styled(RoadMapPath)`
+    height:70vh;
+
+`
 const Progress = styled(RoadMapProjectsToComplete)`
     background-color: transparent;
     padding: 0;
@@ -117,7 +126,8 @@ const OtherUsers = styled.div`
         div{
             min-width:2rem !important;
             min-height: 2rem !important;
-            display: flex;import { ReactHtmlParser } from 'react-html-parser';
+            display: flex;
+
 
             align-items: center;
             justify-content: center;
@@ -136,26 +146,51 @@ const OtherUsers = styled.div`
 const ProjectsDue = styled(RoadMapProjectsToComplete)`
     width: auto;
     background-color: var(--white);
-    height:35rem;
+    height:25rem;
     margin-top: 1.25rem;
+    overflow-y:scroll ;
+    >div{
+        background-color: var(--white);
+        position:sticky;
+        margin-bottom:2rem ;
+        h2{
+            font-size:1.2rem;
+            font-weight:600;
+        }
+        p{
+            font-size:0.8rem;
+            line-height:1.2 ;
+        }
+    }
 
 `
 
 const DetailsModal = styled.div`
-    height: 90vh;
+    position:relative ;
+    height: fit-content;
     max-width:inherit;
     background-color: var(--white);
-    overflow-y:scroll;
-    overflow-x: hidden;
     padding: 1.5rem;
-    hr{
-        margin-top: 1.5rem;
-        opacity: 0.3;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    button{
+        margin-top:2rem ;
     }
+    
 `
 const DetailsModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items:center;
+    width:100%;
+    height:70px !important;
+    position:sticky;
+    top:-20px;
+    left:0;
+    background-color:var(--white);
+    z-index:5;
     >p{
         font-size: 24px;
         font-weight: lighter;
@@ -195,8 +230,11 @@ const Resources = styled(Overview)`
       color: var(--primary);
     }
 `
-const Projects = styled(Overview)`
-
+const DocumentsDisplay = styled.div`
+    overflow: auto;
+    height:90%;
+    /* overflow-x: hidden; */
+    
 `
 
 
@@ -209,7 +247,8 @@ const RoadmapDetails = () => {
     const { state } = useLocation()
     const [currentTopic, setCurrentTopic] = useState([])
     const [resoureDoc, setResourceDoc] = useState(null)
-    const { setIsModalOpen, isModalOpen } = useContext(ModalContext)
+    const { careerPath } = useSelector(selectUser)
+    console.log(careerPath, ":toptopt")
     const avatars = [
         Tina,
         Toks,
@@ -218,7 +257,15 @@ const RoadmapDetails = () => {
     ]
 
     console.log(state, "This is the state!")
-    console.log(resoureDoc, "This is resource doc!!")
+    // console.log(resoureDoc, "This is resource doc!!")
+
+    const {
+        data: projectsResponse,
+        isFetching: fetchingProjectsDue,
+        isLoading: loadingProjectsDue
+    } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(careerPath, state?.level))
+
+    console.log(projectsResponse, "!!!!!!")
 
 
 
@@ -264,17 +311,17 @@ const RoadmapDetails = () => {
                                     </div>
                                     <p onClick={() => setResourceDoc("")}>&#10006;</p>
                                 </DetailsModalHeader>
-                                <hr />
-                                <div>
+                                <DocumentsDisplay>
                                     <ReactQuill
                                         value={resoureDoc}
                                         readOnly={true}
                                         modules={{ toolbar: false }}
                                     />
-                                </div>
+                                </DocumentsDisplay>
+                                <Button primary>I have completed the syllable and task</Button>
                             </DetailsModal>
                             :
-                            state.map((item, index) =>
+                            state?.item.map((item, index) =>
                                 <RoadmapLectureCards
                                     key={index}
                                     title={item?.title}
@@ -335,29 +382,21 @@ const RoadmapDetails = () => {
 
                     </CircularProgressConatiner>
                     <ProjectsDue>
-                        <h2>Projects due for this syllabus</h2>
-                        <p>We have curated detailed projects to help you learn better through practice.
-                            Before the end of this roadmap you will be able to complete the projects below.
-                        </p>
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
+                        <div>
+                            <h2>Projects due for this syllabus</h2>
+                            <p>We have curated detailed projects to help you learn better through practice.
+                                Before the end of this roadmap you will be able to complete the projects below.
+                            </p>
+                        </div>
+
+                        {
+                            projectsResponse?.projectsDue?.map((project, index) =>
+                                <CompleteProjectCard
+                                    project={project}
+                                    index={index}
+                                />
+                            )
+                        }
 
                     </ProjectsDue>
                 </Progress>

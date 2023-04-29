@@ -19,49 +19,39 @@ const SideBarContainer = styled.aside`
     height: 100vh;
     position: relative;
     background-color: var(--white);
-    width: ${({ show }) => (show ? '12.6rem' : '4rem')};
+    width: 12.6rem;
     transition: all .5s ease;
     border-right: 1px solid var(--navborders);
 `
 const LogoContainer = styled(Link)`
     padding: 1.3rem;
 `
-const SectionTitle = styled.p`
-    margin-left: 1.3rem;
-    color: var(--sidemenu-text);
-    font-size: 10px;
-    display: ${({ show }) => (show ? 'inline-block' : 'none')};
-    transition: all .6s ease;
 
-`
-const Toggler = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--white);
-    border: 1px solid var(--gray-black);
-    position: absolute;
-    top: 20%;
-    right: -10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .6s ease;
-    &:hover{
-        cursor: pointer;
-        transform:${({show})=> show ? "translateX(5px)":"translateX(-7px)"}; 
-    }
-    p{
-        font-weight: 700;
-    }
+// const Toggler = styled.div`
+//     width: 20px;
+//     height: 20px;
+//     border-radius: 50%;
+//     background-color: var(--white);
+//     border: 1px solid var(--gray-black);
+//     position: absolute;
+//     top: 20%;
+//     right: -10px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     transition: all .6s ease;
+//     &:hover{
+//         cursor: pointer;
+//         transform:${({show})=> show ? "translateX(5px)":"translateX(-7px)"}; 
+//     }
+//     p{
+//         font-weight: 700;
+//     }
     
-`
+// `
 const Logo = styled.h1`
     font-size: 1.4rem;
     transition: all .5s ease;
-    display: ${({ show }) => (show ? "inline" : 'none')};
-    transition: all .6s ease;
-
 
 `
 
@@ -113,16 +103,18 @@ export const DashboardSideBar = () => {
         },
     ]
     return (
-        <SideBarContainer show={show}>
+        <SideBarContainer>
             <LogoContainer to={"/"}>
-                {
+                {/* {
                     show ?
                         <Logo show={show}>C<span><BlackLogo /></span>detivite</Logo>
                         :
                         <BlackLogo />
-                }
+                } */}
+                <Logo>C<span><BlackLogo /></span>detivite</Logo>
+
             </LogoContainer>
-            <Toggler onClick={toggleShowSideBar}>
+            {/* <Toggler onClick={toggleShowSideBar}>
                 {
                     show
                         ?
@@ -130,9 +122,8 @@ export const DashboardSideBar = () => {
                         :
                         <p>&gt;</p>
                 }
-            </Toggler>
+            </Toggler> */}
             <section>
-                <SectionTitle show={show}>GENERAL</SectionTitle>
                 {
                     menus.map(({ path, title, icon }, index) => <DashboardMenuItem
                         icon={icon}
