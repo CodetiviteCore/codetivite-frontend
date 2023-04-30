@@ -71,7 +71,12 @@ export const RoadMapCourseInfoCard = ({ level, courseNo, cardTitle, item }) => {
                 </CardHeaderInfo>
 
                 <Button onClick={() => {
-                    roadMapNavigate(`/roadmap/${level}`, { state: item })
+                    roadMapNavigate(`/roadmap/${level}`, {
+                        state: {
+                            item: item,
+                            level: level
+                        }
+                    })
                 }}>
                     View Roadmap
                 </Button>
