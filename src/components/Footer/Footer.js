@@ -29,19 +29,21 @@ import FooterLargeLogo from "../../assets/images/footerLargeLogo.png"
 export const Footer = () => {
     return (
         <FooterOuterContainer>
-             <NewsletterOuterContainer>
-                    <NewsletterContainer>
-                        <h4>Subscribe To Our Newsletter</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
-                        <div>
-                            <FooterInput
-                                placeholder={"Enter your email"}
-                            />
-                            <Button newsLetter>Subscribe</Button>
-                        </div>
+            <NewsletterOuterContainer>
+                <NewsletterContainer>
+                    <h4>Subscribe To Our Newsletter</h4>
+                    <p>Stay up-to-date with the latest news, updates,
+                        and exclusive offers from Codetivite by subscribing to our newsletter.
+                    </p>
+                    <div>
+                        <FooterInput
+                            placeholder={"Enter your email"}
+                        />
+                        <Button newsLetter>Subscribe</Button>
+                    </div>
 
-                    </NewsletterContainer>
-                </NewsletterOuterContainer>
+                </NewsletterContainer>
+            </NewsletterOuterContainer>
             <FooterContainer>
                 <FooterBackground>
                     <img src={FooterLargeLogo} alt={"the"} />
@@ -97,7 +99,9 @@ export const Footer = () => {
                             Join other creatives at Codetivite to create amazing projects.
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet vitae etiam quis. Faucibus pellentesque tristique scelerisque in tortor. Vitae mattis sit lobortis ipsum elit.
+                            Are you a creative looking for a community to collaborate and build amazing projects with?.
+                            Look no further than Codetivite!. Our builder's program is the perfect place to unleash your
+                            creativity and develop your skills. Sign up today and let's create something great together.
                         </p>
                         <FooterButtonContainer>
                             <Button primary>Get started</Button>
@@ -109,7 +113,10 @@ export const Footer = () => {
                     <FootLinksLogoDetails>
                         <h1>c<span><img src={LightLogoPng} alt="Footer logo" /></span>detivite</h1>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet vitae etiam quis. Faucibus pellentesque.
+                            Codetivite is a tech learning platform designed to help beginners achieve their
+                            dream by providing comprehensive, yet accessible content.
+                            We offer a builder's program to help techies learn and practice by
+                            solving real-life problems.
                         </p>
                     </FootLinksLogoDetails>
                     <section>

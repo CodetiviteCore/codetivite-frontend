@@ -125,17 +125,21 @@ export const LandingWhatWeDoContainer = styled.div`
 `;
 export const LandingWhatWeDoCard = styled.div`
 	width: 18.5rem;
+	text-align: center;
+
 	h4 {
 		font-size: 1.25rem;
 		font-weight: 600;
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		text-align: center;
 		h4 {
 			font-size: 1rem;
 		}
 		P {
 			font-size: 1rem;
+			text-align: justify;
+			text-justify: inter-word;
 		}
 	}
 `;
@@ -144,8 +148,8 @@ export const LandingWhatWeDoCardContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-top: 3rem;
-	gap: 2rem;
-	@media ${devices.tablet} {
+	gap: 6rem;
+	@media ${devices.tabletL} {
 		flex-wrap: wrap;
 	}
 `;
@@ -184,7 +188,7 @@ export const HowToGetStartedBackground = styled.div`
 			height: 9rem;
 		}
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		height: 100vh;
 	}
 `;
@@ -194,8 +198,9 @@ export const HowToGetStartedContent = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		flex-direction: column;
+		gap: 20%;
 	}
 `;
 export const HowToGetStartedDetails = styled.div`
@@ -210,7 +215,7 @@ export const HowToGetStartedDetails = styled.div`
 		display: flex;
 		gap: 1.75rem;
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		max-width: 100% !important;
 		h3 {
 			font-size: 1.1rem;
@@ -272,16 +277,17 @@ export const CommunityContainer = styled.section`
 	display: flex;
 	justify-content: center;
 	gap: 35rem;
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		height: fit-content;
-		display: block;
 		flex-direction: column;
+		align-items: center;
+		gap: 0;
 	}
 `;
 export const CommunityCollaborate = styled.section`
 	position: relative;
 	width: fit-content;
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		margin: -2rem auto;
 		height: fit-content;
 		padding-bottom: 20%;
@@ -303,7 +309,7 @@ export const CommunityCollaborateDetails = styled.div`
 		margin-top: 0.5rem;
 		margin-bottom: 2rem;
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		margin-top: 10%;
 		display: flex;
 		flex-direction: column;
@@ -344,7 +350,7 @@ export const AvatarContainer = styled.aside`
 		font-weight: 600;
 		margin-bottom: 1.5rem;
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		display: block;
 		position: relative;
 		left: 0;
@@ -378,7 +384,7 @@ export const CallContainer = styled.div`
 	z-index: 1;
 	top: 6rem;
 	left: -11rem;
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		left: -4rem;
 		bottom: 0rem;
 		img {
@@ -405,7 +411,7 @@ export const AudioContainer = styled.div`
 		gap: 3.3px;
 	}
 
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		width: 12rem;
 		position: relative;
 		padding: 0.5rem 0 0.5rem 0.5rem;
@@ -425,7 +431,7 @@ export const LandingCarouselContainer = styled.section`
 	padding: 8%;
 	align-items: center;
 	padding: 8%;
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		height: fit-content;
 		margin-top: 2%;
 		padding-top: 2%;
@@ -449,7 +455,7 @@ export const LandingCarouselElement = styled.div`
 		text-align: center;
 		margin-bottom: 4px;
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		width: 100%;
 		h5 {
 			font-size: 1rem;
@@ -474,13 +480,13 @@ export const CarouselArrow = styled.div`
 `;
 export const PrevArrow = styled(CarouselArrow)`
   left: 20px;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
         display:none ;
     }
 `;
 export const NextArrow = styled(CarouselArrow)`
   right: 20px;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
         display:none ;
     }
 `;
@@ -522,7 +528,7 @@ export const LandingBlogCard = styled.div`
 			font-size: 0.8rem;
 		}
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		width: 20rem;
 		e h4 {
 			font-size: 1rem;
@@ -537,7 +543,7 @@ export const LandingBlogCardContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	width: inherit;
-	@media ${devices.laptop} {
+	@media ${devices.tabletL} {
 		flex-direction: column;
 		align-items: center;
 		padding: 8%;
@@ -558,7 +564,7 @@ export const BlogContainer = styled.div`
 			font-weight: 700;
 		}
 	}
-	@media ${devices.tablet} {
+	@media ${devices.tabletL} {
 		justify-content: center;
 		button {
 			display: none;

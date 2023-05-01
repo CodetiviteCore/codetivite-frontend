@@ -52,7 +52,10 @@ export const Navbar = () => {
   });
 
   //api call
-  const { data: authResponse, refetch: fetchToken } = useApiGet("Auth", () => AuthServices.getUserDetails(searchParams.get("code")));
+  const {
+    data: authResponse,
+    refetch: fetchToken
+  } = useApiGet("Auth", () => AuthServices.getUserDetails(searchParams.get("code")));
 
   //sign up process
   const getUserfromEmail = useCallback(() => {
@@ -68,6 +71,7 @@ export const Navbar = () => {
     }
   }, [dispatch, navigate, searchParams]);
 
+  console.log(authResponse, "response")
   //Get user details login proccess... normal flow
   const getUser = useCallback(() => {
     if (authResponse?.sentEmail) {
@@ -125,7 +129,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 200;
+      const isScrolled = window.scrollY > 0;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -209,7 +213,7 @@ const NavigationBar = styled.nav`
   align-items: center;
   justify-content:space-between;
   background-color: ${({ scrolled }) => (scrolled ? "var(--primary-light)" : "transparent")};
-  position: ${({ scrolled }) => (scrolled ? "fixed" : "relative")};
+  position: ${({ scrolled }) => (scrolled ? "sticky" : "relative")};
   top: 0;
   left: 0;
   width:${({ scrolled }) => (scrolled ? "stretch" : "initial")};
@@ -217,7 +221,7 @@ const NavigationBar = styled.nav`
   padding:0 8%;
   transition: all 0.5s ease;
   z-index: 10;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
     flex-wrap:wrap;
   }
 `;
@@ -236,7 +240,7 @@ const NavList = styled.ul`
   list-style:none;
   display:flex;
   gap: 40px;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
     display: flex;
     flex-direction: column;
   
@@ -248,7 +252,7 @@ const NavListContainer = styled.div`
   justify-content:space-between ;
   width:72%;
   transition: all 2s ease-in-out;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
     position:fixed;
     top:10vh;
     left: ${({ isMenuOpen }) => (isMenuOpen ? '0' : '-100%')};
@@ -286,7 +290,7 @@ const NavItem = styled(NavLink)`
     transform: scaleX(1);
   }
 
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
     color:var(--white);
     text-align:center;
     font-size:1rem;
@@ -297,7 +301,7 @@ const HamburgerContainer = styled.div`
   height: 20px;
   cursor: pointer;
   display:none ;
-  @media ${devices.tablet}{
+  @media ${devices.tabletL}{
     display: flex;
     flex-direction: column;
     justify-content: space-around;

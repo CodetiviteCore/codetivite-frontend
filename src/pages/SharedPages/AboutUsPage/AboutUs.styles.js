@@ -57,7 +57,8 @@ export const AboutUsFirstContainer = styled.div`
     div:last-child{
         p{
             margin-bottom:1.5rem;
-            max-width:400px;
+            max-width:700px;
+            
         }
         
     }
@@ -125,10 +126,12 @@ export const WhatWeDoContainer = styled.div`
     }
 `
 export const WhatWeDoCard = styled.div`
+    text-align:center;
     width: 18.5rem;
     h4{
         font-size:1.25rem;
         font-weight: 600;
+        margin-bottom:1rem;
     }
     @media ${devices.tablet}{
         text-align:center;
@@ -245,7 +248,7 @@ export const ValuesCard = styled.div`
         margin-top: 1rem;
     }
     p{
-        max-width: 80%;
+        max-width: 60%;
         text-align: center;
     }
     @media ${devices.tablet} {

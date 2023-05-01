@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux"
 import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
 import { LoaderContainer, PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
-import { selectCareer } from "../../../Redux store/auth/auth.selector"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect } from "react"
 import { useState } from "react"
@@ -172,7 +170,7 @@ const Roadmap = () => {
             </Stats>
             <PathRoadMapContainer>
                 <RoadMapPath>
-                    <h2>{careerDetails?.resource?.careerpath} Roadmap</h2>
+                    <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
                     
                     {
                         levels.map((item, index) =>
