@@ -153,6 +153,7 @@ export const LandingWhatWeDoCardContainer = styled.div`
 		flex-wrap: wrap;
 	}
 `;
+
 export const HowToGetStartedContainer = styled.section`
 	padding: 8%;
 	height: fit-content;
@@ -228,6 +229,7 @@ export const HowToGetStartedDetails = styled.div`
 		}
 	}
 `;
+
 export const HowToGetStartedCardContainer = styled.aside`
 	display: flex;
 	flex-direction: column;
@@ -361,8 +363,56 @@ export const AvatarContainer = styled.aside`
 		& > div {
 			gap: 1.5rem;
 		}
+
+		p,
+		h5 {
+			font-size: 1rem;
+		}
+		h3 {
+			font-size: 1.2rem;
+			margin-bottom: 1rem;
+		}
+
+		button {
+			align-self: center;
+		}
 	}
 `;
+// export const AvatarContainer = styled.aside`
+// 	position: absolute;
+// 	top: 0;
+// 	left: 2rem;
+// 	padding: 2rem;
+// 	border-radius: 1.2rem;
+// 	width: fit-content;
+// 	background-color: var(--white);
+// 	box-shadow: 3.57055px 3.57055px 89.2638px rgba(0, 0, 0, 0.06);
+// 	& > div {
+// 		display: flex;
+// 		gap: 2.3rem;
+// 	}
+// 	& > div:last-child {
+// 		margin-top: 1.9rem;
+// 		display: flex;
+// 		justify-content: flex-end;
+// 	}
+// 	h4 {
+// 		font-weight: 600;
+// 		margin-bottom: 1.5rem;
+// 	}
+// 	@media ${devices.tablet} {
+// 		display: block;
+// 		position: relative;
+// 		left: 0;
+// 		bottom: 0;
+// 		padding: 1rem;
+// 		border-radius: 1rem;
+// 		margin-top: 10rem;
+// 		& > div {
+// 			gap: 1.5rem;
+// 		}
+// 	}
+// `;
 export const AvatarElement = styled.div`
 	transition: all 1s ease-in-out;
 	p {
@@ -394,6 +444,7 @@ export const CallContainer = styled.div`
 		}
 	}
 `;
+
 export const AudioContainer = styled.div`
 	position: absolute;
 	width: 18.75rem;
@@ -462,6 +513,7 @@ export const LandingCarouselElement = styled.div`
 		}
 	}
 `;
+
 export const CarouselArrow = styled.div`
 	position: absolute;
 	top: 50%;
@@ -537,6 +589,47 @@ export const LandingBlogCard = styled.div`
 			font-size: 1rem;
 		}
 	}
+
+	img {
+		object-fit: cover;
+		width: inherit;
+	}
+	h6 {
+		font-weight: 400;
+		margin: 1rem 0;
+	}
+	h4,
+	p {
+		margin-bottom: 1rem;
+	}
+	hr {
+		opacity: 0.2;
+	}
+	& > div {
+		display: flex;
+		align-items: center;
+		width: fit-content;
+		margin-top: 1rem;
+		gap: 0.6rem;
+		div {
+			margin-top: 1rem;
+		}
+		h5 {
+			font-size: 1rem;
+		}
+		p {
+			font-size: 0.8rem;
+		}
+	}
+	@media ${devices.tabletL} {
+		width: 20rem;
+		e h4 {
+			font-size: 1rem;
+		}
+		p {
+			font-size: 1rem;
+		}
+	}
 `;
 export const LandingBlogCardContainer = styled.div`
 	display: flex;
@@ -549,6 +642,7 @@ export const LandingBlogCardContainer = styled.div`
 		padding: 8%;
 	}
 	/* @media only screen and () and (min-width: 400px){
+
 
     } */
 `;
