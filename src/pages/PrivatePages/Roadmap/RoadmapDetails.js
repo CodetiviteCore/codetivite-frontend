@@ -34,6 +34,9 @@ import { useSelector } from "react-redux";
 import { useApiGet } from "../../../custom-hooks/useApiGet";
 import RoadmapServices from "../../../services/roadmapServices";
 import { selectUser } from "../../../Redux store/auth/auth.selector";
+import { useApiPost } from "../../../custom-hooks/useApiPost";
+import { ToastContainer, toast } from "react-toastify";
+import { Puff } from 'react-loader-spinner';
 
 
 
@@ -223,8 +226,13 @@ const RoadmapDetails = () => {
     const { state } = useLocation()
     const [currentTopic, setCurrentTopic] = useState([])
     const [resoureDoc, setResourceDoc] = useState(null)
+    const [currentId, setCurrentId] = useState("")
     const { careerPath } = useSelector(selectUser)
-    console.log(careerPath, ":toptopt")
+
+
+
+
+
     const avatars = [
         Tina,
         Toks,
@@ -232,41 +240,44 @@ const RoadmapDetails = () => {
         Sophia
     ]
 
-    console.log(state, "This is the state!")
-    // console.log(resoureDoc, "This is resource doc!!")
+
+    const onUpdateSyllabuSuccess = (data) => {
+        console.log("success data", data)
+        toast.success(`Marked as complete!`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            theme: "light",
+        }
+        )
+    }
+    const onUpdateSyllabusError = () => {
+        toast.error(`Failed to update, please check your network`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            theme: "light",
+        }
+        )
+    }
 
     const {
         data: projectsResponse,
         // isFetching: fetchingProjectsDue,
         // isLoading: loadingProjectsDue
     } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(careerPath, state?.level))
-
-    console.log(projectsResponse, "!!!!!!")
-
+    const { data: completedSyllabus } = useApiGet("Completed syllabus state", RoadmapServices.getCompletedSyllablus)
+    const { mutate: completeModule, isLoading: isUpdatingSyllabus } = useApiPost(RoadmapServices.updateSyllablus, "complete module", onUpdateSyllabuSuccess, onUpdateSyllabusError)
 
 
     return (
         <RoadMapDetails>
-            {/* <Modal isOpen={isModalOpen}>
-                <DetailsModal>
-                    <DetailsModalHeader>
-                        <div>
-                            <RoadmapBookIcon />
-                            <p>{currentTopic}</p>
-                        </div>
-                        <p onClick={() => setIsModalOpen(false)}>&#10006;</p>
-                    </DetailsModalHeader>
-                    <hr />
-                    <div>
-                        <ReactQuill
-                            value={resoureDoc}
-                            readOnly={true}
-                            modules={{toolbar:false}}
-                        />
-                    </div>
-                </DetailsModal>
-            </Modal> */}
-
             <Navigation>
                 <div>
                     <p onClick={() => navigate(-1)}>&#8592;</p>
@@ -294,7 +305,26 @@ const RoadmapDetails = () => {
                                         modules={{ toolbar: false }}
                                     />
                                 </DocumentsDisplay>
-                                <Button primary>I have completed the syllable and task</Button>
+                                <Button primary onClick={() => completeModule({
+                                    roadmap: `${careerPath}`,
+                                    skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
+                                    projectId: `${currentId}`
+                                })}>
+                                    {
+                                        isUpdatingSyllabus ?
+                                            <Puff
+                                                height="60"
+                                                width="60"
+                                                radius={1}
+                                                color="var(--primary)"
+                                                ariaLabel="puff-loading"
+                                            />
+                                            :
+
+                                            "I have completed the syllable and task"
+
+                                    }
+                                </Button>
                             </DetailsModal>
                             :
                             state?.item.map((item, index) =>
@@ -302,6 +332,9 @@ const RoadmapDetails = () => {
                                     key={index}
                                     title={item?.title}
                                     resource={item?.resource}
+                                    projectId={item?.projectId}
+                                    setCurrentId={setCurrentId}
+                                    completedSyllabus={completedSyllabus}
                                     // setIsModalOpen={setIsModalOpen}
                                     setCurrentTopic={setCurrentTopic}
                                     setResourceDoc={setResourceDoc}
@@ -377,6 +410,7 @@ const RoadmapDetails = () => {
                     </ProjectsDue>
                 </Progress>
             </DetailsContainer>
+            <ToastContainer />
         </RoadMapDetails>
     )
 

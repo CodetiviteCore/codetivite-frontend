@@ -216,7 +216,7 @@ const NavigationBar = styled.nav`
   position: ${({ scrolled }) => (scrolled ? "sticky" : "relative")};
   top: 0;
   left: 0;
-  width:${({ scrolled }) => (scrolled ? "stretch" : "initial")};
+  width:${({ scrolled }) => (scrolled ? "webkit-fill-available" : "initial")};
   height:10vh;
   padding:0 8%;
   transition: all 0.5s ease;

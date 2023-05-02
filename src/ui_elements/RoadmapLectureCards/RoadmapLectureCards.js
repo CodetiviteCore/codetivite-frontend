@@ -1,9 +1,11 @@
 
 import styled from "styled-components"
-import { Lock, RoadmapBookIcon } from "../../assets/svgs"
+import { Lock, RoadmapBookIcon, Unlock } from "../../assets/svgs"
 import { useApiGet } from '../../custom-hooks/useApiGet';
 import RoadmapServices from "../../services/roadmapServices";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const CardConatiner = styled.div`
     width: auto;
@@ -29,15 +31,30 @@ export const RoadmapLectureCards = ({
     setCurrentTopic,
     setResourceDoc,
     resource,
+    setCurrentId,
+    projectId,
+    completedSyllabus
 }) => {
 
+    const [completed, setCompleted] = useState(false)
+
     const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
-    console.log(resource, "backend resource")
 
     const getDoc = () => {
         fetchDoc()
         document && setResourceDoc(document.data)
     }
+
+    console.log(completedSyllabus, "dsdgg")
+    useEffect(() => {
+        completedSyllabus?.projectsCompleted
+            .forEach((module) => {
+                if (module?.projectId === projectId) {
+                    setCompleted(true)
+                }
+            })
+    }, [completedSyllabus, projectId])
+
     return (
         <CardConatiner>
             <div>
@@ -46,10 +63,13 @@ export const RoadmapLectureCards = ({
                     setCurrentTopic(title)
                     // setIsModalOpen(true)
                     setResourceDoc()
+                    setCurrentId(projectId)
                     getDoc()
                 }}>{title}</Title>
             </div>
-            <Lock />
+            {
+                completed ? <Unlock /> : <Lock />
+            }
         </CardConatiner>
     )
 }

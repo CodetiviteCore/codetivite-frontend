@@ -17,7 +17,9 @@ export default class PreferenceServices {
     }
 
     static async updateCareerPath(careerPath) {
-        const data = {careerPath:careerPath}
+        const data = {
+            careerPath: careerPath
+        }
         return await request({
             url: `users/career-path?careerPath=${careerPath}`,
             method: "PUT",

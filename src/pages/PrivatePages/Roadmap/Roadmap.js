@@ -26,28 +26,32 @@ const Roadmap = () => {
 
             careerDetails?.resource?.levels?.map((level) => {
 
-                const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl }) => ({
+                const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Fresher",
                     title: title,
-                    resource: resourceUrl
+                    resource: resourceUrl,
+                    projectId: projectId
                 })) : []
 
-                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resourceUrl }) => ({
+                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Entry-level",
                     title: title,
-                    resource: resourceUrl
+                    resource: resourceUrl,
+                    projectId: projectId
                 })) : []
 
-                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl }) => ({
+                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Intermediate",
                     title: title,
-                    resource: resourceUrl
+                    resource: resourceUrl,
+                    projectId:projectId
                 })) : []
 
-                const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl }) => ({
+                const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Advanced",
                     title: title,
-                    resource: resourceUrl
+                    resource: resourceUrl,
+                    projectId:projectId
                 })) : []
 
                 levelsArray.push(

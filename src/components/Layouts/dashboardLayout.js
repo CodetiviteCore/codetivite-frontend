@@ -38,7 +38,7 @@ const Toggler = styled.div`
   &:hover {
     cursor: pointer;
     transform: ${({ show }) =>
-      show ? "translateX(5px)" : "translateX(-7px)"};
+    show ? "translateX(5px)" : "translateX(-7px)"};
   }
   p {
     font-weight: 700;
@@ -54,10 +54,10 @@ export const DashboardLayout = ({ children }) => {
 
   return (
     <LayoutBody>
-          <DashboardSideBar show={show} />
+      <DashboardSideBar show={show} />
       <MainContainer show={show}>
         <Toggler show={show} onClick={toggleShowSideBar}>
-          {show ? <p>&gt;</p> :  <p>&lt;</p>}
+          {show ? <p>&gt;</p> : <p>&lt;</p>}
         </Toggler>
         <DashboardNavabar />
         {children}
