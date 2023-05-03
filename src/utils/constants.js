@@ -9,3 +9,7 @@ export const transformRoadMap = (level) => {
   }
   return level
 }
+
+export const formatProgressValue =(num)=> {
+  return num.toFixed(1);
+}

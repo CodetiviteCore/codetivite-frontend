@@ -1,5 +1,6 @@
 import React, {
-    useState
+    useState,
+    useEffect
 } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import {
@@ -37,6 +38,7 @@ import { selectUser } from "../../../Redux store/auth/auth.selector";
 import { useApiPost } from "../../../custom-hooks/useApiPost";
 import { ToastContainer, toast } from "react-toastify";
 import { Puff } from 'react-loader-spinner';
+import { formatProgressValue } from "../../../utils/constants";
 
 
 
@@ -177,7 +179,12 @@ const DetailsModal = styled.div`
     flex-direction:column;
 
     button{
-        margin-top:2rem ;
+        margin-top:2rem;
+        width: 25rem;
+        height:4rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
     }
     
 `
@@ -227,6 +234,7 @@ const RoadmapDetails = () => {
     const [currentTopic, setCurrentTopic] = useState([])
     const [resoureDoc, setResourceDoc] = useState(null)
     const [currentId, setCurrentId] = useState("")
+    const [percentageValue, setPercentageValue] = useState("")
     const { careerPath } = useSelector(selectUser)
 
 
@@ -271,9 +279,35 @@ const RoadmapDetails = () => {
         data: projectsResponse,
         // isFetching: fetchingProjectsDue,
         // isLoading: loadingProjectsDue
-    } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(careerPath, state?.level))
-    const { data: completedSyllabus } = useApiGet("Completed syllabus state", RoadmapServices.getCompletedSyllablus)
-    const { mutate: completeModule, isLoading: isUpdatingSyllabus } = useApiPost(RoadmapServices.updateSyllablus, "complete module", onUpdateSyllabuSuccess, onUpdateSyllabusError)
+    } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(
+        careerPath,
+        state?.level
+    ))
+
+    const {
+        data: completedSyllabus
+    } = useApiGet(
+        "Completed syllabus state",
+        RoadmapServices.getCompletedSyllablus
+        )
+    const {data:progressPercentage} = useApiGet("Progress percentage", RoadmapServices.getProgressPercentage)
+    const {
+        mutate: completeModule,
+        isLoading: isUpdatingSyllabus
+    } = useApiPost(
+        RoadmapServices.updateSyllablus,
+        "complete module",
+        onUpdateSyllabuSuccess,
+        onUpdateSyllabusError
+        )
+    
+        useEffect(() => {
+            if (progressPercentage?.progress) {
+                const fromattedValue = formatProgressValue(progressPercentage?.progress)
+                setPercentageValue(fromattedValue)
+            }
+        },[progressPercentage])
+    
 
 
     return (
@@ -313,16 +347,14 @@ const RoadmapDetails = () => {
                                     {
                                         isUpdatingSyllabus ?
                                             <Puff
-                                                height="60"
-                                                width="60"
+                                                height="40"
+                                                width="40"
                                                 radius={1}
-                                                color="var(--primary)"
+                                                color="var(--white)"
                                                 ariaLabel="puff-loading"
                                             />
                                             :
-
                                             "I have completed the syllable and task"
-
                                     }
                                 </Button>
                             </DetailsModal>
@@ -347,8 +379,8 @@ const RoadmapDetails = () => {
                     <CircularProgressConatiner>
                         <CircularProgress>
                             <CircularProgressbar
-                                value={10}
-                                text={`10%`}
+                                value={percentageValue || 0}
+                                text={`${percentageValue}%` || "0%"}
                                 styles={{
                                     text: {
                                         // Text color
@@ -370,7 +402,7 @@ const RoadmapDetails = () => {
                                         // Customize transition animation
                                         transition: 'all 1.5s ease-out',
                                         // Rotate the path
-                                        transform: 'rotate(0.25turn)',
+                                        // transform: 'rotate(0.25turn)',
                                         transformOrigin: 'center center',
                                     },
                                 }}

@@ -33,7 +33,6 @@ const Prefrence = () => {
 
     const selectPreference = (skill) => {
         setSelectCareerPath(skill)
-
     };
 
 

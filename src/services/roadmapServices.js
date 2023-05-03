@@ -30,4 +30,10 @@ export default class RoadmapServices {
             method: "GET",
         })
     }
+    static async getProgressPercentage(careerPath,level,) {
+        return await request({
+            url: `roadmap/me/progress?roadmap=frontend&skillLevel=Junior&&projectId=64440231999248e6a4437968`,
+            method: "GET",
+        })
+    }
 }   
