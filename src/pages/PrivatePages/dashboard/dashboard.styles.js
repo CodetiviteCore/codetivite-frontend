@@ -11,10 +11,10 @@ export const DashboardContainer = styled.main`
 
 export const DashboardHeader = styled.section`
     background-color:var(--primary);
-    height:35vh;
-    width:100%;
+    height:fit-content;
     color:var(--white) ;
     padding: 3%;
+    display:flex;
 `
 export const DashboardWelcomeBack = styled.div`
     span{
@@ -22,16 +22,18 @@ export const DashboardWelcomeBack = styled.div`
     }
     h6{
         font-weight:400;
+        margin-bottom:0.7rem;
     }
     h6,span{
         font-size:2.5rem;
     }
 `
 export const DashboardOverview = styled.div`
-    margin-top:3%;
+    /* margin-top:20%; */
     h6{
         font-size:1.5rem;
-        font-weight:600;
+        font-weight:700;
+        margin-bottom:1rem;
     }
 
 `
@@ -49,9 +51,31 @@ export const SkillDiv = styled.div`
     border-radius:10px;
 `
 export const SkillDesDiv = styled.div`
-
+    p:last-child{
+        font-weight: 700;
+    }
 `
 export const SkillDetails = styled.div`
     display:flex;
     gap:10px;
+`
+export const ImageContainer = styled.div`
+    width:25rem;
+    height:25rem;
+    margin-right:20% ;
+    img{
+        width:inherit;
+        height:inherit;
+        object-fit:cover;
+    }
+`
+export const DashboardDetailsContainer = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:10%;
+    justify-content:center;
+`
+export const DashboardInfoGraphics = styled.section`
+
 `
