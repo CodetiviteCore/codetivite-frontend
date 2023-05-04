@@ -1,4 +1,4 @@
-import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../assets/svgs"
+import { AverageSalary, Badge, Decrease,  SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
