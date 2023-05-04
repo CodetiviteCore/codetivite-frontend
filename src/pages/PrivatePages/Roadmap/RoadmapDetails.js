@@ -43,8 +43,6 @@ import { formatProgressValue } from "../../../utils/constants";
 
 
 
-
-
 const RoadMapDetails = styled(RoadMapContainer)`
     overflow-y: scroll !important;
     background-color: var(--deep-white);
@@ -288,9 +286,22 @@ const RoadmapDetails = () => {
         data: completedSyllabus
     } = useApiGet(
         "Completed syllabus state",
-        RoadmapServices.getCompletedSyllablus
-        )
-    const {data:progressPercentage} = useApiGet("Progress percentage", RoadmapServices.getProgressPercentage)
+        RoadmapServices.getCompletedSyllablus,
+        {
+            enabled: true,
+            retry: false,
+            refetchOnWindowFocus: false
+        }
+    )
+    const { data: progressPercentage } = useApiGet(
+        "Progress percentage",
+        RoadmapServices.getProgressPercentage,
+        {
+            enabled: true,
+            retry: false,
+            refetchOnWindowFocus: false
+        }
+    )
     const {
         mutate: completeModule,
         isLoading: isUpdatingSyllabus
@@ -299,15 +310,15 @@ const RoadmapDetails = () => {
         "complete module",
         onUpdateSyllabuSuccess,
         onUpdateSyllabusError
-        )
-    
-        useEffect(() => {
-            if (progressPercentage?.progress) {
-                const fromattedValue = formatProgressValue(progressPercentage?.progress)
-                setPercentageValue(fromattedValue)
-            }
-        },[progressPercentage])
-    
+    )
+
+    useEffect(() => {
+        if (progressPercentage?.progress) {
+            const fromattedValue = formatProgressValue(progressPercentage?.progress)
+            setPercentageValue(fromattedValue)
+        }
+    }, [progressPercentage])
+
 
 
     return (

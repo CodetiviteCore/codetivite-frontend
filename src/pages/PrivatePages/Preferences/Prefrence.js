@@ -26,7 +26,16 @@ const Prefrence = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [selectCareerPath, setSelectCareerPath] = useState(null)
-    const { data: preferencesResponse } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    const { data: preferencesResponse } = useApiGet(
+        "Preferences",
+        PreferenceServices.getPreferences,
+        {
+            enabled: true,
+            retry: false,
+            refetchOnWindowFocus: false
+        }
+
+    );
     const { mutate: updateCareer } = useApiPost(PreferenceServices.updateCareerPath)
     const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -145,7 +154,7 @@ const Prefrence = () => {
                         </Save>
                         :
                         <Skeleton width={"30%"} height={60} style={{
-                            marginTop:"100px"
+                            marginTop: "100px"
                         }} />
                 }
 

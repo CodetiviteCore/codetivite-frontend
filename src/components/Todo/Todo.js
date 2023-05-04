@@ -1,138 +1,213 @@
-// import React, { useState } from 'react';
-// import './Todo.css';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-// const Todo = () => {
-//     const [tasks, setTasks] = useState([]);
-//     const [showAddTask, setShowAddTask] = useState(false);
-//     const [taskName, setTaskName] = useState('');
-//     const [taskDescription, setTaskDescription] = useState('');
-//     const [taskTimeRange, setTaskTimeRange] = useState('');
-//     const [taskPriority, setTaskPriority] = useState('');
-//     const [completedTasks, setCompletedTasks] = useState(0);
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+`;
 
-//     const handleAddTask = () => {
-//         setShowAddTask(true);
-//     };
+const Button = styled.button`
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
 
-//     const handleSaveTask = () => {
-//         const newTask = {
-//             name: taskName,
-//             description: taskDescription,
-//             timeRange: taskTimeRange,
-//             priority: taskPriority,
-//             completed: false
-//         };
-//         setTasks([...tasks, newTask]);
-//         setTaskName('');
-//         setTaskDescription('');
-//         setTaskTimeRange('');
-//         setTaskPriority('');
-//         setShowAddTask(false);
-//     };
+const TooltipContainer = styled.div`
+  display: ${({ show }) => show ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;
 
-//     const handleCheckboxClick = (index) => {
-//         const newTasks = [...tasks];
-//         newTasks[index].completed = !newTasks[index].completed;
-//         setTasks(newTasks);
-//         if (newTasks[index].completed) {
-//             setCompletedTasks(completedTasks + 1);
-//         } else {
-//             setCompletedTasks(completedTasks - 1);
-//         }
-//     };
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+`;
 
-//     const handleTaskNameChange = (event) => {
-//         setTaskName(event.target.value);
-//     };
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+  font-size: 16px;
+  outline: none;
+`;
 
-//     const handleTaskDescriptionChange = (event) => {
-//         setTaskDescription(event.target.value);
-//     };
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+  font-size: 16px;
+  outline: none;
+`;
 
-//     const handleTaskTimeRangeChange = (event) => {
-//         setTaskTimeRange(event.target.value);
-//     };
+const Select = styled.select`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+  font-size: 16px;
+  outline: none;
+`;
 
-//     const handleTaskPriorityChange = (event) => {
-//         setTaskPriority(event.target.value);
-//     };
+const Option = styled.option`
+  font-size: 16px;
+`;
 
-//     const handleDragStart = (event, index) => {
-//         event.dataTransfer.setData('text/plain', index);
-//     };
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;
 
-//     const handleDrop = (event, targetIndex) => {
-//         const sourceIndex = event.dataTransfer.getData('text/plain');
-//         const newTasks = [...tasks];
-//         const [removedTask] = newTasks.splice(sourceIndex, 1);
-//         newTasks.splice(targetIndex, 0, removedTask);
-//         setTasks(newTasks);
-//     };
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+  cursor: move;
+`;
 
-//     const renderTask = (task, index) => {
-//         const taskClass = `Todo__task ${task.completed ? 'Todo__task--completed' : ''}`;
-//         return (
-//             <div
-//                 key={index}
-//                 className={taskClass}
-//                 draggable
-//                 onDragStart={(event) => handleDragStart(event, index)}
-//                 onDrop={(event) => handleDrop(event, index)}
-//                 onDragOver={(event) => event.preventDefault()}
-//             >
-//                 <div className="Todo__task-overview">
-//                     <div className="Todo__task-name">{task.name}</div>
-//                     <div className="Todo__task-time">{task.timeRange}</div>
-//                     <input
-//                         type="checkbox"
-//                         checked={task.completed}
-//                         onChange={() => handleCheckboxClick(index)}
-//                     />
-//                 </div>
-//                 <div className="Todo__task-details">
-//                     <div className="Todo__task-description">{task.description}</div>
-//                     <div className="Todo__task-priority">{task.priority}</div>
-//                 </div>
-//             </div>
-//         );
-//     };
+const CardTitle = styled.h3`
+  margin: 0;
+  font-size: 20px;
+`;
 
-//     return (
-//         <div className="Todo">
-//             <div className="Todo__header">
-//                 <div className="Todo__title">Todo List</div>
-//                 <div className="Todo__completed">
-//                     Completed: {completedTasks} / {tasks.length}
-//                 </div>
-//             </div>
-//             <div className="Todo__add-task">
-//                 <button className="Todo__add-task-button" onClick={handleAddTask}>
-//                     Add Task
-//                 </button>
-//                 {showAddTask && (
-//                     <div className="Todo__add-task-container">
-//                         <div className="Todo__add-task-inputs">
-//                             <label>Name:</label>
-//                             <input type="text" value={taskName} onChange={handleTaskNameChange} />
-//                             <label>Description:</label>
-//                             <textarea
-//                                 value={taskDescription}
-//                                 onChange={handleTaskDescriptionChange}
-//                             ></textarea>
-//                             <label>Time Range:</label>
-//                             <input type="text" value={taskTimeRange} onChange={handleTaskTimeRangeChange} />
-//                             <label>Priority:</label>
-//                             <input type="text" value={taskPriority} onChange={handleTaskPriorityChange} />
-//                         </div>
-//                         <button className="Todo__add-task-save" onClick={handleSaveTask}>
-//                             Save Task
-//                         </button>
-//                     </div>
-//                 )}
-//             </div>
-//             <div className="Todo__task-list">{tasks.map(renderTask)}</div>
-//         </div>
-//     );
-// };
+const CardTimeframe = styled.p`
+  margin: 0;
+  font-size: 16px;
+`;
 
-// export default Todo;
+const DetailsContainer = styled.div`
+  display: ${({ show }) => show ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const DetailItem = styled.p`
+  margin: 0;
+  font-size: 16px;
+`;
+
+const CheckBox = styled.input`
+  margin-right: 10px;
+`;
+
+const CompletedTasks = styled.p`
+  margin-top: 20px;
+  font-size: 16px;
+`;
+
+const Todo = () => {
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState(0);
+
+    const handleAddTask = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target)
+        const newTask = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            timeframe: formData.get('timeframe'),
+            priority: formData.get('priority'),
+            completed: false,
+        };
+        setTasks([...tasks, newTask]);
+        setShowTooltip(false);
+    };
+    const handleCardClick = (index) => {
+        const newTasks = [...tasks];
+        newTasks[index].showDetails = !newTasks[index].showDetails;
+        setTasks(newTasks);
+    };
+
+    const handleCheckboxChange = (index) => {
+        const newTasks = [...tasks];
+        newTasks[index].completed = !newTasks[index].completed;
+        setTasks(newTasks);
+        setCompletedTasks(completedTasks + (newTasks[index].completed ? 1 : -1));
+    };
+
+    const handleDragStart = (event, index) => {
+        event.dataTransfer.setData('text/plain', index);
+    };
+
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    };
+
+    const handleDrop = (event, index) => {
+        event.preventDefault();
+        const dragIndex = event.dataTransfer.getData('text');
+        const newTasks = [...tasks];
+        const [draggedTask] = newTasks.splice(dragIndex, 1);
+        newTasks.splice(index, 0, draggedTask);
+        setTasks(newTasks);
+    };
+
+    return (
+        <Container>
+            <Button onClick={() => setShowTooltip(true)}>Add Task</Button>
+            <TooltipContainer show={showTooltip}>
+                <Form onSubmit={handleAddTask}>
+                    <Input name="title" placeholder="Title" required />
+                    <TextArea name="description" placeholder="Description" required />
+                    <Select name="timeframe" required>
+                        <Option value="" disabled selected hidden>Timeframe</Option>
+                        <Option value="Today">Today</Option>
+                        <Option value="This Week">This Week</Option>
+                        <Option value="This Month">This Month</Option>
+                    </Select>
+                    <Select name="priority" required>
+                        <Option value="" disabled selected hidden>Priority</Option>
+                        <Option value="Low">Low</Option>
+                        <Option value="Medium">Medium</Option>
+                        <Option value="High">High</Option>
+                    </Select>
+                    <Button type="submit">Add Task</Button>
+                </Form>
+            </TooltipContainer>
+            <CardContainer>
+                {tasks.map((task, index) => (
+                    <Card key={index} draggable="true" onDragStart={(event) => handleDragStart(event, index)} onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, index)}>
+                        <div onClick={() => handleCardClick(index)}>
+                            <CardTitle>{task.title}</CardTitle>
+                            <CardTimeframe>{task.timeframe}</CardTimeframe>
+                        </div>
+                        <DetailsContainer show={task.showDetails}>
+                            <DetailItem>{task.description}</DetailItem>
+                            <DetailItem>Priority: {task.priority}</DetailItem>
+                            <DetailItem>Completed: <CheckBox type="checkbox" checked={task.completed} onChange={() => handleCheckboxChange(index)} /></DetailItem>
+                        </DetailsContainer>
+                    </Card>
+                ))}
+            </CardContainer>
+            <CompletedTasks>{completedTasks} out of {tasks.length} tasks completed</CompletedTasks>
+        </Container>
+    );
+};
+
+export default Todo;      

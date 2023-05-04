@@ -7,4 +7,10 @@ export default class AuthServices {
             method:"GET"
         })
     }
+    static async getUpdatedUserDetails(email) {
+        return await request({
+            url: `/users/get-user?email=${email}`,
+            method:"GET"
+        })
+    }
 }   

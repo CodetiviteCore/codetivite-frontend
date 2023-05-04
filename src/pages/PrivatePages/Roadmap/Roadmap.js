@@ -1,4 +1,4 @@
-import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../assets/svgs"
+import { AverageSalary, Badge, Decrease,  SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
@@ -12,11 +12,18 @@ const Roadmap = () => {
 
     const [levels, setLevels] = useState([])
 
-
     const {
         data: careerDetails,
         isLoading: isLoadingCereerDetails
-    } = useApiGet("Roadmap", PreferenceServices.getSelectedPreferences)
+    } = useApiGet(
+        "Roadmap",
+        PreferenceServices.getSelectedPreferences,
+        {
+            enabled: true,
+            retry: false,
+            refetchOnWindowFocus: false
+        }
+    )
 
     useEffect(() => {
         if (!!careerDetails) {
@@ -40,50 +47,59 @@ const Roadmap = () => {
                     projectId: projectId
                 })) : []
 
+
                 const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Intermediate",
                     title: title,
                     resource: resourceUrl,
-                    projectId:projectId
+                    projectId: projectId
                 })) : []
+
+
 
                 const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Advanced",
                     title: title,
                     resource: resourceUrl,
-                    projectId:projectId
+                    projectId: projectId
                 })) : []
 
-                levelsArray.push(
-                    fresher,
-                    entryLevel,
-                    intermediate,
-                    advanced
-                )
+                switch (true) {
+                    case (intermediate.length <= 0):
+                        levelsArray.push(fresher, entryLevel, advanced);
+                        break;
+                    case (fresher.length <= 0):
+                        levelsArray.push(entryLevel, intermediate, advanced);
+                        break;
+                    case (entryLevel.length <= 0):
+                        levelsArray.push(fresher, intermediate, advanced);
+                        break;
+                    case (advanced.length <= 0):
+                        levelsArray.push(fresher, entryLevel, intermediate);
+                        break;
+                    default:
+                        levelsArray.push(fresher, entryLevel, intermediate, advanced);
+                        break;
+                }
+
                 return setLevels(levelsArray)
             })
         }
     }, [careerDetails])
 
-    
+
 
     const statsCardDetails = [
         {
             icon: <SkillIcon />,
             title: "Current skill level",
             info: careerDetails?.userInfo?.currentSkillLevel?.title,
-            valueicon: <Increase />,
-            value: "+12.5%",
-            valueDetail: "increased vs lastmonth",
             improved: true
         },
         {
             icon: <AverageSalary />,
             title: "Average salary",
             info: careerDetails?.userInfo?.avarageSalary,
-            valueicon: <Increase />,
-            value: "+12.5%",
-            valueDetail: "increased vs lastmonth",
             improved: true
 
         },
@@ -91,9 +107,6 @@ const Roadmap = () => {
             icon: <Badge />,
             title: "Badges earned",
             info: careerDetails?.userInfo?.badgeEarned?.mostRecentBadgeGotten,
-            valueicon: <Increase />,
-            value: "+12.5%",
-            valueDetail: "increased vs lastmonth",
             improved: true
         },
         {
@@ -109,26 +122,6 @@ const Roadmap = () => {
         },
     ]
 
-    // const courseInfo = [
-    //     {
-    //         level: "Fresher",
-    //         courseNo: "12"
-    //     },
-    //     {
-    //         level: "Entry Level",
-    //         courseNo: "12"
-    //     },
-    //     {
-    //         level: "Intermediate",
-    //         courseNo: "12"
-    //     },
-    //     {
-    //         level: "Advanced",
-    //         courseNo: "12"
-    //     },
-
-    // ]
-
     if (isLoadingCereerDetails) {
         return (
             <LoaderContainer>
@@ -142,7 +135,6 @@ const Roadmap = () => {
             </LoaderContainer>
         )
     }
-
 
 
     return (
@@ -175,7 +167,7 @@ const Roadmap = () => {
             <PathRoadMapContainer>
                 <RoadMapPath>
                     <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
-                    
+
                     {
                         levels.map((item, index) =>
                             <RoadMapCourseInfoCard
@@ -193,23 +185,6 @@ const Roadmap = () => {
                     <p>We have curated detailed projects to help you learn better through practice.
                         Before the end of this roadmap you will be able to complete the projects below.
                     </p>
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
                     <CompleteProjectCard />
                     <CompleteProjectCard />
 
