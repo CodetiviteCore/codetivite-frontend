@@ -55,7 +55,15 @@ export const Navbar = () => {
   const {
     data: authResponse,
     refetch: fetchToken
-  } = useApiGet("Auth", () => AuthServices.getUserDetails(searchParams.get("code")));
+  } = useApiGet(
+    "Auth",
+    () => AuthServices.getUserDetails(searchParams.get("code")),
+    {
+      enabled: false,
+      retry: false,
+      refetchOnWindowFocus: false
+    }
+  );
 
   //sign up process
   const getUserfromEmail = useCallback(() => {

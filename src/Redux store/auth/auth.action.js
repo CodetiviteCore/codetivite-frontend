@@ -20,6 +20,7 @@ export const careerPathSelectState = (state) => {
     }
 }
 export const setCareerPath = (state) => {
+    console.log(state, "setting career path")
     return {
         type: AUTH_ACTION_TYPES.SET_CAREERPATH,
         payload:state

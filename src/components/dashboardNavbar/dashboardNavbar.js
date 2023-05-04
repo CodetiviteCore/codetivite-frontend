@@ -1,11 +1,14 @@
 import styled from "styled-components"
 import User from "../../assets/images/toib.png"
-import { useLayoutEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useLayoutEffect, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
 import Avatar from 'react-avatar';
 import { textFormat } from "../../utils/constants";
 import { Notification } from "../../assets/svgs";
+import { useApiGet } from "../../custom-hooks/useApiGet";
+import AuthServices from "../../services/authServices";
+import { signUpWithGoogle } from "../../Redux store/auth/auth.action";
 
 
 
@@ -15,16 +18,38 @@ export const DashboardNavabar = () => {
         lastname: ""
     });
     const user = useSelector(selectUser);
+    const dispatch = useDispatch()
+    const { _id } = user
+
+    const {
+        data: updatedUser,
+        isFetched
+    } = useApiGet(
+        "updated-user-details",
+        () => AuthServices.getUpdatedUserDetails(_id),
+        {
+            enabled: true
+        }
+    )
+    // console.log(updatedUser, "update eyar")
 
     useLayoutEffect(() => {
         if (user) {
-            const { firstName, lastName } = user;
+            const { firstName, lastName } = user
             setUsernames({
                 firstname: firstName,
                 lastname: lastName
             });
         }
     }, [user]);
+
+    useEffect(() => {
+        if (updatedUser) {
+            dispatch(signUpWithGoogle(updatedUser?.user))
+        }
+    },[dispatch, updatedUser])
+
+
 
     return (
         <DashboardNav>
@@ -34,7 +59,7 @@ export const DashboardNavabar = () => {
             </DashboardTitle>
             <DashboardUserDetails>
                 <div>
-                    <Notification/>
+                    <Notification />
                 </div>
                 {
                     user ?
@@ -47,14 +72,14 @@ export const DashboardNavabar = () => {
                             />
                         </AvatarContainer>
                         :
-                         <img src={User} alt="avatar Icon" />
+                        <img src={User} alt="avatar Icon" />
                 }
 
-               
+
                 <section>
                     <div>
-                        <h5>{usernames.firstname} { usernames.lastname}</h5>
-                        <p>{textFormat(user?.careerPath)}</p>
+                        <h5>{usernames.firstname} {usernames.lastname}</h5>
+                        <p>{isFetched && textFormat(user?.careerPath)}</p>
                     </div>
                     <span>&gt;</span>
                 </section>
