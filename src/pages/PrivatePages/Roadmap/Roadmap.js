@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux"
 import { AverageSalary, Badge, Decrease, Increase, SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
 import { LoaderContainer, PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
-import { selectCareer } from "../../../Redux store/auth/auth.selector"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect } from "react"
 import { useState } from "react"
@@ -12,44 +10,48 @@ import { Puff } from "react-loader-spinner"
 
 const Roadmap = () => {
 
-    const careerPathFromReducer = useSelector(selectCareer)
     const [levels, setLevels] = useState([])
 
 
     const {
         data: careerDetails,
         isLoading: isLoadingCereerDetails
-    } = useApiGet("Roadmap", () => PreferenceServices.getSelectedPreferences(careerPathFromReducer))
+    } = useApiGet("Roadmap", PreferenceServices.getSelectedPreferences)
 
     useEffect(() => {
         if (!!careerDetails) {
 
             let levelsArray = []
+            console.log(careerDetails?.resource?.levels, "yayyy")
 
             careerDetails?.resource?.levels?.map((level) => {
 
-                const fresher = level?.junior ? level?.junior?.map(({ title, resource }) => ({
+                const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Fresher",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl,
+                    projectId: projectId
                 })) : []
 
-                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resource }) => ({
+                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Entry-level",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl,
+                    projectId: projectId
                 })) : []
 
-                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resource }) => ({
+                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Intermediate",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl,
+                    projectId:projectId
                 })) : []
 
-                const advanced = level?.advanced ? level?.advanced?.map(({ title, resource }) => ({
+                const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl, projectId }) => ({
                     cardTitle: "Advanced",
                     title: title,
-                    resource: resource
+                    resource: resourceUrl,
+                    projectId:projectId
                 })) : []
 
                 levelsArray.push(
@@ -59,15 +61,11 @@ const Roadmap = () => {
                     advanced
                 )
                 return setLevels(levelsArray)
-
             })
         }
     }, [careerDetails])
 
-    useEffect(() => {
-        console.log(levels)
-
-    })
+    
 
     const statsCardDetails = [
         {
@@ -176,12 +174,13 @@ const Roadmap = () => {
             </Stats>
             <PathRoadMapContainer>
                 <RoadMapPath>
-                    <h2>{careerDetails?.resource?.careerpath} Roadmap</h2>
+                    <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
+                    
                     {
                         levels.map((item, index) =>
                             <RoadMapCourseInfoCard
                                 cardTitle={item[0]?.cardTitle}
-                                level={item[0].cardTitle}
+                                level={item[0]?.cardTitle}
                                 courseNo={item?.length}
                                 key={index}
                                 item={item}

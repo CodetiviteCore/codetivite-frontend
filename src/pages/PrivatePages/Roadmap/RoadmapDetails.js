@@ -1,9 +1,18 @@
-import React, { useContext, useState } from "react";
-import { ModalContext } from "../../../context/ModalContext";
+import React, {
+    useState,
+    useEffect
+} from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+    useParams,
+    useNavigate,
+    useLocation
+} from "react-router-dom";
 import styled from "styled-components"
-import { Button, RoadmapLectureCards } from "../../../ui_elements";
+import {
+    Button,
+    RoadmapLectureCards
+} from "../../../ui_elements";
 import {
     RoadMapContainer,
     Stats,
@@ -12,13 +21,26 @@ import {
     RoadMapProjectsToComplete
 } from './Roadmap.styles';
 import { CompleteProjectCard } from "../../../ui_elements";
-import { Modal } from "../../../components";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+
 //avtar imports
 import Tina from "../../../assets/images/tima.png"
 import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
 import Sophia from "../../../assets/images/sophia.png"
 import { RoadmapBookIcon } from "../../../assets/svgs";
+import { useSelector } from "react-redux";
+import { useApiGet } from "../../../custom-hooks/useApiGet";
+import RoadmapServices from "../../../services/roadmapServices";
+import { selectUser } from "../../../Redux store/auth/auth.selector";
+import { useApiPost } from "../../../custom-hooks/useApiPost";
+import { ToastContainer, toast } from "react-toastify";
+import { Puff } from 'react-loader-spinner';
+import { formatProgressValue } from "../../../utils/constants";
+
+
 
 
 
@@ -29,6 +51,7 @@ const RoadMapDetails = styled(RoadMapContainer)`
 `
 const Navigation = styled(Stats)`
     justify-content: space-between;
+    
     div{
         display: flex;
         gap:10px;
@@ -45,8 +68,12 @@ const Navigation = styled(Stats)`
         }
     }
 `
-const DetailsContainer = styled(PathRoadMapContainer)``
-const Details = styled(RoadMapPath)``
+const DetailsContainer = styled(PathRoadMapContainer)`
+`
+const Details = styled(RoadMapPath)`
+    height:70vh;
+
+`
 const Progress = styled(RoadMapProjectsToComplete)`
     background-color: transparent;
     padding: 0;
@@ -103,6 +130,8 @@ const OtherUsers = styled.div`
             min-width:2rem !important;
             min-height: 2rem !important;
             display: flex;
+
+
             align-items: center;
             justify-content: center;
             border-radius: 50%;
@@ -120,26 +149,56 @@ const OtherUsers = styled.div`
 const ProjectsDue = styled(RoadMapProjectsToComplete)`
     width: auto;
     background-color: var(--white);
-    height:35rem;
+    height:25rem;
     margin-top: 1.25rem;
+    overflow-y:scroll ;
+    >div{
+        background-color: var(--white);
+        position:sticky;
+        margin-bottom:2rem ;
+        h2{
+            font-size:1.2rem;
+            font-weight:600;
+        }
+        p{
+            font-size:0.8rem;
+            line-height:1.2 ;
+        }
+    }
 
 `
 
 const DetailsModal = styled.div`
-    height: 90vh;
-    max-width:681px;
+    position:relative ;
+    height: fit-content;
+    max-width:inherit;
     background-color: var(--white);
-    overflow-y:scroll;
-    overflow-x: hidden;
     padding: 1.5rem;
-    hr{
-        margin-top: 1.5rem;
-        opacity: 0.3;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    button{
+        margin-top:2rem;
+        width: 25rem;
+        height:4rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
     }
+    
 `
 const DetailsModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items:center;
+    width:100%;
+    height:70px !important;
+    position:sticky;
+    top:-20px;
+    left:0;
+    background-color:var(--white);
+    z-index:5;
     >p{
         font-size: 24px;
         font-weight: lighter;
@@ -156,31 +215,12 @@ const DetailsModalHeader = styled.div`
         }
     }
 `
-const Overview = styled.div`
-    margin-top: 1.5rem;
-    h3{
-        margin-bottom: 6px;
-    }
-    p{
-        line-height: 1.2;
-        font-size: 0.9rem;
-        margin-top: 1rem;
-    }
+
+const DocumentsDisplay = styled.div`
+    overflow: auto;
+    height:90%;
+    /* overflow-x: hidden; */
     
-
-`
-const Resources = styled(Overview)`
-    div{
-        margin-top:16px;
-    }
-    p{
-      display: block;
-      font-size:0.9rem;
-      color: var(--primary);
-    }
-`
-const Projects = styled(Overview)`
-
 `
 
 
@@ -192,76 +232,86 @@ const RoadmapDetails = () => {
     const navigate = useNavigate()
     const { state } = useLocation()
     const [currentTopic, setCurrentTopic] = useState([])
-    const [link,setLink] = useState(null)
-    const { setIsModalOpen, isModalOpen } = useContext(ModalContext)
+    const [resoureDoc, setResourceDoc] = useState(null)
+    const [currentId, setCurrentId] = useState("")
+    const [percentageValue, setPercentageValue] = useState("")
+    const { careerPath } = useSelector(selectUser)
+
+
+
+
+
     const avatars = [
         Tina,
         Toks,
         Tunji,
         Sophia
     ]
-    const redirectToResource = (resourceLink) => {
-        window.location.href=resourceLink
+
+
+    const onUpdateSyllabuSuccess = (data) => {
+        console.log("success data", data)
+        toast.success(`Marked as complete!`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            theme: "light",
+        }
+        )
     }
+    const onUpdateSyllabusError = () => {
+        toast.error(`Failed to update, please check your network`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            theme: "light",
+        }
+        )
+    }
+
+    const {
+        data: projectsResponse,
+        // isFetching: fetchingProjectsDue,
+        // isLoading: loadingProjectsDue
+    } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(
+        careerPath,
+        state?.level
+    ))
+
+    const {
+        data: completedSyllabus
+    } = useApiGet(
+        "Completed syllabus state",
+        RoadmapServices.getCompletedSyllablus
+        )
+    const {data:progressPercentage} = useApiGet("Progress percentage", RoadmapServices.getProgressPercentage)
+    const {
+        mutate: completeModule,
+        isLoading: isUpdatingSyllabus
+    } = useApiPost(
+        RoadmapServices.updateSyllablus,
+        "complete module",
+        onUpdateSyllabuSuccess,
+        onUpdateSyllabusError
+        )
+    
+        useEffect(() => {
+            if (progressPercentage?.progress) {
+                const fromattedValue = formatProgressValue(progressPercentage?.progress)
+                setPercentageValue(fromattedValue)
+            }
+        },[progressPercentage])
+    
+
+
     return (
         <RoadMapDetails>
-            <Modal isOpen={isModalOpen}>
-                <DetailsModal>
-                    <DetailsModalHeader>
-                        <div>
-                            <RoadmapBookIcon />
-                            <p>{currentTopic}</p>
-                        </div>
-                        <p onClick={() => setIsModalOpen(false)}>&#10006;</p>
-                    </DetailsModalHeader>
-                    <hr />
-                    <Overview>
-                        <h3>Overview</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-
-                        <p> Et at vel consequat egestas fermentum est.
-                            Enim pretium in nulla sit sed tellus eget tristique in. Eget in urna varius enim neque neque a.
-                            Dolor quam ut dui orci purus est consectetur placerat erat. At nunc ut eu elit dui et et nunc semper.
-                            Semper morbi quis et accumsan varius platea tincidunt bibendum mauris.
-                        </p>
-
-                        <p>Cras feugiat ut nisi erat leo. At in pellentesque ac felis convallis pellentesque ante.
-                            Vulputate tempus scelerisque sed senectus nisi. Quam at arcu odio vel.
-                            Risus at bibendum dui varius id nibh pellentesque. Amet enim orci a lacus lacus congue leo vulputate.
-                            In aliquam dictum pulvinar ut aliquam integer. Porttitor a massa ante eget volutpat.
-                            Etiam rhoncus velit velit in vitae fames.
-                        </p>
-                    </Overview>
-                    <Resources>
-                        <h3>Resources</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-                        <div>
-                            <p onClick={()=>redirectToResource(link)}> https://codetivite.com/</p>
-                        </div>
-
-
-                    </Resources>
-                    <Projects>
-                        <h3>Projects</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur. Odio tempus sed egestas dapibus consequat sed.
-                            Eu elit aenean et quisque. Magna ipsum faucibus varius bibendum auctor et donec nunc.
-                            Diam bibendum at ipsum quis. Eget nisl tristique consectetur risus quis vel donec accumsan magna.
-                            Vitae malesuada eget ut ut malesuada. Ornare eget purus cursus lectus etiam netus.
-                        </p>
-                    </Projects>
-                </DetailsModal>
-            </Modal>
-
             <Navigation>
                 <div>
                     <p onClick={() => navigate(-1)}>&#8592;</p>
@@ -273,14 +323,55 @@ const RoadmapDetails = () => {
                 <Details>
 
                     {
-                        state.map((item, index) =>
-                            <RoadmapLectureCards
-                                key={index}
-                                title={item.title}
-                                setIsModalOpen={setIsModalOpen}
-                                setCurrentTopic={setCurrentTopic}
-                                setLink={setLink}
-                            />)
+                        resoureDoc ?
+                            <DetailsModal>
+                                <DetailsModalHeader>
+                                    <div>
+                                        <RoadmapBookIcon />
+                                        <p>{currentTopic}</p>
+                                    </div>
+                                    <p onClick={() => setResourceDoc("")}>&#10006;</p>
+                                </DetailsModalHeader>
+                                <DocumentsDisplay>
+                                    <ReactQuill
+                                        value={resoureDoc}
+                                        readOnly={true}
+                                        modules={{ toolbar: false }}
+                                    />
+                                </DocumentsDisplay>
+                                <Button primary onClick={() => completeModule({
+                                    roadmap: `${careerPath}`,
+                                    skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
+                                    projectId: `${currentId}`
+                                })}>
+                                    {
+                                        isUpdatingSyllabus ?
+                                            <Puff
+                                                height="40"
+                                                width="40"
+                                                radius={1}
+                                                color="var(--white)"
+                                                ariaLabel="puff-loading"
+                                            />
+                                            :
+                                            "I have completed the syllable and task"
+                                    }
+                                </Button>
+                            </DetailsModal>
+                            :
+                            state?.item.map((item, index) =>
+                                <RoadmapLectureCards
+                                    key={index}
+                                    title={item?.title}
+                                    resource={item?.resource}
+                                    projectId={item?.projectId}
+                                    setCurrentId={setCurrentId}
+                                    completedSyllabus={completedSyllabus}
+                                    // setIsModalOpen={setIsModalOpen}
+                                    setCurrentTopic={setCurrentTopic}
+                                    setResourceDoc={setResourceDoc}
+                                    resourceDoc={resoureDoc}
+                                />)
                     }
 
                 </Details>
@@ -288,8 +379,8 @@ const RoadmapDetails = () => {
                     <CircularProgressConatiner>
                         <CircularProgress>
                             <CircularProgressbar
-                                value={10}
-                                text={`10%`}
+                                value={percentageValue || 0}
+                                text={`${percentageValue}%` || "0%"}
                                 styles={{
                                     text: {
                                         // Text color
@@ -311,7 +402,7 @@ const RoadmapDetails = () => {
                                         // Customize transition animation
                                         transition: 'all 1.5s ease-out',
                                         // Rotate the path
-                                        transform: 'rotate(0.25turn)',
+                                        // transform: 'rotate(0.25turn)',
                                         transformOrigin: 'center center',
                                     },
                                 }}
@@ -332,33 +423,26 @@ const RoadmapDetails = () => {
 
                     </CircularProgressConatiner>
                     <ProjectsDue>
-                        <h2>Projects due for this syllabus</h2>
-                        <p>We have curated detailed projects to help you learn better through practice.
-                            Before the end of this roadmap you will be able to complete the projects below.
-                        </p>
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
-                        <CompleteProjectCard />
+                        <div>
+                            <h2>Projects due for this syllabus</h2>
+                            <p>We have curated detailed projects to help you learn better through practice.
+                                Before the end of this roadmap you will be able to complete the projects below.
+                            </p>
+                        </div>
+
+                        {
+                            projectsResponse?.projectsDue?.map((project, index) =>
+                                <CompleteProjectCard
+                                    project={project}
+                                    index={index}
+                                />
+                            )
+                        }
 
                     </ProjectsDue>
                 </Progress>
             </DetailsContainer>
+            <ToastContainer />
         </RoadMapDetails>
     )
 

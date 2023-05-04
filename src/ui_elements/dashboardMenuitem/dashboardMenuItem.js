@@ -24,19 +24,18 @@ const Items = styled(Link)`
     color: var(--dashboardText);
     text-decoration: none;
     transition: all .6s ease;
-    /* transition-delay: ${({ show }) => (show ? "0.5s" : "0")}; */
 
 `
 const Title = styled.p`
-    display: ${({ show }) => (show ? 'inline-block' : 'none')};
+    display: inline-block;
 `
 
-export const DashboardMenuItem = ({ icon, title, path, show }) => {
+export const DashboardMenuItem = ({ icon, title, path }) => {
     return (
         <Container>
             <Items to={`${path}`}>
                 <div>{icon}</div>
-                <Title show={show}>{title}</Title>
+                <Title>{title}</Title>
             </Items>
         </Container>
     )

@@ -29,21 +29,20 @@ const Details = styled.p`
 
 `
 
-export const CompleteProjectCard = () => {
+export const CompleteProjectCard = ({project}) => {
     return (
         <CardContainer>
             <Header>
                 <div>
                     <Teacher />
-                    <h5>Design an Ecommerce website</h5>
+                    <h5>{project?.title}</h5>
                 </div>
                 <Lock />
             </Header>
             <Details>
-                Lorem ipsum dolor sit amet consectetur.
-                Et dolor orci auctor dignissim. Aliquam varius commodo ac sed ac.
-                Dictumst lorem donec curabitur amet eget.
-                Quam proin consectetur ac pharetra id ut imperdiet.
+                {
+                    project?.description
+                }
             </Details>
         </CardContainer>
     )

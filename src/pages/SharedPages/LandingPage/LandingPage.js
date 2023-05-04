@@ -111,16 +111,16 @@ const LandingPage = () => {
 
   const cardDetails = [
     {
-      title: "Create your Codetivite account",
-      description: " Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id Elementum."
+      title: "Sign up",
+      description: "To get started, simply sign up on our website - it's quick, easy, and free! Once you've signed up, start exploring our course roadmap and choose the course that interests you the most."
     },
     {
-      title: "Create your Codetivite account",
-      description: " Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id Elementum."
+      title: "Select a preferred roadmap",
+      description: " We offer comprehensive course roadmaps designed specifically for beginners and experienced techies. When you sign up, you'll be prompted to select your preferred roadmap, but don't worry if you change your mind later - you can always switch to a different roadmap that better suits your needs. We want you to have the best possible learning experience, so feel free to explore our different roadmaps and find the one that's right for you."
     },
     {
-      title: "Create your Codetivite account",
-      description: " Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id Elementum."
+      title: "Start Learning",
+      description: "Once you've selected your preferred roadmap, it's time to start learning! Our courses are broken down into easy-to-follow modules, each covering a different topic in the latest technologies. With our step-by-step approach, you'll quickly gain the knowledge and skills you need to succeed in the tech industry. So don't wait - start learning today and take the first step towards achieving your tech dreams!"
     },
   ]
   const blogCardDetails = [
@@ -233,7 +233,10 @@ const LandingPage = () => {
             data-aos="fade-up"
             data-aos-easing="ease-in-out"
             data-aos-duration="600"
-          >Lorem ipsum dolor sit amet consectetur. Senectus orci scelerisque lectus tortor tellus magnis. Molestie porta purus nunc vestibulum ante lacus. </p>
+          >Are you ready to turn your tech dreams into a reality? We're here to help.
+            With our comprehensive and accessible roadmaps, you can learn the latest
+            technologies and achieve your goals in no time
+          </p>
           <Button
             primary
             data-aos="fade-up"
@@ -270,7 +273,11 @@ const LandingPage = () => {
           >
             <RoadmapIcon />
             <h4>Course Roadmap</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Our roadmaps cater to both beginners and advanced learners,
+              covering a wide range of topics in the latest technologies.
+              From web development to artificial intelligence,
+              our modular approach ensures easy-to-follow learning.
+            </p>
           </LandingWhatWeDoCard>
           <LandingWhatWeDoCard
             data-aos="fade-up"
@@ -280,7 +287,12 @@ const LandingPage = () => {
           >
             <PortfolioIcon />
             <h4>Portfolio Manager</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Generate a portfolio that showcases all the skills you've learned
+              and the projects you've worked on.
+              Our portfolio manager is more than just a resume - it's a proof
+              of learning document that demonstrates your proficiency
+              in the latest technologies.
+            </p>
           </LandingWhatWeDoCard>
           <LandingWhatWeDoCard
             data-aos="fade-up"
@@ -290,7 +302,10 @@ const LandingPage = () => {
           >
             <LeaderboardIcon />
             <h4>Leaderboard</h4>
-            <p>Lorem ipsum dolor sit amet consectetur. Commodo pharetra ultricies senectus est dolor id.</p>
+            <p>Compete with other techies and see how you rank on Codetivite's real-time leaderboard.
+              Our leaderboard tracks your progress in courses and builder's
+              program, motivating you to climb to the top
+            </p>
           </LandingWhatWeDoCard>
         </LandingWhatWeDoCardContainer>
       </LandingWhatWeDo>
@@ -306,11 +321,11 @@ const LandingPage = () => {
             data-aos-easing="ease-in-out"
           >
             <p>HOW TO GET STARTED</p>
-            <h3>Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.</h3>
-            <p>Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse
-              augue sed tellus id. Elementum imperdiet vitae etiam quis.
-              Faucibus pellentesque tristique scelerisque in tortor.
-              Vitae mattis sit lobortis ipsum elit.
+            <h3>Join Codetivite today and start your journey towards tech success!</h3>
+            <p>Once you sign up on our website, you'll be able to take a clarity test to determine
+              which part of tech you should focus on. Our course roadmap is broken down
+              into easy-to-follow modules covering a wide range
+              of topics in the latest technologies.
             </p>
             <div>
               <Button primary>Get started</Button>
@@ -400,10 +415,11 @@ const LandingPage = () => {
         <CommunityCollaborateDetails>
           <h5>OUR COMMUNITY</h5>
           <h3>We have over 3000+ community members that uses Codevite</h3>
-          <p>Lorem ipsum dolor sit amet consectetur. Sem magna mattis malesuada hendrerit aliquet.
-            Posuere aenean enim porttitor varius. Etiam libero congue faucibus ultrices.
-            Imperdiet et pharetra adipiscing a vitae dui in eget.
-            Posuere sit enim et porttitor proin leo felis euismod.
+          <p>Join our growing community of techies at Codetivite! We're passionate about learning
+            and collaboration and offer comprehensive course roadmaps, builder's program,
+            and leaderboard to help you succeed in the tech industry.
+            Whether you're a beginner or an experienced techie,
+            we welcome you to join us today!
           </p>
           <Button primary>Join our Community</Button>
         </CommunityCollaborateDetails>
@@ -486,7 +502,7 @@ const LandingPage = () => {
         <BlogContainer>
           <div>
             <p>OUR BLOG</p>
-            <h4>Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.</h4>
+            <h4>Read our Latest and Informative Posts</h4>
           </div>
           <Button primary
             onClick={() => navigate("/our-blog")}
@@ -509,7 +525,6 @@ const LandingPage = () => {
                 avater={card.avater}
                 author={card.author}
                 time={card.time}
-
               />
             )
           }

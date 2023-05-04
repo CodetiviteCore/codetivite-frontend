@@ -16,21 +16,25 @@ import { useDispatch } from "react-redux";
 import { setCareerPath } from "../../../Redux store/auth/auth.action";
 import { useNavigate } from "react-router-dom";
 import { useApiPost } from "../../../custom-hooks/useApiPost";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+
+
 
 
 const Prefrence = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [selectCareerPath, setSelectCareerPath] = useState(null)
-    const { data: preferencesRespsonse } = useApiGet("Preferences", PreferenceServices.getPreferences);
+    const { data: preferencesResponse } = useApiGet("Preferences", PreferenceServices.getPreferences);
     const { mutate: updateCareer } = useApiPost(PreferenceServices.updateCareerPath)
-    // console.log(Cookies.get("authToken"))
+    const [activeIndex, setActiveIndex] = useState(-1);
 
 
     const selectPreference = (skill) => {
         setSelectCareerPath(skill)
-     
     };
+
 
     const submitCareerPath = () => {
         dispatch(setCareerPath(selectCareerPath))
@@ -38,34 +42,113 @@ const Prefrence = () => {
         navigate("/dashboard")
     }
 
+
     useEffect(() => {
         console.log(selectCareerPath)
-    },[selectCareerPath])
+    }, [selectCareerPath])
 
 
     return (
         <PrefrenceContainer>
             <PreferenceDetails>
                 <PreferenceDetailsHeader>
-                    <h1>Selecte your Prefrence</h1>
-                    <p>Choose a career path to enable us serve you better.</p>
+                    <h1>{preferencesResponse ? "Select your Carrer Path" : <Skeleton width={"50%"} height={50} />}</h1>
+                    <p>{preferencesResponse ? "Choose a career path to enable us serve you better." : <Skeleton width={"40%"} height={20} />}</p>
                 </PreferenceDetailsHeader>
                 <PreferenceCardContainer>
-                    {preferencesRespsonse?.map((item, index) => (
-                        <PreferenceButton
-                            onClick={() => selectPreference(item)}
-                            index={index}
-                            key={index}
-                        >
-                            {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </PreferenceButton>
-                    ))}
+                    {preferencesResponse
+                        ? preferencesResponse.map((item, index) => (
+                            <PreferenceButton
+                                key={index}
+                                onClick={() => {
+                                    setActiveIndex(index)
+                                    selectPreference(item)
+                                }}
+                                active={index === activeIndex}
+                            >
+                                {item.charAt(0).toUpperCase() + item.slice(1)}
+                            </PreferenceButton>
+                        ))
+                        :
+                        <>
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+                            <Skeleton
+                                height={50}
+                                width={100}
+                            />
+
+
+                        </>
+                    }
                 </PreferenceCardContainer>
-                <Save primary
-                    onClick={submitCareerPath}
-                >
-                    Save and continue to dashboard
-                </Save>
+                {
+                    preferencesResponse ?
+                        <Save primary
+                            onClick={submitCareerPath}
+                        >
+                            Save and continue to dashboard
+                        </Save>
+                        :
+                        <Skeleton width={"30%"} height={60} style={{
+                            marginTop:"100px"
+                        }} />
+                }
+
             </PreferenceDetails>
             <PreferenceDashboard>
                 <PreferencDashboardeDetails>

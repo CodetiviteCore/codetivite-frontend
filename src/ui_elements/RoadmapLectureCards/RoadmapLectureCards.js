@@ -1,5 +1,10 @@
+
 import styled from "styled-components"
-import { Lock, RoadmapBookIcon } from "../../assets/svgs"
+import { Lock, RoadmapBookIcon, Unlock } from "../../assets/svgs"
+import { useApiGet } from '../../custom-hooks/useApiGet';
+import RoadmapServices from "../../services/roadmapServices";
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const CardConatiner = styled.div`
     width: auto;
@@ -20,20 +25,50 @@ const Title = styled.p`
     }
 `
 
-export const RoadmapLectureCards = ({ title, setIsModalOpen, setCurrentTopic, setLink }) => {
-    // const response = getDocument("17Sghj2HHVuSfZTZ9B5Amxa2vyKxw020BcuZPcmc-KUs")
-    // console.log(response, "getFromDocs")
+export const RoadmapLectureCards = ({
+    title,
+    setCurrentTopic,
+    setResourceDoc,
+    resource,
+    setCurrentId,
+    projectId,
+    completedSyllabus
+}) => {
+
+    const [completed, setCompleted] = useState(false)
+
+    const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
+
+    const getDoc = () => {
+        fetchDoc()
+        document && setResourceDoc(document.data)
+    }
+
+    console.log(completedSyllabus, "dsdgg")
+    useEffect(() => {
+        completedSyllabus?.projectsCompleted
+            .forEach((module) => {
+                if (module?.projectId === projectId) {
+                    setCompleted(true)
+                }
+            })
+    }, [completedSyllabus, projectId])
+
     return (
         <CardConatiner>
             <div>
                 <RoadmapBookIcon />
                 <Title onClick={() => {
                     setCurrentTopic(title)
-                    setIsModalOpen(true)
-                    setLink(title.resource)
+                    // setIsModalOpen(true)
+                    setResourceDoc()
+                    setCurrentId(projectId)
+                    getDoc()
                 }}>{title}</Title>
             </div>
-            <Lock/>
+            {
+                completed ? <Unlock /> : <Lock />
+            }
         </CardConatiner>
     )
 }

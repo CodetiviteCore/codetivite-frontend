@@ -7,15 +7,19 @@ export default class PreferenceServices {
             method:"GET"
         })
     }
-    static async getSelectedPreferences(careerPath) {
+    
+    static async getSelectedPreferences() {
         
         return await request({
-            url: `roadmap?careerPath=${careerPath}`,
+            url: `roadmap/me`,
             method:"GET"
         })
     }
+
     static async updateCareerPath(careerPath) {
-        const data = {careerPath:careerPath}
+        const data = {
+            careerPath: careerPath
+        }
         return await request({
             url: `users/career-path?careerPath=${careerPath}`,
             method: "PUT",

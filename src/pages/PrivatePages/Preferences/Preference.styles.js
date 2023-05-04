@@ -42,12 +42,12 @@ export const PreferenceDashboard = styled.aside`
 `
 export const PreferenceDetailsHeader = styled.div`
     h1{
-        font-size:1.25rem;
+        font-size:2rem;
         margin-bottom:0;
     }
     p{
         margin-top: 0.5rem;
-        font-size:0.87rem ;
+        font-size:1rem ;
     }
 `
 export const PreferenceCardContainer = styled.div`
@@ -68,7 +68,7 @@ export const PreferencDashboardeDetails = styled.aside`
     p{
         margin-top:0.5rem;
         width:80%;
-        font-size:0.87rem;
+        font-size:1rem;
         color:var(--white);
     }
 

@@ -55,6 +55,7 @@ code {
   --categoryGray:#F4F4F4;
   --pure-white:#FFFF;
   --primary-yellow:#FCE459;
+  --dashboard-primary-light: rgba(230, 249, 236, 0.5);
 }
 
 h1,
