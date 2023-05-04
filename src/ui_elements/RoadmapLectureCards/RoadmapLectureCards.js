@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { Lock, RoadmapBookIcon, Unlock } from "../../assets/svgs"
 import { useApiGet } from '../../custom-hooks/useApiGet';
 import RoadmapServices from "../../services/roadmapServices";
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 

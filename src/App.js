@@ -8,8 +8,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import { SharedRoutes } from './routes/RouteBuilder/SharedRoutes';
 import { useSelector } from 'react-redux';
 import { selectCareerState } from "./Redux store/auth/auth.selector";
-import { ReactLenis } from "@studio-freight/react-lenis";
-import Lenis from "@studio-freight/lenis";
+// import { ReactLenis } from "@studio-freight/react-lenis";
+// import Lenis from "@studio-freight/lenis";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 
