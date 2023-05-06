@@ -44,7 +44,6 @@ export const RoadmapLectureCards = ({
         document && setResourceDoc(document.data)
     }
 
-    console.log(completedSyllabus, "dsdgg")
     useEffect(() => {
         completedSyllabus?.projectsCompleted
             .forEach((module) => {

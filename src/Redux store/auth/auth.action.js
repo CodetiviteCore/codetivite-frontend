@@ -1,7 +1,6 @@
 
 import { AUTH_ACTION_TYPES } from './auth.type';
 export const signUpWithGoogle = (user) => {
-    console.log(user, "user-details")
     return {
         type: AUTH_ACTION_TYPES.SET_CURRENT_USER,
         payload: user
@@ -20,9 +19,15 @@ export const careerPathSelectState = (state) => {
     }
 }
 export const setCareerPath = (state) => {
-    console.log(state, "setting career path")
     return {
         type: AUTH_ACTION_TYPES.SET_CAREERPATH,
         payload:state
+    }
+}
+
+export const addToVisitedRoutes = (route) => {
+    return {
+        type: AUTH_ACTION_TYPES.ADD_VISITED_ROUTES,
+        payload:route
     }
 }

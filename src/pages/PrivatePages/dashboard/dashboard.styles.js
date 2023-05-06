@@ -1,12 +1,27 @@
 import styled from "styled-components";
+import { SkillIcon, Badge } from "../../../assets/svgs";
 
 export const DashboardContainer = styled.main`
+    height:100%;
+    overflow-y:scroll;
+    padding-bottom:4% ;
     h6,span,p{
         color: var(--white);
     }
     p{
         font-size:1.2rem ;
     }
+    background-color:var(--white) ;
+`
+export const Skill = styled(SkillIcon)`
+    border-radius:50%;
+    width:3rem;
+    height:3rem;
+`
+export const BadgeTag = styled(Badge)`
+    border-radius:50%;
+    width:3rem;
+    height:3rem;
 `
 
 export const DashboardHeader = styled.section`
@@ -42,13 +57,14 @@ export const Overview = styled.div`
     gap:4%;
 `
 export const SkillDiv = styled.div`
-    padding:10px;
+    padding:20px;
     width:fit-content;
     background-color:var(--dashboard-primary-light);
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:10px;
+    border-radius:50%;
+
 `
 export const SkillDesDiv = styled.div`
     p:last-child{
@@ -58,6 +74,7 @@ export const SkillDesDiv = styled.div`
 export const SkillDetails = styled.div`
     display:flex;
     gap:10px;
+    align-items:center;
 `
 export const ImageContainer = styled.div`
     width:25rem;
@@ -77,5 +94,6 @@ export const DashboardDetailsContainer = styled.div`
     justify-content:center;
 `
 export const DashboardInfoGraphics = styled.section`
-
+    height:50vh;
+    padding: 0 3%;
 `

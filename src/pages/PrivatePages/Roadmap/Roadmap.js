@@ -29,8 +29,6 @@ const Roadmap = () => {
         if (!!careerDetails) {
 
             let levelsArray = []
-            console.log(careerDetails?.resource?.levels, "yayyy")
-
             careerDetails?.resource?.levels?.map((level) => {
 
                 const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl, projectId }) => ({
@@ -177,7 +175,6 @@ const Roadmap = () => {
                                 key={index}
                                 item={item}
                             />)
-
                     }
                 </RoadMapPath>
                 <RoadMapProjectsToComplete>

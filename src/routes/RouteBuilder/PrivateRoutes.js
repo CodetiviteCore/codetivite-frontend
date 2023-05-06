@@ -16,7 +16,10 @@ const LazyCommunity = React.lazy(() => import("../../pages/PrivatePages/Communit
 
 
 
+
 export const PrivateRoutes = () => {
+
+
     const privateLayouts = [
         {
             path: "/dashboard",

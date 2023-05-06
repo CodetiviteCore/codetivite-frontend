@@ -14,8 +14,9 @@ import { useApiGet } from "../../../custom-hooks/useApiGet";
 import PreferenceServices from "../../../services/preferenceServices";
 import { useDispatch } from "react-redux";
 import { setCareerPath } from "../../../Redux store/auth/auth.action";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useApiPost } from "../../../custom-hooks/useApiPost";
+import { addToVisitedRoutes } from "../../../Redux store/auth/auth.action";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -25,7 +26,9 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const Prefrence = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
     const [selectCareerPath, setSelectCareerPath] = useState(null)
+
     const { data: preferencesResponse } = useApiGet(
         "Preferences",
         PreferenceServices.getPreferences,
@@ -51,10 +54,11 @@ const Prefrence = () => {
         navigate("/dashboard")
     }
 
-
     useEffect(() => {
-        console.log(selectCareerPath)
-    }, [selectCareerPath])
+        dispatch(addToVisitedRoutes(location?.pathname.toString()))
+    }, [dispatch, location?.pathname])
+    
+
 
 
     return (

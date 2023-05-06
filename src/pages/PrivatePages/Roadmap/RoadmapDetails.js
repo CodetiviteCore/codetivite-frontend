@@ -248,7 +248,6 @@ const RoadmapDetails = () => {
 
 
     const onUpdateSyllabuSuccess = (data) => {
-        console.log("success data", data)
         toast.success(`Marked as complete!`, {
             position: "top-right",
             autoClose: 3000,
