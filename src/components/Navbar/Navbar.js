@@ -32,6 +32,9 @@ import {
   signUpWithGoogle
 } from '../../Redux store/auth/auth.action';
 import Cookies from 'js-cookie';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 
 
@@ -51,10 +54,13 @@ export const Navbar = () => {
     lastname: ""
   });
 
+
   //api call
   const {
     data: authResponse,
-    refetch: fetchToken
+    refetch: fetchToken,
+    isFetching,
+
   } = useApiGet(
     "Auth",
     () => AuthServices.getUserDetails(searchParams.get("code")),
@@ -64,6 +70,8 @@ export const Navbar = () => {
       refetchOnWindowFocus: false
     }
   );
+
+
 
   //sign up process
   const getUserfromEmail = useCallback(() => {
@@ -79,14 +87,18 @@ export const Navbar = () => {
     }
   }, [dispatch, navigate, searchParams]);
 
-  console.log(authResponse, "response")
+
+
+
   //Get user details login proccess... normal flow
+
   const getUser = useCallback(() => {
     if (authResponse?.sentEmail) {
       setEmailModal(true);
       setIsModalOpen(true);
       navigate("/", { replace: true });
     }
+
 
     else if (authResponse?.authToken) {
       Cookies.remove("authToken")
@@ -98,6 +110,7 @@ export const Navbar = () => {
         dispatch(careerPathSelectState(true));
         navigate("/preferences", { replace: true });
       }
+
       else if (userDetails?.profile?.careerPath) {
         dispatch(careerPathSelectState(true))
       }
@@ -105,24 +118,32 @@ export const Navbar = () => {
       navigate("/", { replace: true });
 
     }
-  }, [
-    authResponse?.authToken,
-    authResponse?.sentEmail,
-    dispatch,
-    navigate,
-    setEmailModal,
-    setIsModalOpen
-  ]);
+  },
+    [
+      authResponse?.authToken,
+      authResponse?.sentEmail,
+      dispatch,
+      navigate,
+      setEmailModal,
+      setIsModalOpen
+    ]
+  );
+
+
 
   useEffect(() => {
+
     //get user details useEffect
+
     if (searchParams.get("token")) {
       getUserfromEmail();
     } else if (searchParams.get("code")) {
       fetchToken();
       getUser();
+      // navigate("/dashboard", { replace: true });
     }
-  }, [getUser, getUserfromEmail, searchParams, fetchToken]);
+
+  }, [getUser, getUserfromEmail, searchParams, fetchToken, navigate]);
 
   useLayoutEffect(() => {
     if (user) {
@@ -168,7 +189,9 @@ export const Navbar = () => {
 
   return (
     <NavigationBar scrolled={scrolled}>
-      <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
+      {
+        isFetching ? <Skeleton height={20} width={80} /> : <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
+      }
       <HamburgerContainer onClick={handleHamburgerClick}>
         <Bar isMenuOpen={isMenuOpen} />
         <Bar isMenuOpen={isMenuOpen} />
@@ -176,11 +199,22 @@ export const Navbar = () => {
       </HamburgerContainer>
       <NavListContainer isMenuOpen={isMenuOpen}>
         <NavList>
-          <NavItem to={"/#community"}>Our community</NavItem>
-          <NavItem to={"/clarity-test"}>Clarity test</NavItem>
-          <NavItem to={"/about-us"}>About</NavItem>
-          <NavItem to={"/contact-us"}>Contact us</NavItem>
-          <NavItem to={"/our-blog"}>Our blog</NavItem>
+          {
+            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/#community"}>Our community</NavItem>
+          }
+          {
+            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/clarity-test"}>Clarity test</NavItem>
+
+          }
+          {
+            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/about-us"}>About</NavItem>
+          }
+          {
+            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/contact-us"}>Contact us</NavItem>
+          }
+          {
+            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/our-blog"}>Our blog</NavItem>
+          }
         </NavList>
         {
           user ?
@@ -201,12 +235,15 @@ export const Navbar = () => {
               </LogoOutDropDown>
             </AvatarContainer>
             :
-            <Button
-              scrolled={scrolled}
-              onClick={openModal}
-            >
-              Login or Sign up
-            </Button>
+            (
+              isFetching ? <Skeleton circle={true} height={40} width={40} /> : <Button
+                scrolled={scrolled}
+                onClick={openModal}
+              >
+                Login or Sign up
+              </Button>
+            )
+
         }
 
       </NavListContainer>
@@ -323,6 +360,7 @@ const NavAvatar = styled(Avatar)`
   span{
     color:var(--white) !important;
   }
+
   `
 
 const Bar = styled.div`

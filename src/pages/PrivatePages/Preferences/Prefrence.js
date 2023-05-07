@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PreferenceButton } from "../../../ui_elements";
 import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {
@@ -14,8 +14,9 @@ import { useApiGet } from "../../../custom-hooks/useApiGet";
 import PreferenceServices from "../../../services/preferenceServices";
 import { useDispatch } from "react-redux";
 import { setCareerPath } from "../../../Redux store/auth/auth.action";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useApiPost } from "../../../custom-hooks/useApiPost";
+import { addToVisitedRoutes } from "../../../Redux store/auth/auth.action";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -25,7 +26,9 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const Prefrence = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
     const [selectCareerPath, setSelectCareerPath] = useState(null)
+
     const { data: preferencesResponse } = useApiGet(
         "Preferences",
         PreferenceServices.getPreferences,
@@ -48,13 +51,12 @@ const Prefrence = () => {
     const submitCareerPath = () => {
         dispatch(setCareerPath(selectCareerPath))
         updateCareer(selectCareerPath)
-        navigate("/dashboard")
+        dispatch(addToVisitedRoutes(location?.pathname.toString()))
+        navigate('/dashboard', { replace: true });
     }
 
 
-    useEffect(() => {
-        console.log(selectCareerPath)
-    }, [selectCareerPath])
+
 
 
     return (

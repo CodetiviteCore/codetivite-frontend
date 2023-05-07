@@ -5,6 +5,7 @@ export const RoadMapContainer = styled.main`
     width: auto;
     padding: 2rem 1.4rem;
     overflow-y: scroll !important;
+    background-color:#f0f5f4;
 
 `
 

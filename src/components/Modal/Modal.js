@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 import { ModalContext } from '../../context/ModalContext';
 import { useEffect } from 'react';
+import { devices } from '../../utils/MediaQueiyBreakPoints';
 
 
 const ModalWrapper = styled(motion.div)`
@@ -27,6 +28,20 @@ const ModalContent = styled(motion.div)`
   /* max-height: 8rem; */
   height:fit-content;
   overflow: auto;
+  @media ${devices.tablet}{
+    width: 20rem;
+    justify-self:center !important;
+    h4{
+        font-size:1rem;
+    }
+    p{
+        font-size:0.8rem;
+    }
+    button{
+        font-size:0.8rem;
+        width:100% !important;
+    }
+  }
   
 `;
 
@@ -34,14 +49,14 @@ export const Modal = ({ isOpen, children }) => {
     const { setIsModalOpen, emailModal } = useContext(ModalContext)
     useEffect(() => {
         emailModal && setIsModalOpen(true)
-    },[emailModal, setIsModalOpen])
+    }, [emailModal, setIsModalOpen])
     // const closeModal = () => {
     //     setIsModalOpen(false);
     // };
     return (
         <ModalWrapper
             isOpen={isOpen}
-            // onClick={closeModal}
+        // onClick={closeModal}
         >
             <ModalContent
                 initial={{

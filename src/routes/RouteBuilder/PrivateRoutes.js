@@ -2,6 +2,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { DashboardLayout } from '../../components/Layouts/dashboardLayout';
+import { LoaderComponent } from '../../ui_elements';
 
 
 
@@ -16,16 +17,21 @@ const LazyCommunity = React.lazy(() => import("../../pages/PrivatePages/Communit
 
 
 
+
 export const PrivateRoutes = () => {
+
+
     const privateLayouts = [
         {
             path: "/dashboard",
-            component: <LazyDashboard />
+            component: (
+                <LazyDashboard />
+            )
         },
         {
             path: "/roadmap/*",
             component: (
-                <React.Suspense fallback={null}>
+                <React.Suspense fallback={<LoaderComponent/>}>
                     <Routes>
                         <Route path="/" element={<LazyRoadMap />} />
                         <Route path="/:level" element={<LazyRoadMapDetails />} />

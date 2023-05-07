@@ -2,6 +2,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { BlogLayout, MainLayout } from '../../components/Layouts'
+import { LoaderComponent } from '../../ui_elements'
 
 
 
@@ -53,7 +54,7 @@ export const SharedRoutes = () => {
                     path={routes.path}
                     element={
                         routes.path === "/our-blog" ? (
-                            <React.Suspense fallback={null}>
+                            <React.Suspense fallback={<LoaderComponent/>}>
                                 <MainLayout>
                                     <BlogLayout>
                                         {routes.component}
@@ -62,7 +63,7 @@ export const SharedRoutes = () => {
                             </React.Suspense>
                             
                         ) : (
-                            <React.Suspense fallback={null}>
+                            <React.Suspense fallback={<LoaderComponent/>}>
                                 <MainLayout>{routes.component}</MainLayout>
                             </React.Suspense>
                         )

@@ -16,3 +16,8 @@ export const selectCareer = createSelector(
     [selectAuthReducer],
     (authSlice)=>authSlice.careerPath
 )
+
+export const selectVisitedRoutes = createSelector(
+    [selectAuthReducer],
+    (authSlice)=>authSlice.visitedRoutes
+)

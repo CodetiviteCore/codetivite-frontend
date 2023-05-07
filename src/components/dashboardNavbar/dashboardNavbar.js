@@ -31,7 +31,6 @@ export const DashboardNavabar = () => {
             enabled: true
         }
     )
-    // console.log(updatedUser, "update eyar")
 
     useLayoutEffect(() => {
         if (user) {
@@ -47,7 +46,7 @@ export const DashboardNavabar = () => {
         if (updatedUser) {
             dispatch(signUpWithGoogle(updatedUser?.user))
         }
-    },[dispatch, updatedUser])
+    }, [dispatch, updatedUser])
 
 
 

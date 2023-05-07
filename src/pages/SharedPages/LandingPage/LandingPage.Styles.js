@@ -10,6 +10,13 @@ export const LandingModal = styled.div`
 		background-color: var(--blue);
 		display: flex;
 		justify-content: space-between;
+
+		@media ${devices.tablet}{
+			.left,.right{
+				width:50px;
+				height:50px ;
+			}
+		}
 	}
 	div:last-child {
 		padding: 50px 70px;
@@ -36,6 +43,12 @@ export const LandingModal = styled.div`
 			}
 			&:hover {
 				cursor: pointer;
+			}
+		}
+		@media ${devices.tablet}{
+			padding:10px 15px ;
+			button{
+				padding:20px ;
 			}
 		}
 	}

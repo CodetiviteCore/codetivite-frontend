@@ -3,7 +3,6 @@ export const textFormat = (text) => {
 }
 
 export const transformRoadMap = (level) => {
-  console.log("This is level", level)
   if (level === "fresher" || level === "Fresher") {
     return "junior"
   }

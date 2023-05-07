@@ -49,6 +49,8 @@ import { ReactComponent as Inclusive } from "./inclusiveness.svg"
 import { ReactComponent as CallBlack } from "./callblack.svg"
 import { ReactComponent as Sms } from "./sms.svg"
 import { ReactComponent as Notification } from "./notification-bing.svg"
+import { ReactComponent as Delete } from "./delete.svg"
+
 
 
 
@@ -111,5 +113,6 @@ export {
     Inclusive,
     CallBlack,
     Sms,
-    Notification
+    Notification,
+    Delete
 }

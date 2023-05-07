@@ -3,7 +3,8 @@ import { AUTH_ACTION_TYPES } from './auth.type';
 export const AUTH_INITIAL_STATE = {
     currentUser: null,
     // careerPath: null,
-    isCareerPathSelected: false
+    isCareerPathSelected: false,
+    visitedRoutes: []
 }
 
 export const authReducer = (state = AUTH_INITIAL_STATE, action) => {
@@ -28,6 +29,11 @@ export const authReducer = (state = AUTH_INITIAL_STATE, action) => {
             return {
                 ...state,
                 careerPath: payload
+            }
+        case AUTH_ACTION_TYPES.ADD_VISITED_ROUTES:
+            return {
+                ...state,
+                visitedRoutes: [payload]
             }
         default:
             return state

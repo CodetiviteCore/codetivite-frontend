@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import {useState } from 'react'
 import "swiper/css"
 import "swiper/css/pagination"
 import 'swiper/css/navigation';
@@ -32,20 +32,14 @@ import {
   LandingBlogContainer,
   BlogContainer,
   LandingBlogCardContainer,
-  LandingModal,
-  LandingModalVerify
 } from './LandingPage.Styles';
 import {
   Audio,
-  Google,
-  LandingModalLogoLeft,
-  LandingModalLogoRight,
   LeaderboardIcon,
   LeftArrow,
   PortfolioIcon,
   RightArrow,
   RoadmapIcon,
-  VerifyMail,
 } from '../../../assets/svgs';
 import GreenLogo from "../../../assets/images/greenLargeLogo.png"
 import { Button, LandingCard } from '../../../ui_elements/index';
@@ -62,9 +56,6 @@ import AuthorAvatar from "../../../assets/images/blogAvatar.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
-import { Modal } from '../../../components';
-import { ModalContext } from '../../../context/ModalContext';
-import { Puff } from 'react-loader-spinner';
 import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -77,27 +68,15 @@ import { useLocation } from 'react-router-dom';
 
 
 const LandingPage = () => {
-  const { isModalOpen, emailModal } = useContext(ModalContext)
   const [cardState, setCardState] = useState(0)
-  const [isredirect, setIsRedirect] = useState(false)
   const navigate = useNavigate()
   const location = useLocation();
   const communityRef = useRef(null)
 
 
-  const redirect = () => {
-    setIsRedirect(true)
-    window.location.href = `https://codetivite-api2.onrender.com/api/v1.0/auth/login`
-  }
-  const redirectToMail = () => {
-    window.location.href = "https://gmail.com"
-  }
-
-
 
   useEffect(() => {
     if (location.hash === '#community') {
-      console.log('Community section found!');
       // Scroll to the community section
       const communityRef = document.getElementById('community');
       communityRef.scrollIntoView({ behavior: 'smooth' });
@@ -108,6 +87,7 @@ const LandingPage = () => {
   const handleCardExpansion = (index) => {
     setCardState(index)
   }
+
 
   const cardDetails = [
     {
@@ -154,66 +134,7 @@ const LandingPage = () => {
   ]
   return (
     <LandingMainContainer>
-      <Modal isOpen={isModalOpen}>
-        {
-          emailModal ?
-            <LandingModalVerify>
-              <div>
-                <VerifyMail />
-              </div>
-              <div>
-                <h4>Verify your email address</h4>
-                <p>We have sent you an email to the selected google account, click on the link to verify your account.</p>
-                <button onClick={redirectToMail}>
-                  Check my mail
-                </button>
-              </div>
-
-            </LandingModalVerify> :
-            <LandingModal>
-              <div>
-                <LandingModalLogoLeft className='left' />
-                <LandingModalLogoRight className='right' />
-              </div>
-              <div>
-                <h4>Continue with your Google account.</h4>
-                <p>Getting started and getting back into your account has been simplified.
-                  Continue using your google account.
-                </p>
-                <button onClick={redirect}>
-                  {
-                    isredirect ? <Puff
-                      height="40"
-                      width="40"
-                      radius={1}
-                      color="var(--white)"
-                      ariaLabel="puff-loading"
-                      wrapperStyle={{
-                        backgroundColor: "transparent",
-                        height: "fit-content",
-                        padding: "0",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
-                      }}
-                      wrapperClass=""
-                      visible={true}
-                    />
-                      :
-                      <>
-                        <Google />
-                        <p>Continue with your Google account</p>
-                      </>
-                  }
-                </button>
-              </div>
-
-            </LandingModal>
-
-
-        }
-
-      </Modal>
+     
       <LandingFirstContainer>
         <div>
           <p
