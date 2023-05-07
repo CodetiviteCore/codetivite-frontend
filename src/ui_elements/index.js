@@ -12,5 +12,5 @@ export * from "./AuthorDetails/authorDetails.js"
 export * from "./FooterInput/footerInput.js"
 export * from "./TeamImage/TeamImage.js"
 export * from "./Input/Input.js"
-
+export * from "./Loader/Loader.js"
 

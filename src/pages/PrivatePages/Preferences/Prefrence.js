@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PreferenceButton } from "../../../ui_elements";
 import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {
@@ -51,13 +51,11 @@ const Prefrence = () => {
     const submitCareerPath = () => {
         dispatch(setCareerPath(selectCareerPath))
         updateCareer(selectCareerPath)
-        navigate("/dashboard")
+        dispatch(addToVisitedRoutes(location?.pathname.toString()))
+        navigate('/dashboard', { replace: true });
     }
 
-    useEffect(() => {
-        dispatch(addToVisitedRoutes(location?.pathname.toString()))
-    }, [dispatch, location?.pathname])
-    
+
 
 
 

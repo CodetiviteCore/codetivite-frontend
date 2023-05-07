@@ -60,7 +60,7 @@ export const Navbar = () => {
     data: authResponse,
     refetch: fetchToken,
     isFetching,
-  
+
   } = useApiGet(
     "Auth",
     () => AuthServices.getUserDetails(searchParams.get("code")),
@@ -115,7 +115,7 @@ export const Navbar = () => {
         dispatch(careerPathSelectState(true))
       }
 
-      navigate("/dashboard", { replace: true });
+      navigate("/", { replace: true });
 
     }
   },
@@ -140,9 +140,10 @@ export const Navbar = () => {
     } else if (searchParams.get("code")) {
       fetchToken();
       getUser();
+      // navigate("/dashboard", { replace: true });
     }
 
-  }, [getUser, getUserfromEmail, searchParams, fetchToken]);
+  }, [getUser, getUserfromEmail, searchParams, fetchToken, navigate]);
 
   useLayoutEffect(() => {
     if (user) {
@@ -188,7 +189,9 @@ export const Navbar = () => {
 
   return (
     <NavigationBar scrolled={scrolled}>
-      <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
+      {
+        isFetching ? <Skeleton height={20} width={80} /> : <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
+      }
       <HamburgerContainer onClick={handleHamburgerClick}>
         <Bar isMenuOpen={isMenuOpen} />
         <Bar isMenuOpen={isMenuOpen} />
@@ -232,12 +235,15 @@ export const Navbar = () => {
               </LogoOutDropDown>
             </AvatarContainer>
             :
-            <Button
-              scrolled={scrolled}
-              onClick={openModal}
-            >
-              Login or Sign up
-            </Button>
+            (
+              isFetching ? <Skeleton circle={true} height={40} width={40} /> : <Button
+                scrolled={scrolled}
+                onClick={openModal}
+              >
+                Login or Sign up
+              </Button>
+            )
+
         }
 
       </NavListContainer>
@@ -354,6 +360,7 @@ const NavAvatar = styled(Avatar)`
   span{
     color:var(--white) !important;
   }
+
   `
 
 const Bar = styled.div`

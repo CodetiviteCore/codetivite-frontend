@@ -237,8 +237,6 @@ const RoadmapDetails = () => {
 
 
 
-
-
     const avatars = [
         Tina,
         Toks,
