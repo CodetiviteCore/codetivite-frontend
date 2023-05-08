@@ -12,6 +12,7 @@ import {
 } from "../../assets/svgs"
 import { DashboardMenuItem } from "../../ui_elements"
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 const SideBarContainer = styled.aside`
@@ -40,6 +41,8 @@ const Logo = styled.h1`
 
 export const DashboardSideBar = ({ show }) => {
 
+    const [activeIndex, setActiveIndex] = useState(1)
+
     const menus = [
         {
             path: "/dashboard",
@@ -49,17 +52,22 @@ export const DashboardSideBar = ({ show }) => {
         {
             path: "/events",
             title: "Events",
-            icon: <EventsIcon />
+            icon: <EventsIcon />,
+            comingSoon: true
         },
         {
             path: "/community",
             title: "Community",
-            icon: <CommunityIcon />
+            icon: <CommunityIcon />,
+            comingSoon: true
+
         },
         {
             path: "/our-blog",
             title: "Our blog",
-            icon: <OurBlogIcon />
+            icon: <OurBlogIcon />,
+            comingSoon: true
+
         },
         {
             path: "/roadmap",
@@ -69,17 +77,22 @@ export const DashboardSideBar = ({ show }) => {
         {
             path: "/leaderboard",
             title: "Leaderboard",
-            icon: <DashboardLeaderboard />
+            icon: <DashboardLeaderboard />,
+            comingSoon: true
+
         },
         {
             path: "/profile",
             title: "My Profile",
-            icon: <MyProfileIcon />
+            icon: <MyProfileIcon />,
+            comingSoon: true
+
         },
         {
             path: "/settings",
             title: "Settings",
-            icon: <Settings />
+            icon: <Settings />,
+            comingSoon: true
         },
     ]
     return (
@@ -94,11 +107,15 @@ export const DashboardSideBar = ({ show }) => {
             </LogoContainer>
             <section>
                 {
-                    menus.map(({ path, title, icon }, index) => <DashboardMenuItem
+                    menus.map(({ path, title, icon, comingSoon }, index) => <DashboardMenuItem
                         icon={icon}
                         title={title}
                         path={path}
-                        key={index}
+                        key={index} 
+                        id={index +1 }
+                        comingSoon={comingSoon}
+                        activeIndex={activeIndex}
+                        setActiveIndex={setActiveIndex}
                     />)
                 }
 

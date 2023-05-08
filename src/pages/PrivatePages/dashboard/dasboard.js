@@ -1,27 +1,26 @@
 import React from 'react'
-import Roadmap from '../Roadmap/Roadmap';
-// import { Calendar } from '../../../components/Calendar/Calendar';
-// import Todo from '../../../components/Todo/Todo';
+import { Calendar } from '../../../components/Calendar/Calendar';
+import Todo from '../../../components/Todo/Todo';
 import {
   DashboardContainer,
-  // DashboardHeader,
-  // DashboardOverview,
-  // DashboardWelcomeBack,
-  // Overview,
-  // SkillDesDiv,
-  // SkillDetails,
-  // SkillDiv,
-  // ImageContainer,
-  // DashboardDetailsContainer,
-  // DashboardInfoGraphics,
-  // Skill,
-  // BadgeTag
+  DashboardHeader,
+  DashboardOverview,
+  DashboardWelcomeBack,
+  Overview,
+  SkillDesDiv,
+  SkillDetails,
+  SkillDiv,
+  ImageContainer,
+  DashboardDetailsContainer,
+  DashboardInfoGraphics,
+  Skill,
+  BadgeTag
 } from './dashboard.styles';
 
 const Dashboard = () => {
   return (
     <DashboardContainer>
-      {/* <DashboardHeader>
+      <DashboardHeader>
         <DashboardDetailsContainer>
           <DashboardWelcomeBack>
             <h6>Welcome back, <span>Victor</span></h6>
@@ -63,8 +62,7 @@ const Dashboard = () => {
       <DashboardInfoGraphics>
         <Todo />
         <Calendar/>
-      </DashboardInfoGraphics> */}
-      <Roadmap/>
+      </DashboardInfoGraphics>
     </DashboardContainer>
   )
 }
