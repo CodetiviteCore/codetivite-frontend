@@ -7,7 +7,7 @@ import { Button } from '../../ui_elements/Button/Button';
 const CalendarWrapper = styled.div`
     width:30rem;
     border:0.5px solid var(--todo-border);
-    min-height:100px ;
+    height:fit-content;
     padding: 0.5% ;
     border-radius:10px ;
     transition: all .3s ease ;
@@ -36,6 +36,7 @@ const MonthContainer = styled.div`
     justify-content: space-between;
     width: auto;
     padding: 10px 20px;
+    position:relative;
     button {
         font-size: 0.8rem;
         padding: 2% 3%;
@@ -107,14 +108,50 @@ const DateWrapper = styled.div`
     overflow-x: auto;
     white-space: nowrap;
     color: black !important ;
-    scroll-behavior: smooth ;
+    scroll-behavior: smooth;
 `;
+
+const ToolTipContainer = styled.div`
+    position:absolute;
+    top:2rem;
+    right:-16rem;
+    z-index:3;
+    width: 17rem;
+    height:fit-content;
+    background-color:#f0f5f4 ;
+    padding:1rem 1.3rem;
+    box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 13px -6px rgba(0,0,0,0.2);
+    textArea,select{
+        border:none;
+        outline:none;
+    }
+    select{
+        height:30px;
+        color: rgba(0,0,0,0.5) ;
+    }
+    textArea{
+        padding:4px ;
+        font-size:1rem ;
+        ::placeholder{
+            opacity:0.3;
+        }
+    }
+`
 
 export const Calendar = () => {
 
     const [selectedDate, setSelectedDate] = useState(null);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    // const [reminders, setReminders] = useState([])
+    const [selectedTime] = useState(null)
+    const [reminder, setRemider] = useState({
+        date: "",
+        reminder: "",
+        time: ""
+    })
 
 
     const handlePrevMonth = () => {
@@ -148,6 +185,30 @@ export const Calendar = () => {
         return new Date(year, month, 1).getDay();
     };
 
+    const handleReminderChange = (e) => {
+        const { value, name } = e.target
+        const reminderDate = selectedDate
+        setRemider({
+            ...reminder,
+            date: reminderDate,
+            [name]: value
+        })
+        console.log(reminder)
+    }
+
+
+    //dropdown time selector generation
+    const timeOptions = Array.from({ length: 13 }, (_, index) => {
+        const hour = index + 6
+        const am_pm = hour >= 12 ? "pm" : "am"
+        const hourDisplayFormat = hour > 12 ? hour - 12 : hour
+
+        return {
+            value: `${hour}${am_pm}`,
+            label: `${hourDisplayFormat}${am_pm}`
+        }
+    })
+
 
     const daysInMonth = getDaysInMonth(currentYear, currentMonth);
     const startingDayOfWeek = getStartingDayOfWeek(currentYear, currentMonth);
@@ -179,6 +240,25 @@ export const Calendar = () => {
                         <h6 onClick={handleNextMonth}>&gt;</h6>
                     </div>
                     <Button primary selected={!!selectedDate}>Add Reminder</Button>
+                    <ToolTipContainer>
+                        {/* <label>Reminder:</label> */}
+                        <textArea
+                            type={"text"}
+                            placeholder={"Enter reminder"}
+                            name={"reminder"}
+                            onChange={handleReminderChange}
+                        />
+                        <select value={selectedTime} onChange={handleReminderChange} name={"time"}>
+                            <option value={""}>Time</option>
+                            {
+                                timeOptions.map((option) =>
+                                    <option value={option.value}>
+                                        {option.label}
+                                    </option>
+                                )
+                            }
+                        </select>
+                    </ToolTipContainer>
                 </MonthContainer>
                 <DateWrapper>
                     {dates.map((date) => (
@@ -188,7 +268,8 @@ export const Calendar = () => {
                             onClick={() =>
                                 hanledSelectDate({
                                     date: date,
-                                    day: (startingDayOfWeek + date - 1) % 7
+                                    day: (startingDayOfWeek + date - 1) % 7,
+                                    month: currentMonth
                                 })
                             }
                         >
@@ -196,7 +277,10 @@ export const Calendar = () => {
                             <p>{days[(startingDayOfWeek + date - 1) % 7]}</p>
                         </DateContainer>
                     ))}
+
+
                 </DateWrapper>
+
             </CalendarContainer>
         </CalendarWrapper>
     )

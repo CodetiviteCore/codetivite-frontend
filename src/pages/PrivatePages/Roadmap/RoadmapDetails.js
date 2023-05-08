@@ -183,7 +183,7 @@ const DetailsModal = styled.div`
         display:flex;
         align-items:center;
         justify-content:center;
-        cursor: ${({primary})=> primary ? "pointer" : "not-allowed"} !important;
+        cursor: ${({ primary }) => primary ? "pointer" : "not-allowed"} !important;
     }
     
 `

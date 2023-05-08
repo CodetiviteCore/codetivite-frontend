@@ -14,6 +14,7 @@ const Container = styled.div`
   border-radius:10px;
   background-color:var(--white) ;
   transition: all .3s ease ;
+  height:fit-content ;
 `;
 
 const TileContainer = styled.div`
