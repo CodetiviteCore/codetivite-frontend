@@ -199,22 +199,21 @@ export const Navbar = () => {
       </HamburgerContainer>
       <NavListContainer isMenuOpen={isMenuOpen}>
         <NavList>
-          {
-            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/#community"}>Our community</NavItem>
-          }
-          {
-            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/clarity-test"}>Clarity test</NavItem>
+          <NavItem to={"/#community"}>Our community</NavItem>
 
-          }
-          {
-            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/about-us"}>About</NavItem>
-          }
-          {
-            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/contact-us"}>Contact us</NavItem>
-          }
-          {
-            isFetching ? <Skeleton height={20} width={80} /> : <NavItem to={"/our-blog"}>Our blog</NavItem>
-          }
+
+          <NavItem to={"/clarity-test"}>Clarity test</NavItem>
+
+
+
+          <NavItem to={"/about-us"}>About</NavItem>
+
+
+          <NavItem to={"/contact-us"}>Contact us</NavItem>
+
+
+          <NavItem to={"/our-blog"}>Our blog</NavItem>
+
         </NavList>
         {
           user ?
