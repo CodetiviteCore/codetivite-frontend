@@ -183,6 +183,7 @@ const DetailsModal = styled.div`
         display:flex;
         align-items:center;
         justify-content:center;
+        cursor: ${({ primary }) => primary ? "pointer" : "not-allowed"} !important;
     }
     
 `
@@ -224,7 +225,6 @@ const DocumentsDisplay = styled.div`
 
 
 
-
 const RoadmapDetails = () => {
     const { level } = useParams()
     const navigate = useNavigate()
@@ -233,6 +233,7 @@ const RoadmapDetails = () => {
     const [resoureDoc, setResourceDoc] = useState(null)
     const [currentId, setCurrentId] = useState("")
     const [percentageValue, setPercentageValue] = useState("")
+    const [completed, setCompleted] = useState(false)
     const { careerPath } = useSelector(selectUser)
 
 
@@ -301,7 +302,8 @@ const RoadmapDetails = () => {
     )
     const {
         mutate: completeModule,
-        isLoading: isUpdatingSyllabus
+        isLoading: isUpdatingSyllabus,
+
     } = useApiPost(
         RoadmapServices.updateSyllablus,
         "complete module",
@@ -347,7 +349,7 @@ const RoadmapDetails = () => {
                                         modules={{ toolbar: false }}
                                     />
                                 </DocumentsDisplay>
-                                <Button primary onClick={() => completeModule({
+                                <Button primary={!completed} disabled={completed} onClick={() => completeModule({
                                     roadmap: `${careerPath}`,
                                     skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
                                     projectId: `${currentId}`
@@ -379,6 +381,8 @@ const RoadmapDetails = () => {
                                     setCurrentTopic={setCurrentTopic}
                                     setResourceDoc={setResourceDoc}
                                     resourceDoc={resoureDoc}
+                                    completed={completed}
+                                    setCompleted={setCompleted}
                                 />)
                     }
 
@@ -388,7 +392,7 @@ const RoadmapDetails = () => {
                         <CircularProgress>
                             <CircularProgressbar
                                 value={percentageValue || 0}
-                                text={`${percentageValue}%` || "0%"}
+                                text={`${percentageValue}%` || "0"}
                                 styles={{
                                     text: {
                                         // Text color

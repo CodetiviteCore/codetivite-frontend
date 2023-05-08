@@ -96,4 +96,6 @@ export const DashboardDetailsContainer = styled.div`
 export const DashboardInfoGraphics = styled.section`
     height:50vh;
     padding: 0 3%;
+    display:flex;
+    /* justify-content:space-between; */
 `

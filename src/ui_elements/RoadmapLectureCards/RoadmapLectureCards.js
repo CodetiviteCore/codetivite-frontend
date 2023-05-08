@@ -4,7 +4,6 @@ import { Lock, RoadmapBookIcon, Unlock } from "../../assets/svgs"
 import { useApiGet } from '../../custom-hooks/useApiGet';
 import RoadmapServices from "../../services/roadmapServices";
 import { useEffect } from 'react';
-import { useState } from 'react';
 
 const CardConatiner = styled.div`
     width: auto;
@@ -32,10 +31,10 @@ export const RoadmapLectureCards = ({
     resource,
     setCurrentId,
     projectId,
-    completedSyllabus
+    completedSyllabus,
+    completed,
+    setCompleted
 }) => {
-
-    const [completed, setCompleted] = useState(false)
 
     const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
 
@@ -51,7 +50,7 @@ export const RoadmapLectureCards = ({
                     setCompleted(true)
                 }
             })
-    }, [completedSyllabus, projectId])
+    }, [completedSyllabus, projectId, setCompleted])
 
     return (
         <CardConatiner>
@@ -60,6 +59,7 @@ export const RoadmapLectureCards = ({
                 <Title onClick={() => {
                     setCurrentTopic(title)
                     // setIsModalOpen(true)
+                    
                     setResourceDoc()
                     setCurrentId(projectId)
                     getDoc()
