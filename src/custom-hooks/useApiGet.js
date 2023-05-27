@@ -5,6 +5,7 @@ export const useApiGet = (key, queryFunction, properties) => {
     return useQuery(
         key,
         queryFunction,
-        properties
+        properties,
+
     )
 }

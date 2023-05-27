@@ -338,7 +338,7 @@ const LandingPage = () => {
           <h3>We have over 3000+ community members that uses Codevite</h3>
           <p>Join our growing community of techies at Codetivite! We're passionate about learning
             and collaboration and offer comprehensive course roadmaps, builder's program,
-            and leaderboard to help you succeed in the tech industry.
+            and leader-board to help you succeed in the tech industry.
             Whether you're a beginner or an experienced techie,
             we welcome you to join us today!
           </p>

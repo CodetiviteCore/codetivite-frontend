@@ -392,7 +392,7 @@ const RoadmapDetails = () => {
                         <CircularProgress>
                             <CircularProgressbar
                                 value={percentageValue || 0}
-                                text={`${percentageValue}%` || "0"}
+                                text={"0%" || `${percentageValue}%`}
                                 styles={{
                                     text: {
                                         // Text color

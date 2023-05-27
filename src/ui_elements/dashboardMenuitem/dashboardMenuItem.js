@@ -49,7 +49,6 @@ const Title = styled.p`
 `
 
 export const DashboardMenuItem = ({ icon, title, path, comingSoon, activeIndex, setActiveIndex, id }) => {
-    console.log(activeIndex)
     return (
         <Container active={activeIndex === id}>
             {comingSoon && <div>Coming soon</div>}

@@ -9,6 +9,7 @@ import { Notification } from "../../assets/svgs";
 import { useApiGet } from "../../custom-hooks/useApiGet";
 import AuthServices from "../../services/authServices";
 import { signUpWithGoogle } from "../../Redux store/auth/auth.action";
+import Skeleton from "react-loading-skeleton";
 
 
 
@@ -28,7 +29,8 @@ export const DashboardNavabar = () => {
         "updated-user-details",
         () => AuthServices.getUpdatedUserDetails(_id),
         {
-            enabled: true
+            enabled: true,
+            refetchOnWindowFocus: false
         }
     )
 
@@ -78,7 +80,7 @@ export const DashboardNavabar = () => {
                 <section>
                     <div>
                         <h5>{usernames.firstname} {usernames.lastname}</h5>
-                        <p>{isFetched && textFormat(user?.careerPath)}</p>
+                        <p>{isFetched ? <Skeleton width={10} height={20} /> : (textFormat(user?.careerPath))}</p>
                     </div>
                     <span>&gt;</span>
                 </section>
@@ -138,7 +140,6 @@ const DashboardUserDetails = styled.div`
     }
     section{
         display: flex;
-        gap: 10px;
         h5{
             font-size: 1rem;
             font-weight: 600;
@@ -150,8 +151,11 @@ const DashboardUserDetails = styled.div`
         span{
             transform: rotate(90deg);
             font-size: 30px;
+            transition: all .3s ease;
             :hover{
                 cursor: pointer;
+                transform:translateY(-30px);
+                /* transform: rotate(80deg); */
             }
         }
     }

@@ -18,8 +18,11 @@ export const authReducer = (state = AUTH_INITIAL_STATE, action) => {
         case AUTH_ACTION_TYPES.REMOVE_CURRENT_USER:
             return {
                 ...state,
-                currentUser: null
+                currentUser: null,
+                isCareerPathSelected: false,
+                visitedRoutes: []
             }
+
         case AUTH_ACTION_TYPES.SET_CAREERPATH_SELECTED:
             return {
                 ...state,
