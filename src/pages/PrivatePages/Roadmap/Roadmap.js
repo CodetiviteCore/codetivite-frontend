@@ -1,4 +1,4 @@
-import { AverageSalary, Badge, Decrease,  SkillIcon } from "../../../assets/svgs"
+import { AverageSalary, Badge, Decrease, SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
 import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
@@ -92,20 +92,50 @@ const Roadmap = () => {
             icon: <SkillIcon />,
             title: "Current skill level",
             info: careerDetails?.userInfo?.currentSkillLevel?.title,
-            improved: true
+            description: () => {
+                console.log(careerDetails?.userInfo?.currentSkillLevel?.title)
+                switch (careerDetails?.userInfo?.currentSkillLevel?.title) {
+                    case "junior":
+                        return console.log("You're just at the start. Long journey ahead")
+                    case "entry-level":
+                        return "You're at the basic level, you're getting better"
+                    case "intermediate":
+                        return "You are ready for a job at this stage"
+                    case "advanced":
+                        return "Apply for senior developer roles"
+
+                    default:
+                        break;
+                }
+            }
         },
         {
             icon: <AverageSalary />,
             title: "Average salary",
             info: careerDetails?.userInfo?.avarageSalary,
-            improved: true
+            description: "Earnings based on your current skills"
 
         },
         {
             icon: <Badge />,
             title: "Badges earned",
             info: careerDetails?.userInfo?.badgeEarned?.mostRecentBadgeGotten,
-            improved: true
+            description: () => {
+
+                switch (careerDetails?.userInfo?.currentSkillLevel?.title) {
+                    case "fresher":
+                        return "You're just at the start. Long journey ahead"
+                    case "entry-level":
+                        return "You're at the basic level, you're getting better"
+                    case "intermediate":
+                        return "You are ready for a job at this stage"
+                    case "advanced":
+                        return "Apply for senior developer roles"
+
+                    default:
+                        break;
+                }
+            }
         },
         {
             icon: <SkillIcon />,
@@ -146,7 +176,8 @@ const Roadmap = () => {
                         valueicon,
                         value,
                         valueDetail,
-                        improved
+                        improved,
+                        description
                     },
                         index
                     ) => <RoadMapCards
@@ -158,6 +189,7 @@ const Roadmap = () => {
                             value={value}
                             valueDetail={valueDetail}
                             improved={improved}
+                            description={()=>description()}
                         />
                     )
                 }

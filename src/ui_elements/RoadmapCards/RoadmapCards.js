@@ -24,28 +24,28 @@ const TitleContainer = styled.div`
         align-items:center ;
     }
 `
-const InfoDetails = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    h6{
-        font-size: 0.75rem;
-        font-weight: 400;
-    }
-    div{
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        p{
-        color: ${({ improved }) => improved ? "var(--primary)" : "var(--danger)"};
-        font-size: 10px;
-    }
-    }
-`
+// const InfoDetails = styled.div`
+//     width: 100%;
+//     display: flex;
+//     gap: 4px;
+//     align-items: center;
+//     h6{
+//         font-size: 0.75rem;
+//         font-weight: 400;
+//     }
+//     div{
+//         display: flex;
+//         align-items: center;
+//         gap: 7px;
+//         p{
+//         color: ${({ improved }) => improved ? "var(--primary)" : "var(--danger)"};
+//         font-size: 10px;
+//     }
+//     }
+// `
 
 
-export const RoadMapCards = ({ icon, title, info, valueIcon, value, valueDetail, improved }) => {
+export const RoadMapCards = ({ icon, title, info, valueIcon, value, valueDetail, improved, description }) => {
     return (
         <CardContainer>
             <TitleContainer>
@@ -56,13 +56,17 @@ export const RoadMapCards = ({ icon, title, info, valueIcon, value, valueDetail,
                 <InfoCircle />
             </TitleContainer>
             <h3>{info}</h3>
-            <InfoDetails improved={improved}>
+            {
+                description && 
+                <p>{description()}</p>
+            }
+            {/* <InfoDetails improved={improved}>
                 <div>
                     {valueIcon}
                     <p>{value}</p>
                 </div>
                 <h6>{valueDetail}</h6>
-            </InfoDetails>
+            </InfoDetails> */}
         </CardContainer>
     )
 }

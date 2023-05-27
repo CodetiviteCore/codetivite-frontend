@@ -174,7 +174,6 @@ export const Calendar = () => {
 
     const hanledSelectDate = (date) => {
         setSelectedDate(date)
-        console.log(selectedDate)
     }
 
     const getDaysInMonth = (year, month) => {
@@ -193,7 +192,6 @@ export const Calendar = () => {
             date: reminderDate,
             [name]: value
         })
-        console.log(reminder)
     }
 
 

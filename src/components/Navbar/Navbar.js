@@ -3,7 +3,8 @@ import {
   useEffect,
   useContext,
   useLayoutEffect,
-  useCallback
+  useCallback,
+  useRef
 } from 'react';
 import {
   NavLink,
@@ -11,6 +12,7 @@ import {
   useNavigate,
   Link
 } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import styled from "styled-components";
 
@@ -38,8 +40,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
-
-
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,6 +48,7 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const dropDownRef = useRef(null)
   const user = useSelector(selectUser);
   const [usernames, setUsernames] = useState({
     firstname: "",
@@ -59,7 +60,7 @@ export const Navbar = () => {
   const {
     data: authResponse,
     refetch: fetchToken,
-    isFetching,
+    isLoading,
 
   } = useApiGet(
     "Auth",
@@ -74,12 +75,14 @@ export const Navbar = () => {
 
 
   //sign up process
-  const getUserfromEmail = useCallback(() => {
+  const getUserFromEmail = useCallback(() => {
     const authToken = searchParams.get("token")
     Cookies.remove("authToken")
     Cookies.set("authToken", authToken, { secure: true })
 
     const userDetails = jwtDecode(authToken);
+
+
     dispatch(signUpWithGoogle(userDetails?.profile));
     if (!userDetails?.profile?.careerPath) {
       dispatch(careerPathSelectState(true));
@@ -90,7 +93,7 @@ export const Navbar = () => {
 
 
 
-  //Get user details login proccess... normal flow
+  //Get user details login process... normal flow
 
   const getUser = useCallback(() => {
     if (authResponse?.sentEmail) {
@@ -100,10 +103,11 @@ export const Navbar = () => {
     }
 
 
-    else if (authResponse?.authToken) {
+    else if (!!authResponse?.authToken) {
       Cookies.remove("authToken")
       Cookies.set("authToken", authResponse?.authToken, { secure: true })
       const userDetails = jwtDecode(authResponse?.authToken);
+
       dispatch(signUpWithGoogle(userDetails?.profile));
 
       if (!userDetails?.profile?.careerPath) {
@@ -132,18 +136,29 @@ export const Navbar = () => {
 
 
   useEffect(() => {
-
     //get user details useEffect
-
     if (searchParams.get("token")) {
-      getUserfromEmail();
+      getUserFromEmail();
     } else if (searchParams.get("code")) {
       fetchToken();
       getUser();
-      // navigate("/dashboard", { replace: true });
+      // navigate("/", { replace: true });
     }
 
-  }, [getUser, getUserfromEmail, searchParams, fetchToken, navigate]);
+  }, [getUser, getUserFromEmail, searchParams, fetchToken, navigate]);
+
+  useEffect(() => {
+    const handleClickOutSide = (event) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+        document.addEventListener("click", handleClickOutSide);
+        setIsDropdownOpen(false)
+      }
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutSide);
+    }
+  }, [])
 
   useLayoutEffect(() => {
     if (user) {
@@ -182,15 +197,21 @@ export const Navbar = () => {
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen)
+    setIsDropdownOpen((prevState) => !prevState)
   }
+
+  const handleLogOut = () => {
+    dispatch(logoutUser());
+  }
+
+
 
 
 
   return (
     <NavigationBar scrolled={scrolled}>
       {
-        isFetching ? <Skeleton height={20} width={80} /> : <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
+        isLoading ? <Skeleton height={20} width={80} /> : <Logo to={"/"}>c<span><BlackLogo /></span>detivite</Logo>
       }
       <HamburgerContainer onClick={handleHamburgerClick}>
         <Bar isMenuOpen={isMenuOpen} />
@@ -199,21 +220,22 @@ export const Navbar = () => {
       </HamburgerContainer>
       <NavListContainer isMenuOpen={isMenuOpen}>
         <NavList>
-          <NavItem to={"/#community"}>Our community</NavItem>
+          {
+            isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/#community"}>Our community</NavItem>
+          }
+          {
+            isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/clarity-test"}>Clarity test</NavItem>
 
-
-          <NavItem to={"/clarity-test"}>Clarity test</NavItem>
-
-
-
-          <NavItem to={"/about-us"}>About</NavItem>
-
-
-          <NavItem to={"/contact-us"}>Contact us</NavItem>
-
-
-          <NavItem to={"/our-blog"}>Our blog</NavItem>
-
+          }
+          {
+            isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/about-us"}>About</NavItem>
+          }
+          {
+            isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/contact-us"}>Contact us</NavItem>
+          }
+          {
+            isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/our-blog"}>Our blog</NavItem>
+          }
         </NavList>
         {
           user ?
@@ -227,15 +249,20 @@ export const Navbar = () => {
               />
               <LogoOutDropDown
                 isDropdownOpen={isDropdownOpen}
+                ref={dropDownRef}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                exit={{ opacity: 0, y: -20 }}
               >
-                <p onClick={() => dispatch(logoutUser)}>Logout</p>
+                <p onClick={handleLogOut}>Logout</p>
                 <hr />
                 <DashboardLink to={"/dashboard"}>Dashboard</DashboardLink>
               </LogoOutDropDown>
             </AvatarContainer>
             :
             (
-              isFetching ? <Skeleton circle={true} height={40} width={40} /> : <Button
+              isLoading ? <Skeleton circle={true} height={40} width={40} /> : <Button
                 scrolled={scrolled}
                 onClick={openModal}
               >
@@ -353,8 +380,14 @@ const HamburgerContainer = styled.div`
 `
 
 const NavAvatar = styled(Avatar)`
+  transition: all 0.3s ease-in;
+  border: 1px solid var(--primary);
+  box-shadow: 1px 6px 14px -8px rgba(0,0,0,0.45);
+  -webkit-box-shadow: 1px 6px 14px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 1px 6px 14px -8px rgba(0,0,0,0.45);
   :hover{
     cursor: pointer;
+    transform: scale(1.1);
   }
   span{
     color:var(--white) !important;
@@ -381,7 +414,7 @@ const Bar = styled.div`
   }
 `;
 
-const LogoOutDropDown = styled.div`
+const LogoOutDropDown = styled(motion.div)`
   background-color: var(--white);
   border-radius: 1px solid var(--navborders); 
   height:auto;
@@ -398,6 +431,10 @@ const LogoOutDropDown = styled.div`
     margin: 10px 0;
     font-weight: 600;
     cursor: pointer;
+    transition: all .3s ease;
+    :hover{
+      color: var(--primary);
+    }
   }
   
   hr{
@@ -406,6 +443,8 @@ const LogoOutDropDown = styled.div`
 `
 const AvatarContainer = styled.div`
   position: relative;
+  transition: all .3s ease-in;
+
 `
 const DashboardLink = styled(Link)`
      font-size: 1rem;
@@ -413,4 +452,8 @@ const DashboardLink = styled(Link)`
     font-weight: 600;
     cursor: pointer;
     text-decoration:none;
+    transition: all .3s ease;
+    :hover{
+      color: var(--primary);
+    }
 `
