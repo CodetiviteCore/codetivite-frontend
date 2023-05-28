@@ -111,6 +111,8 @@ const DashboardNav = styled.nav`
     justify-content: space-between;
     border-bottom: 1px solid var(--navborders);
     padding: 0 1.4rem;
+    border-left: 1px solid var(--navborders);
+
 
     
 `

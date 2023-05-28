@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
+
+export const DashboardMenuItem = ({ icon, title, path, comingSoon, activeIndex, setActiveIndex, id }) => {
+    return (
+        <Container active={activeIndex === id}>
+            {comingSoon && <div>Coming soon</div>}
+            <Items
+                to={comingSoon ? null : `${path}`}
+                onClick={()=>setActiveIndex(id)}
+            >
+                <div>{icon}</div>
+                <Title>{title}</Title>
+            </Items>
+        </Container>
+    )
+}
+
+
+
 const Container = styled.div`
     width: inherit;
     background-color: ${({active})=> active ? "var(--primary-light)" : "transparent"};
@@ -47,18 +65,3 @@ const Items = styled(Link)`
 const Title = styled.p`
     display: inline-block;
 `
-
-export const DashboardMenuItem = ({ icon, title, path, comingSoon, activeIndex, setActiveIndex, id }) => {
-    return (
-        <Container active={activeIndex === id}>
-            {comingSoon && <div>Coming soon</div>}
-            <Items
-                to={comingSoon ? null : `${path}`}
-                onClick={()=>setActiveIndex(id)}
-            >
-                <div>{icon}</div>
-                <Title>{title}</Title>
-            </Items>
-        </Container>
-    )
-}
