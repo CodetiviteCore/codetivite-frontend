@@ -4,7 +4,7 @@ import { InfoCircle } from "../../assets/svgs"
 
 const CardContainer = styled.div`
     background-color: var(--white);
-    height:9rem;
+    height:clamp(5rem, 10vw, 9rem);
     width:100%;
     padding: 11px;
     h3{
@@ -45,7 +45,7 @@ const TitleContainer = styled.div`
 // `
 
 
-export const RoadMapCards = ({ icon, title, info, valueIcon, value, valueDetail, improved, description }) => {
+export const RoadMapCards = ({ icon, title, info, description }) => {
     return (
         <CardContainer>
             <TitleContainer>
@@ -58,15 +58,8 @@ export const RoadMapCards = ({ icon, title, info, valueIcon, value, valueDetail,
             <h3>{info}</h3>
             {
                 description && 
-                <p>{description()}</p>
+                <p>{()=>description()}</p>
             }
-            {/* <InfoDetails improved={improved}>
-                <div>
-                    {valueIcon}
-                    <p>{value}</p>
-                </div>
-                <h6>{valueDetail}</h6>
-            </InfoDetails> */}
         </CardContainer>
     )
 }

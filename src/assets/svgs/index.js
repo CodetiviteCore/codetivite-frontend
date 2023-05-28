@@ -50,6 +50,8 @@ import { ReactComponent as CallBlack } from "./callblack.svg"
 import { ReactComponent as Sms } from "./sms.svg"
 import { ReactComponent as Notification } from "./notification-bing.svg"
 import { ReactComponent as Delete } from "./delete.svg"
+import { ReactComponent as DisconnectedIcon } from "./disconnected.svg"
+
 
 
 
@@ -114,5 +116,6 @@ export {
     CallBlack,
     Sms,
     Notification,
-    Delete
+    Delete,
+    DisconnectedIcon
 }

@@ -21,7 +21,6 @@ const SideBarContainer = styled.aside`
     background-color: var(--white);
     width: 12.6rem;
     transition: all .5s ease;
-    border-right: 1px solid var(--navborders);
 
 `
 const LogoContainer = styled(Link)`

@@ -189,7 +189,7 @@ const Roadmap = () => {
                             value={value}
                             valueDetail={valueDetail}
                             improved={improved}
-                            description={()=>description()}
+                            description={description}
                         />
                     )
                 }

@@ -17,10 +17,17 @@ import { LandingModalVerify } from './pages/SharedPages/LandingPage/LandingPage.
 import { VerifyMail, Google, LandingModalLogoRight, LandingModalLogoLeft } from "./assets/svgs";
 import { LandingModal } from "./pages/SharedPages/LandingPage/LandingPage.Styles";
 import { Puff } from 'react-loader-spinner';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-loading-skeleton/dist/skeleton.css'
+import { Disconnected } from './pages/SharedPages/404Page/404';
+
 
 function App() {
-  const careerPathSelected = useSelector(selectCareerState)
 
+  const [isOnline, setIsOnline] = useState(navigator.onLine)
+
+
+  const careerPathSelected = useSelector(selectCareerState)
   const { isModalOpen, emailModal } = useContext(ModalContext)
 
   const [isredirect, setIsRedirect] = useState(false)
@@ -42,6 +49,42 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true)
+      toast.success(`You're back online`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "light",
+    }
+    )
+    }
+    const handleOffline = () => {
+      setIsOnline(false)
+      toast.error(`You are offline, please connect`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "light",
+    }
+    )
+    }
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  })
   // useEffect(() => {
   //   const lenis = new Lenis({
   //     duration: 1.2,
@@ -70,6 +113,10 @@ function App() {
     }
   );
 
+
+  if (isOnline === false) {
+    return <Disconnected />
+  }
 
   //avatar component random colors
   const primaryColor = "#2AB255";
@@ -156,9 +203,10 @@ function App() {
 
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>
+        <ToastContainer />
       </SkeletonTheme>
       {/* </ReactLenis> */}
-
+    
     </ConfigProvider>
   );
 }
