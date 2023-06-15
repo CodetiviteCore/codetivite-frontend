@@ -16,12 +16,13 @@ const CardConatiner = styled.div`
         display: flex;
         gap: 10px;
     }
-`
-const Title = styled.p`
-    font-weight: 600;
     :hover{
         cursor:pointer;
     }
+`
+const Title = styled.p`
+    font-weight: 600;
+   
 `
 
 export const RoadmapLectureCards = ({
@@ -53,17 +54,19 @@ export const RoadmapLectureCards = ({
     }, [completedSyllabus, projectId, setCompleted])
 
     return (
-        <CardConatiner>
+        <CardConatiner
+            onClick={() => {
+                setCurrentTopic(title)
+                // setIsModalOpen(true)
+
+                setResourceDoc()
+                setCurrentId(projectId)
+                getDoc()
+            }}
+        >
             <div>
                 <RoadmapBookIcon />
-                <Title onClick={() => {
-                    setCurrentTopic(title)
-                    // setIsModalOpen(true)
-                    
-                    setResourceDoc()
-                    setCurrentId(projectId)
-                    getDoc()
-                }}>{title}</Title>
+                <Title>{title}</Title>
             </div>
             {
                 completed ? <Unlock /> : <Lock />

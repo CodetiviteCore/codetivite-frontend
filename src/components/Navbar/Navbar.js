@@ -119,7 +119,7 @@ export const Navbar = () => {
         dispatch(careerPathSelectState(true))
       }
 
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
 
     }
   },

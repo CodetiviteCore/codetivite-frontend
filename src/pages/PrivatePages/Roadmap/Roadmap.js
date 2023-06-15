@@ -21,7 +21,8 @@ const Roadmap = () => {
         {
             enabled: true,
             retry: false,
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
+            staleTime: 9000000
         }
     )
 
@@ -209,7 +210,7 @@ const Roadmap = () => {
                             />)
                     }
                 </RoadMapPath>
-                <RoadMapProjectsToComplete>
+                {/* <RoadMapProjectsToComplete>
                     <h2>Projects to be completed</h2>
                     <p>We have curated detailed projects to help you learn better through practice.
                         Before the end of this roadmap you will be able to complete the projects below.
@@ -217,7 +218,7 @@ const Roadmap = () => {
                     <CompleteProjectCard />
                     <CompleteProjectCard />
 
-                </RoadMapProjectsToComplete>
+                </RoadMapProjectsToComplete> */}
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

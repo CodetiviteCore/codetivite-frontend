@@ -43,188 +43,6 @@ import { formatProgressValue } from "../../../utils/constants";
 
 
 
-const RoadMapDetails = styled(RoadMapContainer)`
-    overflow-y: scroll !important;
-    background-color: var(--deep-white);
-`
-const Navigation = styled(Stats)`
-    justify-content: space-between;
-    
-    div{
-        display: flex;
-        gap:10px;
-        p{
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-        p:first-child{
-            transition: all .5s ease;
-            :hover{
-                cursor: pointer;
-                transform: scaleX(1.5);
-            }
-        }
-    }
-`
-const DetailsContainer = styled(PathRoadMapContainer)`
-`
-const Details = styled(RoadMapPath)`
-    height:70vh;
-
-`
-const Progress = styled(RoadMapProjectsToComplete)`
-    background-color: transparent;
-    padding: 0;
-    overflow-y: hidden;
-    height: fit-content;
-`
-const CircularProgressConatiner = styled.div`
-    background-color: var(--white);
-    width: auto;
-    padding: 1.5rem;
-`
-const CircularProgress = styled.div`
-    width: 13.25rem;
-    height: 13.25rem;
-    margin:0 auto;
-`
-const OtherUsers = styled.div`
-    display: flex;
-    width: 16rem;
-    margin: 2rem auto;
-    align-items: center;
-    justify-content: space-between;
-    >p{
-        font-weight: 600;
-    }
-    >div{
-        display: flex;
-        position: relative;
-        width: fit-content;
-        max-width: 30%;
-        img{
-            width: 2rem;
-            height: 2rem;
-            object-fit: contain;
-            position: relative;
-
-            :nth-child(1){
-                z-index: 1;
-            }
-            :nth-child(2){
-                z-index:2;
-                left: -1.2rem;
-            }
-            :nth-child(3){
-                z-index:2;
-                left: -2.3rem;
-            }
-            :nth-child(4){
-                z-index:2;
-                left: -3.5rem;
-            }
-        }
-        div{
-            min-width:2rem !important;
-            min-height: 2rem !important;
-            display: flex;
-
-
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: var(--deep-white);
-            position: relative;
-            left: -4.4rem;
-            z-index: 2;
-            p{
-                font-size: 0.7rem;
-                font-weight: 800;
-            }
-        }
-    }
-`
-const ProjectsDue = styled(RoadMapProjectsToComplete)`
-    width: auto;
-    background-color: var(--white);
-    height:25rem;
-    margin-top: 1.25rem;
-    overflow-y:scroll ;
-    >div{
-        background-color: var(--white);
-        position:sticky;
-        margin-bottom:2rem ;
-        h2{
-            font-size:1.2rem;
-            font-weight:600;
-        }
-        p{
-            font-size:0.8rem;
-            line-height:1.2 ;
-        }
-    }
-
-`
-
-const DetailsModal = styled.div`
-    position:relative ;
-    height: fit-content;
-    max-width:inherit;
-    background-color: var(--white);
-    padding: 1.5rem;
-    display:flex;
-    align-items:center;
-    flex-direction:column;
-
-    button{
-        margin-top:2rem;
-        width: 25rem;
-        height:4rem;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        cursor: ${({ primary }) => primary ? "pointer" : "not-allowed"} !important;
-    }
-    
-`
-const DetailsModalHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-    width:100%;
-    height:70px !important;
-    position:sticky;
-    top:-20px;
-    left:0;
-    background-color:var(--white);
-    z-index:5;
-    >p{
-        font-size: 24px;
-        font-weight: lighter;
-        :hover{
-            cursor: pointer;
-        }
-    }
-    >div{
-        display: flex;
-        gap:10px;
-        p{
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-    }
-`
-
-const DocumentsDisplay = styled.div`
-    overflow: auto;
-    height:90%;
-    /* overflow-x: hidden; */
-    
-`
-
-
-
-
 const RoadmapDetails = () => {
     const { level } = useParams()
     const navigate = useNavigate()
@@ -459,4 +277,185 @@ const RoadmapDetails = () => {
     )
 
 }
+
+const RoadMapDetails = styled(RoadMapContainer)`
+    overflow-y: scroll !important;
+    background-color: var(--deep-white);
+`
+const Navigation = styled(Stats)`
+    justify-content: space-between;
+    
+    div{
+        display: flex;
+        gap:10px;
+        p{
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        p:first-child{
+            transition: all .5s ease;
+            :hover{
+                cursor: pointer;
+                transform: scaleX(1.5);
+            }
+        }
+    }
+`
+const DetailsContainer = styled(PathRoadMapContainer)`
+`
+const Details = styled(RoadMapPath)`
+    height:70vh;
+
+`
+const Progress = styled(RoadMapProjectsToComplete)`
+    background-color: transparent;
+    padding: 0;
+    overflow-y: hidden;
+    height: fit-content;
+`
+const CircularProgressConatiner = styled.div`
+    background-color: var(--white);
+    width: auto;
+    padding: 1.5rem;
+`
+const CircularProgress = styled.div`
+    width: 13.25rem;
+    height: 13.25rem;
+    margin:0 auto;
+`
+const OtherUsers = styled.div`
+    display: flex;
+    width: 16rem;
+    margin: 2rem auto;
+    align-items: center;
+    justify-content: space-between;
+    >p{
+        font-weight: 600;
+    }
+    >div{
+        display: flex;
+        position: relative;
+        width: fit-content;
+        max-width: 30%;
+        img{
+            width: 2rem;
+            height: 2rem;
+            object-fit: contain;
+            position: relative;
+
+            :nth-child(1){
+                z-index: 1;
+            }
+            :nth-child(2){
+                z-index:2;
+                left: -1.2rem;
+            }
+            :nth-child(3){
+                z-index:2;
+                left: -2.3rem;
+            }
+            :nth-child(4){
+                z-index:2;
+                left: -3.5rem;
+            }
+        }
+        div{
+            min-width:2rem !important;
+            min-height: 2rem !important;
+            display: flex;
+
+
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--deep-white);
+            position: relative;
+            left: -4.4rem;
+            z-index: 2;
+            p{
+                font-size: 0.7rem;
+                font-weight: 800;
+            }
+        }
+    }
+`
+const ProjectsDue = styled(RoadMapProjectsToComplete)`
+    width: auto;
+    background-color: var(--white);
+    height:25rem;
+    margin-top: 1.25rem;
+    overflow-y:scroll ;
+    >div{
+        background-color: var(--white);
+        position:sticky;
+        margin-bottom:2rem ;
+        h2{
+            font-size:1.2rem;
+            font-weight:600;
+        }
+        p{
+            font-size:0.8rem;
+            line-height:1.2 ;
+        }
+    }
+
+`
+
+const DetailsModal = styled.div`
+    position:relative ;
+    height: fit-content;
+    max-width:inherit;
+    background-color: var(--white);
+    padding: 1.5rem;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    button{
+        margin-top:2rem;
+        width: 25rem;
+        height:4rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor: ${({ primary }) => primary ? "pointer" : "not-allowed"} !important;
+    }
+    
+`
+const DetailsModalHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    width:100%;
+    height:70px !important;
+    position:sticky;
+    top:-20px;
+    left:0;
+    background-color:var(--white);
+    z-index:5;
+    >p{
+        font-size: 24px;
+        font-weight: lighter;
+        :hover{
+            cursor: pointer;
+        }
+    }
+    >div{
+        display: flex;
+        gap:10px;
+        p{
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+`
+
+const DocumentsDisplay = styled.div`
+    overflow: auto;
+    height:90%;
+    /* overflow-x: hidden; */
+    
+`
+
+
 export default RoadmapDetails
