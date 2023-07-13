@@ -37,7 +37,10 @@ export const RoadmapLectureCards = ({
     setCompleted
 }) => {
 
-    const { data: document, refetch: fetchDoc } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
+    const {
+        data: document,
+        refetch: fetchDoc
+    } = useApiGet(`${title} document`, () => RoadmapServices.getDocument(resource))
 
     const getDoc = () => {
         fetchDoc()

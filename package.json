@@ -3,6 +3,7 @@
   "version": "yarn init",
   "private": true,
   "dependencies": {
+    "@ramonak/react-progress-bar": "^5.0.3",
     "@studio-freight/lenis": "^1.0.7",
     "@studio-freight/react-lenis": "^0.0.15",
     "@testing-library/jest-dom": "^5.16.5",

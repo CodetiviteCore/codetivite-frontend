@@ -61,6 +61,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { ModalContext } from '../../../context/ModalContext';
 
 
 
@@ -72,7 +74,7 @@ const LandingPage = () => {
   const navigate = useNavigate()
   const location = useLocation();
   const communityRef = useRef(null)
-
+  const {setIsModalOpen} = useContext(ModalContext)
 
 
   useEffect(() => {
@@ -164,6 +166,7 @@ const LandingPage = () => {
             data-aos-easing="ease-in-out"
             data-aos-duration="800"
             data-aos-delay="120"
+            onClick={()=>setIsModalOpen(true)}
           >Get started now</Button>
         </div>
       </LandingFirstContainer>

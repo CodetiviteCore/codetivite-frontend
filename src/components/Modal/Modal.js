@@ -7,6 +7,42 @@ import { devices } from '../../utils/MediaQueiyBreakPoints';
 import { AnimatePresence } from 'framer-motion';
 
 
+export const Modal = ({ isOpen, children }) => {
+    const { setIsModalOpen, emailModal } = useContext(ModalContext)
+    useEffect(() => {
+        emailModal && setIsModalOpen(true)
+    }, [emailModal, setIsModalOpen])
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    return (
+        <ModalWrapper
+            isOpen={isOpen}
+        >
+            <AnimatePresence>
+                <ModalHolder
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}                                       
+                >
+
+                    <ModalContent>
+                        {children}
+                    </ModalContent>
+
+                    <i
+                        class="material-symbols-outlined"
+                        onClick={closeModal}
+                    >close</i>
+                </ModalHolder>
+            </AnimatePresence>
+        </ModalWrapper>
+
+    );
+};
+
+
+
 const ModalWrapper = styled(motion.div)`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   justify-content: center;
@@ -68,37 +104,3 @@ const ModalHolder = styled(motion.div)`
     }
   }
 `
-
-export const Modal = ({ isOpen, children }) => {
-    const { setIsModalOpen, emailModal } = useContext(ModalContext)
-    useEffect(() => {
-        emailModal && setIsModalOpen(true)
-    }, [emailModal, setIsModalOpen])
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-    return (
-        <ModalWrapper
-            isOpen={isOpen}
-        >
-            <AnimatePresence>
-                <ModalHolder
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}                                       
-                >
-
-                    <ModalContent>
-                        {children}
-                    </ModalContent>
-
-                    <i
-                        class="material-symbols-outlined"
-                        onClick={closeModal}
-                    >close</i>
-                </ModalHolder>
-            </AnimatePresence>
-        </ModalWrapper>
-
-    );
-};

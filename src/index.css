@@ -57,6 +57,10 @@ code {
   --primary-yellow:#FCE459;
   --dashboard-primary-light: rgba(230, 249, 236, 0.2);
   --todo-border: rgba(0,0,0,0.1);
+  --dashboardBackground: #f0f5f4;
+  --locked:rgba(220, 38, 38, 0.24);
+  --unlocked:#E5F0E8;
+  --light-green:#9DE8AA;
 }
 
 h1,
@@ -118,6 +122,13 @@ button{
   justify-content: center;
   padding: 5rem 0;
 }
+.quill{
+  border: none !important;
+  outline: none !important;
+}
+
+
+  
 
 @media screen and (max-width:768px) {
   p{

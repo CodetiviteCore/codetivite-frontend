@@ -20,7 +20,7 @@ export default class RoadmapServices {
         return await request({
             url: `project/me`,
             method: "PUT",
-            data:data
+            data: data
         })
     }
     static async getCompletedSyllablus() {
@@ -29,10 +29,16 @@ export default class RoadmapServices {
             method: "GET",
         })
     }
-    static async getProgressPercentage(careerPath,level,) {
+    static async getProgressPercentage(careerPath, level, projectId) {
         return await request({
-            url: `roadmap/me/progress?roadmap=frontend&skillLevel=Junior&&projectId=64440231999248e6a4437968`,
+            url: `roadmap/me/progress?roadmap=${careerPath}&skillLevel=${level}&projectId=${projectId}`,
             method: "GET",
+        })
+    }
+
+    static async getLevelDetails(careerPath, level) {
+        return await request({
+            url: `roadmap/?careerPath=${careerPath}&level=${level}`,
         })
     }
 }   
