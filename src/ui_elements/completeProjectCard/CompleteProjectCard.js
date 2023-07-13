@@ -1,5 +1,30 @@
 import styled from 'styled-components';
 import { Lock, Teacher } from '../../assets/svgs';
+import { LockUnlocked } from '../LockUnlock/LockUnlocked';
+
+
+export const CompleteProjectCard = ({project, completed}) => {
+    return (
+        <CardContainer>
+            <Header>
+                <div>
+                    <Teacher />
+                    <h5>{project?.title}</h5>
+                </div>
+
+                <LockUnlocked
+                    locked={completed}
+                />
+            </Header>
+            <Details>
+                {
+                    project?.description
+                }
+            </Details>
+        </CardContainer>
+    )
+}
+
 
 const CardContainer = styled.div`
     border-bottom: 1px solid var(--navborders);
@@ -9,8 +34,10 @@ const CardContainer = styled.div`
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items:center;
     div{
         display: flex;
+        align-items:center;
         gap: 10px;
         h5{
             font-size: 1rem;
@@ -21,29 +48,11 @@ const Header = styled.div`
 `
 
 const Details = styled.p`
-    margin:20px 0;
+    margin:0.5rem 0;
     font-size: 0.75rem;
     line-height: 1.3;
-    width: 86%;
-    margin: 0 auto;
+    width:100%;
+    padding-left:8%;
+    
 
 `
-
-export const CompleteProjectCard = ({project}) => {
-    return (
-        <CardContainer>
-            <Header>
-                <div>
-                    <Teacher />
-                    <h5>{project?.title}</h5>
-                </div>
-                <Lock />
-            </Header>
-            <Details>
-                {
-                    project?.description
-                }
-            </Details>
-        </CardContainer>
-    )
-}

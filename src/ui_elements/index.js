@@ -13,4 +13,6 @@ export * from "./FooterInput/footerInput.js"
 export * from "./TeamImage/TeamImage.js"
 export * from "./Input/Input.js"
 export * from "./Loader/Loader.js"
+export * from "./SyllabusCard/SyllabusCard.js"
+export * from "./LockUnlock/LockUnlocked.js"
 

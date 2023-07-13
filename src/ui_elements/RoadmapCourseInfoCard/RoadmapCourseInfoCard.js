@@ -5,6 +5,48 @@ import Left from "../../assets/images/courseCardAccent.png"
 import Right from "../../assets/images/courseCardAccent2.png"
 import { useNavigate } from 'react-router-dom';
 
+
+export const RoadMapCourseInfoCard = ({
+    level,
+    courseNo,
+    cardTitle,
+    item,
+    description
+}) => {
+    const roadMapNavigate = useNavigate();
+    return (
+        <CardContainer>
+            <img src={Left} alt="Accent" />
+            <CardHeader>
+                <CardHeaderInfo>
+                    <AwardBackground>
+                        <YellowAward />
+                    </AwardBackground>
+                    <div>
+                        <h6>{cardTitle}</h6>
+                        <p>{courseNo} syllabus</p>
+                    </div>
+                </CardHeaderInfo>
+
+                <Button onClick={() => {
+                    roadMapNavigate(`/roadmap/${level}`)
+                }}>
+                    View Roadmap
+                </Button>
+            </CardHeader>
+            <CardDetails>
+                <p>
+                    {description}
+                </p>
+            </CardDetails>
+            <img src={Right} alt="Accent" />
+        </CardContainer>
+    );
+};
+
+
+
+
 const CardContainer = styled.div`
     width: auto;
     height: 10rem;
@@ -54,42 +96,3 @@ const CardDetails = styled.section`
         line-height: 1.3;
     }
 `
-export const RoadMapCourseInfoCard = ({ level, courseNo, cardTitle, item }) => {
-    const roadMapNavigate = useNavigate();
-    return (
-        <CardContainer>
-            <img src={Left} alt="Accent" />
-            <CardHeader>
-                <CardHeaderInfo>
-                    <AwardBackground>
-                        <YellowAward />
-                    </AwardBackground>
-                    <div>
-                        <h6>{cardTitle}</h6>
-                        <p>{courseNo} syllabus</p>
-                    </div>
-                </CardHeaderInfo>
-
-                <Button onClick={() => {
-                    roadMapNavigate(`/roadmap/${level}`, {
-                        state: {
-                            item: item,
-                            level: level
-                        }
-                    })
-                }}>
-                    View Roadmap
-                </Button>
-            </CardHeader>
-            <CardDetails>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. Amet viverra purus enim urna
-                    hac semper. Integer at imperdiet tortor imperdiet vulputate pharetra
-                    nullam lorem elit. Vitae consequat et id porta. Ut diam diam commodo
-                    suspendisse sed lorem. Scelerisque proin.
-                </p>
-            </CardDetails>
-            <img src={Right} alt="Accent" />
-        </CardContainer>
-    );
-};

@@ -23,27 +23,8 @@ const TitleContainer = styled.div`
         gap: 10px;
         align-items:center ;
     }
+    
 `
-// const InfoDetails = styled.div`
-//     width: 100%;
-//     display: flex;
-//     gap: 4px;
-//     align-items: center;
-//     h6{
-//         font-size: 0.75rem;
-//         font-weight: 400;
-//     }
-//     div{
-//         display: flex;
-//         align-items: center;
-//         gap: 7px;
-//         p{
-//         color: ${({ improved }) => improved ? "var(--primary)" : "var(--danger)"};
-//         font-size: 10px;
-//     }
-//     }
-// `
-
 
 export const RoadMapCards = ({ icon, title, info, description }) => {
     return (

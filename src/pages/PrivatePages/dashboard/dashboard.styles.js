@@ -1,101 +1,82 @@
 import styled from "styled-components";
-import { SkillIcon, Badge } from "../../../assets/svgs";
+import { devices } from '../../../utils/MediaQueiyBreakPoints';
+import { Link } from 'react-router-dom';
 
 export const DashboardContainer = styled.main`
     height:100%;
     overflow-y:scroll;
-    padding-bottom:4% ;
-    h6,span,p{
-        color: var(--white);
-    }
-    p{
-        font-size:1.2rem ;
-    }
-    background-color:var(--white) ;
+    padding: 2rem 1.4rem;
+   background-color:#f0f5f4;
+ ;
 `
-export const Skill = styled(SkillIcon)`
-    border-radius:50%;
-    width:3rem;
-    height:3rem;
-`
-export const BadgeTag = styled(Badge)`
-    border-radius:50%;
-    width:3rem;
-    height:3rem;
+export const Stats = styled.section`
+    display: flex;
+    gap: 1rem;
+    height: auto;
+    @media ${devices.tablet}{
+        flex-wrap:wrap;
+    }
 `
 
-export const DashboardHeader = styled.section`
-    background-color:var(--primary);
-    height:fit-content;
-    color:var(--white) ;
-    padding: 3%;
-    display:flex;
+export const JumpBackInTaskSection = styled.section`
+    height: min-content;
+    display: flex;
+    margin-top: 1.5rem;
+    justify-content: space-between;
+    @media ${devices.tabletL}{
+        flex-wrap:wrap;
+    }
 `
-export const DashboardWelcomeBack = styled.div`
+
+export const JumpBackInContainer = styled.div`
+    flex: 0.6;
+    height: 64vh;
+    background-color: var(--white);
+    overflow-y: scroll;
+    padding: 1.25rem 2rem;
+    width: clamp(30rem, 100%, 40rem);
+    
+    h2{
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    >div{
+        display:flex;
+        justify-content:space-between;
+        align-items: center;
+    }
+`
+export const JumpBackLink = styled(Link)`
+    display:flex;
+    gap:0.5rem ;
+    p,span{
+        color: var(--primary);
+        font-weight:600;
+    }
     span{
-        font-weight:800;
-    }
-    h6{
-        font-weight:400;
-        margin-bottom:0.7rem;
-    }
-    h6,span{
-        font-size:2.5rem;
+        font-size: 1.5rem;
     }
 `
-export const DashboardOverview = styled.div`
-    /* margin-top:20%; */
-    h6{
-        font-size:1.5rem;
-        font-weight:700;
-        margin-bottom:1rem;
-    }
-
-`
-export const Overview = styled.div`
-    display:flex;
-    gap:4%;
-`
-export const SkillDiv = styled.div`
-    padding:20px;
-    width:fit-content;
-    background-color:var(--dashboard-primary-light);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-
-`
-export const SkillDesDiv = styled.div`
-    p:last-child{
-        font-weight: 700;
-    }
-`
-export const SkillDetails = styled.div`
-    display:flex;
-    gap:10px;
-    align-items:center;
-`
-export const ImageContainer = styled.div`
-    width:25rem;
-    height:25rem;
-    margin-right:20% ;
-    img{
-        width:inherit;
-        height:inherit;
-        object-fit:cover;
-    }
-`
-export const DashboardDetailsContainer = styled.div`
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:10%;
-    justify-content:center;
-`
-export const DashboardInfoGraphics = styled.section`
-    height:50vh;
-    padding: 0 3%;
-    display:flex;
-    /* justify-content:space-between; */
-`
+// export const RoadMapTask = styled.aside`
+//     flex:0.36;
+//     background-color:var(--white);
+//     padding:1rem;
+//     >div{
+//         width:100%;
+//         display:flex;
+//         align-items:center;
+//         justify-content:space-between;
+//     }
+//     h2{
+//         font-size: 1.25rem;
+//         font-weight: 600;
+//     }
+    
+//     >p{
+//         font-size: 0.75rem;
+//         line-height: 1.3;
+//     }
+//     @media ${devices.tablet}{
+//         flex-wrap:wrap;
+//     }
+// `

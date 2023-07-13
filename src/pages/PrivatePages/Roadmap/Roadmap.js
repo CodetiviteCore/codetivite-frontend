@@ -1,16 +1,17 @@
 import { AverageSalary, Badge, Decrease, SkillIcon } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
-import { CompleteProjectCard, RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
+import { RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
 import { LoaderContainer, PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect } from "react"
 import { useState } from "react"
 import { Puff } from "react-loader-spinner"
+import { CompleteProjectCard } from '../../../ui_elements/completeProjectCard/CompleteProjectCard';
+import { TaskComponent } from "../dashboard/components/TaskComponent"
 
 const Roadmap = () => {
 
-    const [levels, setLevels] = useState([])
 
     const {
         data: careerDetails,
@@ -21,71 +22,12 @@ const Roadmap = () => {
         {
             enabled: true,
             retry: false,
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
+            staleTime: 9000000
         }
     )
 
-    useEffect(() => {
-        if (!!careerDetails) {
-
-            let levelsArray = []
-            careerDetails?.resource?.levels?.map((level) => {
-
-                const fresher = level?.junior ? level?.junior?.map(({ title, resourceUrl, projectId }) => ({
-                    cardTitle: "Fresher",
-                    title: title,
-                    resource: resourceUrl,
-                    projectId: projectId
-                })) : []
-
-                const entryLevel = level?.entrylevel ? level?.entrylevel?.map(({ title, resourceUrl, projectId }) => ({
-                    cardTitle: "Entry-level",
-                    title: title,
-                    resource: resourceUrl,
-                    projectId: projectId
-                })) : []
-
-
-                const intermediate = level?.intermediate ? level?.intermediate?.map(({ title, resourceUrl, projectId }) => ({
-                    cardTitle: "Intermediate",
-                    title: title,
-                    resource: resourceUrl,
-                    projectId: projectId
-                })) : []
-
-
-
-                const advanced = level?.advanced ? level?.advanced?.map(({ title, resourceUrl, projectId }) => ({
-                    cardTitle: "Advanced",
-                    title: title,
-                    resource: resourceUrl,
-                    projectId: projectId
-                })) : []
-
-                switch (true) {
-                    case (intermediate.length <= 0):
-                        levelsArray.push(fresher, entryLevel, advanced);
-                        break;
-                    case (fresher.length <= 0):
-                        levelsArray.push(entryLevel, intermediate, advanced);
-                        break;
-                    case (entryLevel.length <= 0):
-                        levelsArray.push(fresher, intermediate, advanced);
-                        break;
-                    case (advanced.length <= 0):
-                        levelsArray.push(fresher, entryLevel, intermediate);
-                        break;
-                    default:
-                        levelsArray.push(fresher, entryLevel, intermediate, advanced);
-                        break;
-                }
-
-                return setLevels(levelsArray)
-            })
-        }
-    }, [careerDetails])
-
-
+    console.log(careerDetails, "opsairhje")
 
     const statsCardDetails = [
         {
@@ -93,7 +35,6 @@ const Roadmap = () => {
             title: "Current skill level",
             info: careerDetails?.userInfo?.currentSkillLevel?.title,
             description: () => {
-                console.log(careerDetails?.userInfo?.currentSkillLevel?.title)
                 switch (careerDetails?.userInfo?.currentSkillLevel?.title) {
                     case "junior":
                         return console.log("You're just at the start. Long journey ahead")
@@ -197,27 +138,19 @@ const Roadmap = () => {
             <PathRoadMapContainer>
                 <RoadMapPath>
                     <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
-
                     {
-                        levels.map((item, index) =>
+                        careerDetails?.levelAndDescriptions.map((item, index) =>
                             <RoadMapCourseInfoCard
-                                cardTitle={item[0]?.cardTitle}
-                                level={item[0]?.cardTitle}
-                                courseNo={item?.length}
+                                cardTitle={item?.roadmap}
+                                level={item?.roadmap}
+                                courseNo={careerDetails?.resource.length}
                                 key={index}
                                 item={item}
-                            />)
+                            />
+                        )
                     }
                 </RoadMapPath>
-                <RoadMapProjectsToComplete>
-                    <h2>Projects to be completed</h2>
-                    <p>We have curated detailed projects to help you learn better through practice.
-                        Before the end of this roadmap you will be able to complete the projects below.
-                    </p>
-                    <CompleteProjectCard />
-                    <CompleteProjectCard />
-
-                </RoadMapProjectsToComplete>
+                <TaskComponent />
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

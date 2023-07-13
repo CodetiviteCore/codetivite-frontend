@@ -30,7 +30,7 @@ import { ReactComponent as Decrease } from "./decrease.svg"
 import { ReactComponent as Badge } from "./badge.svg"
 import { ReactComponent as InfoCircle } from "./info-circle.svg"
 import { ReactComponent as YellowAward } from "./award-yellow.svg"
-import { ReactComponent as Teacher } from "./teacher.svg"
+import { ReactComponent as Teacher } from "./archive-book.svg"
 import { ReactComponent as Lock } from "./lock.svg"
 import { ReactComponent as Unlock } from "./unlock.svg"
 import { ReactComponent as RoadmapBookIcon} from "./roadmap-book.svg"
@@ -51,14 +51,12 @@ import { ReactComponent as Sms } from "./sms.svg"
 import { ReactComponent as Notification } from "./notification-bing.svg"
 import { ReactComponent as Delete } from "./delete.svg"
 import { ReactComponent as DisconnectedIcon } from "./disconnected.svg"
-
-
-
-
-
-
-
-
+import { ReactComponent as CompleteProjectBadge } from "./complete.svg"
+import { ReactComponent as CompleteLessonIcon } from "./lesson.svg"
+import { ReactComponent as CloseCircle } from "./close-circle.svg"
+import { ReactComponent as GreenBook } from "./green-book.svg"
+import { ReactComponent as CompleteCircle } from "./complete-circle.svg"
+import {ReactComponent as TickCircle} from "./tick-circle.svg"
 
 
 
@@ -117,5 +115,11 @@ export {
     Sms,
     Notification,
     Delete,
-    DisconnectedIcon
+    DisconnectedIcon,
+    CompleteProjectBadge,
+    CompleteLessonIcon,
+    CloseCircle,
+    GreenBook,
+    CompleteCircle,
+    TickCircle
 }

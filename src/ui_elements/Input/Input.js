@@ -7,7 +7,9 @@ export const Input = ({
     errorMessage,
     width,
     height,
-    type
+    type,
+    backgroundColor,
+    ...otherProps
     
 }) => {
     return (
@@ -17,6 +19,8 @@ export const Input = ({
                 width={width}
                 height={height}
                 type={type}
+                backgroundColor={backgroundColor}
+                {...otherProps}
             />
             <p>{errorMessage}</p>
         </>
@@ -26,7 +30,7 @@ export const Input = ({
 
 const InputField = styled.input`
     padding: 1.1rem;
-    border: 1px solid #D0D5DD;
+    border: none;
     width: ${({ width }) => width ? width : "fill"};
     height: ${({ height }) => height && height};
     outline: none;
@@ -34,6 +38,7 @@ const InputField = styled.input`
     :focus{
         border-color: var(--primary);
     }
+    background-color: ${({ backgroundColor }) => backgroundColor ? backgroundColor : "var(--white)"};
 
     @media ${devices.tablet}{
         padding: 0.8rem;

@@ -1,6 +1,19 @@
 import  styled from 'styled-components';
 import { devices } from './../../utils/MediaQueiyBreakPoints';
 
+
+export const Button = ({ children, ...props }) => {
+   
+    return (
+        <ButtonStyle
+            {...props}
+        >
+            {children}
+        </ButtonStyle>
+    )
+}
+
+
 const ButtonStyle = styled.button`
     padding: 1rem 2rem;
     background-color: ${({primary,scrolled, newsLetter,transparent})=> primary ? "var(--primary)" : scrolled ? "var(--primary)" : newsLetter ? "var(--primary)" : transparent ? "transparent" : "var(--primary-light)"};
@@ -26,14 +39,3 @@ const ButtonStyle = styled.button`
         padding:0.5rem 1rem ;
     }
 `
-
-export const Button = ({ children, ...props }) => {
-   
-    return (
-        <ButtonStyle
-            {...props}
-        >
-            {children}
-        </ButtonStyle>
-    )
-}
