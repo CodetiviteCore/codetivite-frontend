@@ -5,11 +5,8 @@ import {
   JumpBackInTaskSection,
   Stats,
   JumpBackLink,
-  RoadMapTask
 } from './dashboard.styles';
-import { useState } from 'react';
-import { useApiGet } from '../../../custom-hooks/useApiGet';
-import PreferenceServices from '../../../services/preferenceServices';
+
 import {
   Badge,
   CloseCircle,
@@ -18,13 +15,12 @@ import {
   GreenBook
 } from '../../../assets/svgs';
 import { RoadMapCards } from '../../../ui_elements/RoadmapCards/RoadmapCards';
-import { CompleteProjectCard, SyllabusCard } from '../../../ui_elements';
+import { SyllabusCard } from '../../../ui_elements';
 import { TaskComponent } from './components/TaskComponent';
 
 
 const Dashboard = () => {
 
-  const [levels, setLevels] = useState([])
 
   // const {
   //   data: careerDetails,

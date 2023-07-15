@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Lock, Teacher } from '../../assets/svgs';
+import {Teacher } from '../../assets/svgs';
 import { LockUnlocked } from '../LockUnlock/LockUnlocked';
 
 
