@@ -79,10 +79,7 @@ export const Navbar = () => {
     const authToken = searchParams.get("token")
     Cookies.remove("authToken")
     Cookies.set("authToken", authToken, { secure: true })
-
     const userDetails = jwtDecode(authToken);
-
-
     dispatch(signUpWithGoogle(userDetails?.profile));
     if (!userDetails?.profile?.careerPath) {
       dispatch(careerPathSelectState(true));
@@ -101,7 +98,6 @@ export const Navbar = () => {
       setIsModalOpen(true);
       navigate("/", { replace: true });
     }
-
 
     else if (!!authResponse?.authToken) {
       Cookies.remove("authToken")

@@ -35,41 +35,27 @@ import { ToastContainer, toast } from "react-toastify";
 import { Puff } from 'react-loader-spinner';
 import { formatProgressValue } from "../../../utils/constants";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import Skeleton from "react-loading-skeleton";
 
 
 
 const RoadmapDetails = () => {
     const { level } = useParams()
     const navigate = useNavigate()
-    // const [currentTopic, setCurrentTopic] = useState([])
     const [resoureDoc, setResourceDoc] = useState(null)
     const [makeRequest, setMakeRequest] = useState(false)
+    const [activeState, setActiveState] = useState(null)
     const [currentId, setCurrentId] = useState("")
     const [percentageValue, setPercentageValue] = useState("")
     const { careerPath } = useSelector(selectUser)
     const [isModuleComplete, setIsModuleComplete] = useState(false)
     const [showQuill, setShowQuill] = useState(true)
-    
 
 
-    console.log(careerPath, "This is user")
 
 
     const onUpdateSyllabuSuccess = (data) => {
-        toast.success(`Marked as complete!`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            theme: "light",
-        }
-        )
-    }
-    const onUpdateSyllabusError = () => {
-        toast.error(`Failed to update, please check your network`, {
+        toast.success("Marked as completed", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -81,46 +67,57 @@ const RoadmapDetails = () => {
         )
     }
 
-    console.log(isModuleComplete, "Hmmmm")
 
-    // const {
-    //     data: projectsResponse,
-    //     // isFetching: fetchingProjectsDue,
-    //     // isLoading: loadingProjectsDue
-    // } = useApiGet("projects due", () => RoadmapServices.getProjectsDueForSyllabus(
-    //     careerPath,
-    //     state?.level
-    // ))
+    const onUpdateSyllabusError = (e) => {
+        toast.error(e.data?.message, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            theme: "light",
+        }
+        )
+    }
 
     const {
-        data: details
+        data: details,
+        isLoading: isLoadingDetails,
+
     } = useApiGet(
         "roadmap-details",
         () => RoadmapServices.getLevelDetails(careerPath, level),
         {
             enabled: true,
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
+            cacheTime: 0,
         })
 
-    console.log(details, "Deeeeetsss")
     const {
-        data: completedSyllabus
+        data: completedSyllabus,
+        isLoading: isLoadingCompletedSyllabus
     } = useApiGet(
         "Completed syllabus state",
         RoadmapServices.getCompletedSyllablus,
         {
             enabled: true,
             retry: false,
+            cacheTime: 0,
             refetchOnWindowFocus: false
         }
     )
-    const { data: progressPercentage } = useApiGet(
+    const {
+        data: progressPercentage,
+        isLoading: isLoadingProgressPercentage
+    } = useApiGet(
         "Progress percentage",
         () => RoadmapServices.getProgressPercentage(careerPath, level),
         {
             enabled: true,
             retry: true,
-            refetchOnWindowFocus: true
+            refetchOnWindowFocus: true,
+            cacheTime: 0,
         }
     )
     const {
@@ -129,7 +126,7 @@ const RoadmapDetails = () => {
 
     } = useApiPost(
         RoadmapServices.updateSyllablus,
-        "Progress percentage",
+        ["Progress percentage", "Completed syllabus state"],
         onUpdateSyllabuSuccess,
         onUpdateSyllabusError
     )
@@ -140,6 +137,18 @@ const RoadmapDetails = () => {
             setPercentageValue(fromattedValue)
         }
     }, [progressPercentage])
+
+
+
+    // useEffect(() => {
+    //     // Manually invalidate queries when entering the page
+    //     // queryClient.invalidateQueries('Completed syllabus state');
+    //     // queryClient.invalidateQueries('Progress percentage');
+    //     queryClient.removeQueries('Progress percentage');
+
+    //   }, []);
+
+
 
 
 
@@ -160,18 +169,43 @@ const RoadmapDetails = () => {
                 <NavigationProgressBar>
                     <NavigationStatsContainer>
                         <NavigationStats>
-                            <div>
+                            {
+                                isLoadingDetails ||
+                                    isLoadingProgressPercentage ||
+                                    isLoadingCompletedSyllabus ?
+                                    <Skeleton
+                                        width={200}
+                                        height={20}
+                                        baseColor={`var(--light-green)`}
+                                    />
+                                    :
+                                    <div>
+                                        <RoadmapBookIcon />
+                                        <p>{completedSyllabus?.projectsCompleted.length}/{details?.resource.length} Lessons Completed</p>
+                                    </div>
+                            }
+
+                            {/* <div>
                                 <RoadmapBookIcon />
                                 <p>4/21 Lessons Completed</p>
-                            </div>
-                            <div>
-                                <RoadmapBookIcon />
-                                <p>4/21 Lessons Completed</p>
-                            </div>
-                            <div>
-                                <CompleteProjectBadge />
-                                <p>4/21 Lessons Completed</p>
-                            </div>
+                            </div> */}
+
+                            {
+                                isLoadingDetails ||
+                                    isLoadingProgressPercentage ||
+                                    isLoadingCompletedSyllabus ?
+                                    <Skeleton
+                                        width={200}
+                                        height={20}
+                                        baseColor={`var(--light-green)`}
+                                    />
+                                    :
+                                    <div>
+                                        <CompleteProjectBadge />
+                                        <p>4/21 Projects Completed</p>
+                                    </div>
+                            }
+
                         </NavigationStats>
                         <ProgressBar
                             completed={percentageValue === 0 ? 3 : percentageValue}
@@ -196,27 +230,59 @@ const RoadmapDetails = () => {
             <DetailsContainer>
                 <Details>
                     <h4>Syllabus Content</h4>
-                    {
-                        details &&
-                        details?.resource.map((item, index) =>
-                            <SyllabusCard
-                                key={index}
-                                title={item?.title}
-                                resource={item?.resourceUrl}
-                                projectId={item?.projectId}
-                                setCurrentId={setCurrentId}
-                                completedSyllabus={completedSyllabus}
-                                // setCurrentTopic={setCurrentTopic}
-                                setResourceDoc={setResourceDoc}
-                                resourceDoc={resoureDoc}
-                                icon={<GreenBook />}
-                                setMakeRequest={setMakeRequest}
-                                activeStateIcon={<CloseCircle />}
-                                isModuleComplete={isModuleComplete}
-                                setIsModuleComplete={setIsModuleComplete}
-                                setShowQuill={setShowQuill}
 
-                            />)
+                    {
+                        (
+                            details &&
+                            !isLoadingDetails &&
+                            !isLoadingCompletedSyllabus &&
+                            !isLoadingProgressPercentage
+                        )
+                            ?
+                            details?.resource.map((item, index) =>
+                                <SyllabusCard
+                                    key={index}
+                                    cardActiveState={index}
+                                    activeState={activeState}
+                                    setActiveState={setActiveState}
+                                    title={item?.title}
+                                    resource={item?.resourceUrl}
+                                    projectId={item?.projectId}
+                                    setCurrentId={setCurrentId}
+                                    completedSyllabus={completedSyllabus}
+                                    // setCurrentTopic={setCurrentTopic}
+                                    setResourceDoc={setResourceDoc}
+                                    resourceDoc={resoureDoc}
+                                    icon={<GreenBook />}
+                                    setMakeRequest={setMakeRequest}
+                                    activeStateIcon={<CloseCircle />}
+                                    isModuleComplete={isModuleComplete}
+                                    setIsModuleComplete={setIsModuleComplete}
+                                    setShowQuill={setShowQuill}
+
+                                />
+                            )
+                            :
+                            <>
+                                <Skeleton
+                                    height={80}
+                                    width={450}
+                                    style={{ marginBottom: "20px" }}
+                                />
+                                <Skeleton
+                                    height={80}
+                                    width={450}
+                                    style={{ marginBottom: "20px" }}
+
+                                />
+                                <Skeleton
+                                    height={80}
+                                    width={450}
+                                    style={{ marginBottom: "20px" }}
+
+                                />
+                            </>
+
                     }
                 </Details>
                 <Progress>
@@ -241,17 +307,19 @@ const RoadmapDetails = () => {
                                                         width={"50%"}
                                                         placeholder={"Please enter project link"}
                                                         backgroundColor={"var(--primary-light)"}
-                                                    /> 
+                                                    />
                                                     <TaskLinkButton primary>
                                                         Submit Project
                                                     </TaskLinkButton>
                                                 </LinkSubmitContainer>
 
-                                                <Button primary={!isModuleComplete} onClick={() => completeModule({
-                                                    roadmap: `${careerPath}`,
-                                                    skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
-                                                    projectId: `${currentId}`
-                                                })}>
+                                                <Button primary={!isModuleComplete} disabled={isModuleComplete} onClick={() => {
+                                                    completeModule({
+                                                        roadmap: `${careerPath}`,
+                                                        skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
+                                                        projectId: `${currentId}`
+                                                    })
+                                                }}>
                                                     {
                                                         isUpdatingSyllabus ?
                                                             <Puff
@@ -317,7 +385,7 @@ const NavigationWithButton = styled.div`
         display: flex;
         gap:10px;
         p{
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
         }
         p:first-child{
@@ -438,39 +506,9 @@ const DetailsModal = styled.div`
     }
     
 `
-// const DetailsModalHeader = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-//     align-items:center;
-//     width:100%;
-//     height:70px !important;
-//     position:sticky;
-//     top:-20px;
-//     left:0;
-//     background-color:var(--white);
-//     z-index:5;
-//     >p{
-//         font-size: 24px;
-//         font-weight: lighter;
-//         :hover{
-//             cursor: pointer;
-//         }
-//     }
-//     >div{
-//         display: flex;
-//         gap:10px;
-//         p{
-//             font-size: 1.2rem;
-//             font-weight: 600;
-//         }
-//     }
-// `
-
 const DocumentsDisplay = styled.div`
     overflow: auto;
     height:90%;
-    /* overflow-x: hidden; */
-    
 `
 const LinkSubmitContainer = styled.div`
     width:100%;
@@ -487,5 +525,6 @@ const TaskLinkButton = styled(Button)`
     align-self: flex-start !important;
     margin-top: -.3rem !important;
 `
+
 
 export default RoadmapDetails

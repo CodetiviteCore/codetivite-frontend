@@ -1,17 +1,14 @@
 import { useMutation, useQueryClient } from "react-query"
 
-export const useApiPost = (queryFunction, keyToInvalidate,success,error) => {
-    const queryClient = useQueryClient()
-    return useMutation(
-        queryFunction,
-        {
-            
-            onSuccess: () => {
-                queryClient.invalidateQueries(keyToInvalidate)
-                success()
-            },
-            onError:error
-
-        }
-    )
-}
+export const useApiPost = (queryFunction, keysToInvalidate, success, error) => {
+    const queryClient = useQueryClient();
+    return useMutation(queryFunction, {
+        onSuccess: () => {
+            keysToInvalidate.forEach((key) => {
+                queryClient.invalidateQueries(key);
+            });
+            success();
+        },
+        onError: error,
+    });
+};
