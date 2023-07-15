@@ -1,17 +1,28 @@
-import { AverageSalary, Badge, Decrease, SkillIcon } from "../../../assets/svgs"
+import {
+    AverageSalary,
+    Badge,
+    Decrease,
+    SkillIcon
+} from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
-import { RoadMapCards, RoadMapCourseInfoCard } from "../../../ui_elements"
-import { LoaderContainer, PathRoadMapContainer, RoadMapContainer, RoadMapPath, RoadMapProjectsToComplete, Stats } from "./Roadmap.styles"
+import {
+    RoadMapCards,
+    RoadMapCourseInfoCard
+} from "../../../ui_elements"
+import {
+    LoaderContainer,
+    PathRoadMapContainer,
+    RoadMapContainer,
+    RoadMapPath,
+    Stats
+} from "./Roadmap.styles"
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useEffect } from "react"
-import { useState } from "react"
+
 import { Puff } from "react-loader-spinner"
-import { CompleteProjectCard } from '../../../ui_elements/completeProjectCard/CompleteProjectCard';
 import { TaskComponent } from "../dashboard/components/TaskComponent"
 
 const Roadmap = () => {
-
 
     const {
         data: careerDetails,
@@ -23,7 +34,6 @@ const Roadmap = () => {
             enabled: true,
             retry: false,
             refetchOnWindowFocus: false,
-            staleTime: 9000000
         }
     )
 
