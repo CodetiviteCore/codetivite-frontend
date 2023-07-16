@@ -52,11 +52,8 @@ import {
   CommunityCollaborateDetails,
   CommunityContainer
 } from '../LandingPage/LandingPage.Styles';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
-  const aboutNavigate = useNavigate();
 
   return (
     <AboutUsOuterContainer>
