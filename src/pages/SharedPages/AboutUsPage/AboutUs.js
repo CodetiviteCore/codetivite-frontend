@@ -52,8 +52,12 @@ import {
   CommunityCollaborateDetails,
   CommunityContainer
 } from '../LandingPage/LandingPage.Styles';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
+  const aboutNavigate = useNavigate();
+
   return (
     <AboutUsOuterContainer>
       <AboutUsFirstContainer>
@@ -403,7 +407,10 @@ const AboutUs = () => {
             builder's program, and leaderboard to help you succeed in the tech industry.
             Whether you're a beginner or an experienced techie, we welcome you to join us today!
           </p>
-          <Button primary>Join our Community</Button>
+          <Button onClick={() => {      
+            window.location.href = `https://twitter.com/codetivite`
+          }}>Join our Community</Button>
+          
         </CommunityCollaborateDetails>
       </CommunityContainer>
 

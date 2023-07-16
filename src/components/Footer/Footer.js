@@ -26,7 +26,14 @@ import FooterBook from "../../assets/images/book.png"
 import FooterAward from "../../assets/images/award.png"
 import LightLogoPng from "../../assets/images/lightlogo.png"
 import FooterLargeLogo from "../../assets/images/footerLargeLogo.png"
+import { ModalContext } from '../../context/ModalContext';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 export const Footer = () => {
+    const { setIsModalOpen } = useContext(ModalContext);
+    const footerNavigate = useNavigate();
     return (
         <FooterOuterContainer>
             <NewsletterOuterContainer>
@@ -104,8 +111,17 @@ export const Footer = () => {
                             creativity and develop your skills. Sign up today and let's create something great together.
                         </p>
                         <FooterButtonContainer>
-                            <Button primary>Get started</Button>
-                            <Button>Contact us</Button>
+                            <Button
+                                primary
+                                data-aos="fade-up"
+                                data-aos-easing="ease-in-out"
+                                data-aos-duration="800"
+                                data-aos-delay="120"
+                                onClick={() => setIsModalOpen(true)}
+                            >Get started now</Button>
+                            <Button onClick={() => {
+                                footerNavigate(`/contact-us`)
+                            }}>Contact us</Button>
                         </FooterButtonContainer>
                     </FooterGetStarted>
                 </FooterDetails>
@@ -123,18 +139,28 @@ export const Footer = () => {
                         <div>
                             <h3>CODETIVITE</h3>
                             <FooterLinkList>
-                                <FooterLinkItem>About us</FooterLinkItem>
-                                <FooterLinkItem>Our blog</FooterLinkItem>
-                                <FooterLinkItem>Clarity test</FooterLinkItem>
-                                <FooterLinkItem>Our community</FooterLinkItem>
+                                <FooterLinkItem>
+                                    <Link className="footerBottomLinkItems" to="/about-us">About us</Link>
+                                </FooterLinkItem>
+                                {/* <FooterLinkItem>Our blog</FooterLinkItem>
+                                <FooterLinkItem>Clarity test</FooterLinkItem> */}
+                                <FooterLinkItem>
+                                    <a href="https://twitter.com/codetivite" target="_blank" rel="noopener noreferrer" className="footerBottomLinkItems">
+                                        Our community
+                                    </a>
+                                </FooterLinkItem>
                             </FooterLinkList>
                         </div>
                         <div>
                             <h3>SUPPORT</h3>
                             <FooterLinkList>
                                 <FooterLinkItem>FAQs</FooterLinkItem>
-                                <FooterLinkItem>Contact us</FooterLinkItem>
-                                <FooterLinkItem>Privacy policy</FooterLinkItem>
+                                <FooterLinkItem>
+                                    <Link className="footerBottomLinkItems" to="/about-us">Contact us</Link>
+                                </FooterLinkItem>
+                                <FooterLinkItem>
+                                    Privacy policy
+                                </FooterLinkItem>
                             </FooterLinkList>
                         </div>
                     </section>
@@ -142,9 +168,21 @@ export const Footer = () => {
                         <div>
                             <h3>SOCIALS</h3>
                             <FooterLinkList>
-                                <FooterLinkItem>LinkedIn</FooterLinkItem>
-                                <FooterLinkItem>Twitter</FooterLinkItem>
-                                <FooterLinkItem>Instagram</FooterLinkItem>
+                                <FooterLinkItem>
+                                    <a href="https://www.linkedin.com/company/codetivite/" target="_blank" rel="noopener noreferrer" className="footerBottomLinkItems">
+                                        LinkedIn
+                                    </a>
+                                </FooterLinkItem>
+                                <FooterLinkItem>
+                                    <a href="https://twitter.com/codetivite" target="_blank" rel="noopener noreferrer" className="footerBottomLinkItems">
+                                        Twitter
+                                    </a>
+                                </FooterLinkItem>
+                                <FooterLinkItem>
+                                    <a href="https://www.instagram.com/codetivite/" target="_blank" rel="noopener noreferrer" className="footerBottomLinkItems">
+                                        Instagram
+                                    </a>
+                                </FooterLinkItem>
                             </FooterLinkList>
                         </div>
                         <div>

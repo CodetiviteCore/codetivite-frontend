@@ -252,8 +252,15 @@ const LandingPage = () => {
               of topics in the latest technologies.
             </p>
             <div>
-              <Button primary>Get started</Button>
-              <Button>Take clarity test</Button>
+              <Button
+                primary
+                data-aos="fade-up"
+                data-aos-easing="ease-in-out"
+                data-aos-duration="800"
+                data-aos-delay="120"
+                onClick={() => setIsModalOpen(true)}
+              >Get started</Button>              
+              {/* <Button>Take clarity test</Button> */}
             </div>
           </HowToGetStartedDetails>
           <HowToGetStartedCardContainer>
@@ -345,7 +352,9 @@ const LandingPage = () => {
             Whether you're a beginner or an experienced techie,
             we welcome you to join us today!
           </p>
-          <Button primary>Join our Community</Button>
+          <Button onClick={() => {
+            window.open('https://twitter.com/codetivite', '_blank');
+          }}>Join our Community</Button>
         </CommunityCollaborateDetails>
       </CommunityContainer>
       <LandingCarouselContainer>

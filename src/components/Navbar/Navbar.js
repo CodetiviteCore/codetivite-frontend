@@ -219,19 +219,19 @@ export const Navbar = () => {
           {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/#community"}>Our community</NavItem>
           }
-          {
+          {/* {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/clarity-test"}>Clarity test</NavItem>
 
-          }
+          } */}
           {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/about-us"}>About</NavItem>
           }
           {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/contact-us"}>Contact us</NavItem>
           }
-          {
+          {/* {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/our-blog"}>Our blog</NavItem>
-          }
+          } */}
         </NavList>
         {
           user ?

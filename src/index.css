@@ -127,7 +127,14 @@ button{
   outline: none !important;
 }
 
+.footerBottomLinkItems {
+  color: white;
+  text-decoration: none;
+}
 
+.footerBottomLinkItems:hover {
+  text-decoration: underline;
+}
   
 
 @media screen and (max-width:768px) {
