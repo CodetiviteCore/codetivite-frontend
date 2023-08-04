@@ -48,51 +48,51 @@ export const DashboardSideBar = ({ show }) => {
             title: "Dashboard",
             icon: <DashboardIcon />
         },
-        {
-            path: "/events",
-            title: "Events",
-            icon: <EventsIcon />,
-            comingSoon: true
-        },
-        {
-            path: "/community",
-            title: "Community",
-            icon: <CommunityIcon />,
-            comingSoon: true
+        // {
+        //     path: "/events",
+        //     title: "Events",
+        //     icon: <EventsIcon />,
+        //     comingSoon: true
+        // },
+        // {
+        //     path: "/community",
+        //     title: "Community",
+        //     icon: <CommunityIcon />,
+        //     comingSoon: true
 
-        },
-        {
-            path: "/our-blog",
-            title: "Our blog",
-            icon: <OurBlogIcon />,
-            comingSoon: true
+        // },
+        // {
+        //     path: "/our-blog",
+        //     title: "Our blog",
+        //     icon: <OurBlogIcon />,
+        //     comingSoon: true
 
-        },
+        //},
         {
             path: "/roadmap",
             title: "Roadmap",
             icon: <RoadmapDashboardIcon />
         },
-        {
-            path: "/leaderboard",
-            title: "Leaderboard",
-            icon: <DashboardLeaderboard />,
-            comingSoon: true
+        // {
+        //     path: "/leaderboard",
+        //     title: "Leaderboard",
+        //     icon: <DashboardLeaderboard />,
+        //     comingSoon: true
 
-        },
-        {
-            path: "/profile",
-            title: "My Profile",
-            icon: <MyProfileIcon />,
-            comingSoon: true
+        // },
+        // {
+        //     path: "/profile",
+        //     title: "My Profile",
+        //     icon: <MyProfileIcon />,
+        //     comingSoon: true
 
-        },
-        {
-            path: "/settings",
-            title: "Settings",
-            icon: <Settings />,
-            comingSoon: true
-        },
+        // },
+        // {
+        //     path: "/settings",
+        //     title: "Settings",
+        //     icon: <Settings />,
+        //     comingSoon: true
+        // },
     ]
     return (
         <SideBarContainer>
