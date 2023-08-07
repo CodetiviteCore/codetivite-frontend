@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const {
     data: careerDetails,
-    isLaoding: isLoadingCereerDetails
+   // isLaoding: isLoadingCereerDetails
   } = useApiGet(
     "Dashboard",
     DashboardServices.getDashboardDetails,
