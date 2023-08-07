@@ -147,7 +147,7 @@ const Roadmap = () => {
             </Stats>
             <PathRoadMapContainer>
                 <RoadMapPath>
-                    <h2>{careerDetails?.resource?.careerPath} Roadmap</h2>
+                    <h2>{careerDetails?.userInfo?.currentSkillLevel?.careerPath} Roadmap</h2>
                     {
                         careerDetails?.levelAndDescriptions.map((item, index) =>
                             <RoadMapCourseInfoCard
@@ -156,11 +156,15 @@ const Roadmap = () => {
                                 courseNo={careerDetails?.resource.length}
                                 key={index}
                                 item={item}
+                                description={item?.description}
                             />
                         )
                     }
                 </RoadMapPath>
-                <TaskComponent />
+                <TaskComponent
+                    taskDetails={careerDetails?.resource}
+
+                />
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

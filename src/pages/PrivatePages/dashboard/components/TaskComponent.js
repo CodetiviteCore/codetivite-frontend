@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CompleteProjectCard } from "../../../../ui_elements"
 import { Link } from 'react-router-dom';
-export const TaskComponent = () => {
+export const TaskComponent = ({taskDetails}) => {
     const projects = [
         {
             title: "Create a table using AutoLayout...",
@@ -28,18 +28,13 @@ export const TaskComponent = () => {
         <Container>
             <Header>
                 <h2>Roadmap task</h2>
-                <Redirect>
-                    <p>See more</p>
-                    <span>&#8594;</span> 
-                </Redirect>
-
             </Header>
             {
-                projects.map((card, index) =>
+                taskDetails.map((card, index) =>
                     <CompleteProjectCard
                         key={index}
                         project={card}
-                        completed={card.locked}
+                        completed={card?.isCompleted}
                     />
                 )
             }

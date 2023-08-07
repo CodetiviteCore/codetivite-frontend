@@ -9,7 +9,6 @@ import {
 
 import {
   Badge,
-  CloseCircle,
   CompleteLessonIcon,
   CompleteProjectBadge,
   GreenBook
@@ -17,22 +16,28 @@ import {
 import { RoadMapCards } from '../../../ui_elements/RoadmapCards/RoadmapCards';
 import { SyllabusCard } from '../../../ui_elements';
 import { TaskComponent } from './components/TaskComponent';
+import { useApiGet } from '../../../custom-hooks/useApiGet';
+import DashboardServices from '../../../services/dashboardServices';
+import { truncateText } from '../../../utils/constants';
 
 
 const Dashboard = () => {
 
 
-  // const {
-  //   data: careerDetails,
-  //   isLaoding: isLoadingCereerDetails
-  // } = useApiGet(
-  //   "Dashboard",
-  //   PreferenceServices.getSelectedPreferences, {
-  //   enabled: true,
-  //   retry: false,
-  //   refetchOnWindowFocus: false,
-  // }
-  // )
+  const {
+    data: careerDetails,
+    isLaoding: isLoadingCereerDetails
+  } = useApiGet(
+    "Dashboard",
+    DashboardServices.getDashboardDetails,
+    {
+      enabled: true,
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+  console.log(careerDetails, "asopod")
 
   const cardDetails = [
     {
@@ -78,71 +83,25 @@ const Dashboard = () => {
             </JumpBackLink>
           </div>
 
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
+          <>
+            {
+              careerDetails?.resource?.map((card) =>
+                <SyllabusCard
+                  title={card?.title}
+                  description={truncateText(card?.projectDescription)}
+                  icon={<GreenBook />}
+                  completeFromDashboard={card?.isCompleted}
+                  // activeStateIcon={<CloseCircle />}
 
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
+                />
+              )
+            }
+          </>
 
-          <SyllabusCard
-            icon={<GreenBook />}
-            activeStateIcon={<CloseCircle />}
-            activeState={true}
-          />
         </JumpBackInContainer>
 
         <TaskComponent
-          
+
         />
 
       </JumpBackInTaskSection>

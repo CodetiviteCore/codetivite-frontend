@@ -12,3 +12,7 @@ export const transformRoadMap = (level) => {
 export const formatProgressValue =(num)=> {
   return num.toFixed(1);
 }
+
+export const truncateText = (text) => {
+  return `${text.split(" ").slice(0, 20).join(" ")}...`;
+}

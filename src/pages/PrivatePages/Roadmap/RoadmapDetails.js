@@ -50,6 +50,8 @@ const RoadmapDetails = () => {
     const { careerPath } = useSelector(selectUser)
     const [isModuleComplete, setIsModuleComplete] = useState(false)
     const [showQuill, setShowQuill] = useState(true)
+    const [projectLink, setProjectLink] = useState("")
+    const [isError, setIsError] = useState(false)
 
 
 
@@ -131,24 +133,16 @@ const RoadmapDetails = () => {
         onUpdateSyllabusError
     )
 
+    const handleCompleteModule = (data) => {
+        setIsError(false);
+        return data.url === "" ? setIsError(true) : completeModule(data);
+    };
     useEffect(() => {
         if (progressPercentage?.progress) {
             const fromattedValue = formatProgressValue(progressPercentage?.progress)
             setPercentageValue(fromattedValue)
         }
     }, [progressPercentage])
-
-
-
-    // useEffect(() => {
-    //     // Manually invalidate queries when entering the page
-    //     // queryClient.invalidateQueries('Completed syllabus state');
-    //     // queryClient.invalidateQueries('Progress percentage');
-    //     queryClient.removeQueries('Progress percentage');
-
-    //   }, []);
-
-
 
 
 
@@ -184,11 +178,6 @@ const RoadmapDetails = () => {
                                         <p>{completedSyllabus?.projectsCompleted.length}/{details?.resource.length} Lessons Completed</p>
                                     </div>
                             }
-
-                            {/* <div>
-                                <RoadmapBookIcon />
-                                <p>4/21 Lessons Completed</p>
-                            </div> */}
 
                             {
                                 isLoadingDetails ||
@@ -250,7 +239,6 @@ const RoadmapDetails = () => {
                                     projectId={item?.projectId}
                                     setCurrentId={setCurrentId}
                                     completedSyllabus={completedSyllabus}
-                                    // setCurrentTopic={setCurrentTopic}
                                     setResourceDoc={setResourceDoc}
                                     resourceDoc={resoureDoc}
                                     icon={<GreenBook />}
@@ -259,7 +247,6 @@ const RoadmapDetails = () => {
                                     isModuleComplete={isModuleComplete}
                                     setIsModuleComplete={setIsModuleComplete}
                                     setShowQuill={setShowQuill}
-
                                 />
                             )
                             :
@@ -307,19 +294,23 @@ const RoadmapDetails = () => {
                                                         width={"50%"}
                                                         placeholder={"Please enter project link"}
                                                         backgroundColor={"var(--primary-light)"}
+                                                        value={projectLink}
+                                                        onChange={(e) => setProjectLink(e.target.value)}
                                                     />
-                                                    <TaskLinkButton primary>
-                                                        Submit Project
-                                                    </TaskLinkButton>
+                                                    {isError && <p>Please insert project link</p>}
                                                 </LinkSubmitContainer>
 
-                                                <Button primary={!isModuleComplete} disabled={isModuleComplete} onClick={() => {
-                                                    completeModule({
-                                                        roadmap: `${careerPath}`,
-                                                        skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
-                                                        projectId: `${currentId}`
-                                                    })
-                                                }}>
+                                                <Button
+                                                    primary={!isModuleComplete}
+                                                    onClick={() =>
+                                                        handleCompleteModule({
+                                                            roadmap: `${careerPath}`,
+                                                            skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
+                                                            projectId: `${currentId}`,
+                                                            url: `${projectLink}`
+                                                        })
+                                                    }
+                                                >
                                                     {
                                                         isUpdatingSyllabus ?
                                                             <Puff
@@ -502,7 +493,7 @@ const DetailsModal = styled.div`
         display:flex;
         align-items:center;
         justify-content:center;
-        cursor: ${({ primary }) => primary ? "pointer" : "not-allowed"} !important;
+        cursor: ${({ primary }) => primary ? "not-allowed" : "pointer"} !important;
     }
     
 `
@@ -511,20 +502,14 @@ const DocumentsDisplay = styled.div`
     height:90%;
 `
 const LinkSubmitContainer = styled.div`
-    width:100%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0 ;
+    flex-direction: column;
+    p{
+        font-size: clamp(0.7rem, 0.8rem, 0.8rem);
+        color: red;
+    }
 `
-const TaskLinkButton = styled(Button)`
-    width:11rem !important;
-    height: inherit;
-    border-radius: 0;
-    align-self: flex-start !important;
-    margin-top: -.3rem !important;
-`
-
 
 export default RoadmapDetails
