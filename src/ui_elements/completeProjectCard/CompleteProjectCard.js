@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {Teacher } from '../../assets/svgs';
 import { LockUnlocked } from '../LockUnlock/LockUnlocked';
+import { truncateText } from '../../utils/constants';
 
 
 export const CompleteProjectCard = ({project, completed}) => {
@@ -13,12 +14,12 @@ export const CompleteProjectCard = ({project, completed}) => {
                 </div>
 
                 <LockUnlocked
-                    locked={completed}
+                    complete={completed}
                 />
             </Header>
             <Details>
                 {
-                    project?.description
+                    truncateText(project?.projectDescription)
                 }
             </Details>
         </CardContainer>
@@ -51,7 +52,7 @@ const Details = styled.p`
     margin:0.5rem 0;
     font-size: 0.75rem;
     line-height: 1.3;
-    width:100%;
+    width:inherit;
     padding-left:8%;
     
 

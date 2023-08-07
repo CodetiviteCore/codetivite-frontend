@@ -4,11 +4,13 @@ import { useApiGet } from '../../custom-hooks/useApiGet';
 import RoadmapServices from '../../services/roadmapServices';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
+import { useLocation } from "react-router-dom";
 
 export const SyllabusCard = ({
     icon,
     title,
+    completeFromDashboard,
+    description,
     setResourceDoc,
     resource,
     setCurrentId,
@@ -24,12 +26,18 @@ export const SyllabusCard = ({
 }) => {
     const [completed, setCompleted] = useState(false);
     const [isActive, setIsActive] = useState(false);
+    const location = useLocation()
 
-    const { data: document, refetch: fetchDoc } = useApiGet(
+
+    const {
+        data: document,
+        refetch: fetchDoc
+    } = useApiGet(
         `${title} document`,
         () => RoadmapServices.getDocument(resource)
     );
 
+    console.log(location.pathname, "Fromdashboard")
     const getDoc = () => {
         fetchDoc();
         setMakeRequest(true);
@@ -71,9 +79,9 @@ export const SyllabusCard = ({
                 <CardDetails>
                     <div>
                         <h3>{title ? title : 'Create a table using Auto Layout...'}</h3>
-                        <p>Table and Grid systems</p>
+                        <p>{description}</p>
                     </div>
-                    <LockUnlocked complete={completed} />
+                    <LockUnlocked complete={completed || completeFromDashboard} />
                 </CardDetails>
             </ContentContainer>
         </CardContainer>
