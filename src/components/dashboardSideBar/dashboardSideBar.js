@@ -1,14 +1,14 @@
 import styled from "styled-components"
 import {
     BlackLogo,
-    CommunityIcon,
+    //CommunityIcon,
     DashboardIcon,
-    DashboardLeaderboard,
-    EventsIcon,
-    MyProfileIcon,
-    OurBlogIcon,
+    // DashboardLeaderboard,
+    // EventsIcon,
+    // MyProfileIcon,
+    // OurBlogIcon,
     RoadmapDashboardIcon,
-    Settings
+    //Settings
 } from "../../assets/svgs"
 import { DashboardMenuItem } from "../../ui_elements"
 import { Link } from 'react-router-dom';
