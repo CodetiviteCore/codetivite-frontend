@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { CompleteProjectCard } from "../../../../ui_elements"
-//import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 export const TaskComponent = ({taskDetails}) => {
     // const projects = [
     //     {

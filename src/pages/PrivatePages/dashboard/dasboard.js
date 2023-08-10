@@ -15,7 +15,7 @@ import {
 } from '../../../assets/svgs';
 import { RoadMapCards } from '../../../ui_elements/RoadmapCards/RoadmapCards';
 import { SyllabusCard } from '../../../ui_elements';
-import { TaskComponent } from './components/TaskComponent';
+// import { TaskComponent } from './components/TaskComponent';
 import { useApiGet } from '../../../custom-hooks/useApiGet';
 import DashboardServices from '../../../services/dashboardServices';
 import { truncateText } from '../../../utils/constants';
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const {
     data: careerDetails,
-   // isLaoding: isLoadingCereerDetails
+    // isLaoding: isLoadingCereerDetails
   } = useApiGet(
     "Dashboard",
     DashboardServices.getDashboardDetails,
@@ -85,8 +85,9 @@ const Dashboard = () => {
 
           <>
             {
-              careerDetails?.resource?.map((card) =>
+              careerDetails?.resource?.map((card, index) =>
                 <SyllabusCard
+                  key={index}
                   title={card?.title}
                   description={truncateText(card?.projectDescription)}
                   icon={<GreenBook />}
@@ -100,9 +101,9 @@ const Dashboard = () => {
 
         </JumpBackInContainer>
 
-        <TaskComponent
+        {/* <TaskComponent
 
-        />
+        /> */}
 
       </JumpBackInTaskSection>
 
