@@ -1,29 +1,29 @@
 import styled from "styled-components"
 import { CompleteProjectCard } from "../../../../ui_elements"
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 export const TaskComponent = ({taskDetails}) => {
-    const projects = [
-        {
-            title: "Create a table using AutoLayout...",
-            description: "This task aims to teach you how to create AutoLayouts",
-            locked: true
-        },
-        {
-            title: "Create a table using AutoLayout...",
-            description: "This task aims to teach you how to create AutoLayouts",
-            locked: false
-        },
-        {
-            title: "Create a table using AutoLayout...",
-            description: "This task aims to teach you how to create AutoLayouts",
-            locked: false
-        },
-        {
-            title: "Create a table using AutoLayout...",
-            description: "This task aims to teach you how to create AutoLayouts",
-            locked: false
-        },
-    ]
+    // const projects = [
+    //     {
+    //         title: "Create a table using AutoLayout...",
+    //         description: "This task aims to teach you how to create AutoLayouts",
+    //         locked: true
+    //     },
+    //     {
+    //         title: "Create a table using AutoLayout...",
+    //         description: "This task aims to teach you how to create AutoLayouts",
+    //         locked: false
+    //     },
+    //     {
+    //         title: "Create a table using AutoLayout...",
+    //         description: "This task aims to teach you how to create AutoLayouts",
+    //         locked: false
+    //     },
+    //     {
+    //         title: "Create a table using AutoLayout...",
+    //         description: "This task aims to teach you how to create AutoLayouts",
+    //         locked: false
+    //     },
+    // ]
     return (
         <Container>
             <Header>
@@ -60,19 +60,19 @@ const Header = styled.section`
     }
 
 `
-const Redirect = styled(Link)`
-    display:flex;
-    align-items:center;
-    gap:5px;
-    p{
-        font-size:1rem;
-        color:var(--primary);
-        font-weight:600;
-    }
-    span{
-        font-size: 1.5rem;
-        color:var(--primary);
-    }
-`
+// const Redirect = styled(Link)`
+//     display:flex;
+//     align-items:center;
+//     gap:5px;
+//     p{
+//         font-size:1rem;
+//         color:var(--primary);
+//         font-weight:600;
+//     }
+//     span{
+//         font-size: 1.5rem;
+//         color:var(--primary);
+//     }
+// `
 
 

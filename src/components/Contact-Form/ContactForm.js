@@ -16,18 +16,18 @@ export const ContactForm = () => {
 			<NameContainer>
 				<div>
 					<label>Last name</label>
-					<Input type={'text'} width={'12rem'} />
+					<Input type={'text'} width={'12rem'} backgroundColor={"var(--primary-light)"} />
 				</div>
 
 				<div>
 					<label>First name</label>
-					<Input type={'text'} width={'12rem'} />
+					<Input type={'text'} width={'12rem'} backgroundColor={"var(--primary-light)"} />
 				</div>
 			</NameContainer>
 
 			<EmailContainer>
 				<label>Email</label>
-				<Input width={'93.3%'} type={'email'} />
+				<Input width={'93.3%'} type={'email'} backgroundColor={"var(--primary-light)"} />
 			</EmailContainer>
 
 			<MessageContainer>
