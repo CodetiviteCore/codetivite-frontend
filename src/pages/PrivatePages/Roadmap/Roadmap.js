@@ -35,9 +35,7 @@ const Roadmap = () => {
             retry: false,
             refetchOnWindowFocus: false,
         }
-    )
-
-    console.log(careerDetails, "opsairhje")
+    )   
 
     const statsCardDetails = [
         {

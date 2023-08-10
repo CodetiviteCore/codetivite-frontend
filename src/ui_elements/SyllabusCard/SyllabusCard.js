@@ -37,7 +37,7 @@ export const SyllabusCard = ({
         () => RoadmapServices.getDocument(resource)
     );
 
-    console.log(location.pathname, "Fromdashboard")
+    // console.log(location.pathname, "Fromdashboard")
     const getDoc = () => {
         fetchDoc();
         setMakeRequest(true);

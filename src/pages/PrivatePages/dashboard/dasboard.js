@@ -37,8 +37,6 @@ const Dashboard = () => {
     }
   )
 
-  console.log(careerDetails, "asopod")
-
   const cardDetails = [
     {
       icon: <Badge />,
