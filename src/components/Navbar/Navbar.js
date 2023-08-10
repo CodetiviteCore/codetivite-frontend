@@ -219,10 +219,10 @@ export const Navbar = () => {
           {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/#community"}>Our community</NavItem>
           }
-          {
+          {/* {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/clarity-test"}>Clarity test</NavItem>
 
-          }
+          } */}
           {
             isLoading ? <Skeleton height={20} width={80} /> : <NavItem to={"/about-us"}>About</NavItem>
           }
@@ -317,7 +317,7 @@ const NavListContainer = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between ;
-  width:72%;
+  width:64%;
   transition: all 2s ease-in-out;
   @media ${devices.tabletL}{
     position:fixed;

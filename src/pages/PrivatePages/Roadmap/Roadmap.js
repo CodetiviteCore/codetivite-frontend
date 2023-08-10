@@ -115,7 +115,6 @@ const Roadmap = () => {
         )
     }
 
-
     return (
         <RoadMapContainer>
             <Stats>
