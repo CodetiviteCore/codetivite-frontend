@@ -191,7 +191,7 @@ const RoadmapDetails = () => {
                                     :
                                     <div>
                                         <CompleteProjectBadge />
-                                        <p>4/21 Projects Completed</p>
+                                        <p>{completedSyllabus?.projectsCompleted.length}/{details?.resource.length} Projects Completed</p>
                                     </div>
                             }
 
