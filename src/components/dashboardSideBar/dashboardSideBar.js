@@ -2,7 +2,7 @@ import styled from "styled-components"
 import {
     BlackLogo,
     //CommunityIcon,
-    DashboardIcon,
+    //DashboardIcon,
     // DashboardLeaderboard,
     // EventsIcon,
     // MyProfileIcon,
@@ -43,11 +43,11 @@ export const DashboardSideBar = ({ show }) => {
     const [activeIndex, setActiveIndex] = useState(1)
 
     const menus = [
-        {
-            path: "/dashboard",
-            title: "Dashboard",
-            icon: <DashboardIcon />
-        },
+        //TODO: {
+        //     path: "/dashboard",
+        //     title: "Dashboard",
+        //     icon: <DashboardIcon />
+        // },
         // {
         //     path: "/events",
         //     title: "Events",

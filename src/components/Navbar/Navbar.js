@@ -115,7 +115,9 @@ export const Navbar = () => {
         dispatch(careerPathSelectState(true))
       }
 
-      navigate("/dashboard", { replace: true });
+      //TODO: navigate("/dashboard", { replace: true });
+      navigate("/roadmap", { replace: true });
+
 
     }
   },
@@ -253,7 +255,8 @@ export const Navbar = () => {
               >
                 <p onClick={handleLogOut}>Logout</p>
                 <hr />
-                <DashboardLink to={"/dashboard"}>Dashboard</DashboardLink>
+                {/* TODO: <DashboardLink to={"/dashboard"}>Dashboard</DashboardLink> */}
+                <DashboardLink to={"/roadmap"}>Roadmap</DashboardLink>
               </LogoOutDropDown>
             </AvatarContainer>
             :

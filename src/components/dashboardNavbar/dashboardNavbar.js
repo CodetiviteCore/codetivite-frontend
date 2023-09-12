@@ -4,12 +4,12 @@ import { useLayoutEffect, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../Redux store/auth/auth.selector';
 import Avatar from 'react-avatar';
-import { textFormat } from "../../utils/constants";
+//import { textFormat } from "../../utils/constants";
 import { Notification } from "../../assets/svgs";
 import { useApiGet } from "../../custom-hooks/useApiGet";
 import AuthServices from "../../services/authServices";
 import { signUpWithGoogle } from "../../Redux store/auth/auth.action";
-import Skeleton from "react-loading-skeleton";
+//import Skeleton from "react-loading-skeleton";
 
 
 
@@ -24,7 +24,7 @@ export const DashboardNavabar = () => {
 
     const {
         data: updatedUser,
-        isFetched
+        //isFetched
     } = useApiGet(
         "updated-user-details",
         () => AuthServices.getUpdatedUserDetails(_id),
@@ -77,13 +77,14 @@ export const DashboardNavabar = () => {
                 }
 
 
+                {/* TODO: The icon here, dances on hover
                 <section>
                     <div>
                         <h5>{usernames.firstname} {usernames.lastname}</h5>
                         <p>{isFetched ? <Skeleton width={10} height={20} /> : (textFormat(user?.careerPath))}</p>
                     </div>
-                    <span>&gt;</span>
-                </section>
+                    {/* TODO: <span>&gt;</span> */}
+                {/* </section> */}
             </DashboardUserDetails>
         </DashboardNav>
     )
