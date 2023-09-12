@@ -404,8 +404,8 @@ const AboutUs = () => {
             builder's program, and leaderboard to help you succeed in the tech industry.
             Whether you're a beginner or an experienced techie, we welcome you to join us today!
           </p>
-          <Button onClick={() => {      
-            window.location.href = `https://twitter.com/codetivite`
+          <Button onClick={() => { 
+            window.open("https://twitter.com/codetivite", "_blank");
           }}>Join our Community</Button>
           
         </CommunityCollaborateDetails>

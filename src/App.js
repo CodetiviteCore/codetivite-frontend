@@ -40,7 +40,7 @@ function App() {
 
 
   const redirectToMail = () => {
-    window.location.href = "https://gmail.com"
+    window.open("https://gmail.com", "_blank");
   }
 
   useEffect(() => {
