@@ -29,9 +29,9 @@ import {
   PrevArrow,
   NextArrow,
   Slide,
-  LandingBlogContainer,
-  BlogContainer,
-  LandingBlogCardContainer,
+  // LandingBlogContainer,
+  // BlogContainer,
+  // LandingBlogCardContainer,
 } from './LandingPage.Styles';
 import {
   Audio,
@@ -51,13 +51,13 @@ import Tina from "../../../assets/images/tima.png"
 import Tobi from "../../../assets/images/toib.png"
 import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
-import Blog from "../../../assets/images/blogPicture.png"
-import AuthorAvatar from "../../../assets/images/blogAvatar.png"
+// import Blog from "../../../assets/images/blogPicture.png"
+// import AuthorAvatar from "../../../assets/images/blogAvatar.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import 'aos/dist/aos.css';
-import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
-import { useNavigate } from 'react-router-dom';
+// import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
+//import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -71,7 +71,7 @@ import { ModalContext } from '../../../context/ModalContext';
 
 const LandingPage = () => {
   const [cardState, setCardState] = useState(0)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const location = useLocation();
   const communityRef = useRef(null)
   const {setIsModalOpen} = useContext(ModalContext)
@@ -105,35 +105,35 @@ const LandingPage = () => {
       description: "Once you've selected your preferred roadmap, it's time to start learning! Our courses are broken down into easy-to-follow modules, each covering a different topic in the latest technologies. With our step-by-step approach, you'll quickly gain the knowledge and skills you need to succeed in the tech industry. So don't wait - start learning today and take the first step towards achieving your tech dreams!"
     },
   ]
-  const blogCardDetails = [
-    {
-      image: Blog,
-      category: "news",
-      title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
-      description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
-      avater: AuthorAvatar,
-      author: "Prince Chijioke",
-      time: "Mon, 26 Jan 2023"
-    },
-    {
-      image: Blog,
-      category: "products",
-      title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
-      description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
-      avater: AuthorAvatar,
-      author: "Prince Chijioke",
-      time: "Mon, 26 Jan 2023"
-    },
-    {
-      image: Blog,
-      category: "tech",
-      title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
-      description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
-      avater: AuthorAvatar,
-      author: "Prince Chijioke",
-      time: "Mon, 26 Jan 2023"
-    },
-  ]
+  // const blogCardDetails = [
+  //   {
+  //     image: Blog,
+  //     category: "news",
+  //     title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
+  //     description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
+  //     avater: AuthorAvatar,
+  //     author: "Prince Chijioke",
+  //     time: "Mon, 26 Jan 2023"
+  //   },
+  //   {
+  //     image: Blog,
+  //     category: "products",
+  //     title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
+  //     description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
+  //     avater: AuthorAvatar,
+  //     author: "Prince Chijioke",
+  //     time: "Mon, 26 Jan 2023"
+  //   },
+  //   {
+  //     image: Blog,
+  //     category: "tech",
+  //     title: "Lorem ipsum dolor sit amet consectetur. Eu est praesent eleifend.",
+  //     description: "Lorem ipsum dolor sit amet consectetur. Est phasellus quis suspendisse augue sed tellus id. Elementum imperdiet.",
+  //     avater: AuthorAvatar,
+  //     author: "Prince Chijioke",
+  //     time: "Mon, 26 Jan 2023"
+  //   },
+  // ]
   return (
     <LandingMainContainer>
      
@@ -431,7 +431,7 @@ const LandingPage = () => {
           <NextArrow className="next">{<RightArrow />}</NextArrow>
         </Swiper>
       </LandingCarouselContainer>
-      <LandingBlogContainer>
+      {/* <LandingBlogContainer>
         <BlogContainer>
           <div>
             <p>OUR BLOG</p>
@@ -462,7 +462,7 @@ const LandingPage = () => {
             )
           }
         </LandingBlogCardContainer>
-      </LandingBlogContainer>
+      </LandingBlogContainer> */}
     </LandingMainContainer>
   )
 }
