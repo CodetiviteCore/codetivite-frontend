@@ -4,7 +4,7 @@ import { useApiGet } from '../../custom-hooks/useApiGet';
 import RoadmapServices from '../../services/roadmapServices';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 
 export const SyllabusCard = ({
     icon,
@@ -18,7 +18,7 @@ export const SyllabusCard = ({
     completedSyllabus,
     setMakeRequest,
     setShowQuill,
-    isModuleComplete,
+    //isModuleComplete,
     setIsModuleComplete,
     activeState,
     setActiveState,
@@ -26,7 +26,7 @@ export const SyllabusCard = ({
 }) => {
     const [completed, setCompleted] = useState(false);
     const [isActive, setIsActive] = useState(false);
-    const location = useLocation()
+    //const location = useLocation()
 
 
     const {
