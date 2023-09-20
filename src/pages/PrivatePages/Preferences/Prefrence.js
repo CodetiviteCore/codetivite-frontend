@@ -52,7 +52,8 @@ const Prefrence = () => {
         dispatch(setCareerPath(selectCareerPath))
         updateCareer(selectCareerPath)
         dispatch(addToVisitedRoutes(location?.pathname.toString()))
-        navigate('/dashboard', { replace: true });
+        //TODO: navigate('/dashboard', { replace: true });
+        navigate('/roadmap', { replace: true });
     }
 
 
