@@ -382,40 +382,31 @@ const LandingPage = () => {
           <Slide>
             <LandingCarouselElement>
               <h5>
-                “Lorem ipsum dolor sit amet consectetur.
-                Auctor viverra in sagittis rhoncus pellentesque turpis dignissim commodo sit.
-                Eget erat bibendum justo quis quam orci nunc volutpat pulvinar.
-                Aliquam aliquam cursus hac a nulla diam eu cursus lectus.”
+                “Codetivite gave me my first real life experience as a technical writer. The roadmap was broken down in a way that was easy to understand. The learning was self paced and every module came with its own tasks. I loved the experience!”
               </h5>
-              <h6>Prince Chijioke</h6>
-              <p>Product Designer</p>
+              <h6>Okoli Kosisochukwu</h6>
+              <p>Technical Writer</p>
             </LandingCarouselElement>
           </Slide>
           <Slide>
             <LandingCarouselElement>
               <h5>
-                “Lorem ipsum dolor sit amet consectetur.
-                Auctor viverra in sagittis rhoncus pellentesque turpis dignissim commodo sit.
-                Eget erat bibendum justo quis quam orci nunc volutpat pulvinar.
-                Aliquam aliquam cursus hac a nulla diam eu cursus lectus.”
+                “Codetivite is revolutionary! The literal meaning of digital internships. Where else can you get real life experience to put you ahead in your career.”
               </h5>
-              <h6>Prince Chijioke</h6>
-              <p>Product Designer</p>
+              <h6>Okorie Rachel</h6>
+              <p>Backend Engineer</p>
             </LandingCarouselElement>
           </Slide>
           <SwiperSlide>
             <LandingCarouselElement>
               <h5>
-                “Lorem ipsum dolor sit amet consectetur.
-                Auctor viverra in sagittis rhoncus pellentesque turpis dignissim commodo sit.
-                Eget erat bibendum justo quis quam orci nunc volutpat pulvinar.
-                Aliquam aliquam cursus hac a nulla diam eu cursus lectus.”
+                “Where would I have been without codetivite!”
               </h5>
-              <h6>Prince Chijioke</h6>
-              <p>Product Designer</p>
+              <h6>Victor Ama</h6>
+              <p>Frontend Developer</p>
             </LandingCarouselElement>
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <LandingCarouselElement>
               <h5>
                 “Lorem ipsum dolor sit amet consectetur.
@@ -426,7 +417,7 @@ const LandingPage = () => {
               <h6>Prince Chijioke</h6>
               <p>Product Designer</p>
             </LandingCarouselElement>
-          </SwiperSlide>
+          </SwiperSlide> */}
           <PrevArrow className="prev">{<LeftArrow />}</PrevArrow>
           <NextArrow className="next">{<RightArrow />}</NextArrow>
         </Swiper>
