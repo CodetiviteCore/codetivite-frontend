@@ -19,9 +19,11 @@ const ContactUs = () => {
             <CallBlack />
             <p>+234 903 8283 447</p>
           </ButtonFlexContainer>
-        </Button>
+        </Button>        
 
-        <Button contact>
+        <Button contact onClick={() => {          
+          window.open('mailto:codetivite@gmail.com?subject=Hello Codetivite', '_blank');
+        }}>
           <ButtonFlexContainer>
             <Sms />
             <p>contact@codetivite.com</p>
@@ -34,3 +36,4 @@ const ContactUs = () => {
 }
 
 export default ContactUs
+
