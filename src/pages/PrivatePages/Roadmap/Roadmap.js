@@ -158,10 +158,10 @@ const Roadmap = () => {
                         )
                     }
                 </RoadMapPath>
-                <TaskComponent
+                {/* <TaskComponent
                     taskDetails={careerDetails?.resource}
 
-                />
+                /> */}
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

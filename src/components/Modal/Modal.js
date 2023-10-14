@@ -6,41 +6,48 @@ import { useEffect } from 'react';
 import { devices } from '../../utils/MediaQueiyBreakPoints';
 import { AnimatePresence } from 'framer-motion';
 
-
 export const Modal = ({ isOpen, children }) => {
-    const { setIsModalOpen, emailModal } = useContext(ModalContext)
+    const { setIsModalOpen, emailModal } = useContext(ModalContext);
+
     useEffect(() => {
-        emailModal && setIsModalOpen(true)
-    }, [emailModal, setIsModalOpen])
+        emailModal && setIsModalOpen(true);
+    }, [emailModal, setIsModalOpen]);
+
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+
+    const preventPropagation = (e) => {
+        e.stopPropagation();
+    };
+
     return (
         <ModalWrapper
             isOpen={isOpen}
+            onClick={closeModal}
+            onKeyDown={handleEscape}
+            tabIndex="0"
         >
-            <AnimatePresence>
                 <ModalHolder
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}                                       
+                    onClick={preventPropagation}
                 >
-
-                    <ModalContent>
+                    <ModalContent >
                         {children}
                     </ModalContent>
-
                     <i
-                        class="material-symbols-outlined"
+                        className="material-symbols-outlined"
                         onClick={closeModal}
                     >close</i>
                 </ModalHolder>
-            </AnimatePresence>
         </ModalWrapper>
-
     );
 };
-
 
 
 const ModalWrapper = styled(motion.div)`

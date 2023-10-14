@@ -25,7 +25,9 @@ export const LandingModal = styled.div`
 			font-size: 1.3rem;
 			margin-bottom: 1rem;
 		}
-
+		form{
+			margin-top:0.8rem;
+		}
 		button {
 			background-color: var(--google-blue);
 			margin: 2rem auto 0 auto;
@@ -45,6 +47,10 @@ export const LandingModal = styled.div`
 				cursor: pointer;
 			}
 		}
+		/* input{
+			width:100% !important;
+			text-align: center;
+		} */
 		@media ${devices.tablet}{
 			padding:10px 15px ;
 			button{

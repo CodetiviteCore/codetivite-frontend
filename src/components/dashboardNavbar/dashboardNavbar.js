@@ -51,7 +51,6 @@ export const DashboardNavabar = () => {
     }, [dispatch, updatedUser])
 
 
-
     return (
         <DashboardNav>
             <DashboardTitle>

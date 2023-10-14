@@ -83,10 +83,10 @@ const RoadmapDetails = () => {
         )
     }
 
+
     const {
         data: details,
         isLoading: isLoadingDetails,
-
     } = useApiGet(
         "roadmap-details",
         () => RoadmapServices.getLevelDetails(careerPath, level),
@@ -95,6 +95,7 @@ const RoadmapDetails = () => {
             refetchOnWindowFocus: false,
             cacheTime: 0,
         })
+
 
     const {
         data: completedSyllabus,
@@ -109,6 +110,7 @@ const RoadmapDetails = () => {
             refetchOnWindowFocus: false
         }
     )
+
     const {
         data: progressPercentage,
         isLoading: isLoadingProgressPercentage
@@ -143,8 +145,6 @@ const RoadmapDetails = () => {
             setPercentageValue(fromattedValue)
         }
     }, [progressPercentage])
-
-
 
     return (
         <RoadMapDetails>
@@ -235,6 +235,7 @@ const RoadmapDetails = () => {
                                     activeState={activeState}
                                     setActiveState={setActiveState}
                                     title={item?.title}
+                                    isCompleted={item?.isCompleted}
                                     resource={item?.resourceUrl}
                                     projectId={item?.projectId}
                                     setCurrentId={setCurrentId}
@@ -289,26 +290,41 @@ const RoadmapDetails = () => {
                                                     />
                                                 </DocumentsDisplay>
 
-                                                <LinkSubmitContainer>
-                                                    <Input
-                                                        width={"50%"}
-                                                        placeholder={"Please enter project link"}
-                                                        backgroundColor={"var(--primary-light)"}
-                                                        value={projectLink}
-                                                        onChange={(e) => setProjectLink(e.target.value)}
-                                                    />
-                                                    {isError && <p>Please insert project link</p>}
-                                                </LinkSubmitContainer>
+                                                {
+                                                    isModuleComplete ? null :
+                                                        <LinkSubmitContainer>
+                                                            <Input
+                                                                width={"50%"}
+                                                                placeholder={"Please enter project link"}
+                                                                backgroundColor={"var(--primary-light)"}
+                                                                value={projectLink}
+                                                                onChange={(e) => setProjectLink(e.target.value)}
+                                                            />
+                                                            {/* {isError && <p>Please insert project link</p>} */}
+                                                        </LinkSubmitContainer>
+                                                }
+
 
                                                 <Button
                                                     primary={!isModuleComplete}
-                                                    onClick={() =>
-                                                        handleCompleteModule({
-                                                            roadmap: `${careerPath}`,
-                                                            skillLevel: `${level === "Fresher" ? "junior" : level === "Entry-Level" ? "entryLevel" : level}`,
-                                                            projectId: `${currentId}`,
-                                                            url: `${projectLink}`
-                                                        })
+                                                    onClick={() => {
+                                                        if (isModuleComplete) {
+                                                            handleCompleteModule({
+                                                                roadmap: `${careerPath}`,
+                                                                skillLevel: `${level === "Fresher" ?
+                                                                    "junior" : level === "Entry-Level" ?
+                                                                        "entryLevel" : level}`,
+                                                                projectId: `${currentId}`,
+                                                                url: `${projectLink}`
+                                                            })
+                                                            setProjectLink("")
+                                                        }
+                                                        else {
+                                                            return null
+                                                        }
+
+                                                    }
+
                                                     }
                                                 >
                                                     {
@@ -317,7 +333,7 @@ const RoadmapDetails = () => {
                                                                 height="40"
                                                                 width="40"
                                                                 radius={1}
-                                                                color="var(--primary)"
+                                                                color="white"
                                                                 ariaLabel="puff-loading"
                                                             />
                                                             :
@@ -350,6 +366,10 @@ const RoadmapDetails = () => {
     )
 
 }
+
+
+
+
 
 const RoadMapDetails = styled(RoadMapContainer)`
     overflow-y: scroll !important;
