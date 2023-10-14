@@ -16,14 +16,11 @@ export default class PreferenceServices {
         })
     }
 
-    static async updateCareerPath(careerPath) {
-        const data = {
-            careerPath: careerPath
-        }
+    static async updateCareerPath(data) {
+        const {careerPath, firstname, lastname} = data
         return await request({
-            url: `users/career-path?careerPath=${careerPath}`,
+            url: `users/career-path/?firstName=${firstname}&lastName=${lastname}&careerPath=${careerPath}`,
             method: "PUT",
-            data:data
         })
     }
 }   

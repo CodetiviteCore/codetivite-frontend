@@ -20,7 +20,6 @@ import {
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import { Puff } from "react-loader-spinner"
-import { TaskComponent } from "../dashboard/components/TaskComponent"
 
 const Roadmap = () => {
 
@@ -158,10 +157,10 @@ const Roadmap = () => {
                         )
                     }
                 </RoadMapPath>
-                <TaskComponent
+                {/* <TaskComponent
                     taskDetails={careerDetails?.resource}
 
-                />
+                /> */}
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

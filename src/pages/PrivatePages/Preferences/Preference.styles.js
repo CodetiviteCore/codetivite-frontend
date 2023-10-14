@@ -11,9 +11,12 @@ export const PrefrenceContainer = styled.main`
     }
 
 `
-export const PreferenceDetails = styled.aside`
+export const PreferenceDetails = styled.form`
     flex:0.5;
     padding:2.6rem;
+    div{
+        width:fit-content;
+    }
     @media ${devices.tablet}{
         width:100% ;
         flex:1;
@@ -72,4 +75,11 @@ export const PreferencDashboardeDetails = styled.aside`
         color:var(--white);
     }
 
+`
+
+export const CollectDetails = styled.div`
+    width:100% !important;
+    input{
+        margin-bottom:1rem;
+    }
 `

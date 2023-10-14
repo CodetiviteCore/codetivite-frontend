@@ -44,7 +44,7 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setIsModalOpen, setEmailModal } = useContext(ModalContext);
+  const { setIsModalOpen} = useContext(ModalContext);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -58,8 +58,8 @@ export const Navbar = () => {
 
   //api call
   const {
-    data: authResponse,
-    refetch: fetchToken,
+    // data: authResponse,
+    // refetch: fetchToken,
     isLoading,
 
   } = useApiGet(
@@ -77,14 +77,19 @@ export const Navbar = () => {
   //sign up process
   const getUserFromEmail = useCallback(() => {
     const authToken = searchParams.get("token")
-    Cookies.remove("authToken")
-    Cookies.set("authToken", authToken, { secure: true })
-    const userDetails = jwtDecode(authToken);
-    dispatch(signUpWithGoogle(userDetails?.profile));
-    if (!userDetails?.profile?.careerPath) {
-      dispatch(careerPathSelectState(true));
-      navigate("/preferences", { replace: true });
+    if (authToken) {
+      Cookies.remove("authToken")
+      Cookies.set("authToken", authToken, { secure: true })
+      const userDetails = jwtDecode(authToken);
+      dispatch(signUpWithGoogle(userDetails?.profile));
+      if (userDetails?.isNewUser) {
+        dispatch(careerPathSelectState(true));
+        navigate("/preferences", { replace: true });
+      }
     }
+    // else {
+    //   navigate("/roadmap", { replace: true });
+    // }
   }, [dispatch, navigate, searchParams]);
 
 
@@ -92,58 +97,60 @@ export const Navbar = () => {
 
   //Get user details login process... normal flow
 
-  const getUser = useCallback(() => {
-    if (authResponse?.sentEmail) {
-      setEmailModal(true);
-      setIsModalOpen(true);
-      navigate("/", { replace: true });
-    }
+  // const getUser = useCallback(() => {
+  //   if (authResponse?.sentEmail) {
+  //     setEmailModal(true);
+  //     setIsModalOpen(true);
+  //     navigate("/", { replace: true });
+  //   }
 
-    else if (!!authResponse?.authToken) {
-      Cookies.remove("authToken")
-      Cookies.set("authToken", authResponse?.authToken, { secure: true })
-      const userDetails = jwtDecode(authResponse?.authToken);
+  //   else if (!!authResponse?.authToken) {
+  //     Cookies.remove("authToken")
+  //     Cookies.set("authToken", authResponse?.authToken, { secure: true })
+  //     const userDetails = jwtDecode(authResponse?.authToken);
 
-      dispatch(signUpWithGoogle(userDetails?.profile));
+  //     // dispatch(signUpWithGoogle(userDetails?.profile));
 
-      if (!userDetails?.profile?.careerPath) {
-        dispatch(careerPathSelectState(true));
-        navigate("/preferences", { replace: true });
-      }
+  //     if (!userDetails?.profile?.careerPath) {
+  //       // dispatch(careerPathSelectState(true));
+  //       // navigate("/preferences", { replace: true });
+  //       setEmailModal(true);
+  //     }
 
-      else if (userDetails?.profile?.careerPath) {
-        dispatch(careerPathSelectState(true))
-      }
+  //     else if (userDetails?.profile?.careerPath) {
+  //       console.log(userDetails, "ahhh")
+  //       dispatch(signUpWithGoogle(userDetails?.profile));
+  //       dispatch(careerPathSelectState(true))
+  //       navigate("/roadmap", { replace: true });
+  //     }
 
-      //TODO: navigate("/dashboard", { replace: true });
-      navigate("/roadmap", { replace: true });
+  //     //TODO: navigate("/dashboard", { replace: true });
 
-
-    }
-  },
-    [
-      authResponse?.authToken,
-      authResponse?.sentEmail,
-      dispatch,
-      navigate,
-      setEmailModal,
-      setIsModalOpen
-    ]
-  );
+  //   }
+  // },
+  //   [
+  //     authResponse?.authToken,
+  //     authResponse?.sentEmail,
+  //     dispatch,
+  //     navigate,
+  //     setEmailModal,
+  //     setIsModalOpen
+  //   ]
+  // );
 
 
 
   useEffect(() => {
     //get user details useEffect
-    if (searchParams.get("token")) {
-      getUserFromEmail();
-    } else if (searchParams.get("code")) {
-      fetchToken();
-      getUser();
-      // navigate("/", { replace: true });
-    }
-
-  }, [getUser, getUserFromEmail, searchParams, fetchToken, navigate]);
+    // if (searchParams.get("token")) {
+    //   getUserFromEmail();
+    // } else if (searchParams.get("code")) {
+    //   fetchToken();
+    //   getUser();
+    //   // navigate("/", { replace: true });
+    // }
+    getUserFromEmail()
+  }, [getUserFromEmail]);
 
   useEffect(() => {
     const handleClickOutSide = (event) => {

@@ -9,7 +9,9 @@ import { useState } from 'react';
 export const SyllabusCard = ({
     icon,
     title,
+    index,
     completeFromDashboard,
+    isCompleted,
     description,
     setResourceDoc,
     resource,
@@ -23,8 +25,9 @@ export const SyllabusCard = ({
     activeState,
     setActiveState,
     cardActiveState,
+    isModuleComplete
 }) => {
-    const [completed, setCompleted] = useState(false);
+    // const [completed, setCompleted] = useState(false);
     const [isActive, setIsActive] = useState(false);
     //const location = useLocation()
 
@@ -37,22 +40,11 @@ export const SyllabusCard = ({
         () => RoadmapServices.getDocument(resource)
     );
 
-    // console.log(location.pathname, "Fromdashboard")
+
     const getDoc = () => {
         fetchDoc();
         setMakeRequest(true);
     };
-
-    useEffect(() => {
-        completedSyllabus?.projectsCompleted.forEach((module) => {
-            if (module?.projectId === projectId) {
-                setCompleted(true);
-                setIsModuleComplete(true);
-            } else if (module?.projectId === projectId && isActive) {
-                setIsModuleComplete(true);
-            }
-        });
-    }, [completedSyllabus, isActive, projectId, setCompleted, setIsModuleComplete]);
 
     useEffect(() => {
         if (document) {
@@ -70,7 +62,7 @@ export const SyllabusCard = ({
                 getDoc();
                 setCurrentId(projectId);
                 setIsActive(true);
-                setIsModuleComplete(false);
+                setIsModuleComplete(isCompleted);
                 setActiveState(cardActiveState);
             }}
         >
@@ -81,7 +73,7 @@ export const SyllabusCard = ({
                         <h3>{title ? title : 'Create a table using Auto Layout...'}</h3>
                         <p>{description}</p>
                     </div>
-                    <LockUnlocked complete={completed || completeFromDashboard} />
+                    <LockUnlocked complete={isCompleted || completeFromDashboard} />
                 </CardDetails>
             </ContentContainer>
         </CardContainer>

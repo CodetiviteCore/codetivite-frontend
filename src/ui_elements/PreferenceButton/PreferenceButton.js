@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { devices } from '../../utils/MediaQueiyBreakPoints';
 
-const ButtonStyle = styled.button`
+const ButtonStyle = styled.div`
     padding: 1rem 2rem;
     outline: none;
     border: none;

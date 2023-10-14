@@ -2,7 +2,7 @@
 import { AUTH_ACTION_TYPES } from './auth.type';
 export const AUTH_INITIAL_STATE = {
     currentUser: null,
-    // careerPath: null,
+    careerPath: null,
     isCareerPathSelected: false,
     visitedRoutes: []
 }
