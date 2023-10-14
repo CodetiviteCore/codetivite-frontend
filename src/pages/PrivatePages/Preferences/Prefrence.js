@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input, PreferenceButton } from "../../../ui_elements";
 import DashboardImage from "../../../assets/images/dashboardImage.png";
 import {

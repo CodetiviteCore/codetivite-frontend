@@ -51,7 +51,7 @@ const RoadmapDetails = () => {
     const [isModuleComplete, setIsModuleComplete] = useState(false)
     const [showQuill, setShowQuill] = useState(true)
     const [projectLink, setProjectLink] = useState("")
-    const [isError, setIsError] = useState(false)
+    const [setIsError] = useState(false)
 
 
 

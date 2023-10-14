@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { ModalContext } from '../../context/ModalContext';
 import { useEffect } from 'react';
 import { devices } from '../../utils/MediaQueiyBreakPoints';
-import { AnimatePresence } from 'framer-motion';
 
 export const Modal = ({ isOpen, children }) => {
     const { setIsModalOpen, emailModal } = useContext(ModalContext);

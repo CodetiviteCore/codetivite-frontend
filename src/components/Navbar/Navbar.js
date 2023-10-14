@@ -44,7 +44,7 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setIsModalOpen, setEmailModal } = useContext(ModalContext);
+  const { setIsModalOpen} = useContext(ModalContext);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -58,8 +58,8 @@ export const Navbar = () => {
 
   //api call
   const {
-    data: authResponse,
-    refetch: fetchToken,
+    // data: authResponse,
+    // refetch: fetchToken,
     isLoading,
 
   } = useApiGet(
