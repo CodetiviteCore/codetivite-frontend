@@ -118,7 +118,7 @@ const Prefrence = () => {
                         </CollectDetails>
                     }
                     <PreferenceDetailsHeader>
-                        <h1>{preferencesResponse ? "Select your Carrer Path" : <Skeleton width={"50%"} height={50} />}</h1>
+                        <h1>{preferencesResponse ? "Select your Career Path" : <Skeleton width={"50%"} height={50} />}</h1>
                         <p>{preferencesResponse ? "Choose a career path to enable us serve you better." : <Skeleton width={"40%"} height={20} />}</p>
                     </PreferenceDetailsHeader>
 
@@ -168,9 +168,7 @@ const Prefrence = () => {
                 <PreferencDashboardeDetails>
                     <h2>Codetivite got you covered!</h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur. Lobortis neque odio proin
-                        diam magna sed feugiat maecenas. Quam quis diam vel non feugiat
-                        fames facilisi.
+                        Welcome aboard! Our goal is to ensure you get enough experience to land you a solid job in tech.
                     </p>
                 </PreferencDashboardeDetails>
                 <img src={DashboardImage} alt={"dashboard_image"} />
