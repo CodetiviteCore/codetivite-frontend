@@ -1,8 +1,11 @@
-name: hello-world
+name: check-codetivite-frontend
 on: push
-jobs:
-  sample-job:
+jobs: 
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+      - uses: VictorDanilov/react-project-checker-action@v0.0.1-alpha3
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build Project
+        run: yarn run build
