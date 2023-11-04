@@ -8,6 +8,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { SharedRoutes } from './routes/RouteBuilder/SharedRoutes';
 import { useSelector } from 'react-redux';
 import { selectCareerState } from "./Redux store/auth/auth.selector";
+import { selectUser } from "./Redux store/auth/auth.selector";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -18,7 +19,7 @@ import { Disconnected } from './pages/SharedPages/404Page/404';
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
   const careerPathSelected = useSelector(selectCareerState)
-
+  const isUser = useSelector(selectUser)
 
   useEffect(() => {
     Aos.init({
@@ -102,11 +103,7 @@ function App() {
           <div>
             <SharedRoutes />
           </div>
-
-          {
-            careerPathSelected && <PrivateRoutes />
-          }
-
+          {(careerPathSelected) && <PrivateRoutes />}
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>
         <ToastContainer />

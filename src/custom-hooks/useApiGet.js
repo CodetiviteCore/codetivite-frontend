@@ -6,6 +6,5 @@ export const useApiGet = (key, queryFunction, properties) => {
         key,
         queryFunction,
         properties,
-
     )
 }
