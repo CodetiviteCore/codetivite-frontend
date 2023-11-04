@@ -19,7 +19,6 @@ function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
   const careerPathSelected = useSelector(selectCareerState)
 
-
   useEffect(() => {
     Aos.init({
       offset: 20,
@@ -102,11 +101,7 @@ function App() {
           <div>
             <SharedRoutes />
           </div>
-
-          {
-            careerPathSelected && <PrivateRoutes />
-          }
-
+          {(careerPathSelected) && <PrivateRoutes />}
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>
         <ToastContainer />

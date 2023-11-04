@@ -44,7 +44,7 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setIsModalOpen} = useContext(ModalContext);
+  const { setIsModalOpen } = useContext(ModalContext);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -85,6 +85,10 @@ export const Navbar = () => {
       if (userDetails?.isNewUser) {
         dispatch(careerPathSelectState(true));
         navigate("/preferences", { replace: true });
+      }
+      else {
+        dispatch(careerPathSelectState(true))
+        navigate("/roadmap", { replace: true });
       }
     }
     // else {
