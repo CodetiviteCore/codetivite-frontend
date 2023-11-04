@@ -19,7 +19,6 @@ import { Disconnected } from './pages/SharedPages/404Page/404';
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
   const careerPathSelected = useSelector(selectCareerState)
-  const isUser = useSelector(selectUser)
 
   useEffect(() => {
     Aos.init({
