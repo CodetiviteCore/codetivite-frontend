@@ -8,7 +8,6 @@ import 'react-circular-progressbar/dist/styles.css';
 import { SharedRoutes } from './routes/RouteBuilder/SharedRoutes';
 import { useSelector } from 'react-redux';
 import { selectCareerState } from "./Redux store/auth/auth.selector";
-import { selectUser } from "./Redux store/auth/auth.selector";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-loading-skeleton/dist/skeleton.css'
