@@ -15,10 +15,12 @@ import {
 } from '../../../assets/svgs';
 import { RoadMapCards } from '../../../ui_elements/RoadmapCards/RoadmapCards';
 import { SyllabusCard } from '../../../ui_elements';
-// import { TaskComponent } from './components/TaskComponent';
+import { TaskComponent } from './components/TaskComponent';
 import { useApiGet } from '../../../custom-hooks/useApiGet';
 import DashboardServices from '../../../services/dashboardServices';
 import { truncateText } from '../../../utils/constants';
+import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
+import { BlogComponent } from './components/BlogComponent';
 
 
 const Dashboard = () => {
@@ -99,12 +101,11 @@ const Dashboard = () => {
 
         </JumpBackInContainer>
 
-        {/* <TaskComponent
-
-        /> */}
+        <TaskComponent />
 
       </JumpBackInTaskSection>
-
+      <BlogComponent/>
+      
     </DashboardContainer>
   )
 }

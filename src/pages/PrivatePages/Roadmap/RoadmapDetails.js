@@ -373,7 +373,7 @@ const RoadmapDetails = () => {
 
 const RoadMapDetails = styled(RoadMapContainer)`
     overflow-y: scroll !important;
-     background-color:#f0f5f4;
+    background-color:#f0f5f4;
     padding: 0 0 3rem !important;
     
 `

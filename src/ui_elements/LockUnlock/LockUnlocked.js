@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import React from 'react'
 import { CloseCircle, CompleteCircle, TickCircle } from '../../assets/svgs'
 
-export const LockUnlocked = ({ locked =true, complete }) => {
+export const LockUnlocked = ({ locked=true, complete }) => {
     return (
         <>
             {
@@ -11,6 +11,7 @@ export const LockUnlocked = ({ locked =true, complete }) => {
                     :
                     <Container locked={locked}>
                         {
+                            
                             locked ?
                                 <CloseCircle />
                                 :
@@ -52,5 +53,5 @@ const Locked = styled.p`
     color:var(--danger) !important;
 `
 const Unlocked = styled.p`
-    color:var(--primary) ;
+    color:var(--primary) !important;
 `

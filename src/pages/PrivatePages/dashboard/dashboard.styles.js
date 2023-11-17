@@ -6,8 +6,8 @@ export const DashboardContainer = styled.main`
     height:100%;
     overflow-y:scroll;
     padding: 2rem 1.4rem;
-   background-color:#f0f5f4;
- ;
+    background-color:#f0f5f4;
+    ;
 `
 export const Stats = styled.section`
     display: flex;
@@ -57,26 +57,26 @@ export const JumpBackLink = styled(Link)`
         font-size: 1.5rem;
     }
 `
-// export const RoadMapTask = styled.aside`
-//     flex:0.36;
-//     background-color:var(--white);
-//     padding:1rem;
-//     >div{
-//         width:100%;
-//         display:flex;
-//         align-items:center;
-//         justify-content:space-between;
-//     }
-//     h2{
-//         font-size: 1.25rem;
-//         font-weight: 600;
-//     }
+export const RoadMapTask = styled.aside`
+    flex:0.36;
+    background-color:var(--white);
+    padding:1rem;
+    >div{
+        width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+    }
+    h2{
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
     
-//     >p{
-//         font-size: 0.75rem;
-//         line-height: 1.3;
-//     }
-//     @media ${devices.tablet}{
-//         flex-wrap:wrap;
-//     }
-// `
+    >p{
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+    @media ${devices.tablet}{
+        flex-wrap:wrap;
+    }
+`

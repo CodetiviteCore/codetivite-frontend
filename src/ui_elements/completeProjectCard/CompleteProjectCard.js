@@ -19,7 +19,7 @@ export const CompleteProjectCard = ({project, completed}) => {
             </Header>
             <Details>
                 {
-                    truncateText(project?.projectDescription)
+                    truncateText(project?.description)
                 }
             </Details>
         </CardContainer>
