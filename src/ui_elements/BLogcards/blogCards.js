@@ -30,7 +30,7 @@ export const BlogCards = ({
 }
 
 const BlogCardContainer = styled.div`
-      width:25rem;
+    width:25rem;
     
     img{
         object-fit:cover;
