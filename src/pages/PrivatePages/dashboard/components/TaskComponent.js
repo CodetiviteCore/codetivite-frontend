@@ -46,7 +46,6 @@ export const TaskComponent = ({taskDetails}) => {
                         project={card}
                         completed={card?.locked}
                     />
-                    // <div>hi</div>
                 )
             }
 
