@@ -22,11 +22,11 @@ const ContactUs = () => {
         </Button>        
 
         <Button contact onClick={() => {          
-          window.open('mailto:codetivite@gmail.com?subject=Hello Codetivite', '_blank');
+          window.open('mailto:codetivite@gmail.com?subject=Hello Codetivite', '_blank', 'noopener noreferrer');
         }}>
           <ButtonFlexContainer>
             <Sms />
-            <p>contact@codetivite.com</p>
+            <p>codetivite@gmail.com</p>
           </ButtonFlexContainer>
         </Button>
       </ContactDetails>
