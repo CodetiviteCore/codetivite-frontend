@@ -4,26 +4,31 @@ import React from 'react';
 import { BlogCards } from "../../../../ui_elements/BLogcards/blogCards";
 
 export const BlogComponent = () => {
-    const category = 'news';
-    const title = ' ipsum dolor sit amet, consectetur adipiscing elit.';
-    const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+    const blogData = {
+        category: 'news',
+        title : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod ',
+        description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+    };
 
     return (
         <Container>
-        <Header>
-            <h2>Our blogpost</h2>
-            <Redirect to="/blog">
-            <p>See more</p>
-            <span>&#8594;</span>
-            </Redirect>
-        </Header>
-            <BlogCards category={category} title={title} description={description} />
+            <Header>
+                <h2>Our blogpost</h2>
+                <Redirect to="/blog">
+                <p>See more</p>
+                <span>&#8594;</span>
+                </Redirect>
+            </Header>
+            <BlogCards category={blogData.category} title={blogData.title} description={blogData.description} />
         </Container>
     );
 };
 
 const Container = styled.aside`
-    flex: 0.36;
+    flex: 0.26 1 0%;
+    // float:right;
+    // width: 24rem;
     background-color: var(--white);
     padding: 1rem;
     margin-top: 1.5rem;

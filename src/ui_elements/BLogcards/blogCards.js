@@ -15,22 +15,27 @@ export const BlogCards = ({
 }) => {
     return (
         <BlogCardContainer>
-            <img src={image} alt={"Blog media"} />
+            {image && <img src={image} alt={"Blog media"} />}
             <h6>{category.toLocaleUpperCase()}</h6>
             <h4>{title}</h4>
             <p>{description}</p>
-            <hr />
-            <AuthorDetails
-                avatar={avater}
-                author={author}
-                time={time}
-            />
+            {avater && author && time && (
+                <>
+                    <hr />
+                    <AuthorDetails
+                        avatar={avater}
+                        author={author}
+                        time={time}
+                    />
+                </>
+            )}
+            
         </BlogCardContainer>
     )
 }
 
 const BlogCardContainer = styled.div`
-    width:25rem;
+    width:24rem;
     
     img{
         object-fit:cover;
