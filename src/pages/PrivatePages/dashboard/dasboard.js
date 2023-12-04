@@ -5,6 +5,7 @@ import {
   JumpBackInTaskSection,
   Stats,
   JumpBackLink,
+  HeatMapSection,
 } from './dashboard.styles';
 
 import {
@@ -19,7 +20,7 @@ import { TaskComponent } from './components/TaskComponent';
 import { useApiGet } from '../../../custom-hooks/useApiGet';
 import DashboardServices from '../../../services/dashboardServices';
 import { truncateText } from '../../../utils/constants';
-import { BlogCards } from '../../../ui_elements/BLogcards/blogCards';
+import Heatmap from '../../../assets/images/heatmap.png';
 import { BlogComponent } from './components/BlogComponent';
 
 
@@ -102,9 +103,14 @@ const Dashboard = () => {
         </JumpBackInContainer>
 
         <TaskComponent />
-
+        
       </JumpBackInTaskSection>
-      <BlogComponent/>
+      <HeatMapSection>
+          <img src={Heatmap} alt='heat map'/>
+
+        <BlogComponent/>
+        
+      </HeatMapSection>
       
     </DashboardContainer>
   )

@@ -30,7 +30,7 @@ export const JumpBackInTaskSection = styled.section`
 
 export const JumpBackInContainer = styled.div`
     flex: 0.6;
-    height: 64vh;
+    // height: 64vh;
     background-color: var(--white);
     overflow-y: scroll;
     padding: 1.25rem 2rem;
@@ -78,5 +78,19 @@ export const RoadMapTask = styled.aside`
     }
     @media ${devices.tablet}{
         flex-wrap:wrap;
+    }
+`
+export const HeatMapSection = styled.section`
+    height: min-content;
+    display: flex;
+    margin-top: 1.5rem;
+    justify-content: space-between;
+    @media ${devices.tabletL}{
+        flex-wrap:wrap;
+    }
+    img{
+        flex: 0.36;
+        height: 45vh;
+        width: 65%;
     }
 `
