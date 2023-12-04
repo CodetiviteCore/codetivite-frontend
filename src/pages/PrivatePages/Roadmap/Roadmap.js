@@ -6,6 +6,7 @@ import {
 } from "../../../assets/svgs"
 import { useApiGet } from "../../../custom-hooks/useApiGet"
 import PreferenceServices from "../../../services/preferenceServices"
+import { TaskComponent } from '../dashboard/components/TaskComponent';
 import {
     RoadMapCards,
     RoadMapCourseInfoCard,
@@ -162,6 +163,8 @@ const Roadmap = () => {
                     taskDetails={careerDetails?.resource}
 
                 /> */}
+
+                <TaskComponent/>
             </PathRoadMapContainer>
         </RoadMapContainer>
     )

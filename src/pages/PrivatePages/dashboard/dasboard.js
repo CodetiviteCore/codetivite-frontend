@@ -5,6 +5,7 @@ import {
   JumpBackInTaskSection,
   Stats,
   JumpBackLink,
+  HeatMapSection,
 } from './dashboard.styles';
 
 import {
@@ -15,10 +16,12 @@ import {
 } from '../../../assets/svgs';
 import { RoadMapCards } from '../../../ui_elements/RoadmapCards/RoadmapCards';
 import { SyllabusCard } from '../../../ui_elements';
-// import { TaskComponent } from './components/TaskComponent';
+import { TaskComponent } from './components/TaskComponent';
 import { useApiGet } from '../../../custom-hooks/useApiGet';
 import DashboardServices from '../../../services/dashboardServices';
 import { truncateText } from '../../../utils/constants';
+import Heatmap from '../../../assets/images/heatmap.png';
+import { BlogComponent } from './components/BlogComponent';
 
 
 const Dashboard = () => {
@@ -99,12 +102,16 @@ const Dashboard = () => {
 
         </JumpBackInContainer>
 
-        {/* <TaskComponent
-
-        /> */}
-
+        <TaskComponent />
+        
       </JumpBackInTaskSection>
+      <HeatMapSection>
+          <img src={Heatmap} alt='heat map'/>
 
+        <BlogComponent/>
+        
+      </HeatMapSection>
+      
     </DashboardContainer>
   )
 }

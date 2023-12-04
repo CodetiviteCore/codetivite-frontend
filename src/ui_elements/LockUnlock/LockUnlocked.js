@@ -3,20 +3,38 @@ import React from "react";
 import { CloseCircle, CompleteCircle, TickCircle } from "../../assets/svgs";
 import { devices } from "../../utils/MediaQueiyBreakPoints";
 
-export const LockUnlocked = ({ locked = true, complete }) => {
-  return (
-    <>
-      {complete ? (
-        <TickCircle />
-      ) : (
-        <Container locked={locked}>
-          {locked ? <CloseCircle /> : <CompleteCircle />}
-          {locked ? <Locked>Locked</Locked> : <Unlocked>Unlocked</Unlocked>}
-        </Container>
-      )}
-    </>
-  );
-};
+export const LockUnlocked = ({ locked=true, complete }) => {
+    return (
+        <>
+            {
+                complete ?
+                    <TickCircle />
+                    :
+                    <Container locked={locked}>
+                        {
+                            
+                            locked ?
+                                <CloseCircle />
+                                :
+                                <CompleteCircle />
+                        }
+                        {
+                            locked ?
+                                <Locked>
+                                    Locked
+                                </Locked>
+                                :
+                                <Unlocked>
+                                    Unlocked
+                                </Unlocked>
+                        }
+                    </Container>
+            }
+        </>
+
+    )
+}
+
 
 const Container = styled.div`
   background-color: ${({ locked }) =>
