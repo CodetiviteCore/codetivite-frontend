@@ -333,13 +333,11 @@ const RoadmapDetails = () => {
 };
 
 const RoadMapDetails = styled(RoadMapContainer)`
-  overflow-y: scroll !important;
-  background-color: #f0f5f4;
-  padding: 0 0 3rem !important;
-  @media ${devices.tablet} {
-    padding: 0 !important;
-  }
-`;
+    overflow-y: scroll !important;
+    background-color:#f0f5f4;
+    padding: 0 0 3rem !important;
+    
+`
 const NavigationContainer = styled.section`
   height: auto;
   width: auto;

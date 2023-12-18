@@ -42,5 +42,5 @@ const Locked = styled.p`
   color: var(--danger) !important;
 `;
 const Unlocked = styled.p`
-  color: var(--primary);
+    color:var(--primary) !important;
 `;

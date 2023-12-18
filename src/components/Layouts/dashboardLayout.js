@@ -1,8 +1,7 @@
-import styled from "styled-components"
-import { DashboardSideBar } from "../dashboardSideBar/dashboardSideBar"
-import { DashboardNavabar } from '../dashboardNavbar/dashboardNavbar';
+import styled from "styled-components";
+import { DashboardSideBar } from "../dashboardSideBar/dashboardSideBar";
+import { DashboardNavabar } from "../dashboardNavbar/dashboardNavbar";
 import { useState } from "react";
-
 
 const LayoutBody = styled.div`
   display: flex;
@@ -16,7 +15,7 @@ const MainContainer = styled.div`
   left: ${({ show }) => (show ? "3.5rem" : "12.7rem")};
   width: stretch;
   height: 100%;
-  background-color:var(--deep-white) ;
+  background-color: var(--deep-white);
   display: flex;
   flex-direction: column;
   transition: all 0.6s ease;
@@ -37,8 +36,7 @@ const Toggler = styled.div`
   transition: all 0.6s ease;
   &:hover {
     cursor: pointer;
-    transform: ${({ show }) =>
-    show ? "translateX(5px)" : "translateX(-7px)"};
+    transform: ${({ show }) => (show ? "translateX(5px)" : "translateX(-7px)")};
   }
   p {
     font-weight: 700;
