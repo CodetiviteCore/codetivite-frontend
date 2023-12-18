@@ -51,6 +51,7 @@ import Tina from "../../../assets/images/tima.png"
 import Tobi from "../../../assets/images/toib.png"
 import Toks from "../../../assets/images/toks.png"
 import Tunji from "../../../assets/images/tunji.png"
+import LandingPageTempImage from "../../../assets/images/LandingPageImage.png"
 // import Blog from "../../../assets/images/blogPicture.png"
 // import AuthorAvatar from "../../../assets/images/blogAvatar.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -172,7 +173,11 @@ const LandingPage = () => {
       </LandingFirstContainer>
       <LandingVideoIllustratorContainer>
         <LandingIllustrator>
-
+          <img
+            src={LandingPageTempImage}
+            alt='logo'
+            width={"100%"}
+          />
         </LandingIllustrator>
       </LandingVideoIllustratorContainer>
       <LandingWhatWeDo>
